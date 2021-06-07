@@ -46,7 +46,7 @@ export default function Machines() {
         model:'2020', machineSerialNo: 'UPNL163573839',machineAge:'8',controller:'FANUC',controllerModel:'201ABC',generateQRCode:'yes'},
         {id: 1, machineId: 'UPLMCH002', customerCode: 'UPNLCUSTT02', machineType: 'XYZ',make:'907600000',
         model:'2021', machineSerialNo: 'UPNL163573839',machineAge:'10',controller:'FANUC',controllerModel:'2021CDF',generateQRCode:'yes'},
-        {id: 1, machineId: 'UPLMCH003', customerCode: 'UPNLCUSTT02', machineType: 'XYZ',make:'907600000',
+        {id: 2, machineId: 'UPLMCH003', customerCode: 'UPNLCUSTT02', machineType: 'XYZ',make:'907600000',
         model:'2012', machineSerialNo: 'UPNL163573839',machineAge:'15',controller:'FANUC',controllerModel:'2021CDF',generateQRCode:'yes'},
     ])
 
@@ -90,7 +90,7 @@ export default function Machines() {
             <CDataTable
              items={data}
               fields={fields}
-              itemsPerPage={5}
+              itemsPerPage={2}
               pagination
               scopedSlots = {{
                 'status':
