@@ -51,7 +51,7 @@ export default function Overview() {
               All
               </CCol>
               <CCol xs="1">
-              <CButton block variant="ghost" color="info"onClick={() => setInfo(!info)} className="mr-1">New</CButton>
+              <CButton block variant="ghost" color="info" onClick={() => setInfo(!info)} className="mr-1">New</CButton>
             </CCol>
             </CRow>
             <CDataTable
