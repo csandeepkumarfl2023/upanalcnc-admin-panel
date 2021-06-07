@@ -41,7 +41,6 @@ const breakdownData = [
 const salesData = [
   {id: 0, breakdownId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
   executive:'Naveen', status: 'Pending',createdDate:'2021-04-10',email:'adam@company.com'},
-
 ]
 
 export default function Overview() {
@@ -68,7 +67,7 @@ export default function Overview() {
             <CDataTable
              items={usersData}
               fields={fields}
-              itemsPerPage={5}
+              itemsPerPage={1}
               pagination
               scopedSlots = {{
                 'status':
