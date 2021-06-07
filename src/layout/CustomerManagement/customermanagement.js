@@ -13,22 +13,24 @@ import {
   CTabs,
   CCardHeader
 } from '@coreui/react'
+import Customer from './customer'
+import Machines from './machines'
 
-export default function Overview() {
+export default function CustomerManagement() {
 
   return (
     <>
-       <CCol xs="12" md="6" className="mb-4">
+       <CCol xs="6" md="12" className="mb-4">
         <CCard>
-          <CCardBody>
-            <CTabs activeTab="home">
+          <CCardBody>   
+            <CTabs activeTab="customers">
               <CNav variant="tabs">
                 <CNavItem>
                   <CNavLink data-tab="customers">
                     Customers
                   </CNavLink>
                 </CNavItem>
-                <CNavItem>
+                <CNavItem> 
                   <CNavLink data-tab="machines">
                     Machines
                   </CNavLink>
@@ -36,10 +38,10 @@ export default function Overview() {
               </CNav>
               <CTabContent>
                 <CTabPane data-tab="customers">
-                  {`1.`}
+                 <Customer/>
                 </CTabPane>
-                <CTabPane data-tab="machines">
-                  {`2. `}
+                <CTabPane data-tab="machines">  
+                 <Machines />
                 </CTabPane>
               </CTabContent>
             </CTabs>

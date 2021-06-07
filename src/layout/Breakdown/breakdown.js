@@ -16,8 +16,6 @@ import {
   CFormGroup,
   CLabel,
   CInput,
-  
-
 } from '@coreui/react'
 
 const getBadge = status => {
