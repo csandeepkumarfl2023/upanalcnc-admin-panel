@@ -88,7 +88,7 @@ export default function Breakdown() {
             <CDataTable
              items={data}
               fields={fields}
-              itemsPerPage={5}
+              itemsPerPage={1}
               pagination
               scopedSlots = {{
                 'status':

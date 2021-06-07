@@ -36,7 +36,7 @@ const _nav =  [
     {
       _tag: 'CSidebarNavItem',
       name: 'Employee Management',
-      to: '/employeemangement',
+      to: '/employeemanagement',
       icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
       icon: 'cil-pencil'
     },
