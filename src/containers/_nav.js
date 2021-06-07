@@ -33,6 +33,20 @@ const _nav =  [
       icon: 'cil-pencil'
     },
 
+    {
+      _tag: 'CSidebarNavItem',
+      name: 'Employee Management',
+      to: '/employeemangement',
+      icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
+      icon: 'cil-pencil'
+    },
+    {
+      _tag: 'CSidebarNavItem',
+      name: 'Customer Management',
+      to: '/customermanagement',
+      icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
+      icon: 'cil-pencil'
+    },
   // {
   //   _tag: 'CSidebarNavTitle',
   //   _children: ['Theme']
@@ -328,6 +342,7 @@ const _nav =  [
 //     _tag: 'CSidebarNavDivider',
 //     className: 'm-2'
 //   }
+
  ]
 
  export default _nav
