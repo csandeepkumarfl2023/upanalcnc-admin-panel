@@ -67,7 +67,7 @@ export default function Overview() {
             <CDataTable
              items={usersData}
               fields={fields}
-              itemsPerPage={1}
+              itemsPerPage={2}
               pagination
               scopedSlots = {{
                 'status':
@@ -105,7 +105,7 @@ export default function Overview() {
             <CDataTable
              items={breakdownData}
               fields={fields}
-              itemsPerPage={1}
+              itemsPerPage={2}
               pagination
               scopedSlots = {{
                 'status':
@@ -142,7 +142,7 @@ export default function Overview() {
             <CDataTable
              items={salesData}
               fields={fields}
-              itemsPerPage={1}
+              itemsPerPage={2}
               pagination
               scopedSlots = {{
                 'status':

@@ -90,7 +90,7 @@ export default function Machines() {
             <CDataTable
              items={data}
               fields={fields}
-              itemsPerPage={2}
+              itemsPerPage={5}
               pagination
               scopedSlots = {{
                 'status':

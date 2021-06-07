@@ -75,7 +75,7 @@ export default function Payments() {
             <CDataTable
              items={data}
               fields={fields}
-              itemsPerPage={1}
+              itemsPerPage={5}
               pagination
               scopedSlots = {{
                 'status':
