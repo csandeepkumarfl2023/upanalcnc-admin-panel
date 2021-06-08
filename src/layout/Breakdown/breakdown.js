@@ -53,6 +53,8 @@ export default function Breakdown() {
     const [reports,setReports] = useState("")
     const [alert,setAlert] = useState(false)
     const [info, setInfo] = useState(false)
+    const [editModal, setEditModal] = useState(false)
+    const [edit, setEdit] = useState(false)
 
     const submitHandler = () => {
         let currentData = {}
@@ -72,7 +74,17 @@ export default function Breakdown() {
         setInfo(!info)
         setAlert(true)
     }
-
+    const editBtnHandler = () => {   
+      const update = {...edit}
+      const copiedList = [...data]   
+      const element = copiedList.find(elem => elem.id === update.id)
+      element.breakdownId = update.breakdownId;
+      element.description = update.description;
+        setData(copiedList)
+        setEditModal(false)
+        setAlert(true)
+      
+   }
     const conditionalRowStyles = [
       {
         when: row => row.calories < 300,
@@ -116,7 +128,7 @@ export default function Breakdown() {
                 'breakdownId':
                   (item)=>(
                     <td>
-                   <a  onClick={()=> setInfo(!info)}>{item.breakdownId}</a>
+                   <a  onClick={()=> setEditModal(!editModal)}>{item.breakdownId}</a>
                     </td>
                   )
               }}
@@ -210,6 +222,78 @@ export default function Breakdown() {
           </CCard>
         </CCol>
         </CRow>
+
+        <CModal 
+              show={editModal} 
+              onClose={() => setEditModal(!editModal)}
+              color="info"
+            >
+              <CModalHeader closeButton>
+                <CModalTitle>EditModal Breakdown</CModalTitle>
+              </CModalHeader>
+              <CModalBody>
+              <CRow>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="breakdownId">Breakdown Id</CLabel>
+                <CInput type="text" id="breakdownId1" name="breakdownId" placeholder="BreakdownId" value={edit.breakdownId} onChange={(e) => setEdit({...edit, breakdownId: e.target.value})}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="company">Company</CLabel>
+                <CInput type="text" id="company" name="company" placeholder="company" value={company} onChange={(e) => setCompany(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+            <CRow>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="description">Description</CLabel>
+                <CInput type="text" id="description" name="description" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="issueType">Issue Type</CLabel>
+                <CInput type="text" id="issueType" name="issueType" placeholder="Issue Type" value={issueType} onChange={(e) => setIssueType(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+            <CRow>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="executive">Executive</CLabel>
+                <CInput type="text" id="executive" name="executive" placeholder="Executive" value={executive} onChange={(e) => setExecutive(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="status">Status</CLabel>
+                <CInput type="text" id="status" name="status" placeholder="Status" value={status} onChange={(e) => setStatus(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+            <CRow>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="contactNumber">Contact Number</CLabel>
+                <CInput type="text" id="contactNumber" name="contactNumber" placeholder="Contact Number" value={contactNumber} onChange={(e) => setContactNumber(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="reports">Reports</CLabel>
+                <CInput type="text" id="reports" name="reports" placeholder="Reports" value={reports} onChange={(e) => setReports(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+              </CModalBody>
+              <CModalFooter>
+                <CButton color="secondary" onClick={() => setInfo(!info)}>Delete</CButton>
+                <CButton color="info" onClick={editBtnHandler}>Edit</CButton>{' '}
+              </CModalFooter>
+            </CModal>
     </>
   )
 }       
