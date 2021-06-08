@@ -16,6 +16,7 @@ import {
   CFormGroup,
   CLabel,
   CInput,
+  CCardHeader
 } from '@coreui/react'
 
 
@@ -31,7 +32,6 @@ const getBadge = status => {
   const fields = ['breakdownId','company', 'priority','issueType','executive', 'status','createdDate','email']
 
 export default function SalesVisit() {
-    const [info, setInfo] = useState(false)
     const [data, setData] = useState([
       {id: 0, breakdownId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
       executive:'Naveen', status: 'Pending',createdDate:'2021-04-10',email:'adam@company.com'},
@@ -44,6 +44,9 @@ export default function SalesVisit() {
     const [createdDate,setCreatedDate] = useState("")
     const [executive,setExecutive] = useState("")
     const [email,setEmail] = useState("")
+    const [info, setInfo] = useState(false)
+    const [alert,setAlert] = useState(false)
+
 
     const submitHandler = () => {
       let currentData = {}
@@ -61,6 +64,8 @@ export default function SalesVisit() {
       setData(allData)
       console.log('alldata',allData);
       setInfo(!info)
+      setAlert(true)
+
   }
   return (
     <>
@@ -166,7 +171,11 @@ export default function SalesVisit() {
                 <CButton color="secondary" onClick={() => setInfo(!info)}>Cancel</CButton>
                 <CButton color="info" onClick={submitHandler}>Submit</CButton>{' '}
               </CModalFooter>
-            </CModal>
+            </CModal>  
+
+            <CModal show={alert} variant="success" onClose={() => setAlert(false)} dismissible>
+            <CModalHeader closeButton onClick={() => setAlert(false)}>Successfully Added!</CModalHeader>
+          </CModal>
             </CCardBody>
           </CCard>
         </CCol>

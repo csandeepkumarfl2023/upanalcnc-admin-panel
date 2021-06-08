@@ -40,6 +40,7 @@ export default function EmployeeMangement() {
     const [description,setDescription] = useState("")
     const [type,setType] = useState("")
     const [name,setName] = useState("")
+    const [alert,setAlert] = useState(false)
 
 
     const submitHandler = () => {
@@ -53,6 +54,7 @@ export default function EmployeeMangement() {
       setData(allData)
       console.log('alldata',allData);
       setInfo(!info)
+      setAlert(true)
   }
   return (
     <>
@@ -127,6 +129,9 @@ export default function EmployeeMangement() {
                 <CButton color="info" onClick={submitHandler}>Submit</CButton>{' '}
               </CModalFooter>
             </CModal>
+            <CModal show={alert} variant="success" onClose={() => setAlert(false)} dismissible>
+            <CModalHeader closeButton onClick={() => setAlert(false)}>Successfully Added!</CModalHeader>
+          </CModal>
             </CCardBody>
           </CCard>
         </CCol>

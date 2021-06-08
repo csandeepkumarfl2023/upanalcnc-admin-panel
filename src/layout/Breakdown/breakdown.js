@@ -16,6 +16,10 @@ import {
   CFormGroup,
   CLabel,
   CInput,
+  CNav,
+  CNavItem,
+  CNavLink
+
 } from '@coreui/react'
 
 const getBadge = status => {
@@ -29,8 +33,8 @@ const getBadge = status => {
 }
 const fields = ['breakdownId','company','description','issueType','executive', 'status','contactNumber', 'reports']
 
+
 export default function Breakdown() {
-    const [info, setInfo] = useState(false)
     const [data, setData] = useState([
         {id: 0, breakdownId: 'UPNLBKN202101', status:'Completed', issueType:'Electrical',description:'value proposition', company: 'Upanal CNC', contactNumber: '8765964234', 
         executive:'ABC',reports:'no'},
@@ -47,7 +51,8 @@ export default function Breakdown() {
     const [contactNumber,setContactNumber] = useState("")
     const [executive,setExecutive] = useState("")
     const [reports,setReports] = useState("")
-
+    const [alert,setAlert] = useState(false)
+    const [info, setInfo] = useState(false)
 
     const submitHandler = () => {
         let currentData = {}
@@ -65,8 +70,22 @@ export default function Breakdown() {
         setData(allData)
         console.log('alldata',allData);
         setInfo(!info)
+        setAlert(true)
     }
 
+    const conditionalRowStyles = [
+      {
+        when: row => row.calories < 300,
+        style: {
+          backgroundColor: 'green',
+          color: 'white',
+          '&:hover': {
+            cursor: 'pointer',
+          },
+        },
+      }
+    ];
+    
   return (
     <>
    <CRow>
@@ -76,6 +95,7 @@ export default function Breakdown() {
              All
               <DocsLink name="CModal"/>
             </CCardHeader> */}
+              
             <CCardBody>
               <CRow>
               <CCol xs="11">
@@ -85,21 +105,31 @@ export default function Breakdown() {
               <CButton block variant="ghost" color="info" onClick={() => setInfo(!info)} className="mr-1">New</CButton>
             </CCol>
             </CRow>
+            
             <CDataTable
              items={data}
               fields={fields}
+              conditionalRowStyles={conditionalRowStyles}
               itemsPerPage={5}
               pagination
               scopedSlots = {{
-                'status':
+                'breakdownId':
                   (item)=>(
                     <td>
-                      <CBadge color={getBadge(item.status)}>
-                        {item.status}
-                      </CBadge>
+                   <a  onClick={()=> setInfo(!info)}>{item.breakdownId}</a>
                     </td>
                   )
               }}
+              // scopedSlots = {{
+              //   'status':
+              //     (item)=>(
+              //       <td>
+              //         <CBadge color={getBadge(item.status)}>
+              //           {item.status}
+              //         </CBadge>
+              //       </td>
+              //     )
+              // }}
             />
              <CModal 
               show={info} 
@@ -172,6 +202,10 @@ export default function Breakdown() {
                 <CButton color="info" onClick={submitHandler}>Submit</CButton>{' '}
               </CModalFooter>
             </CModal>
+
+            <CModal show={alert} variant="success" onClose={() => setAlert(false)} dismissible>
+            <CModalHeader closeButton onClick={() => setAlert(false)}>Successfully Added!</CModalHeader>
+          </CModal>
             </CCardBody>
           </CCard>
         </CCol>

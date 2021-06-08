@@ -40,6 +40,7 @@ export default function Machines() {
     const [machineAge,setMachineAge] = useState("")
     const [controller,setController] = useState("")
     const [controllerModel,setControllerModel] = useState("")
+    const [alert,setAlert] = useState(false)
 
     const [data,setData] = useState([
         {id: 0, machineId: 'UPLMCH001', customerCode: 'UPNLCUSTT01', machineType: 'ABC',make:'908000000',
@@ -67,6 +68,7 @@ export default function Machines() {
         setData(allData)
         console.log('alldata',allData);
         setInfo(!info)
+        setAlert(true)
     }
 
     return (
@@ -174,6 +176,9 @@ export default function Machines() {
                 <CButton color="info" onClick={submitHandler}>Submit</CButton>{' '}
               </CModalFooter>
             </CModal>
+            <CModal show={alert} variant="success" onClose={() => setAlert(false)} dismissible>
+            <CModalHeader closeButton onClick={() => setAlert(false)}>Successfully Added!</CModalHeader>
+          </CModal>
             </CCardBody>
          
         </CCol>

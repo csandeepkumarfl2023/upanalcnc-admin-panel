@@ -43,6 +43,8 @@ export default function Customer() {
     const [country,setCountry] = useState("")
     const [email,setEmail] = useState("")
     const [gstNumber,setGstNumber] = useState("")
+    const [alert,setAlert] = useState(false)
+
     const [data,setData] = useState([
         {id: 0, customerName: 'Cloudhub', customerCode: 'UPNLCUSTT01', contactPerson: 'ABC',mobileNo:'908000000',
         email:'jrogers@cloudhub.com', address: '#26,Peenya Industrial area',gstNumber:'jrogers@cloudhub.com'},
@@ -70,6 +72,7 @@ export default function Customer() {
         setData(allData)
         console.log('alldata',allData);
         setInfo(!info)
+        setAlert(true)
     }
 
     return (
@@ -197,6 +200,9 @@ export default function Customer() {
                 <CButton color="info" onClick={submitHandler}>Submit</CButton>{' '}
               </CModalFooter>
             </CModal>
+            <CModal show={alert} variant="success" onClose={() => setAlert(false)} dismissible>
+            <CModalHeader closeButton onClick={() => setAlert(false)}>Successfully Added!</CModalHeader>
+          </CModal>
             </CCardBody>
          
         </CCol>
