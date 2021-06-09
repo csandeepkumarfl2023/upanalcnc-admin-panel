@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import {
   CButton,
   CCard,
@@ -19,7 +18,7 @@ import CIcon from '@coreui/icons-react'
 const Login = (props) => {
   const loginHandler = () => {
     console.log('loginnn')
-//props.history.push('/dashboard')
+    props.history.push('/overview')
   }
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
