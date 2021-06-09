@@ -7,10 +7,13 @@ import {
   CImg,
   CButton
 } from '@coreui/react'
+import { useHistory } from "react-router-dom";
 
 const TheHeaderDropdown = (props) => {
+  const history = useHistory();
+
   const logoutHandler = () => {
-    props.history.push('/login');
+  history.push('/login');
   }
   return (
     <CDropdown

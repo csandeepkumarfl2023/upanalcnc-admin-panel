@@ -3,6 +3,7 @@ import React from 'react';
 import './App.css';
 import './scss/style.scss';
 import { HashRouter, Route, Switch } from 'react-router-dom';
+import Login from './pages/Login/login'
 
 const loading = (
   <div className="pt-3 text-center">
@@ -17,9 +18,9 @@ function App() {
     <HashRouter>
     <React.Suspense fallback={loading}>
     <Switch>
-        {/* <Route path="/login"  name="login" render={props => <Login {...props}/>}  />
-        <Route path="/overview" name="Overview" render={props => <TheLayout {...props}/>} /> */}
-        <Route path="/" name="Overview" render={props => <TheLayout {...props}/>} /> 
+    <Route path="/login"  name="login" render={props => <Login {...props}/>}  />
+        <Route path="/overview" name="Overview" render={props => <TheLayout {...props}/>} />
+         <Route path="/" name="Overview" render={props => <TheLayout {...props}/>} />
 
     </Switch>
     </React.Suspense>
