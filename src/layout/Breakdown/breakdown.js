@@ -59,7 +59,8 @@ export default function Breakdown() {
 
     const [info, setInfo] = useState(false)
     const [editModal, setEditModal] = useState(false)
-    
+    const  [loading,setLoading] = useState(false)
+
 
     const submitHandler = () => {
         let currentData = {}
@@ -78,6 +79,9 @@ export default function Breakdown() {
         console.log('alldata',allData);
         setInfo(!info)
         setAlert(true)
+        setLoading(true)
+
+      //  setLoading(false)
     }
     const editBtnHandler = () => {   
       let updatedData = {}
@@ -124,9 +128,15 @@ export default function Breakdown() {
 
       setDeleteAlert(true)
   }
-    
+
+
   return (
     <>
+    <div class="text-center">
+     <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+      </div>
+      </div>
    <CRow>
         <CCol xs="12" lg="12">
           <CCard>

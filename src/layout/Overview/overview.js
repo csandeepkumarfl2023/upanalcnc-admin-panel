@@ -4,16 +4,16 @@ import {
   CBadge,
   CCard,
   CCardBody,
-  CModal,
-  CModalBody,
-  CModalFooter,
-  CModalHeader,
-  CModalTitle,
+  CCardHeader,
   CCol,
   CDataTable,
   CRow,
-  CButton
+  CButton,
+  CModal
 } from '@coreui/react'
+import {
+  CChartDoughnut,
+} from '@coreui/react-chartjs'
 
 const getBadge = status => {
   switch (status) {
@@ -45,9 +45,131 @@ const salesData = [
 
 export default function Overview() {
   const [info, setInfo] = useState(false)
+  const  [loading,setLoading] = useState(false)
 
   return (
     <>
+    <CModal
+     show={loading} 
+     onClose={() => setLoading(!loading)}
+     color="info">
+    <div class="text-center">
+     <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+      </div>
+      </div>
+      </CModal>
+    <CRow>
+    <CCol xs="4" sm="3">
+
+      <CCard>
+        <CCardHeader>
+         Service Requests
+        </CCardHeader>
+        <CCardBody>
+          <CChartDoughnut
+            datasets={[
+              {
+                backgroundColor: [
+                  '#41B883',
+                  '#E46651',
+                  '#00D8FF',
+                  '#DD1B16'
+                ],
+                data: [10, 10, 10, 10]
+              }
+            ]}
+         //   labels={['VueJs', 'EmberJs', 'ReactJs', 'AngularJs']}
+            options={{  
+              tooltips: {
+                enabled: true
+              }
+            }}
+          />
+        </CCardBody>
+      </CCard>
+      </CCol>
+      <CCol xs="4" sm="3">
+      <CCard>
+        <CCardHeader>
+        Sales Visits
+        </CCardHeader>
+        <CCardBody>
+          <CChartDoughnut
+            datasets={[
+              {
+                backgroundColor: [
+                  '#41B883',
+                  '#E46651',
+                  '#00D8FF',
+                  '#DD1B16'
+                ],
+                data: [10, 10, 10, 10]
+              }
+            ]}
+           // labels={['VueJs', 'EmberJs', 'ReactJs', 'AngularJs']}
+            options={{  
+              tooltips: {
+                enabled: true
+              }
+            }}
+          />
+        </CCardBody>
+      </CCard>
+      </CCol>
+      <CCol xs="4" sm="3">
+      <CCard>
+        <CCardHeader>
+        Payment Follo-Ups
+        </CCardHeader>
+        <CCardBody>
+          <CChartDoughnut
+            datasets={[
+              {
+                backgroundColor: [
+                  '#41B883',
+                  '#E46651',
+                  '#00D8FF',
+                  '#DD1B16'
+                ],
+                data: [10, 10, 10, 10]
+              }
+            ]}
+          //  labels={['VueJs', 'EmberJs', 'ReactJs', 'AngularJs']}
+            options={{  
+              tooltips: {
+                enabled: true
+              }
+            }}
+          />
+        </CCardBody>
+      </CCard>
+      </CCol>
+      <CCol xs="4" sm="3">
+      <CCard>
+        <CCardHeader>
+        PM
+        </CCardHeader>
+        <CCardBody>
+          <CChartDoughnut
+            datasets={[
+              {
+                backgroundColor: [
+                  '#41B883',
+                  '#E46651',
+                  '#00D8FF',
+                  '#DD1B16'
+                ],
+                data: [10, 10, 10, 10]
+              }
+            ]}
+         
+          />
+        </CCardBody>
+      </CCard>
+      </CCol>
+      </CRow>
+
    <CRow>
         <CCol xs="12" lg="12">
           <CCard>
@@ -61,7 +183,7 @@ export default function Overview() {
               All
               </CCol>
               <CCol xs="1">
-              <CButton block variant="ghost" color="info" onClick={() => setInfo(!info)} className="mr-1">New</CButton>
+              <CButton block  color="info" onClick={() => setInfo(!info)} className="mr-1">New</CButton>
             </CCol>
             </CRow>
             <CDataTable
@@ -99,7 +221,7 @@ export default function Overview() {
               Breakdown
               </CCol>
               <CCol xs="1">
-              <CButton block variant="ghost" color="info"onClick={() => setInfo(!info)} className="mr-1">New</CButton>
+              <CButton block  color="info"onClick={() => setInfo(!info)} className="mr-1">New</CButton>
             </CCol>
             </CRow>
             <CDataTable
@@ -136,7 +258,7 @@ export default function Overview() {
               Sales Visit
               </CCol>
               <CCol xs="1">
-              <CButton block variant="ghost" color="info"onClick={() => setInfo(!info)} className="mr-1">New</CButton>
+              <CButton block  color="info"onClick={() => setInfo(!info)} className="mr-1">New</CButton>
             </CCol>
             </CRow>
             <CDataTable
