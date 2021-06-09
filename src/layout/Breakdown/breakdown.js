@@ -172,16 +172,7 @@ export default function Breakdown() {
                     </td>
                   )
               }}
-              // scopedSlots = {{
-              //   'status':
-              //     (item)=>(
-              //       <td>
-              //         <CBadge color={getBadge(item.status)}>
-              //           {item.status}
-              //         </CBadge>
-              //       </td>
-              //     )
-              // }}
+
             />
              <CModal 
               show={info} 

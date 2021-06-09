@@ -46,7 +46,11 @@ export default function SalesVisit() {
     const [email,setEmail] = useState("")
     const [info, setInfo] = useState(false)
     const [alert,setAlert] = useState(false)
+    const [editModal, setEditModal] = useState(false)
+    const [editAlert,setEditAlert] = useState(false)
 
+    const [deleteAlert,setDeleteAlert] = useState(false)
+    const [updateId, setUpdateId] = useState()
 
     const submitHandler = () => {
       let currentData = {}
@@ -59,7 +63,7 @@ export default function SalesVisit() {
       currentData.createdDate=createdDate
       currentData.executive=executive
       currentData.email=email
-      let allData = [...data]
+      let allData = [...data] 
       allData.push(currentData)
       setData(allData)
       console.log('alldata',allData);
@@ -67,6 +71,51 @@ export default function SalesVisit() {
       setAlert(true)
 
   }
+  const editBtnHandler = () => {   
+    let updatedData = {}
+      updatedData.id = updateId
+      updatedData.breakdownId = breakdownId
+      updatedData.status = status
+      updatedData.issueType=issueType
+      updatedData.company=company
+      updatedData.executive=executive
+      updatedData.email=email
+      updatedData.createdDate=createdDate
+      updatedData.priority=priority
+      console.log('updatedData', updatedData)
+      let filteredArr = data.filter(function( obj ) {
+        return obj.id !== updateId;
+      });
+      console.log(filteredArr)
+      setData([...filteredArr, updatedData])
+
+      setEditModal(false)
+      setEditAlert(true)
+     
+ }
+  const conditionalRowStyles = [
+    {
+      when: row => row.calories < 300,
+      style: {
+        backgroundColor: 'green',
+        color: 'white',
+        '&:hover': {
+          cursor: 'pointer',
+        },
+      },
+    }
+  ];
+  const deleteHandler = () => {
+    let element = [...data]
+    let updatedData = {}
+    updatedData.id = updateId
+    console.log(updatedData.id);
+    element = element.filter(item => item.id !==updatedData.id);
+    setData(element)
+    setEditModal(false)
+
+    setDeleteAlert(true)
+}
   return (
     <>
    <CRow>
@@ -82,24 +131,36 @@ export default function SalesVisit() {
               Sales Visit
               </CCol>
               <CCol xs="1">
-              <CButton block variant="ghost" color="info" onClick={() => setInfo(!info)} className="mr-1">New</CButton>
+              <CButton block  color="info" onClick={() => setInfo(!info)} className="mr-1">New</CButton>
             </CCol>
             </CRow>
             <CDataTable
              items={data}
               fields={fields}
+              conditionalRowStyles={conditionalRowStyles}
               itemsPerPage={5}
               pagination
               scopedSlots = {{
-                'status':
+                'breakdownId':
                   (item)=>(
                     <td>
-                      <CBadge color={getBadge(item.status)}>
-                        {item.status}
-                      </CBadge>
+                   <a  onClick={()=>{
+                     setUpdateId(item.id)
+                     setBreakdownId(item.breakdownId)
+                     setCompany(item.company)
+                     setIssueType(item.issueType)
+                     setStatus(item.status)
+                     setExecutive(item.executive)
+                     setPriority(item.priority)
+                     setCreatedDate(item.createdDate)
+                     setEmail(item.email)
+                      setEditModal(!editModal)}
+                   }
+                      >{item.breakdownId}</a>
                     </td>
                   )
               }}
+
             />
              <CModal 
               show={info} 
@@ -111,12 +172,7 @@ export default function SalesVisit() {
               </CModalHeader>
               <CModalBody>
               <CRow>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="breakdownId">Breakdown Id</CLabel>
-                <CInput type="text" id="breakdownId" name="breakdownId" placeholder="BreakdownId" value={breakdownId} onChange={(e) => setBreakdownId(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
+
             <CCol xs="10" md="6">
               <CFormGroup >
                 <CLabel htmlFor="company">Company</CLabel>
@@ -176,9 +232,83 @@ export default function SalesVisit() {
             <CModal show={alert} variant="success" onClose={() => setAlert(false)} dismissible>
             <CModalHeader closeButton onClick={() => setAlert(false)}>Successfully Added!</CModalHeader>
           </CModal>
+
+          <CModal show={editAlert} variant="success" onClose={() => setEditAlert(false)} dismissible>
+            <CModalHeader closeButton onClick={() => setEditAlert(false)}>Updated Successfully</CModalHeader>
+          </CModal>
+
+          <CModal show={deleteAlert} variant="success" onClose={() => setDeleteAlert(false)} dismissible>
+            <CModalHeader closeButton onClick={() => setDeleteAlert(false)}>Deleted Successfully</CModalHeader>
+          </CModal>
             </CCardBody>
           </CCard>
         </CCol>
+        <CModal 
+              show={editModal} 
+              onClose={() => setEditModal(!editModal)}
+              color="info"
+            >
+              <CModalHeader closeButton>
+                <CModalTitle>Edit Breakdown</CModalTitle>
+              </CModalHeader>
+              <CModalBody>
+              <CRow>
+      
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="company">Company</CLabel>
+                <CInput type="text" id="company" name="company" placeholder="company" value={company? company: ''} onChange={(e) => setCompany(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+            <CRow>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="priority">Priority</CLabel>
+                <CInput type="text" id="priority" name="priority" placeholder="Priority" value={priority} onChange={(e) => setPriority(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="issueType">Issue Type</CLabel>
+                <CInput type="text" id="issueType" name="issueType" placeholder="Issue Type" value={issueType?issueType: ''} onChange={(e) => setIssueType(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+            <CRow>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="executive">Executive</CLabel>
+                <CInput type="text" id="executive" name="executive" placeholder="Executive" value={executive? executive: ''} onChange={(e) => setExecutive(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="status">Status</CLabel>
+                <CInput type="text" id="status" name="status" placeholder="Status" value={status? status: ''} onChange={(e) => setStatus(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+            <CRow>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="createdDate">Created Date</CLabel>
+                <CInput type="date" id="createdDate" name="createdDate" placeholder="Created Date" value={createdDate} onChange={(e) => setCreatedDate(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="email">Email</CLabel>
+                <CInput type="text" id="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+              </CModalBody>
+              <CModalFooter>
+                <CButton color="secondary" onClick={ deleteHandler}>Delete</CButton>
+                <CButton color="info" onClick={editBtnHandler}>Edit</CButton>{' '}
+              </CModalFooter>
+            </CModal>
         </CRow>
     </>
   )
