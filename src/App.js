@@ -11,12 +11,16 @@ const loading = (
 )
 function App() {
   const TheLayout = React.lazy(() => import('./containers/TheLayout'));
+ const Login = React.lazy(() => import('./pages/Login/login'));
+
   return (   
     <HashRouter>
-       <React.Suspense fallback={loading}>
+    <React.Suspense fallback={loading}>
     <Switch>
-  {/* <Login /> */}
-  <Route path="/" name="Home" render={props => <TheLayout {...props}/>} />
+        {/* <Route path="/login"  name="login" render={props => <Login {...props}/>}  />
+        <Route path="/overview" name="Overview" render={props => <TheLayout {...props}/>} /> */}
+        <Route path="/" name="Overview" render={props => <TheLayout {...props}/>} /> 
+
     </Switch>
     </React.Suspense>
     </HashRouter>

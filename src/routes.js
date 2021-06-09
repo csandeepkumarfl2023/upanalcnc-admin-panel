@@ -1,7 +1,4 @@
 import React from 'react';
-import Payments from './layout/Payments/payments';
-
-
 
 const Overview = React.lazy(() => import('./layout/Overview/overview'));
 const Breakdown = React.lazy(() => import('./layout/Breakdown/breakdown'));
@@ -12,7 +9,7 @@ const Payment = React.lazy(() => import('./layout/Payments/payments'));
 
 
 const routes = [
-  { path: '/', exact: true, name: 'Home' },
+  { path: '/login', exact: true, name: 'login' },
   { path: '/overview', name: 'Overview', component: Overview },
   { path: '/breakdown', name: 'Breakdown', component: Breakdown },
   { path: '/sales_visit', name: 'SaleVisit', component: SalesVisit },
