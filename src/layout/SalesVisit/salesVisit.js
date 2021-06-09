@@ -265,7 +265,7 @@ export default function SalesVisit() {
             <CCol xs="10" md="6">
               <CFormGroup >
                 <CLabel htmlFor="priority">Priority</CLabel>
-                <CInput type="text" id="priority" name="priority" placeholder="Priority" value={priority} onChange={(e) => setPriority(e.target.value)}/>
+                <CInput type="text" id="priority" name="priority" placeholder="Priority" value={priority?priority: ''} onChange={(e) => setPriority(e.target.value)}/>
               </CFormGroup>
             </CCol>
             <CCol xs="10" md="6">
@@ -293,13 +293,13 @@ export default function SalesVisit() {
             <CCol xs="10" md="6">
               <CFormGroup >
                 <CLabel htmlFor="createdDate">Created Date</CLabel>
-                <CInput type="date" id="createdDate" name="createdDate" placeholder="Created Date" value={createdDate} onChange={(e) => setCreatedDate(e.target.value)}/>
+                <CInput type="date" id="createdDate" name="createdDate" placeholder="Created Date" value={createdDate?createdDate:''} onChange={(e) => setCreatedDate(e.target.value)}/>
               </CFormGroup>
             </CCol>
             <CCol xs="10" md="6">
               <CFormGroup >
                 <CLabel htmlFor="email">Email</CLabel>
-                <CInput type="text" id="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                <CInput type="text" id="email" name="email" placeholder="Email" value={email?email:''} onChange={(e) => setEmail(e.target.value)}/>
               </CFormGroup>
             </CCol>
             </CRow>
