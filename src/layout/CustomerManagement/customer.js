@@ -44,7 +44,11 @@ export default function Customer() {
     const [email,setEmail] = useState("")
     const [gstNumber,setGstNumber] = useState("")
     const [alert,setAlert] = useState(false)
+    const [editModal, setEditModal] = useState(false)
+    const [editAlert,setEditAlert] = useState(false)
 
+    const [deleteAlert,setDeleteAlert] = useState(false)
+    const [updateId, setUpdateId] = useState()
     const [data,setData] = useState([
         {id: 0, customerName: 'Cloudhub', customerCode: 'UPNLCUSTT01', contactPerson: 'ABC',mobileNo:'908000000',
         email:'jrogers@cloudhub.com', address: '#26,Peenya Industrial area',gstNumber:'jrogers@cloudhub.com'},
@@ -74,7 +78,54 @@ export default function Customer() {
         setInfo(!info)
         setAlert(true)
     }
-
+    const editBtnHandler = () => {   
+      let updatedData = {}
+        updatedData.id = updateId
+        updatedData.customerName = customerName
+        updatedData.contactPerson = contactPerson
+        updatedData.mobileNo=mobileNo
+        updatedData.alternateNo=alternateNo
+        updatedData.address=address
+        updatedData.city=city
+        updatedData.zipCode=zipCode
+        updatedData.state=state
+        updatedData.country=country
+        updatedData.email=email
+        updatedData.gstNumber=gstNumber
+        console.log('updatedData', updatedData)
+        let filteredArr = data.filter(function( obj ) {
+          return obj.id !== updateId;
+        });
+        console.log(filteredArr)
+        setData([...filteredArr, updatedData])
+  
+        setEditModal(false)
+        setEditAlert(true)
+       
+   }
+    const conditionalRowStyles = [
+      {
+        when: row => row.calories < 300,
+        style: {
+          backgroundColor: 'green',
+          color: 'white',
+          '&:hover': {
+            cursor: 'pointer',
+          },
+        },
+      }
+    ];
+    const deleteHandler = () => {
+      let element = [...data]
+      let updatedData = {}
+      updatedData.id = updateId
+      console.log(updatedData.id);
+      element = element.filter(item => item.id !==updatedData.id);
+      setData(element)
+      setEditModal(false)
+  
+      setDeleteAlert(true)
+  }
     return (
         <div>
              <CRow>
@@ -90,24 +141,39 @@ export default function Customer() {
               Customers
               </CCol>
               <CCol xs="1">
-              <CButton block variant="ghost" color="info"onClick={() => setInfo(!info)} className="mr-1">New</CButton>
+              <CButton  color="info"onClick={() => setInfo(!info)} className="mr-1">New</CButton>
             </CCol>
             </CRow>
             <CDataTable
              items={data}
               fields={fields}
+              conditionalRowStyles={conditionalRowStyles}
               itemsPerPage={5}
               pagination
               scopedSlots = {{
-                'status':
+                'customerName':
                   (item)=>(
                     <td>
-                      <CBadge color={getBadge(item.status)}>
-                        {item.status}
-                      </CBadge>
+                   <a  onClick={()=>{
+                     setUpdateId(item.id)
+                     setCustomerName(item.customerName)
+                     setContactPerson(item.contactPerson)
+                     setMobileNo(item.mobileNo)
+                     setAlternateNo(item.alternateNo)
+                     setAddress(item.address)
+                     setCity(item.city)
+                     setZipCode(item.zipCode)
+                     setState(item.state)
+                     setCountry(item.country)
+                     setGstNumber(item.gstNumber)
+                     setEmail(item.email)
+                      setEditModal(!editModal)}
+                   }
+                      >{item.customerName}</a>
                     </td>
                   )
               }}
+
             />
              <CModal 
               show={info} 
@@ -203,9 +269,107 @@ export default function Customer() {
             <CModal show={alert} variant="success" onClose={() => setAlert(false)} dismissible>
             <CModalHeader closeButton onClick={() => setAlert(false)}>Successfully Added!</CModalHeader>
           </CModal>
+          <CModal show={editAlert} variant="success" onClose={() => setEditAlert(false)} dismissible>
+            <CModalHeader closeButton onClick={() => setEditAlert(false)}>Updated Successfully</CModalHeader>
+          </CModal>
+
+          <CModal show={deleteAlert} variant="success" onClose={() => setDeleteAlert(false)} dismissible>
+            <CModalHeader closeButton onClick={() => setDeleteAlert(false)}>Deleted Successfully</CModalHeader>
+          </CModal>
             </CCardBody>
          
         </CCol>
+        <CModal 
+              show={editModal} 
+              onClose={() => setEditModal(!editModal)}
+              color="info"
+            >
+              <CModalHeader closeButton>
+                <CModalTitle>Edit Customers</CModalTitle>
+              </CModalHeader>
+              <CModalBody>
+              <CRow>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="customerName">Customer Name</CLabel>
+                <CInput type="text" id="customerName" name="customerName" placeholder="Customer Name" value={customerName?customerName:''} onChange={(e) => setCustomerName(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="contactPerson">Contact Person</CLabel>
+                <CInput type="text" id="contactPerson" name="contactPerson" placeholder="Contact Person" value={contactPerson?contactPerson:''} onChange={(e) => setContactPerson(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+            <CRow>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="mobileNo">Contact Number</CLabel>
+                <CInput type="text" id="mobileNo" name="mobileNo" placeholder="Mobile No" value={mobileNo?mobileNo:''} onChange={(e) => setMobileNo(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="alternateNo">Alternate No</CLabel>
+                <CInput type="text" id="alternateNo" name="alternateNo" placeholder="Alternate No" value={alternateNo?alternateNo:''} onChange={(e) => setAlternateNo(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+            <CRow>
+            <CCol xs="10" md="4">
+              <CFormGroup >
+                <CLabel htmlFor="address">Address</CLabel>
+                <CInput type="text" id="address" name="address" placeholder="Address" value={address?address:''} onChange={(e) => setAddress(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="4">
+              <CFormGroup >
+                <CLabel htmlFor="city">City</CLabel>
+                <CInput type="text" id="city" name="city" placeholder="City" value={city?city:''} onChange={(e) => setCity(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="4">
+              <CFormGroup >
+                <CLabel htmlFor="zipCode">Zip Code</CLabel>
+                <CInput type="text" id="zipCode" name="zipCode" placeholder="Zip Code" value={zipCode?zipCode:''} onChange={(e) => setZipCode(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+            <CRow>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="state">State</CLabel>
+                <CInput type="text" id="state" name="state" placeholder="State" value={state?state:''} onChange={(e) => setState(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="country">Country</CLabel>
+                <CInput type="text" id="country" name="country" placeholder="Country" value={country?country:''} onChange={(e) => setCountry(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+            <CRow>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="email">Email</CLabel>
+                <CInput type="text" id="email" name="email" placeholder="Email" value={email?email:''} onChange={(e) => setEmail(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="gstNumber">GSTN</CLabel>
+                <CInput type="text" id="gstNumber" name="gstNumber" placeholder="GSTN" value={gstNumber? gstNumber:''} onChange={(e) => setGstNumber(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+              </CModalBody>
+              <CModalFooter>
+                <CButton color="secondary" onClick={ deleteHandler}>Delete</CButton>
+                <CButton color="info" onClick={editBtnHandler}>Edit</CButton>{' '}
+              </CModalFooter>
+            </CModal>
         </CRow>
         </div>
     )

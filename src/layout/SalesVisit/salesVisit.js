@@ -249,7 +249,7 @@ export default function SalesVisit() {
               color="info"
             >
               <CModalHeader closeButton>
-                <CModalTitle>Edit Breakdown</CModalTitle>
+                <CModalTitle>Edit SalesVisit</CModalTitle>
               </CModalHeader>
               <CModalBody>
               <CRow>
