@@ -13,6 +13,7 @@ import {
   CAlert,
   CDataTable,
   CRow,
+  CSelect,
   CButton,
   CFormGroup,
   CLabel,
@@ -22,6 +23,7 @@ import {
   CNavLink
 
 } from '@coreui/react'
+import CIcon from '@coreui/icons-react'
 
 const getBadge = status => {
   switch (status) {
@@ -52,6 +54,9 @@ export default function ServiceRequest() {
     const [contactNumber,setContactNumber] = useState("")
     const [executive,setExecutive] = useState("")
     const [reports,setReports] = useState("")
+    const [name,setName] = useState("")
+    const [sheduleDate,setSheduleDate] = useState("")
+    const [sheduleTime,setSheduleTime] = useState("")
     const [alert,setAlert] = useState(false)
     const [editAlert,setEditAlert] = useState(false)
 
@@ -61,6 +66,7 @@ export default function ServiceRequest() {
     const [info, setInfo] = useState(false)
     const [editModal, setEditModal] = useState(false)
     const  [loading,setLoading] = useState(false)
+    const [executiveinfo,setExecutiveInfo] = useState(false)
 
 
     const submitHandler = () => {
@@ -84,6 +90,23 @@ export default function ServiceRequest() {
 
       //  setLoading(false)
     }
+
+    const ExecutivesubmitHandler = () => {
+      let currentData = {}
+      currentData.id = Math.round(Math.random() * 10000000)
+      currentData.name = name
+      currentData.sheduleDate = sheduleDate
+      currentData.sheduleTime=sheduleTime
+      let allData = [...data]
+      allData.push(currentData)
+      setData(allData)
+      console.log('alldata',allData);
+      setExecutiveInfo(!executiveinfo)
+      setAlert(true)
+      setLoading(true)
+
+    //  setLoading(false)
+  }
     const editBtnHandler = () => {   
       let updatedData = {}
         updatedData.id = updateId
@@ -117,6 +140,7 @@ export default function ServiceRequest() {
           },
         },
       }
+      
     ];
     const deleteHandler = () => {
       let element = [...data]
@@ -191,10 +215,68 @@ export default function ServiceRequest() {
                    }
                       >{item.servicerequestId}</a>
                     </td>
+                  ),
+                  'executive':
+                  (item)=>(
+                    <td>
+                     <p>  <a  onClick={()=>{
+                 setExecutiveInfo(!executiveinfo)}
+                   }>
+                       {<CIcon name="cil-phone"  size="1xl"/>}</a></p>
+                 
+                    </td>
                   )
               }}
 
             />
+        
+
+        <CModal 
+              show={executiveinfo} 
+              onClose={() => setExecutiveInfo(!executiveinfo)}
+              color="info"
+            >
+              <CModalHeader closeButton>
+                <CModalTitle>Add Executive</CModalTitle>
+              </CModalHeader>
+              <CModalBody>
+              <CRow>
+       
+              <CCol xs="12" md="3" size="md">
+              <CFormGroup >
+                <CLabel htmlFor="name">Name</CLabel>
+                <CSelect custom size="md" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)}>
+                  <option value="Open this select menu">Open this select menu</option>
+                  <option value="Vamsi">Vamsi</option>
+                  <option value="Sandeep">Sandeep</option>
+                  <option value="Pooja">Pooja</option>
+                  <option value="Vikram">Vikram</option>
+                  <option value="Arun">Arun</option>
+                </CSelect>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+            <CRow>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="sheduleDate">Shedule Date</CLabel>
+                <CInput type="date" id="sheduleDate" name="sheduleDate" placeholder="sheduleDate" value={sheduleDate} onChange={(e) => setSheduleDate(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="sheduleTime">Shedule Time</CLabel>
+                <CInput type="time" id="sheduleTime" name="sheduleTime" placeholder="sheduleTime" value={sheduleTime} onChange={(e) => setSheduleTime(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+              </CModalBody>
+              <CModalFooter>
+                <CButton color="secondary" onClick={() => setExecutiveInfo(!executiveinfo)}>Cancel</CButton>
+                <CButton color="info" onClick={ExecutivesubmitHandler}>Submit</CButton>{' '}
+              </CModalFooter>
+            </CModal>
+
              <CModal 
               show={info} 
               onClose={() => setInfo(!info)}
