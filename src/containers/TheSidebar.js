@@ -10,31 +10,29 @@ import {
   CSidebarMinimizer,
   CSidebarNavDropdown,
   CSidebarNavItem,
+  CImg
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
-//import { ReactComponent as Logo } from '../components/logo.svg'
 
 // sidebar nav config
 import navigation from './_nav'
-//import Logo from 'src/components/logo'
 
 const TheSidebar = () => {
-  // const dispatch = useDispatch()
-  // const show = useSelector(state => state.sidebarShow)
+  const dispatch = useDispatch()
+  const show = useSelector(state => state.sidebarShow)
 
   return (  
     <CSidebar
-      // show={show}
-      // onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
+      show={show}
+      onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        {/* <CIcon
-          className="c-sidebar-brand-full"
-          name="logo-negative"
-          height={35}
-        /> */}
-         {/* <Logo  className="c-sidebar-brand-full" height={35}/> */}
+      <CImg style={{height:'60%',width:'60%'}}
+            src={'avatars/logo.jpg'}
+            className="c-logo-img"
+            alt="admin@bootstrapmaster.com"
+          />
         <CIcon
           className="c-sidebar-brand-minimized"
           name="sygnet"
