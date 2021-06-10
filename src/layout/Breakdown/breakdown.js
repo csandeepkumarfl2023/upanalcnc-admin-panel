@@ -132,11 +132,11 @@ export default function Breakdown() {
 
   return (
     <>
-    <div class="text-center">
+    {/* <div class="text-center">
      <div class="spinner-border" role="status">
     <span class="sr-only">Loading...</span>
       </div>
-      </div>
+      </div> */}
    <CRow>
         <CCol xs="12" lg="12">
           <CCard>
