@@ -12,6 +12,7 @@ import {
   CCol,
   CDataTable,
   CRow,
+  CAlert,
   CButton,
   CFormGroup,
   CLabel,
@@ -31,7 +32,7 @@ const getBadge = status => {
       default: return 'primary'
     }
   }
-  const fields = ['breakdownId','company', 'priority','issueType','executive', 'status','createdDate','email']
+  const fields = ['servicerequestId','company', 'priority','issueType','executive', 'status','createdDate','email']
   
   const override = css`
   display: block;
@@ -39,10 +40,10 @@ const getBadge = status => {
 `;
 export default function SalesVisit() {
     const [data, setData] = useState([
-      {id: 0, breakdownId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
+      {id: 0, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
       executive:'Naveen', status: 'Pending',createdDate:'2021-04-10',email:'adam@company.com'},
     ])
-    const [breakdownId,setBreakdownId] = useState("")
+    const [servicerequestId,setServiceRequestId] = useState("")
     const [status,setStatus] = useState("")
     const [issueType,setIssueType] = useState("")
     const [priority,setPriority] = useState("")
@@ -62,7 +63,7 @@ export default function SalesVisit() {
     const submitHandler = () => {
       let currentData = {}
       currentData.id = Math.round(Math.random() * 10000000)
-      currentData.breakdownId = breakdownId
+      currentData.servicerequestId = servicerequestId
       currentData.status = status
       currentData.issueType=issueType
       currentData.priority=priority
@@ -84,7 +85,7 @@ export default function SalesVisit() {
   const editBtnHandler = () => {   
     let updatedData = {}
       updatedData.id = updateId
-      updatedData.breakdownId = breakdownId
+      updatedData.servicerequestId = servicerequestId
       updatedData.status = status
       updatedData.issueType=issueType
       updatedData.company=company
@@ -136,6 +137,16 @@ export default function SalesVisit() {
     <div className="sweet-loading">
       <ClipLoader  loading={loading}  css={override} size={50} color='#2f4f4f'/>
     </div>
+      <CAlert color="success" show={alert} onClose={() => setAlert(false)} dismissible>
+            <CModalHeader closeButton onClick={() => setAlert(false)}>Successfully Added!</CModalHeader>
+          </CAlert>
+          <CAlert color="primary"show={editAlert} variant="success" onClose={() => setEditAlert(false)} dismissible>
+            <CModalHeader closeButton onClick={() => setEditAlert(false)}>Updated Successfully</CModalHeader>
+          </CAlert>
+
+          <CAlert color="danger"  show={deleteAlert} onClose={() => setDeleteAlert(false)} dismissible>
+            <CModalHeader closeButton onClick={() => setDeleteAlert(false)}>Deleted Successfully</CModalHeader>
+          </CAlert>
    <CRow>
         <CCol xs="12" lg="12">
         {!loading ?  
@@ -160,12 +171,12 @@ export default function SalesVisit() {
               itemsPerPage={5}
               pagination
               scopedSlots = {{
-                'breakdownId':
+                'servicerequestId':
                   (item)=>(
                     <td>
                    <a  onClick={()=>{
                      setUpdateId(item.id)
-                     setBreakdownId(item.breakdownId)
+                     setServiceRequestId(item.servicerequestId)
                      setCompany(item.company)
                      setIssueType(item.issueType)
                      setStatus(item.status)
@@ -175,7 +186,7 @@ export default function SalesVisit() {
                      setEmail(item.email)
                       setEditModal(!editModal)}
                    }
-                      >{item.breakdownId}</a>
+                      >{item.servicerequestId}</a>
                     </td>
                   )
               }}
@@ -248,17 +259,7 @@ export default function SalesVisit() {
               </CModalFooter>
             </CModal>  
 
-            <CModal show={alert} variant="success" onClose={() => setAlert(false)} dismissible>
-            <CModalHeader closeButton onClick={() => setAlert(false)}>Successfully Added!</CModalHeader>
-          </CModal>
-
-          <CModal show={editAlert} variant="success" onClose={() => setEditAlert(false)} dismissible>
-            <CModalHeader closeButton onClick={() => setEditAlert(false)}>Updated Successfully</CModalHeader>
-          </CModal>
-
-          <CModal show={deleteAlert} variant="success" onClose={() => setDeleteAlert(false)} dismissible>
-            <CModalHeader closeButton onClick={() => setDeleteAlert(false)}>Deleted Successfully</CModalHeader>
-          </CModal>
+ 
             </CCardBody>
           </CCard>
            : null } 
