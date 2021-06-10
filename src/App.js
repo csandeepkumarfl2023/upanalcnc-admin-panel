@@ -14,6 +14,7 @@ function App() {
   const TheLayout = React.lazy(() => import('./containers/TheLayout'));
  const Login = React.lazy(() => import('./pages/Login/login'));
 
+
   return (   
     <HashRouter>
     <React.Suspense fallback={loading}>

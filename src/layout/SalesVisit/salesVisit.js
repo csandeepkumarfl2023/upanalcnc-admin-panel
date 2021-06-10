@@ -12,6 +12,7 @@ import {
   CCol,
   CDataTable,
   CRow,
+  CAlert,
   CButton,
   CFormGroup,
   CLabel,
@@ -118,6 +119,16 @@ export default function SalesVisit() {
 }
   return (
     <>
+      <CAlert color="success" show={alert} onClose={() => setAlert(false)} dismissible>
+            <CModalHeader closeButton onClick={() => setAlert(false)}>Successfully Added!</CModalHeader>
+          </CAlert>
+          <CAlert color="primary"show={editAlert} variant="success" onClose={() => setEditAlert(false)} dismissible>
+            <CModalHeader closeButton onClick={() => setEditAlert(false)}>Updated Successfully</CModalHeader>
+          </CAlert>
+
+          <CAlert color="danger"  show={deleteAlert} onClose={() => setDeleteAlert(false)} dismissible>
+            <CModalHeader closeButton onClick={() => setDeleteAlert(false)}>Deleted Successfully</CModalHeader>
+          </CAlert>
    <CRow>
         <CCol xs="12" lg="12">
           <CCard>
@@ -229,17 +240,7 @@ export default function SalesVisit() {
               </CModalFooter>
             </CModal>  
 
-            <CModal show={alert} variant="success" onClose={() => setAlert(false)} dismissible>
-            <CModalHeader closeButton onClick={() => setAlert(false)}>Successfully Added!</CModalHeader>
-          </CModal>
-
-          <CModal show={editAlert} variant="success" onClose={() => setEditAlert(false)} dismissible>
-            <CModalHeader closeButton onClick={() => setEditAlert(false)}>Updated Successfully</CModalHeader>
-          </CModal>
-
-          <CModal show={deleteAlert} variant="success" onClose={() => setDeleteAlert(false)} dismissible>
-            <CModalHeader closeButton onClick={() => setDeleteAlert(false)}>Deleted Successfully</CModalHeader>
-          </CModal>
+ 
             </CCardBody>
           </CCard>
         </CCol>

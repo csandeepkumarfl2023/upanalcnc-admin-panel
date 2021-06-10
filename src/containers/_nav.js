@@ -7,13 +7,12 @@ const _nav =  [
     name: 'Overview',
     to: '/overview',
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
-    icon: 'cil-pencil'
   },
   {
    _tag: 'CSidebarNavItem',
     name: 'ServiceRequest',
     to: '/servicerequest',
-    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
+    icon: <CIcon name="cil-settings" customClasses="c-sidebar-nav-icon"/>,
     // badge: {
     //   color: 'info',
     //   text: 'NEW',
@@ -22,30 +21,31 @@ const _nav =  [
       _tag: 'CSidebarNavItem',
       name: 'Sales Visit',
       to: '/sales_visit',
-      icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
-      icon: 'cil-pencil'
+      icon: <CIcon name="cil-share-all" customClasses="c-sidebar-nav-icon"/>,
     },
     {
       _tag: 'CSidebarNavItem',
       name: 'Payments',
       to: '/payments',
-      icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
-      icon: 'cil-pencil'
+      icon: <CIcon name= "cil-dollar" customClasses="c-sidebar-nav-icon"/>,
     },
-
     {
       _tag: 'CSidebarNavItem',
       name: 'Employee Management',
       to: '/employeemanagement',
-      icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
-      icon: 'cil-pencil'
+      icon: <CIcon name="cil-user-follow" customClasses="c-sidebar-nav-icon"/>,
     },
     {
       _tag: 'CSidebarNavItem',
       name: 'Customer Management',
       to: '/customermanagement',
-      icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
-      icon: 'cil-pencil'
+      icon: <CIcon name="cil-user" customClasses="c-sidebar-nav-icon"/>,
+    },
+    {
+      _tag: 'CSidebarNavItem',
+      name: 'PM',
+      to: '/pm',
+      icon: <CIcon name="cil-people" customClasses="c-sidebar-nav-icon"/>,
     },
   // {
   //   _tag: 'CSidebarNavTitle',

@@ -6,6 +6,7 @@ const SalesVisit = React.lazy(() => import('./layout/SalesVisit/salesVisit'));
 const Customermanagement = React.lazy(() => import('./layout/CustomerManagement/customermanagement'));
 const Employeemanagement = React.lazy(() => import('./layout/EmployeeManagement/employeemanagement'));
 const Payment = React.lazy(() => import('./layout/Payments/payments'));
+const PM = React.lazy(() => import('./layout/PM/pm'));
 
 
 const routes = [
@@ -17,7 +18,8 @@ const routes = [
   { path: '/employeemanagement', name: 'Employeemanagement', component: Employeemanagement },
   { path: '/payments', name: 'Payments', component: Payment },
 
- 
+  { path: '/pm', name: 'PM', component: PM },
+
 ];
 
 export default routes;

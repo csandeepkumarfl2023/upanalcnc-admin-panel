@@ -10,9 +10,9 @@ import {
   CModalHeader,
   CModalTitle,
   CCol,
+  CAlert,
   CDataTable,
   CRow,
-  CAlert,
   CButton,
   CFormGroup,
   CLabel,
@@ -31,10 +31,10 @@ const getBadge = status => {
   }
   const fields = ['name', 'type','description',]
 
-export default function Payments() {
+export default function Pms() {
     const [info, setInfo] = useState(false)
     const [data, setData] = useState([
-      {id: 0,  name: 'Payment', type: 'Payment Type',description:'Payment Desc',
+      {id: 0,  name: 'Pm', type: 'Pm Type',description:'Pm Desc',
      },
     ])
 
@@ -103,7 +103,7 @@ export default function Payments() {
 }
   return (
     <>
-        <CAlert color="success" show={alert} onClose={() => setAlert(false)} dismissible>
+      <CAlert color="success" show={alert} onClose={() => setAlert(false)} dismissible>
             <CModalHeader closeButton onClick={() => setAlert(false)}>Successfully Added!</CModalHeader>
           </CAlert>
           <CAlert color="primary"show={editAlert} variant="success" onClose={() => setEditAlert(false)} dismissible>
@@ -123,7 +123,7 @@ export default function Payments() {
             <CCardBody>
               <CRow>
               <CCol xs="11">
-              Payments
+              Pms
               </CCol>
               <CCol xs="1">
               <CButton  color="info" onClick={() => setInfo(!info)} className="mr-1">New</CButton>
@@ -159,7 +159,7 @@ export default function Payments() {
               color="info"
             >
               <CModalHeader closeButton>
-                <CModalTitle>Add New</CModalTitle>
+                <CModalTitle>Add New PM</CModalTitle>
               </CModalHeader>
               <CModalBody>
               <CRow>
@@ -192,7 +192,7 @@ export default function Payments() {
                 <CButton color="info" onClick={submitHandler}>Submit</CButton>{' '}
               </CModalFooter>
             </CModal>
-        
+
             </CCardBody>
           </CCard>
         </CCol>
@@ -202,7 +202,7 @@ export default function Payments() {
               color="info"
             >
               <CModalHeader closeButton>
-                <CModalTitle>Edit Payments</CModalTitle>
+                <CModalTitle>Edit PM </CModalTitle>
               </CModalHeader>
               <CModalBody>
               <CRow>
