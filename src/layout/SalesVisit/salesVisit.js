@@ -19,6 +19,8 @@ import {
   CCardHeader
 } from '@coreui/react'
 
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const getBadge = status => {
     switch (status) {
@@ -30,7 +32,11 @@ const getBadge = status => {
     }
   }
   const fields = ['breakdownId','company', 'priority','issueType','executive', 'status','createdDate','email']
-
+  
+  const override = css`
+  display: block;
+  margin: 0 auto;
+`;
 export default function SalesVisit() {
     const [data, setData] = useState([
       {id: 0, breakdownId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
@@ -51,6 +57,7 @@ export default function SalesVisit() {
 
     const [deleteAlert,setDeleteAlert] = useState(false)
     const [updateId, setUpdateId] = useState()
+    const  [loading,setLoading] = useState(false)
 
     const submitHandler = () => {
       let currentData = {}
@@ -69,6 +76,9 @@ export default function SalesVisit() {
       console.log('alldata',allData);
       setInfo(!info)
       setAlert(true)
+      setLoading(true)
+      setTimeout(function(){   setLoading(false)
+       }, 3000);
 
   }
   const editBtnHandler = () => {   
@@ -91,6 +101,9 @@ export default function SalesVisit() {
 
       setEditModal(false)
       setEditAlert(true)
+      setLoading(true)
+      setTimeout(function(){   setLoading(false)
+       }, 3000);
      
  }
   const conditionalRowStyles = [
@@ -113,13 +126,19 @@ export default function SalesVisit() {
     element = element.filter(item => item.id !==updatedData.id);
     setData(element)
     setEditModal(false)
-
     setDeleteAlert(true)
+    setLoading(true)
+    setTimeout(function(){   setLoading(false)
+     }, 3000);
 }
   return (
     <>
+    <div className="sweet-loading">
+      <ClipLoader  loading={loading}  css={override} size={50} color='#2f4f4f'/>
+    </div>
    <CRow>
         <CCol xs="12" lg="12">
+        {!loading ?  
           <CCard>
             {/* <CCardHeader>
              All
@@ -242,6 +261,7 @@ export default function SalesVisit() {
           </CModal>
             </CCardBody>
           </CCard>
+           : null } 
         </CCol>
         <CModal 
               show={editModal} 

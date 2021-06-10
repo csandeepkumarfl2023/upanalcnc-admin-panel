@@ -21,7 +21,8 @@ import {
   CNavLink
 
 } from '@coreui/react'
-
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
 const getBadge = status => {
   switch (status) {
     case 'Completed': return 'success'
@@ -33,6 +34,10 @@ const getBadge = status => {
 }
 const fields = ['breakdownId','company','description','issueType','executive', 'status','contactNumber', 'reports']
 
+const override = css`
+  display: block;
+  margin: 0 auto;
+`;
 
 export default function Breakdown() {
     const [data, setData] = useState([
@@ -80,8 +85,8 @@ export default function Breakdown() {
         setInfo(!info)
         setAlert(true)
         setLoading(true)
-
-      //  setLoading(false)
+        setTimeout(function(){   setLoading(false)
+         }, 3000);
     }
     const editBtnHandler = () => {   
       let updatedData = {}
@@ -103,6 +108,9 @@ export default function Breakdown() {
 
         setEditModal(false)
         setEditAlert(true)
+        setLoading(true)
+        setTimeout(function(){   setLoading(false)
+         }, 3000);
        
    }
     const conditionalRowStyles = [
@@ -125,26 +133,21 @@ export default function Breakdown() {
       element = element.filter(item => item.id !==updatedData.id);
       setData(element)
       setEditModal(false)
-
       setDeleteAlert(true)
+      setLoading(true)
+      setTimeout(function(){   setLoading(false)
+       }, 3000);
   }
-
 
   return (
     <>
-    {/* <div class="text-center">
-     <div class="spinner-border" role="status">
-    <span class="sr-only">Loading...</span>
-      </div>
-      </div> */}
+      <div className="sweet-loading">
+      <ClipLoader  loading={loading}  css={override} size={50} color='#2f4f4f'/>
+    </div>
    <CRow>
         <CCol xs="12" lg="12">
+        {!loading ?  
           <CCard>
-            {/* <CCardHeader>
-             All
-              <DocsLink name="CModal"/>
-            </CCardHeader> */}
-              
             <CCardBody>
               <CRow>
               <CCol xs="11">
@@ -154,7 +157,7 @@ export default function Breakdown() {
               <CButton  color="info" onClick={() => setInfo(!info)} className="mr-1">New</CButton>
             </CCol>
             </CRow>
-            
+      
             <CDataTable
              items={data}
               fields={fields}
@@ -264,6 +267,7 @@ export default function Breakdown() {
           </CModal>
             </CCardBody>
           </CCard>
+        : null } 
         </CCol>
         <CModal 
               show={editModal} 

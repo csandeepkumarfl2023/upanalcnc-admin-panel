@@ -17,6 +17,8 @@ import {
   CLabel,
   CInput,
 } from '@coreui/react'
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 
 const getBadge = status => {
@@ -29,7 +31,10 @@ const getBadge = status => {
     }
   }
   const fields = ['name', 'type','description',]
-
+  const override = css`
+  display: block;
+  margin: 0 auto;
+`;
 export default function Payments() {
     const [info, setInfo] = useState(false)
     const [data, setData] = useState([
@@ -46,6 +51,7 @@ export default function Payments() {
 
     const [deleteAlert,setDeleteAlert] = useState(false)
     const [updateId, setUpdateId] = useState()
+    const  [loading,setLoading] = useState(false)
 
     const submitHandler = () => {
       let currentData = {}
@@ -59,6 +65,9 @@ export default function Payments() {
       console.log('alldata',allData);
       setInfo(!info)
       setAlert(true)
+      setLoading(true)
+      setTimeout(function(){   setLoading(false)
+       }, 3000);
   }
   const editBtnHandler = () => {   
     let updatedData = {}
@@ -75,6 +84,9 @@ export default function Payments() {
 
       setEditModal(false)
       setEditAlert(true)
+      setLoading(true)
+      setTimeout(function(){   setLoading(false)
+       }, 3000);
      
  }
   const conditionalRowStyles = [
@@ -97,13 +109,19 @@ export default function Payments() {
     element = element.filter(item => item.id !==updatedData.id);
     setData(element)
     setEditModal(false)
-
     setDeleteAlert(true)
+    setLoading(true)
+    setTimeout(function(){   setLoading(false)
+     }, 3000);
 }
   return (
     <>
+      <div className="sweet-loading">
+      <ClipLoader  loading={loading}  css={override} size={50} color='#2f4f4f'/>
+    </div>
    <CRow>
         <CCol xs="12" lg="12">
+        {!loading ?  
           <CCard>
             {/* <CCardHeader>
              All
@@ -193,6 +211,7 @@ export default function Payments() {
           </CModal>
             </CCardBody>
           </CCard>
+           : null } 
         </CCol>
         <CModal 
               show={editModal} 
