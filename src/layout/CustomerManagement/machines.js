@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 
 import {
-    CBadge,
-    CCard,
+    CSelect,
     CCardBody,
     CModal,
     CModalBody,
@@ -18,8 +17,13 @@ import {
     CLabel,
     CInput,
 } from '@coreui/react'
-
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
 const fields = ['machineId','customerCode', 'machineType','make','model', 'machineSerialNo','machineAge','controller','controllerModel','generateQRCode']
+const override = css`
+display: block;
+margin: 0 auto;
+`;
 
 const getBadge = status => {
     switch (status) {
@@ -41,12 +45,15 @@ export default function Machines() {
     const [machineSerialNo,setMachineSerialNo] = useState("")
     const [machineAge,setMachineAge] = useState("")
     const [controller,setController] = useState("")
+    const [others,setOthers] = useState(false)
+    const [typeOthers,setTypeOthers] = useState(false)
     const [generateQRCode,setGenerateQRCode] = useState("")
 
     const [controllerModel,setControllerModel] = useState("")
     const [alert,setAlert] = useState(false)
     const [editModal, setEditModal] = useState(false)
     const [editAlert,setEditAlert] = useState(false)
+    const  [loading,setLoading] = useState(false)
 
     const [deleteAlert,setDeleteAlert] = useState(false)
     const [updateId, setUpdateId] = useState()
@@ -74,9 +81,12 @@ export default function Machines() {
         let allData = [...data]
         allData.push(currentData)
         setData(allData)
-        console.log('alldata',allData);
-        setInfo(!info)
+        console.log('alldata',controller);
+        setInfo(!info)  
         setAlert(true)
+        setLoading(true)
+        setTimeout(function(){   setLoading(false)
+         }, 3000);
     }
     const editBtnHandler = () => {   
       let updatedData = {}
@@ -100,6 +110,9 @@ export default function Machines() {
   
         setEditModal(false)
         setEditAlert(true)
+        setLoading(true)
+        setTimeout(function(){   setLoading(false)
+         }, 3000);
        
    }
     const conditionalRowStyles = [
@@ -114,6 +127,17 @@ export default function Machines() {
         },
       }
     ];
+
+    const controllerHandler = (e) => {
+      e.target.value == 'Others' ? setOthers(true) :  setOthers(false)
+       setController(e.target.value)
+    }
+
+    const typeHandler = (e) => {
+      e.target.value == 'Others' ? setTypeOthers(true) :  setTypeOthers(false)
+       setMachineType(e.target.value)
+    }
+
     const deleteHandler = () => {
       let element = [...data]
       let updatedData = {}
@@ -122,11 +146,16 @@ export default function Machines() {
       element = element.filter(item => item.id !==updatedData.id);
       setData(element)
       setEditModal(false)
-  
       setDeleteAlert(true)
+      setLoading(true)
+      setTimeout(function(){   setLoading(false)
+       }, 3000);
   }
     return (
         <div>
+     <div className="sweet-loading">
+      <ClipLoader  loading={loading}  css={override} size={50} color='#2f4f4f'/>
+    </div>
             <CAlert color="success" show={alert} onClose={() => setAlert(false)} dismissible>
             <CModalHeader closeButton onClick={() => setAlert(false)}>Successfully Added!</CModalHeader>
           </CAlert>
@@ -139,11 +168,7 @@ export default function Machines() {
           </CAlert>
              <CRow>
         <CCol xs="12" lg="12">
-         
-            {/* <CCardHeader>
-             All
-              <DocsLink name="CModal"/>
-            </CCardHeader> */}
+        {!loading ?  
             <CCardBody>
               <CRow>
               <CCol xs="11">
@@ -200,9 +225,23 @@ export default function Machines() {
               </CFormGroup>
             </CCol>
             <CCol xs="10" md="6">
-              <CFormGroup >
+            <CFormGroup >
                 <CLabel htmlFor="machineType">Machine Type</CLabel>
-                <CInput type="text" id="machineType" name="machineType" placeholder="Machine Type" value={machineType} onChange={(e) => setMachineType(e.target.value)}/>
+                <CSelect custom size="md" name="machineType" id="machineType" value={machineType} onChange={typeHandler}>
+                  <option value="0">Open this select menu</option>
+                  <option value="VMC">VMC</option>
+                  <option value="TURNING">TURNING</option>
+                  <option value="VTL">VTL</option>
+                  <option value="HMC">HMC</option>
+                  <option value="SPM">SPM</option>
+                  <option value="Others">Others</option>
+                </CSelect>
+                { typeOthers ? 
+                  <CRow style={{marginRight:'3%',marginLeft:'1%'}}>
+                  <CLabel htmlFor="controller">Enter Your Option</CLabel>                  
+                <CInput type="text" id="others" name="others" placeholder="Machine Type"  value={machineType} onChange={(e) => setMachineType(e.target.value)}/>
+                 </CRow>
+                  : null } 
               </CFormGroup>
             </CCol>
             </CRow>
@@ -237,17 +276,33 @@ export default function Machines() {
             </CCol>
             <CCol xs="10" md="4">
               <CFormGroup >
-                <CLabel htmlFor="controller">Machine Controller</CLabel>
-                <CInput type="text" id="controller" name="controller" placeholder="controller" value={controller} onChange={(e) => setController(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            <CCol xs="10" md="4">
-              <CFormGroup >
                 <CLabel htmlFor="controllerModel">Controller Model</CLabel>
                 <CInput type="text" id="controllerModel" name="controllerModel" placeholder="Controller Model" value={controllerModel} onChange={(e) => setControllerModel(e.target.value)}/>
               </CFormGroup>
             </CCol>
             </CRow> 
+
+
+            <CCol xs="10" md="6">
+            <CFormGroup >
+                <CLabel htmlFor="controller">Machine Controller</CLabel>
+                <CSelect custom size="md" name="controller" id="controller" value={controller} onChange={controllerHandler}>
+                  <option value="0">Open this select menu</option>
+                  <option value="Funac">Funac</option>
+                  <option value="Siemens">Siemens</option>
+                  <option value="Mitsubishi">Mitsubishi</option>
+                  <option value="Others">Others</option>
+                </CSelect>
+                
+                 { others ?   
+                  <CRow style={{marginRight:'3%',marginLeft:'1%'}}>
+                  <CLabel htmlFor="controller">Enter Your Option</CLabel>             
+                <CInput type="text" id="others" name="others" placeholder="Machine controller"  value={controller} onChange={(e) => setController(e.target.value)}/>
+                </CRow>
+                  : null } 
+              </CFormGroup>
+            </CCol>
+
               </CModalBody>
               <CModalFooter>
                 <CButton color="secondary" onClick={() => setInfo(!info)}>Cancel</CButton>
@@ -256,7 +311,7 @@ export default function Machines() {
             </CModal>
 
             </CCardBody>
-         
+         : null }
         </CCol>
         <CModal 
               show={editModal} 

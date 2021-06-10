@@ -19,7 +19,15 @@ import {
     CInput,
 } from '@coreui/react'
 
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
+
 const fields = ['customerName','customerCode', 'contactPerson','mobileNo','email', 'address','gstNumber']
+
+const override = css`
+display: block;
+margin: 0 auto;
+`;
 
 const getBadge = status => {
     switch (status) {
@@ -50,6 +58,8 @@ export default function Customer() {
 
     const [deleteAlert,setDeleteAlert] = useState(false)
     const [updateId, setUpdateId] = useState()
+    const  [loading,setLoading] = useState(false)
+
     const [data,setData] = useState([
         {id: 0, customerName: 'Cloudhub', customerCode: 'UPNLCUSTT01', contactPerson: 'ABC',mobileNo:'908000000',
         email:'jrogers@cloudhub.com', address: '#26,Peenya Industrial area',gstNumber:'jrogers@cloudhub.com'},
@@ -78,6 +88,9 @@ export default function Customer() {
         console.log('alldata',allData);
         setInfo(!info)
         setAlert(true)
+        setLoading(true)
+        setTimeout(function(){   setLoading(false)
+         }, 3000);
     }
     const editBtnHandler = () => {   
       let updatedData = {}
@@ -102,6 +115,9 @@ export default function Customer() {
   
         setEditModal(false)
         setEditAlert(true)
+        setLoading(true)
+        setTimeout(function(){   setLoading(false)
+         }, 3000);
        
    }
     const conditionalRowStyles = [
@@ -124,11 +140,17 @@ export default function Customer() {
       element = element.filter(item => item.id !==updatedData.id);
       setData(element)
       setEditModal(false)
-  
       setDeleteAlert(true)
+      setLoading(true)
+      setTimeout(function(){   setLoading(false)
+       }, 3000);
   }
     return (
         <div>
+     <div className="sweet-loading">
+      <ClipLoader  loading={loading}  css={override} size={50} color='#2f4f4f'/>
+     </div> 
+        <CRow>
             <CAlert color="success" show={alert} onClose={() => setAlert(false)} dismissible>
             <CModalHeader closeButton onClick={() => setAlert(false)}>Successfully Added!</CModalHeader>
           </CAlert>
@@ -141,11 +163,7 @@ export default function Customer() {
           </CAlert>
              <CRow>
         <CCol xs="12" lg="12">
-         
-            {/* <CCardHeader>
-             All
-              <DocsLink name="CModal"/>
-            </CCardHeader> */}
+        {!loading ?
             <CCardBody>
               <CRow>
               <CCol xs="11">
@@ -279,7 +297,7 @@ export default function Customer() {
             </CModal>
 
             </CCardBody>
-         
+         : null }
         </CCol>
         <CModal 
               show={editModal} 
@@ -373,6 +391,8 @@ export default function Customer() {
               </CModalFooter>
             </CModal>
         </CRow>
+        </CRow>
         </div>
+        
     )
 }

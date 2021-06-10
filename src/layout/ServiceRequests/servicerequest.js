@@ -25,6 +25,8 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
 const getBadge = status => {
   switch (status) {
     case 'Completed': return 'success'
@@ -36,6 +38,10 @@ const getBadge = status => {
 }
 const fields = ['servicerequestId','company','description','issueType','executive', 'status','contactNumber', 'reports']
 
+const override = css`
+  display: block;
+  margin: 0 auto;
+`;
 
 export default function ServiceRequest() {
     const [data, setData] = useState([
@@ -87,8 +93,8 @@ export default function ServiceRequest() {
         setInfo(!info)
         setAlert(true)
         setLoading(true)
-
-      //  setLoading(false)
+        setTimeout(function(){   setLoading(false)
+         }, 3000);
     }
 
     const ExecutivesubmitHandler = () => {
@@ -127,6 +133,9 @@ export default function ServiceRequest() {
 
         setEditModal(false)
         setEditAlert(true)
+        setLoading(true)
+        setTimeout(function(){   setLoading(false)
+         }, 3000);
        
    }
     const conditionalRowStyles = [
@@ -150,13 +159,17 @@ export default function ServiceRequest() {
       element = element.filter(item => item.id !==updatedData.id);
       setData(element)
       setEditModal(false)
-
       setDeleteAlert(true)
+      setLoading(true)
+      setTimeout(function(){   setLoading(false)
+       }, 3000);
   }
-
 
   return (
     <>
+      <div className="sweet-loading">
+      <ClipLoader  loading={loading}  css={override} size={50} color='#2f4f4f'/>
+    </div>
     {/* <div class="text-center">
      <div class="spinner-border" role="status">
     <span class="sr-only">Loading...</span>
@@ -174,12 +187,8 @@ export default function ServiceRequest() {
           </CAlert>
    <CRow>
         <CCol xs="12" lg="12">
+        {!loading ?  
           <CCard>
-            {/* <CCardHeader>
-             All
-              <DocsLink name="CModal"/>
-            </CCardHeader> */}
-              
             <CCardBody>
               <CRow>
               <CCol xs="11">
@@ -189,7 +198,7 @@ export default function ServiceRequest() {
               <CButton  color="info" onClick={() => setInfo(!info)} className="mr-1">New</CButton>
             </CCol>
             </CRow>
-            
+      
             <CDataTable
              items={data}
               fields={fields}
@@ -347,6 +356,7 @@ export default function ServiceRequest() {
          
             </CCardBody>
           </CCard>
+        : null } 
         </CCol>
         <CModal 
               show={editModal} 

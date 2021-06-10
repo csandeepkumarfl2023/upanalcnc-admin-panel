@@ -9,7 +9,17 @@ import {
   CHeaderNavLink,
   CSubheader,
   CBreadcrumbRouter,
-  CLink
+  CButton,
+  CButtonGroup,
+  CFormGroup,
+  CCol,
+  CInput,
+  CLabel,
+  CCardHeader,
+  CCardBody,
+  CCard,
+  CLink,
+  CRow
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
@@ -55,13 +65,11 @@ const TheHeader = () => {
 
       <CHeaderNav className="d-md-down-none mr-auto">
         <CHeaderNavItem className="px-3" >
-          {/* <CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink>
-        </CHeaderNavItem>
-        <CHeaderNavItem  className="px-3">
-          <CHeaderNavLink to="/users">Users</CHeaderNavLink>
-        </CHeaderNavItem>
-        <CHeaderNavItem className="px-3">
-          <CHeaderNavLink>Settings</CHeaderNavLink> */}
+               <CInput
+                    className="mr-sm-2"
+                    placeholder="Search"
+                    size="sm"
+                  ></CInput>
         </CHeaderNavItem>
       </CHeaderNav>
 
@@ -77,21 +85,18 @@ const TheHeader = () => {
           className="border-0 c-subheader-nav m-0 px-0 px-md-3" 
           routes={routes} 
         />
+           <CFormGroup row>
+             <CRow>
           <div className="d-md-down-none mfe-2 c-subheader-nav">
-            {/* <CLink className="c-subheader-nav-link"href="#">
-              <CIcon name="cil-speech" alt="Settings" />
-            </CLink> */}
-            {/* <CLink 
-              className="c-subheader-nav-link" 
-              aria-current="page" 
-              to="/dashboard"
-            >
-              <CIcon name="cil-graph" alt="Dashboard" />&nbsp;Dashboard
-            </CLink>
-            <CLink className="c-subheader-nav-link" href="#">
-              <CIcon name="cil-settings" alt="Settings" />&nbsp;Settings
-            </CLink> */}
+          <CButtonGroup>
+              <CButton color="secondary">Days</CButton>
+              <CButton color="secondary">Weeks</CButton>
+              <CButton color="secondary">Months</CButton>
+            </CButtonGroup>
           </div>
+            <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{width:'40%',marginTop:'2%'}} />
+            </CRow>
+            </CFormGroup>
       </CSubheader>
     </CHeader>
   )

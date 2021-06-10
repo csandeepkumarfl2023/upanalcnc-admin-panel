@@ -289,7 +289,7 @@ setDeleteAlert(true)
     <CRow>
     <CCol xs="4" sm="3">
 
-      <CCard>
+      <CCard >
         <CCardHeader>
          Service Requests
         </CCardHeader>
@@ -298,15 +298,16 @@ setDeleteAlert(true)
             datasets={[
               {
                 backgroundColor: [
-                  '#41B883',
-                  '#E46651',
-                  '#00D8FF',
-                  '#DD1B16'
+                  '#50D2C2',
+                  '#FF3366',
+                  '#FCAB53',
+                  '#D667CD',
+                  '#8C88FF'
                 ],
-                data: [10, 10, 10, 10]
+                data: [10, 10, 10, 10,10]
               }
             ]}
-         //   labels={['VueJs', 'EmberJs', 'ReactJs', 'AngularJs']}
+         //  labels={['Completed', 'Overdue', 'Pending', 'Assigned','Accepted']}
             options={{  
               tooltips: {
                 enabled: true
@@ -326,15 +327,16 @@ setDeleteAlert(true)
             datasets={[
               {
                 backgroundColor: [
-                  '#41B883',
-                  '#E46651',
-                  '#00D8FF',
-                  '#DD1B16'
+                  '#50D2C2',
+                  '#FF3366',
+                  '#FCAB53',
+                  '#D667CD',
+                  '#8C88FF'
                 ],
-                data: [10, 10, 10, 10]
+                data: [10, 10, 10, 10,10]
               }
             ]}
-           // labels={['VueJs', 'EmberJs', 'ReactJs', 'AngularJs']}
+          //  labels={['Completed', 'Overdue', 'Pending', 'Assigned','Accepted']}
             options={{  
               tooltips: {
                 enabled: true
@@ -354,15 +356,16 @@ setDeleteAlert(true)
             datasets={[
               {
                 backgroundColor: [
-                  '#41B883',
-                  '#E46651',
-                  '#00D8FF',
-                  '#DD1B16'
+                  '#50D2C2',
+                  '#FF3366',
+                  '#FCAB53',
+                  '#D667CD',
+                  '#8C88FF'
                 ],
-                data: [10, 10, 10, 10]
+                data: [10, 10, 10, 10,10]
               }
             ]}
-          //  labels={['VueJs', 'EmberJs', 'ReactJs', 'AngularJs']}
+          //  labels={['Completed', 'Overdue', 'Pending', 'Assigned','Accepted']}
             options={{  
               tooltips: {
                 enabled: true
@@ -382,15 +385,21 @@ setDeleteAlert(true)
             datasets={[
               {
                 backgroundColor: [
-                  '#41B883',
-                  '#E46651',
-                  '#00D8FF',
-                  '#DD1B16'
+                  '#50D2C2',
+                  '#FF3366',
+                  '#FCAB53',
+                  '#D667CD',
+                  '#8C88FF'
                 ],
-                data: [10, 10, 10, 10]
+                data: [10, 10, 10, 10,10]
               }
             ]}
-         
+          //  labels={['Completed', 'Overdue', 'Pending', 'Assigned','Accepted']}
+            options={{  
+              tooltips: {
+                enabled: true
+              }
+            }}
           />
         </CCardBody>
       </CCard>
