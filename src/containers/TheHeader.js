@@ -11,6 +11,7 @@ import {
   CBreadcrumbRouter,
   CLink
 } from '@coreui/react'
+
 import CIcon from '@coreui/icons-react'
 
 // routes config
