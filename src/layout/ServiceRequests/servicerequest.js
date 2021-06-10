@@ -31,19 +31,19 @@ const getBadge = status => {
     default: return 'primary'
   }
 }
-const fields = ['breakdownId','company','description','issueType','executive', 'status','contactNumber', 'reports']
+const fields = ['servicerequestId','company','description','issueType','executive', 'status','contactNumber', 'reports']
 
 
-export default function Breakdown() {
+export default function ServiceRequest() {
     const [data, setData] = useState([
-        {id: 0, breakdownId: 'UPNLBKN202101', status:'Completed', issueType:'Electrical',description:'value proposition', company: 'Upanal CNC', contactNumber: '8765964234', 
+        {id: 0, servicerequestId: 'UPNLBKN202101', status:'Completed', issueType:'Electrical',description:'value proposition', company: 'Upanal CNC', contactNumber: '8765964234', 
         executive:'ABC',reports:'no'},
-        {id: 1, breakdownId: 'UPNLBKN202102', status:'InProgress', issueType:'Mechanical',description:'Prospecting', company: 'ABC', contactNumber: '97543281231', 
+        {id: 1, servicerequestId: 'UPNLBKN202102', status:'InProgress', issueType:'Mechanical',description:'Prospecting', company: 'ABC', contactNumber: '97543281231', 
         executive:'XYZ',reports:'no'},
-        {id: 2, breakdownId: 'UPNLBKN202103', status:'ON-SITE', issueType:'Electrical',description:'Id.decision Makers', company: 'XYZ', contactNumber: '76854012334', 
+        {id: 2, servicerequestId: 'UPNLBKN202103', status:'ON-SITE', issueType:'Electrical',description:'Id.decision Makers', company: 'XYZ', contactNumber: '76854012334', 
         executive:'ABC',reports:'no'},
       ])
-    const [breakdownId,setBreakdownId] = useState("")
+    const [servicerequestId,setServiceRequestId] = useState("")
     const [status,setStatus] = useState("")
     const [issueType,setIssueType] = useState("")
     const [description,setDescription] = useState("")
@@ -65,7 +65,7 @@ export default function Breakdown() {
     const submitHandler = () => {
         let currentData = {}
         currentData.id = Math.round(Math.random() * 10000000)
-        currentData.breakdownId = breakdownId
+        currentData.servicerequestId = servicerequestId
         currentData.status = status
         currentData.issueType=issueType
         currentData.description=description
@@ -86,7 +86,7 @@ export default function Breakdown() {
     const editBtnHandler = () => {   
       let updatedData = {}
         updatedData.id = updateId
-        updatedData.breakdownId = breakdownId
+        updatedData.servicerequestId = servicerequestId
         updatedData.status = status
         updatedData.issueType=issueType
         updatedData.description=description
@@ -148,7 +148,7 @@ export default function Breakdown() {
             <CCardBody>
               <CRow>
               <CCol xs="11">
-              Breakdown
+              ServiceRequest
               </CCol>
               <CCol xs="1">
               <CButton  color="info" onClick={() => setInfo(!info)} className="mr-1">New</CButton>
@@ -162,12 +162,12 @@ export default function Breakdown() {
               itemsPerPage={5}
               pagination
               scopedSlots = {{
-                'breakdownId':
+                'servicerequestId':
                   (item)=>(
                     <td>
                    <a  onClick={()=>{
                      setUpdateId(item.id)
-                     setBreakdownId(item.breakdownId)
+                     setServiceRequestId(item.servicerequestId)
                      setCompany(item.company)
                      setIssueType(item.issueType)
                      setDescription(item.description)
@@ -178,7 +178,7 @@ export default function Breakdown() {
 
                       setEditModal(!editModal)}
                    }
-                      >{item.breakdownId}</a>
+                      >{item.servicerequestId}</a>
                     </td>
                   )
               }}
@@ -271,7 +271,7 @@ export default function Breakdown() {
               color="info"
             >
               <CModalHeader closeButton>
-                <CModalTitle>Edit Breakdown</CModalTitle>
+                <CModalTitle>Edit ServiceRequest</CModalTitle>
               </CModalHeader>
               <CModalBody>
               <CRow>

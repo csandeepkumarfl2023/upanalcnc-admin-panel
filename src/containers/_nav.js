@@ -11,8 +11,8 @@ const _nav =  [
   },
   {
    _tag: 'CSidebarNavItem',
-    name: 'Breakdown',
-    to: '/breakdown',
+    name: 'ServiceRequest',
+    to: '/servicerequest',
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
     // badge: {
     //   color: 'info',

@@ -24,22 +24,22 @@ const getBadge = status => {
     default: return 'primary'
   }
 }
-const fields = ['breakdownId','company', 'priority','issueType','executive', 'status','createdDate','email']
+const fields = ['servicerequestId','company', 'priority','issueType','executive', 'status','createdDate','email']
 
 const usersData = [
-  {id: 0, breakdownId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
+  {id: 0, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
   executive:'Naveen', status: 'Pending',createdDate:'2021-04-10',email:'adam@company.com'},
-  {id: 1, breakdownId: 'UPNLBKN202102', company: 'Company Two', priority: 'Low',issueType:'Electrical',
+  {id: 1, servicerequestId: 'UPNLBKN202102', company: 'Company Two', priority: 'Low',issueType:'Electrical',
   executive:'Naveen', status: 'Active',createdDate:'2021-04-10',email:'adam@company.com'}
 ]
 
-const breakdownData = [
-  {id: 0, breakdownId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
+const servicerequestData = [
+  {id: 0, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
   executive:'Naveen', status: 'on-site',createdDate:'2021-04-10',email:'adam@company.com'},
 
 ]
 const salesData = [
-  {id: 0, breakdownId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
+  {id: 0, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
   executive:'Naveen', status: 'Pending',createdDate:'2021-04-10',email:'adam@company.com'},
 ]
 
@@ -180,7 +180,6 @@ export default function Overview() {
             <CCardBody>
               <CRow>
               <CCol xs="11">
-              All
               </CCol>
               <CCol xs="1">
               <CButton block  color="info" onClick={() => setInfo(!info)} className="mr-1">New</CButton>
@@ -218,14 +217,14 @@ export default function Overview() {
             <CCardBody>
               <CRow>
               <CCol xs="11">
-              Breakdown
+              ServiceRequest
               </CCol>
               <CCol xs="1">
               <CButton block  color="info"onClick={() => setInfo(!info)} className="mr-1">New</CButton>
             </CCol>
             </CRow>
             <CDataTable
-             items={breakdownData}
+             items={servicerequestData}
               fields={fields}
               itemsPerPage={2}
               pagination

@@ -29,14 +29,14 @@ const getBadge = status => {
       default: return 'primary'
     }
   }
-  const fields = ['breakdownId','company', 'priority','issueType','executive', 'status','createdDate','email']
+  const fields = ['servicerequestId','company', 'priority','issueType','executive', 'status','createdDate','email']
 
 export default function SalesVisit() {
     const [data, setData] = useState([
-      {id: 0, breakdownId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
+      {id: 0, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
       executive:'Naveen', status: 'Pending',createdDate:'2021-04-10',email:'adam@company.com'},
     ])
-    const [breakdownId,setBreakdownId] = useState("")
+    const [servicerequestId,setServiceRequestId] = useState("")
     const [status,setStatus] = useState("")
     const [issueType,setIssueType] = useState("")
     const [priority,setPriority] = useState("")
@@ -55,7 +55,7 @@ export default function SalesVisit() {
     const submitHandler = () => {
       let currentData = {}
       currentData.id = Math.round(Math.random() * 10000000)
-      currentData.breakdownId = breakdownId
+      currentData.servicerequestId = servicerequestId
       currentData.status = status
       currentData.issueType=issueType
       currentData.priority=priority
@@ -74,7 +74,7 @@ export default function SalesVisit() {
   const editBtnHandler = () => {   
     let updatedData = {}
       updatedData.id = updateId
-      updatedData.breakdownId = breakdownId
+      updatedData.servicerequestId = servicerequestId
       updatedData.status = status
       updatedData.issueType=issueType
       updatedData.company=company
@@ -141,12 +141,12 @@ export default function SalesVisit() {
               itemsPerPage={5}
               pagination
               scopedSlots = {{
-                'breakdownId':
+                'servicerequestId':
                   (item)=>(
                     <td>
                    <a  onClick={()=>{
                      setUpdateId(item.id)
-                     setBreakdownId(item.breakdownId)
+                     setServiceRequestId(item.servicerequestId)
                      setCompany(item.company)
                      setIssueType(item.issueType)
                      setStatus(item.status)
@@ -156,7 +156,7 @@ export default function SalesVisit() {
                      setEmail(item.email)
                       setEditModal(!editModal)}
                    }
-                      >{item.breakdownId}</a>
+                      >{item.servicerequestId}</a>
                     </td>
                   )
               }}
