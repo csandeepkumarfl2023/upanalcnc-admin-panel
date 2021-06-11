@@ -89,8 +89,7 @@ export default function Pms() {
       setTimeout(function(){   
         setLoading(false)
         setEditAlert(true)
-      }, 3000);
-     
+      }, 3000);   
  }
   const conditionalRowStyles = [
     {
@@ -148,7 +147,7 @@ React.useEffect(() => {
             <CCardBody>
               <CRow>
               <CCol xs="11">
-              Pms
+              Pm
               </CCol>
               <CCol xs="1">
               <CButton  color="info" onClick={() => setInfo(!info)} className="mr-1">New</CButton>

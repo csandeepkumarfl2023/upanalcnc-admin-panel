@@ -20,8 +20,9 @@ function App() {
     <React.Suspense fallback={loading}>
     <Switch>
     <Route path="/login"  name="login" render={props => <Login {...props}/>}  />
-        <Route path="/overview" name="Overview" render={props => <TheLayout {...props}/>} />
-         <Route path="/" name="Overview" render={props => <TheLayout {...props}/>} />
+    <Route path="/overview" name="Overview" render={props => <TheLayout {...props}/>} />
+    <Route path="/" name="Overview" render={props => <TheLayout {...props}/>} />
+
 
     </Switch>
     </React.Suspense>

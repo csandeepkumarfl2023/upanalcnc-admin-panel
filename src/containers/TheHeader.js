@@ -69,7 +69,9 @@ const TheHeader = () => {
                     className="mr-sm-2"
                     placeholder="Search"
                     size="sm"
-                  ></CInput>
+                  >
+                  {/* <CIcon name="cil-phone"  size="1xl"/> */}
+                  </CInput>
         </CHeaderNavItem>
       </CHeaderNav>
 

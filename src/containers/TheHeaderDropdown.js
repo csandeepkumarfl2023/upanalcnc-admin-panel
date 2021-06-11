@@ -15,6 +15,9 @@ const TheHeaderDropdown = () => {
   const logoutHandler = () => {
   history.push('/login');
   }
+  const profileHandler = () => {
+    history.push('/profile');
+    }
   return (
     <CDropdown
       inNav
@@ -34,6 +37,9 @@ const TheHeaderDropdown = () => {
         <CDropdownItem divider />
         <CDropdownItem>
           <CButton name="cil-lock-locked" className="mfe-2" onClick={logoutHandler}>Log Out</CButton>
+        </CDropdownItem>
+        <CDropdownItem>
+        <CButton name="cil-lock-locked" className="mfe-2" onClick={profileHandler}>My Profile</CButton>
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>

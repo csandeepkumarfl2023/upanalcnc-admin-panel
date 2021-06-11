@@ -24,15 +24,17 @@ import {
 
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 const getBadge = status => {
   switch (status) {
-    case 'Completed': return 'success'
-    case 'ON-SITE': return 'secondary'
-    case 'InProgress': return 'warning'
-    case 'Banned': return 'danger'
+    case 'Completed': return 'info'
+    case 'Overdue': return 'danger'
+    case 'Pending': return 'warning'
+    case 'Assigned': return 'light'
+    case 'Accepted': return 'secondary'
+    case 'new': return 'dark'
+    case 'open': return 'dark'
     default: return 'primary'
   }
 }
@@ -47,9 +49,9 @@ export default function ServiceRequest() {
     const [data, setData] = useState([
         {id: 0, servicerequestId: 'UPNLBKN202101', status:'Completed', issueType:'Electrical',description:'value proposition', company: 'Upanal CNC', contactNumber: '8765964234', 
         executive:'ABC',reports:'no'},
-        {id: 1, servicerequestId: 'UPNLBKN202102', status:'InProgress', issueType:'Mechanical',description:'Prospecting', company: 'ABC', contactNumber: '97543281231', 
+        {id: 1, servicerequestId: 'UPNLBKN202102', status:'Overdue', issueType:'Mechanical',description:'Prospecting', company: 'ABC', contactNumber: '97543281231', 
         executive:'XYZ',reports:'no'},
-        {id: 2, servicerequestId: 'UPNLBKN202103', status:'ON-SITE', issueType:'Electrical',description:'Id.decision Makers', company: 'XYZ', contactNumber: '76854012334', 
+        {id: 2, servicerequestId: 'UPNLBKN202103', status:'Pending', issueType:'Electrical',description:'Id.decision Makers', company: 'XYZ', contactNumber: '76854012334', 
         executive:'ABC',reports:'no'},
       ])
     const [servicerequestId,setServiceRequestId] = useState("")
@@ -78,7 +80,7 @@ export default function ServiceRequest() {
     const submitHandler = () => {
         let currentData = {}
         currentData.id = Math.round(Math.random() * 10000000)
-        currentData.servicerequestId = servicerequestId
+        currentData.servicerequestId = 'Ul456578'
         currentData.status = status
         currentData.issueType=issueType
         currentData.description=description
@@ -99,18 +101,18 @@ export default function ServiceRequest() {
     }
 
     const ExecutivesubmitHandler = () => {
-      let currentData = {}
-      currentData.id = Math.round(Math.random() * 10000000)
-      currentData.name = name
-      currentData.sheduleDate = sheduleDate
-      currentData.sheduleTime=sheduleTime
-      let allData = [...data]
-      allData.push(currentData)
-      setData(allData)
-      console.log('alldata',allData);
-      setExecutiveInfo(!executiveinfo)
-      setAlert(true)
-      setLoading(true)
+      // let currentData = {}
+      // currentData.id = Math.round(Math.random() * 10000000)
+      // currentData.name = name
+      // currentData.sheduleDate = sheduleDate
+      // currentData.sheduleTime=sheduleTime
+      // let allData = [...data]
+      // allData.push(currentData)
+      // setData(allData)
+      // console.log('alldata',allData);
+       setExecutiveInfo(!executiveinfo)
+      // setAlert(true)
+      // setLoading(true)
 
     //  setLoading(false)
   }
@@ -174,7 +176,7 @@ export default function ServiceRequest() {
       setLoading(false)
     }, 2000);
   },[])
-  
+
   return (
     <>
       <div className="sweet-loading">
@@ -239,6 +241,14 @@ export default function ServiceRequest() {
                        {<CIcon name="cil-phone"  size="1xl"/>}</a></p>
                  
                     </td>
+                  ),
+                  'status':
+                  (item)=>(
+                    <td>
+                      <CBadge color={getBadge(item.status)}>
+                        {item.status}
+                      </CBadge>
+                    </td>
                   )
               }}
 
@@ -260,7 +270,7 @@ export default function ServiceRequest() {
               <CFormGroup >
                 <CLabel htmlFor="name">Name</CLabel>
                 <CSelect custom size="md" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)}>
-                  <option value="Open this select menu">Open this select menu</option>
+                  <option value="undefined">Open this select menu</option>
                   <option value="Vamsi">Vamsi</option>
                   <option value="Sandeep">Sandeep</option>
                   <option value="Pooja">Pooja</option>

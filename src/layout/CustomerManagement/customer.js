@@ -17,6 +17,7 @@ import {
     CFormGroup,
     CLabel,
     CInput,
+    CSelect
 } from '@coreui/react'
 
 import { css } from "@emotion/react";
@@ -28,16 +29,6 @@ const override = css`
 display: block;
 margin: 0 auto;
 `;
-
-const getBadge = status => {
-    switch (status) {
-      case 'Active': return 'success'
-      case 'on-site': return 'secondary'
-      case 'Pending': return 'warning'
-      case 'Banned': return 'danger'
-      default: return 'primary'
-    }
-  }
 
 export default function Customer() {
     const [info, setInfo] = useState(false)
@@ -148,7 +139,7 @@ export default function Customer() {
          setDeleteAlert(true)
        }, 3000);
   }
-  
+
   React.useEffect(() => {
     setLoading(true)
     setTimeout(function(){  
@@ -227,8 +218,15 @@ export default function Customer() {
               <CRow>
             <CCol xs="10" md="6">
               <CFormGroup >
-                <CLabel htmlFor="customerName">Customer Name</CLabel>
-                <CInput type="text" id="customerName" name="customerName" placeholder="Customer Name" value={customerName} onChange={(e) => setCustomerName(e.target.value)}/>
+              <CLabel htmlFor="Customer Name">Customer Name</CLabel>
+                  <CSelect custom size="md" name="customerName" id="customerName" value={customerName} onChange={(e) => setCustomerName(e.target.value)}>
+                  <option value="0">Open this select menu</option>
+                  <option value="Vamsi">Vamsi</option>
+                  <option value="Sandeep">Sandeep</option>
+                  <option value="Pooja">Pooja</option>
+                  <option value="Vikram">Vikram</option>
+                  <option value="Arun">Arun</option>
+                </CSelect>
               </CFormGroup>
             </CCol>
             <CCol xs="10" md="6">

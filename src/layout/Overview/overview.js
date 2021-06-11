@@ -25,6 +25,8 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 const fields = ['servicerequestId','company', 'priority','issueType','executive', 'status','createdDate','email']
 
+const pmfields = ['name','type', 'description']
+
 const override = css`
 display: block;
 margin: 0 auto;
@@ -59,6 +61,12 @@ export default function Overview() {
     executive:'Naveen', status: 'Active',createdDate:'2021-04-10',email:'adam@company.com'}
   ])
 
+  const [pmData, setPmData] = useState([
+    {id: 0,  name: 'Pm1', type: 'Pm Type',description:'Pm Desc'},
+    {id: 1,  name: 'Pm2', type: 'Pm Type',description:'Pm Desc'},
+    {id: 2,  name: 'Pm3', type: 'Pm Type',description:'Pm Desc'}
+  ])
+
   const getBadge = status => {
     switch (status) {
       case 'Active': return 'success'
@@ -90,6 +98,13 @@ export default function Overview() {
 
   const [deleteAlert,setDeleteAlert] = useState(false)
   const [updateId, setUpdateId] = useState()
+
+  
+  const [description,setDescription] = useState("")
+  const [type,setType] = useState("")
+  const [name,setName] = useState("")
+  const [pmEditModal, setPmEditModal] = useState(false)
+  const [pmAddModal,setPmAddModal] = useState(false)
 
   const submitHandler = () => {
     let currentData = {}
@@ -288,6 +303,56 @@ React.useEffect(() => {
   }, 2000);
 },[])
 
+const pmSubmitHandler = () => {
+  let currentData = {}
+  currentData.id = Math.round(Math.random() * 10000000)
+  currentData.description=description
+  currentData.type=type
+  currentData.name=name
+  let allData = [...pmData]
+  allData.push(currentData)
+  setPmData(allData)
+  console.log('alldata',allData);
+  setPmAddModal(!pmAddModal)
+  setLoading(true)
+  setTimeout(function(){   
+    setLoading(false)
+    setAlert(true)
+   }, 3000);
+}
+const pmeEditHandler = () => {   
+  let updatedData = {}
+    updatedData.id = updateId
+    updatedData.description=description
+    updatedData.type=type
+    updatedData.name=name
+    console.log('updatedData', updatedData)
+    let filteredArr = pmData.filter(function( obj ) {
+      return obj.id !== updateId;
+    });
+    console.log(filteredArr)
+    setPmData([...filteredArr, updatedData])
+    setPmEditModal(false)
+    setLoading(true)
+    setTimeout(function(){   
+      setLoading(false)
+      setEditAlert(true)
+    }, 3000);   
+}
+const pmDeleteHandler = () => {
+  let element = [...pmData]
+  let updatedData = {}
+  updatedData.id = updateId
+  console.log(updatedData.id);
+  element = element.filter(item => item.id !==updatedData.id);
+  setPmData(element)
+  setPmEditModal(false)
+  setLoading(true)
+  setTimeout(function(){   
+    setLoading(false)
+    setDeleteAlert(true)
+  }, 3000);
+}
   return (
     <>
      <div className="sweet-loading">
@@ -980,7 +1045,129 @@ React.useEffect(() => {
               </CModalFooter>
             </CModal>
         </CRow>
-   </>
+
+        {/* PM */}
+        <CRow>
+        <CCol xs="12" lg="12">
+          <CCard>   
+            <CCardBody>
+              <CRow>
+              <CCol xs="11">
+              PM
+              </CCol>
+              <CCol xs="1">
+              <CButton  color="info" onClick={() => setPmAddModal(!pmAddModal)} className="mr-1">New</CButton>
+            </CCol>
+            </CRow>   
+        <CDataTable
+        items={pmData}
+        fields={pmfields}
+        conditionalRowStyles={conditionalRowStyles}
+        itemsPerPage={2}
+        pagination
+        scopedSlots = {{
+          'name':
+            (item)=>(
+              <td>
+             <a  onClick={()=>{
+              setUpdateId(item.id)
+               setName(item.name)
+               setDescription(item.description)
+               setType(item.type)
+              
+               setPmEditModal(!pmEditModal)}
+             }
+                >{item.name}</a>
+              </td>
+            )
+        }}
+
+      /> 
+       <CModal 
+              show={pmAddModal} 
+              onClose={() => setPmAddModal(!pmAddModal)}
+              color="info"
+            >
+              <CModalHeader closeButton>
+                <CModalTitle>Add New PM</CModalTitle>
+              </CModalHeader>
+              <CModalBody>
+              <CRow>
+
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="name">Name</CLabel>
+                <CInput type="text" id="name" name="name" placeholder="name" value={name} onChange={(e) => setName(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+            <CRow>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="type">Type</CLabel>
+                <CInput type="text" id="type" name="type" placeholder="Type" value={type} onChange={(e) => setType(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="description">Description</CLabel>
+                <CInput type="text" id="description" name="description" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+
+              </CModalBody>
+              <CModalFooter>
+                <CButton color="secondary" onClick={() => setPmAddModal(!pmAddModal)}>Cancel</CButton>
+                <CButton color="info" onClick={pmSubmitHandler}>Submit</CButton>{' '}
+              </CModalFooter>
+            </CModal>
+
+            </CCardBody>
+          </CCard>
+        </CCol>
+        <CModal 
+              show={pmEditModal} 
+              onClose={() => setPmEditModal(!pmEditModal)}
+              color="info"
+            >
+              <CModalHeader closeButton>
+                <CModalTitle>Edit PM </CModalTitle>
+              </CModalHeader>
+              <CModalBody>
+              <CRow>
+
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="name">Name</CLabel>
+                <CInput type="text" id="name" name="name" placeholder="name" value={name?name:''} onChange={(e) => setName(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+            <CRow>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="type">Type</CLabel>
+                <CInput type="text" id="type" name="type" placeholder="Type" value={type?type:''} onChange={(e) => setType(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="description">Description</CLabel>
+                <CInput type="text" id="description" name="description" placeholder="Description" value={description?description:''} onChange={(e) => setDescription(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+
+              </CModalBody>
+              <CModalFooter>
+                <CButton color="secondary" onClick={pmDeleteHandler}>Delete</CButton>
+                <CButton color="info" onClick={pmeEditHandler}>Edit</CButton>{' '}
+              </CModalFooter>
+            </CModal>
+        </CRow>  
+  
+   </>   
   : null}
     </>
   )

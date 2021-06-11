@@ -25,16 +25,6 @@ display: block;
 margin: 0 auto;
 `;
 
-const getBadge = status => {
-    switch (status) {
-      case 'Active': return 'success'
-      case 'on-site': return 'secondary'
-      case 'Pending': return 'warning'
-      case 'Banned': return 'danger'
-      default: return 'primary'
-    }
-  }
-
 export default function Machines() {
     const [info, setInfo] = useState(false)
     const [customerCode,setCustomerCode] = useState("")
@@ -248,10 +238,10 @@ export default function Machines() {
                   <option value="Others">Others</option>
                 </CSelect>
                 { typeOthers ? 
-                  <CRow style={{marginRight:'3%',marginLeft:'1%'}}>
+                  <>
                   <CLabel htmlFor="controller">Enter Your Option</CLabel>                  
                 <CInput type="text" id="others" name="others" placeholder="Machine Type"  value={machineType} onChange={(e) => setMachineType(e.target.value)}/>
-                 </CRow>
+                 </>
                   : null } 
               </CFormGroup>
             </CCol>
@@ -306,10 +296,10 @@ export default function Machines() {
                 </CSelect>
                 
                  { others ?   
-                  <CRow style={{marginRight:'3%',marginLeft:'1%'}}>
+                  <>
                   <CLabel htmlFor="controller">Enter Your Option</CLabel>             
                 <CInput type="text" id="others" name="others" placeholder="Machine controller"  value={controller} onChange={(e) => setController(e.target.value)}/>
-                </CRow>
+                </>
                   : null } 
               </CFormGroup>
             </CCol>

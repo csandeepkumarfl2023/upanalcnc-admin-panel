@@ -21,15 +21,6 @@ import {
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 
-const getBadge = status => {
-    switch (status) {
-      case 'Active': return 'success'
-      case 'on-site': return 'secondary'
-      case 'Pending': return 'warning'
-      case 'Banned': return 'danger'
-      default: return 'primary'
-    }
-  }
   const fields = ['name', 'type','description',]
   const override = css`
   display: block;

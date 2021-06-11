@@ -16,20 +16,25 @@ import {
   CButton,
   CFormGroup,
   CLabel,
+  CSelect,
   CInput,
   CCardHeader
 } from '@coreui/react'
 
+import CIcon from '@coreui/icons-react'
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const getBadge = status => {
     switch (status) {
-      case 'Active': return 'success'
-      case 'on-site': return 'secondary'
-      case 'Pending': return 'warning'
-      case 'Banned': return 'danger'
-      default: return 'primary'
+      case 'Completed': return 'info'
+    case 'Overdue': return 'danger'
+    case 'Pending': return 'warning'
+    case 'Assigned': return 'light'
+    case 'Accepted': return 'secondary'
+    case 'new': return 'dark'
+    case 'open': return 'dark'
+    default: return 'primary'
     }
   }
   const fields = ['servicerequestId','company', 'priority','issueType','executive', 'status','createdDate','email']
@@ -41,7 +46,7 @@ const getBadge = status => {
 export default function SalesVisit() {
     const [data, setData] = useState([
       {id: 0, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
-      executive:'Naveen', status: 'Pending',createdDate:'2021-04-10',email:'adam@company.com'},
+      executive:'Naveen', status: 'Completed',createdDate:'2021-04-10',email:'adam@company.com'},
     ])
     const [servicerequestId,setServiceRequestId] = useState("")
     const [status,setStatus] = useState("")
@@ -59,11 +64,15 @@ export default function SalesVisit() {
     const [deleteAlert,setDeleteAlert] = useState(false)
     const [updateId, setUpdateId] = useState()
     const  [loading,setLoading] = useState(false)
+    const [executiveinfo,setExecutiveInfo] = useState(false)
+    const [name,setName] = useState("")
+    const [sheduleDate,setSheduleDate] = useState("")
+    const [sheduleTime,setSheduleTime] = useState("")
 
     const submitHandler = () => {
       let currentData = {}
       currentData.id = Math.round(Math.random() * 10000000)
-      currentData.servicerequestId = servicerequestId
+      currentData.servicerequestId = 'Uld32351'
       currentData.status = status
       currentData.issueType=issueType
       currentData.priority=priority
@@ -105,9 +114,25 @@ export default function SalesVisit() {
       setTimeout(function(){  
          setLoading(false)
          setEditAlert(true)
-       }, 3000);
-     
+       }, 3000);   
  }
+
+ const ExecutivesubmitHandler = () => {
+  // let currentData = {}
+  // currentData.id = Math.round(Math.random() * 10000000)
+  // currentData.name = name
+  // currentData.sheduleDate = sheduleDate
+  // currentData.sheduleTime=sheduleTime
+  // let allData = [...data]
+  // allData.push(currentData)
+  // setData(allData)
+  // console.log('alldata',allData);
+   setExecutiveInfo(!executiveinfo)
+ // setAlert(true)
+ // setLoading(true)
+
+//  setLoading(false)
+}
   const conditionalRowStyles = [
     {
       when: row => row.calories < 300,
@@ -198,10 +223,72 @@ React.useEffect(() => {
                    }
                       >{item.servicerequestId}</a>
                     </td>
-                  )
-              }}
-
+                  ),
+                     'executive':
+                     (item)=>(
+                       <td>
+                        <p>  <a  onClick={()=>{
+                    setExecutiveInfo(!executiveinfo)}
+                      }>
+                          {<CIcon name="cil-phone"  size="1xl"/>}</a></p>
+                    
+                       </td>
+                     ),
+                     'status':
+                     (item)=>(
+                       <td>
+                         <CBadge color="success">
+                           {item.status}
+                         </CBadge>
+                       </td>
+                     )
+                 }}
             />
+             <CModal 
+              show={executiveinfo} 
+              onClose={() => setExecutiveInfo(!executiveinfo)}
+              color="info"
+            >
+              <CModalHeader closeButton>
+                <CModalTitle>Add Executive</CModalTitle>
+              </CModalHeader>
+              <CModalBody>
+              <CRow>
+       
+              <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="name">Name</CLabel>
+                <CSelect custom size="md" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)}>
+                  <option value="undefined">Open this select menu</option>
+                  <option value="Vamsi">Vamsi</option>
+                  <option value="Sandeep">Sandeep</option>
+                  <option value="Pooja">Pooja</option>
+                  <option value="Vikram">Vikram</option>
+                  <option value="Arun">Arun</option>
+                </CSelect>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+            <CRow>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="sheduleDate">Shedule Date</CLabel>
+                <CInput type="date" id="sheduleDate" name="sheduleDate" placeholder="sheduleDate" value={sheduleDate} onChange={(e) => setSheduleDate(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="sheduleTime">Shedule Time</CLabel>
+                <CInput type="time" id="sheduleTime" name="sheduleTime" placeholder="sheduleTime" value={sheduleTime} onChange={(e) => setSheduleTime(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+              </CModalBody>
+              <CModalFooter>
+                <CButton color="secondary" onClick={() => setExecutiveInfo(!executiveinfo)}>Cancel</CButton>
+                <CButton color="info" onClick={ExecutivesubmitHandler}>Submit</CButton>{' '}
+              </CModalFooter>
+            </CModal>
              <CModal 
               show={info} 
               onClose={() => setInfo(!info)}
