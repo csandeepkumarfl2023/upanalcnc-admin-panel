@@ -168,6 +168,13 @@ export default function ServiceRequest() {
        }, 3000);
   }
 
+  React.useEffect(() => {
+    setLoading(true)
+    setTimeout(function(){  
+      setLoading(false)
+    }, 2000);
+  },[])
+  
   return (
     <>
       <div className="sweet-loading">

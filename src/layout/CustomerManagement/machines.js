@@ -154,6 +154,14 @@ export default function Machines() {
          setDeleteAlert(true)
        }, 3000);
   }
+
+  React.useEffect(() => {
+    setLoading(true)
+    setTimeout(function(){  
+      setLoading(false)
+    }, 2000);
+  },[])
+
     return (
         <div>
      <div className="sweet-loading">
@@ -285,7 +293,7 @@ export default function Machines() {
             </CCol>
             </CRow> 
 
-
+            <CRow>    
             <CCol xs="10" md="6">
             <CFormGroup >
                 <CLabel htmlFor="controller">Machine Controller</CLabel>
@@ -305,6 +313,7 @@ export default function Machines() {
                   : null } 
               </CFormGroup>
             </CCol>
+            </CRow>  
 
               </CModalBody>
               <CModalFooter>

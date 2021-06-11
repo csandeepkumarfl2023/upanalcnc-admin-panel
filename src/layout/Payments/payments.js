@@ -118,6 +118,14 @@ export default function Payments() {
       setDeleteAlert(true)
     }, 3000);
 }
+
+React.useEffect(() => {
+  setLoading(true)
+  setTimeout(function(){  
+    setLoading(false)
+  }, 2000);
+},[])
+
   return (
     <>
       <div className="sweet-loading">

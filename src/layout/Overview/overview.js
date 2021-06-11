@@ -19,17 +19,16 @@ import {
   CLabel,
   CInput,
 } from '@coreui/react'
-import {
-  CChartDoughnut,
-} from '@coreui/react-chartjs'
-
+import { CChartDoughnut } from '@coreui/react-chartjs'
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const fields = ['servicerequestId','company', 'priority','issueType','executive', 'status','createdDate','email']
 
-
-
-
-
+const override = css`
+display: block;
+margin: 0 auto;
+`;
 
 export default function Overview() {
   const [data, setData] = useState([
@@ -106,9 +105,12 @@ export default function Overview() {
     let allData = [...data] 
     allData.push(currentData)
     setData(allData)
-    console.log('alldata',allData);
     setInfo(!info)
-    setAlert(true)
+    setLoading(true)
+    setTimeout(function(){  
+       setLoading(false)
+       setAlert(true)
+     }, 3000);
 
 }
 const editBtnHandler = () => {   
@@ -122,7 +124,6 @@ const editBtnHandler = () => {
     updatedData.email=email
     updatedData.createdDate=createdDate
     updatedData.priority=priority
-    console.log('updatedData', updatedData)
     let filteredArr = data.filter(function( obj ) {
       return obj.id !== updateId;
     });
@@ -153,9 +154,11 @@ const deleteHandler = () => {
   element = element.filter(item => item.id !==updatedData.id);
   setData(element)
   setEditModal(false)
-
-  setDeleteAlert(true)
-}
+  setLoading(true)
+  setTimeout(function(){  
+    setLoading(false)
+    setDeleteAlert(true)
+  }, 3000);}
 
 const submitServie = () => {
   let currentData = {}
@@ -171,9 +174,12 @@ const submitServie = () => {
   let allData = [...servicedata] 
   allData.push(currentData)
   setServiceData(allData)
-  console.log('alldata',allData);
   setServiceInfo(!serviceinfo)
-  setAlert(true)
+  setLoading(true)
+  setTimeout(function(){  
+     setLoading(false)
+     setAlert(true)
+   }, 3000);
 
 }
 const editservice = () => {   
@@ -187,16 +193,17 @@ let updatedData = {}
   updatedData.email=email
   updatedData.createdDate=createdDate
   updatedData.priority=priority
-  console.log('updatedData', updatedData)
   let filteredArr = servicedata.filter(function( obj ) {
     return obj.id !== updateId;
   });
   console.log(filteredArr)
   setServiceData([...filteredArr, updatedData])
-
   setServiceEditModal(false)
-  setEditAlert(true)
- 
+  setLoading(true)
+  setTimeout(function(){  
+     setLoading(false)
+     setEditAlert(true)
+   }, 3000); 
 }
 
 const deleteservice = () => {
@@ -207,8 +214,11 @@ console.log(updatedData.id);
 element = element.filter(item => item.id !==updatedData.id);
 setServiceData(element)
 setServiceEditModal(false)
-setDeleteAlert(true)
-}
+setLoading(true)
+setTimeout(function(){  
+  setLoading(false)
+  setDeleteAlert(true)
+}, 3000);}
 
 const overviewsubmitServie = () => {
   let currentData = {}
@@ -224,9 +234,12 @@ const overviewsubmitServie = () => {
   let allData = [...overviewdata] 
   allData.push(currentData)
   setOverviewData(allData)
-  console.log('alldata',allData);
   setOverviewInfo(!overviewinfo)
-  setAlert(true)
+  setLoading(true)
+  setTimeout(function(){  
+     setLoading(false)
+     setAlert(true)
+   }, 3000);
 
 }
 const overvieweditservice = () => {   
@@ -240,14 +253,16 @@ let updatedData = {}
   updatedData.email=email
   updatedData.createdDate=createdDate
   updatedData.priority=priority
-  console.log('updatedData', updatedData)
   let filteredArr = overviewdata.filter(function( obj ) {
     return obj.id !== updateId;
   });
-  console.log(filteredArr)
   setOverviewData([...filteredArr, updatedData])
   setOverviewEditModal(false)
-  setEditAlert(true)
+  setLoading(true)
+  setTimeout(function(){  
+     setLoading(false)
+     setEditAlert(true)
+   }, 3000);
  
 }
 
@@ -259,14 +274,25 @@ console.log(updatedData.id);
 element = element.filter(item => item.id !==updatedData.id);
 setOverviewData(element)
 setOverviewEditModal(false)
-
-setDeleteAlert(true)
+setLoading(true)
+setTimeout(function(){  
+  setLoading(false)
+  setDeleteAlert(true)
+}, 3000);
 }
+
+React.useEffect(() => {
+  setLoading(true)
+  setTimeout(function(){  
+    setLoading(false)
+  }, 2000);
+},[])
+
   return (
     <>
-     {/* <div className="sweet-loading">
+     <div className="sweet-loading">
       <ClipLoader  loading={loading}  css={override} size={50} color='#2f4f4f'/>
-    </div> */}
+    </div>
         <CAlert color="success" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
            Successfully Added!
           </CAlert>
@@ -277,19 +303,11 @@ setDeleteAlert(true)
           <CAlert color="danger" show={deleteAlert} closeButton onClick={() => setDeleteAlert(false)} dismissible>
             Deleted Successfully!
           </CAlert>
-    <CModal
-     show={loading} 
-     onClose={() => setLoading(!loading)}
-     color="info">
-    <div class="text-center">
-     <div class="spinner-border" role="status">
-    <span class="sr-only">Loading...</span>
-      </div>
-      </div>
-      </CModal>
+      
     <CRow>
+    {!loading ? 
+    <> 
     <CCol xs="4" sm="3">
-
       <CCard >
         <CCardHeader>
          Service Requests
@@ -405,8 +423,11 @@ setDeleteAlert(true)
         </CCardBody>
       </CCard>
       </CCol>
+      </>
+      : null}
       </CRow>
-
+      {!loading ? 
+          <>
       <CRow>
         <CCol xs="12" lg="12">
           <CCard>
@@ -959,6 +980,8 @@ setDeleteAlert(true)
               </CModalFooter>
             </CModal>
         </CRow>
+   </>
+  : null}
     </>
   )
 }
