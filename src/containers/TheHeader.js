@@ -94,7 +94,8 @@ const TheHeader = () => {
               <CButton color="secondary">Months</CButton>
             </CButtonGroup>
           </div>
-            <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{width:'40%',marginTop:'2%'}} />
+            <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{width:'30%',marginTop:'1.5%'}} />
+            <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{width:'30%',marginTop:'1.5%'}} />
             </CRow>
             </CFormGroup>
       </CSubheader>

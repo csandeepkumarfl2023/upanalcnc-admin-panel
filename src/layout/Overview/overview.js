@@ -207,7 +207,6 @@ console.log(updatedData.id);
 element = element.filter(item => item.id !==updatedData.id);
 setServiceData(element)
 setServiceEditModal(false)
-
 setDeleteAlert(true)
 }
 
@@ -247,7 +246,6 @@ let updatedData = {}
   });
   console.log(filteredArr)
   setOverviewData([...filteredArr, updatedData])
-
   setOverviewEditModal(false)
   setEditAlert(true)
  
@@ -266,15 +264,18 @@ setDeleteAlert(true)
 }
   return (
     <>
-      <CAlert color="success" show={alert} onClose={() => setAlert(false)} dismissible>
-            <CModalHeader closeButton onClick={() => setAlert(false)}>Successfully Added!</CModalHeader>
+     {/* <div className="sweet-loading">
+      <ClipLoader  loading={loading}  css={override} size={50} color='#2f4f4f'/>
+    </div> */}
+        <CAlert color="success" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
+           Successfully Added!
           </CAlert>
-          <CAlert color="primary"show={editAlert} variant="success" onClose={() => setEditAlert(false)} dismissible>
-            <CModalHeader closeButton onClick={() => setEditAlert(false)}>Updated Successfully</CModalHeader>
+          <CAlert color="success" show={editAlert} closeButton onClick={() => setEditAlert(false)} dismissible>
+           Updated Successfully!
           </CAlert>
 
-          <CAlert color="danger"  show={deleteAlert} onClose={() => setDeleteAlert(false)} dismissible>
-            <CModalHeader closeButton onClick={() => setDeleteAlert(false)}>Deleted Successfully</CModalHeader>
+          <CAlert color="danger" show={deleteAlert} closeButton onClick={() => setDeleteAlert(false)} dismissible>
+            Deleted Successfully!
           </CAlert>
     <CModal
      show={loading} 

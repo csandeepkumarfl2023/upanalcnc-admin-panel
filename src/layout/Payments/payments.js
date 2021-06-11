@@ -65,9 +65,10 @@ export default function Payments() {
       setData(allData)
       console.log('alldata',allData);
       setInfo(!info)
-      setAlert(true)
       setLoading(true)
-      setTimeout(function(){   setLoading(false)
+      setTimeout(function(){  
+         setLoading(false)
+         setAlert(true)
        }, 3000);
   }
   const editBtnHandler = () => {   
@@ -84,9 +85,10 @@ export default function Payments() {
       setData([...filteredArr, updatedData])
 
       setEditModal(false)
-      setEditAlert(true)
       setLoading(true)
-      setTimeout(function(){   setLoading(false)
+      setTimeout(function(){  
+         setLoading(false)
+         setEditAlert(true)
        }, 3000);
      
  }
@@ -110,27 +112,28 @@ export default function Payments() {
     element = element.filter(item => item.id !==updatedData.id);
     setData(element)
     setEditModal(false)
-    setDeleteAlert(true)
     setLoading(true)
-    setTimeout(function(){   setLoading(false)
-     }, 3000);
+    setTimeout(function(){  
+      setLoading(false)
+      setDeleteAlert(true)
+    }, 3000);
 }
   return (
     <>
       <div className="sweet-loading">
       <ClipLoader  loading={loading}  css={override} size={50} color='#2f4f4f'/>
     </div>
-        <CAlert color="success" show={alert} onClose={() => setAlert(false)} dismissible>
-            <CModalHeader closeButton onClick={() => setAlert(false)}>Successfully Added!</CModalHeader>
+        <CAlert color="success" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
+           Successfully Added!
           </CAlert>
-          <CAlert color="primary"show={editAlert} variant="success" onClose={() => setEditAlert(false)} dismissible>
-            <CModalHeader closeButton onClick={() => setEditAlert(false)}>Updated Successfully</CModalHeader>
+          <CAlert color="success" show={editAlert} closeButton onClick={() => setEditAlert(false)} dismissible>
+           Updated Successfully!
           </CAlert>
 
-          <CAlert color="danger"  show={deleteAlert} onClose={() => setDeleteAlert(false)} dismissible>
-            <CModalHeader closeButton onClick={() => setDeleteAlert(false)}>Deleted Successfully</CModalHeader>
+          <CAlert color="danger" show={deleteAlert} closeButton onClick={() => setDeleteAlert(false)} dismissible>
+            Deleted Successfully!
           </CAlert>
-   <CRow>
+      <CRow>
         <CCol xs="12" lg="12">
         {!loading ?  
           <CCard>
@@ -213,7 +216,7 @@ export default function Payments() {
         
             </CCardBody>
           </CCard>
-           : null } 
+            :  null  } 
         </CCol>
         <CModal 
               show={editModal} 

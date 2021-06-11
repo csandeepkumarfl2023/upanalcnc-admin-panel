@@ -19,6 +19,8 @@ import {
   CInput,
 } from '@coreui/react'
 
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const getBadge = status => {
     switch (status) {
@@ -30,7 +32,10 @@ const getBadge = status => {
     }
   }
   const fields = ['name', 'type','description',]
-
+  const override = css`
+  display: block;
+  margin: 0 auto;
+`;
 export default function Pms() {
     const [info, setInfo] = useState(false)
     const [data, setData] = useState([
@@ -47,6 +52,7 @@ export default function Pms() {
 
     const [deleteAlert,setDeleteAlert] = useState(false)
     const [updateId, setUpdateId] = useState()
+    const  [loading,setLoading] = useState(false)
 
     const submitHandler = () => {
       let currentData = {}
@@ -59,7 +65,11 @@ export default function Pms() {
       setData(allData)
       console.log('alldata',allData);
       setInfo(!info)
-      setAlert(true)
+      setLoading(true)
+      setTimeout(function(){   
+        setLoading(false)
+        setAlert(true)
+       }, 3000);
   }
   const editBtnHandler = () => {   
     let updatedData = {}
@@ -75,7 +85,11 @@ export default function Pms() {
       setData([...filteredArr, updatedData])
 
       setEditModal(false)
-      setEditAlert(true)
+      setLoading(true)
+      setTimeout(function(){   
+        setLoading(false)
+        setEditAlert(true)
+      }, 3000);
      
  }
   const conditionalRowStyles = [
@@ -98,28 +112,31 @@ export default function Pms() {
     element = element.filter(item => item.id !==updatedData.id);
     setData(element)
     setEditModal(false)
-
-    setDeleteAlert(true)
+    setLoading(true)
+    setTimeout(function(){   
+      setLoading(false)
+      setDeleteAlert(true)
+    }, 3000);
 }
   return (
     <>
-      <CAlert color="success" show={alert} onClose={() => setAlert(false)} dismissible>
-            <CModalHeader closeButton onClick={() => setAlert(false)}>Successfully Added!</CModalHeader>
+     <div className="sweet-loading">
+      <ClipLoader  loading={loading}  css={override} size={50} color='#2f4f4f'/>
+       </div>
+       <CAlert color="success" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
+           Successfully Added!
           </CAlert>
-          <CAlert color="primary"show={editAlert} variant="success" onClose={() => setEditAlert(false)} dismissible>
-            <CModalHeader closeButton onClick={() => setEditAlert(false)}>Updated Successfully</CModalHeader>
+          <CAlert color="success"show={editAlert} closeButton onClick={() => setEditAlert(false)} dismissible>
+           Updated Successfully!
           </CAlert>
 
-          <CAlert color="danger"  show={deleteAlert} onClose={() => setDeleteAlert(false)} dismissible>
-            <CModalHeader closeButton onClick={() => setDeleteAlert(false)}>Deleted Successfully</CModalHeader>
+          <CAlert color="danger" show={deleteAlert} closeButton onClick={() => setDeleteAlert(false)} dismissible>
+            Deleted Successfully!
           </CAlert>
-   <CRow>
+      <CRow>
         <CCol xs="12" lg="12">
-          <CCard>
-            {/* <CCardHeader>
-             All
-              <DocsLink name="CModal"/>
-            </CCardHeader> */}
+        {!loading ?  
+          <CCard>   
             <CCardBody>
               <CRow>
               <CCol xs="11">
@@ -195,6 +212,7 @@ export default function Pms() {
 
             </CCardBody>
           </CCard>
+          : null }
         </CCol>
         <CModal 
               show={editModal} 
