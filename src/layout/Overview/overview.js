@@ -396,6 +396,11 @@ const SalesVisitshow =  (item) => {
     pathname:'/sales_visit',
     state: item });
 }
+const pmmethodshow =  (item) => {
+  history.push({
+    pathname:'/pm',
+    state: item });
+}
   return (
     <>
      <div className="sweet-loading">
@@ -1121,8 +1126,8 @@ const SalesVisitshow =  (item) => {
         items={pmData}
         fields={pmfields}
         conditionalRowStyles={conditionalRowStyles}
-        itemsPerPage={2}
-        pagination
+        // itemsPerPage={2}
+        // pagination
         scopedSlots = {{
           'name':
             (item)=>(
@@ -1141,6 +1146,8 @@ const SalesVisitshow =  (item) => {
         }}
 
       /> 
+                 <CLink color="info" width={50} onClick={pmmethodshow}>show more</CLink>
+
        <CModal 
               show={pmAddModal} 
               onClose={() => setPmAddModal(!pmAddModal)}
