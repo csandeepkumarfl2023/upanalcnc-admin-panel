@@ -28,6 +28,8 @@ import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 import routes from '../../routes'
 import CIcon from '@coreui/icons-react'
+import { useHistory } from "react-router-dom";
+import EditServiceRequest from '../ServiceRequests/editServiceRequest';
 
 const fields = ['servicerequestId','company', 'priority','issueType','executive', 'status','createdDate','email']
 
@@ -39,6 +41,9 @@ margin: 0 auto;
 `;
 
 export default function Overview() {
+
+  const history = useHistory();
+
   const [data, setData] = useState([
     {id: 0, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
     executive:'Naveen', status: 'Pending',createdDate:'2021-04-10',email:'adam@company.com'},
@@ -51,9 +56,9 @@ export default function Overview() {
   const [servicedata, setServiceData]  =useState( [
     {id: 0, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
     executive:'Assign', status: 'Assigned',createdDate:'2021-04-10',email:'adam@company.com'},
-    {id: 1, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
+    {id: 1, servicerequestId: 'UPNLBKN202102', company: 'Company one', priority: 'High',issueType:'Electrical',
     executive:'Assign', status: 'Pending',createdDate:'2021-04-10',email:'adam@company.com'},
-    {id: 2, servicerequestId: 'UPNLBKN202102', company: 'Company Two', priority: 'Low',issueType:'Electrical',
+    {id: 2, servicerequestId: 'UPNLBKN202103', company: 'Company Two', priority: 'Low',issueType:'Electrical',
     executive:'Assign', status: 'Completed',createdDate:'2021-04-10',email:'adam@company.com'}
   
   ])
@@ -102,13 +107,14 @@ export default function Overview() {
   const [email,setEmail] = useState("")
   const [alert,setAlert] = useState(false)
   const [editModal, setEditModal] = useState(false)
-  const [serviceeditModal, setServiceEditModal] = useState(false)
+ // const [serviceeditModal, setServiceEditModal] = useState(false)
   const [overvieweditModal, setOverviewEditModal] = useState(false)
 
   const [editAlert,setEditAlert] = useState(false)
 
   const [deleteAlert,setDeleteAlert] = useState(false)
   const [updateId, setUpdateId] = useState()
+  const [exeUpdateId, setExeUpdateId] = useState()
 
   
   const [description,setDescription] = useState("")
@@ -119,8 +125,8 @@ export default function Overview() {
   const [executiveinfo,setExecutiveInfo] = useState(false)
 
   const [employee,setEmployee] = useState("")
-  const [sheduleDate,setSheduleDate] = useState("")
-  const [sheduleTime,setSheduleTime] = useState("")
+  const [scheduleDate,setSheduleDate] = useState("")
+  const [scheduleTime,setSheduleTime] = useState("")
 
   const submitHandler = () => {
     let currentData = {}
@@ -213,43 +219,19 @@ const submitServie = () => {
    }, 3000);
 
 }
-const editservice = () => {   
-let updatedData = {}
-  updatedData.id = updateId
-  updatedData.servicerequestId = servicerequestId
-  updatedData.status = status
-  updatedData.issueType=issueType
-  updatedData.company=company
-  updatedData.executive=executive
-  updatedData.email=email
-  updatedData.createdDate=createdDate
-  updatedData.priority=priority
-  let filteredArr = servicedata.filter(function( obj ) {
-    return obj.id !== updateId;
-  });
-  console.log(filteredArr)
-  setServiceData([...filteredArr, updatedData])
-  setServiceEditModal(false)
-  setLoading(true)
-  setTimeout(function(){  
-     setLoading(false)
-     setEditAlert(true)
-   }, 3000); 
-}
-
-const deleteservice = () => {
-let element = [...servicedata]
-let updatedData = {}
-updatedData.id = updateId
-console.log(updatedData.id);
-element = element.filter(item => item.id !==updatedData.id);
-setServiceData(element)
-setServiceEditModal(false)
-setLoading(true)
-setTimeout(function(){  
-  setLoading(false)
-  setDeleteAlert(true)
-}, 3000);}
+// const deleteservice = () => {
+// let element = [...servicedata]
+// let updatedData = {}
+// updatedData.id = updateId
+// console.log(updatedData.id);
+// element = element.filter(item => item.id !==updatedData.id);
+// setServiceData(element)
+// //setServiceEditModal(false)
+// setLoading(true)
+// setTimeout(function(){  
+//   setLoading(false)
+//   setDeleteAlert(true)
+// }, 3000);}
 
 const overviewsubmitServie = () => {
   let currentData = {}
@@ -371,22 +353,24 @@ const pmDeleteHandler = () => {
 }
 
 const executiveHandler = () => {
-  // let currentData = {}
-  // currentData.employee=employee
-  // let allData = [...assign] 
-  // allData.push(currentData)
-  // setAssign(employee)
-   console.log('exeeeeeeeeeeee',employee,executive);
-
-
     let updatedData = {}
-    updatedData.id = updateId
+    updatedData.id = exeUpdateId
     updatedData.executive=employee
+    updatedData.servicerequestId = servicerequestId
+     updatedData.status = status
+    updatedData.issueType=issueType
+    updatedData.company=company
+    updatedData.executive=employee
+    updatedData.email=email
+    updatedData.createdDate=createdDate
+    updatedData.priority=priority
+    updatedData.date = scheduleDate
+     updatedData.time = scheduleTime
+    console.log('updatedData',updatedData);
     let filteredArr = servicedata.filter(function( obj ) {
-      return obj.id !== updateId;
+      return obj.id!= exeUpdateId       
     });
-    console.log(updatedData)
-  //  setServiceData([...filteredArr, updatedData])
+    setServiceData([...filteredArr, updatedData])
     setLoading(true)
     setTimeout(function(){  
        setLoading(false)
@@ -394,9 +378,14 @@ const executiveHandler = () => {
      }, 3000); 
      setExecutiveInfo(!executiveinfo)
   }
+const editServiceHandler =  (item) => {
+  history.push({
+    pathname:'/editServiceRequest',
+    state: item });
+}
+
   return (
     <>
-    
      <div className="sweet-loading">
       <ClipLoader  loading={loading}  css={override} size={50} color='#2f4f4f'/>
     </div>
@@ -558,10 +547,6 @@ const executiveHandler = () => {
       <CRow>
         <CCol xs="12" lg="12">
           <CCard>
-            {/* <CCardHeader>
-             All
-              <DocsLink name="CModal"/>
-            </CCardHeader> */}
             <CCardBody>
               <CRow>
               <CCol xs="11">
@@ -742,10 +727,6 @@ const executiveHandler = () => {
         <CRow>
         <CCol xs="12" lg="12">
           <CCard>
-            {/* <CCardHeader>
-             All
-              <DocsLink name="CModal"/>
-            </CCardHeader> */}
             <CCardBody>
               <CRow>
               <CCol xs="11">
@@ -765,8 +746,19 @@ const executiveHandler = () => {
                 'servicerequestId':
                   (item)=>(
                     <td>
-                   <a  onClick={()=>{
-                     setUpdateId(item.id)
+                    <a  onClick={()=>{
+                     editServiceHandler(item)
+                  }
+                   }
+                      >{item.servicerequestId}</a>
+
+                    </td>
+                  ),
+                  'executive':
+                     (item)=>(
+                       <td>
+                        <p>  <a  onClick={()=>{
+                      setExeUpdateId(item.id)
                      setServiceRequestId(item.servicerequestId)
                      setCompany(item.company)
                      setIssueType(item.issueType)
@@ -774,21 +766,10 @@ const executiveHandler = () => {
                      setExecutive(item.executive)
                      setPriority(item.priority)
                      setCreatedDate(item.createdDate)
-                     setEmail(item.email)
-                 //    setEmployee(item.employee)
-                      setServiceEditModal(!serviceeditModal)}
-                   }
-                      >{item.servicerequestId}</a>
-                    </td>
-                  ),
-                  'executive':
-                     (item)=>(
-                       <td>
-                        <p>  <a  onClick={()=>{
-                        setExecutiveInfo(!executiveinfo)}
+                     setEmail(item.email)                    
+                      setExecutiveInfo(!executiveinfo)}
                       }>{item.executive}
-                          {<CIcon name="cil-phone"  size="1xl"/>}</a></p>
-                    
+                          {<CIcon name="cil-pen"  size="1xl"/>}</a></p>
                        </td>
                      ),
                      'status':
@@ -873,72 +854,7 @@ const executiveHandler = () => {
             </CCardBody>
           </CCard>
         </CCol>
-        <CModal 
-              show={serviceeditModal} 
-              onClose={() => setServiceEditModal(!serviceeditModal)}
-              color="info"
-            >
-              <CModalHeader closeButton>
-                <CModalTitle>Edit Service Request</CModalTitle>
-              </CModalHeader>
-              <CModalBody>
-              <CRow>
-      
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="company">Company</CLabel>
-                <CInput type="text" id="company" name="company" placeholder="company" value={company? company: ''} onChange={(e) => setCompany(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            </CRow>
-            <CRow>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="priority">Priority</CLabel>
-                <CInput type="text" id="priority" name="priority" placeholder="Priority" value={priority?priority: ''} onChange={(e) => setPriority(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="issueType">Issue Type</CLabel>
-                <CInput type="text" id="issueType" name="issueType" placeholder="Issue Type" value={issueType?issueType: ''} onChange={(e) => setIssueType(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            </CRow>
-            <CRow>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="executive">Executive</CLabel>
-                <CInput type="text" id="executive" name="executive" placeholder="Executive" value={executive? executive: ''} onChange={(e) => setExecutive(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="status">Status</CLabel>
-                <CInput type="text" id="status" name="status" placeholder="Status" value={status? status: ''} onChange={(e) => setStatus(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            </CRow>
-            <CRow>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="createdDate">Created Date</CLabel>
-                <CInput type="date" id="createdDate" name="createdDate" placeholder="Created Date" value={createdDate?createdDate:''} onChange={(e) => setCreatedDate(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="email">Email</CLabel>
-                <CInput type="text" id="email" name="email" placeholder="Email" value={email?email:''} onChange={(e) => setEmail(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            </CRow>
-              </CModalBody>
-              <CModalFooter>
-                <CButton color="secondary" onClick={ deleteservice}>Delete</CButton>
-                <CButton color="info" onClick={editservice}>Edit</CButton>{' '}
-              </CModalFooter>
-            </CModal>
+       
         </CRow>
 
 
@@ -969,20 +885,20 @@ const executiveHandler = () => {
             </CRow>
             <CCol xs="10" lg="10">
               <CFormGroup >
-                <CLabel htmlFor="sheduleDate">Shedule Date</CLabel>
-                <CInput type="date" id="sheduleDate" name="sheduleDate" placeholder="sheduleDate" value={sheduleDate} onChange={(e) => setSheduleDate(e.target.value)}/>
+                <CLabel htmlFor="scheduleDate">Shedule Date</CLabel>
+                <CInput type="date" id="scheduleDate" name="scheduleDate" placeholder="scheduleDate" value={scheduleDate} onChange={(e) => setSheduleDate(e.target.value)}/>
               </CFormGroup>
             </CCol>
             <CCol xs="10" lg="10">
               <CFormGroup >
-                <CLabel htmlFor="sheduleTime">Shedule Time</CLabel>
-                <CInput type="time" id="sheduleTime" name="sheduleTime" placeholder="sheduleTime" value={sheduleTime} onChange={(e) => setSheduleTime(e.target.value)}/>
+                <CLabel htmlFor="scheduleTime">Shedule Time</CLabel>
+                <CInput type="time" id="scheduleTime" name="scheduleTime" placeholder="scheduleTime" value={scheduleTime} onChange={(e) => setSheduleTime(e.target.value)}/>
               </CFormGroup>
             </CCol>
               </CModalBody>
               <CModalFooter>
                 <CButton color="secondary" onClick={() => setExecutiveInfo(!executiveinfo)}>Cancel</CButton>
-                <CButton color="info" onClick={(item) => {executiveHandler(item.id)}}>Assign</CButton>{' '}
+                <CButton color="info" onClick={() => {executiveHandler()}}>Assign</CButton>{' '}
               </CModalFooter>
             </CModal>
 
@@ -1188,7 +1104,7 @@ const executiveHandler = () => {
         items={pmData}
         fields={pmfields}
         conditionalRowStyles={conditionalRowStyles}
-        itemsPerPage={3}
+        itemsPerPage={2}
         pagination
         scopedSlots = {{
           'name':

@@ -65,6 +65,7 @@ export default function Customer() {
         currentData.customerName = customerName
         currentData.contactPerson = contactPerson
         currentData.mobileNo=mobileNo
+        currentData.customerCode = 'UPNLCUSTT03'
         currentData.alternateNo=alternateNo
         currentData.address=address
         currentData.city=city

@@ -60,7 +60,7 @@ export default function Machines() {
     const submitHandler = () => {
         let currentData = {}
         currentData.id = Math.round(Math.random() * 10000000)
-        currentData.customerCode = customerCode
+        currentData.customerCode = 'UPNLCUSTT03'
         currentData.machineType = machineType
         currentData.make=make
         currentData.model=model

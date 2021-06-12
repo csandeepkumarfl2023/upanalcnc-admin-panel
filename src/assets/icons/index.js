@@ -34,7 +34,8 @@ import {
   cifIn,
   cifFr,
   cifEs,
-  cifPl
+  cifPl,
+
 } from '@coreui/icons'
 import {
   cilAlignCenter,
@@ -103,6 +104,8 @@ import {
   cilPencil,
   cilPeople,
   cilPhone,
+  cilPen,
+  cilColorBorder,
   cilPrint,
   cilPuzzle,
   cilSave,
@@ -201,6 +204,8 @@ export const icons = Object.assign({}, {
   cilPencil,
   cilPeople,
   cilPhone,
+  cilPen,
+  cilColorBorder,
   cilPrint,
   cilPuzzle,
   cilSave,
