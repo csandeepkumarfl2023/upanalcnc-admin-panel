@@ -1,25 +1,39 @@
 import axios from 'axios';
-import api from './apiService'
+import { constants } from '../constants';
 
-const apiServices = api()
+let customerData = [
+    { 
+      id: 0, customerName: 'Cloudhub', customerCode: 'UPNLCUS7672', contactPerson: 'ABC', mobileNo: '908000000',
+      email: 'jrogers@cloudhub.com', address: '#26,Peenya Industrial area', gstNumber: 'jrogers@cloudhub.com'
+    }
+]
 
-const postCustomer = async (data) => {
-    let response = await axios.post(`${apiServices}/Customer`, data)
+export default class CustomerService{
+
+ async createCustomer(data) {
+    customerData.push(data)
+    let response = customerData
+    return response
+};
+
+ async getAllCustomers() {
+    let response = customerData
     return response
 }
 
-const getCustomer = async () => {
-    let response = await axios.get(`${apiServices}/Customer`)
-    return response
+ async updateCustomer(data, id) {
+    let filteredArr = customerData.filter(function (obj) {
+        return obj.id !== id;
+      });
+    customerData = [
+        ...filteredArr, data
+    ]
+    return customerData
 }
 
-const putCustomer = async (data) => {
-    let response = await axios.put(`${apiServices}/Customer`, data)
-    return response
+ async deleteCustomer(id) {
+    customerData = customerData.filter(item => item.id !== id);
+    return customerData
+}
 }
 
-const deleteCustomer = async (data) => {
-    let response = await axios.delete(`${apiServices}/Customer`)
-    return response
-}
-export { postCustomer, getCustomer,putCustomer,deleteCustomer }
