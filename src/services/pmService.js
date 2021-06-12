@@ -1,25 +1,40 @@
 import axios from 'axios';
-import api from './apiService'
+import { constants } from '../constants';
 
-const apiServices = api()
+let pmData = [
+    {id: 0,  name: 'Pm', type: 'Pm Type',description:'Pm Desc'}
+]
 
-const postPm = async (data) => {
-    let response = await axios.post(`${apiServices}/Pm`, data)
+export default class PmService{
+
+ async postPm(data) {
+    // let response = await axios.post(`${apiServices}/Pm`, data)
+    pmData.push(data)
+    let response = pmData
+    return response
+};
+
+ async getAllPms() {
+    // let response = await axios.get(`${apiServices}/Pm`)
+    let response = pmData
     return response
 }
 
-const getPm = async () => {
-    let response = await axios.get(`${apiServices}/Pm`)
-    return response
+ async putPm(data, id) {
+    // let response = await axios.put(`${apiServices}/Pm`, data)
+    let filteredArr = pmData.filter(function (obj) {
+        return obj.id !== id;
+      });
+    pmData = [
+        ...filteredArr, data
+    ]
+    return pmData
 }
 
-const putPm = async (data) => {
-    let response = await axios.put(`${apiServices}/Pm`, data)
-    return response
+ async deletePm(id) {
+    // let response = await axios.delete(`${apiServices}/Pm`)
+    pmData = pmData.filter(item => item.id !== id);
+    return pmData
+}
 }
 
-const deletePm = async (data) => {
-    let response = await axios.delete(`${apiServices}/Pm`)
-    return response
-}
-export { postPm, getPm,putPm,deletePm }
