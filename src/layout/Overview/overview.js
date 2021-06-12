@@ -21,7 +21,8 @@ import {
   CSubheader,
   CBreadcrumbRouter,
   CButtonGroup,
-  CSelect
+  CSelect,
+  CLink
 } from '@coreui/react'
 import { CChartDoughnut } from '@coreui/react-chartjs'
 import { css } from "@emotion/react";
@@ -30,6 +31,7 @@ import routes from '../../routes'
 import CIcon from '@coreui/icons-react'
 import { useHistory } from "react-router-dom";
 import EditServiceRequest from '../ServiceRequests/editServiceRequest';
+import SalesVisit from '../SalesVisit/salesVisit';
 
 const fields = ['servicerequestId','company', 'priority','issueType','executive', 'status','createdDate','email']
 
@@ -38,7 +40,7 @@ const pmfields = ['name','type', 'description']
 const override = css`
 display: block;
 margin: 0 auto;
-`;
+`;  
 
 export default function Overview() {
 
@@ -383,7 +385,26 @@ const editServiceHandler =  (item) => {
     pathname:'/editServiceRequest',
     state: item });
 }
+const addServiceHandler = () => {
+ history.push('./createServiceRequest')
+}
 
+const servicerequestshow =  (item) => {
+  history.push({
+    pathname:'/serviceRequest',
+    state: item });
+}
+
+const SalesVisitshow =  (item) => {
+  history.push({
+    pathname:'/sales_visit',
+    state: item });
+}
+const pmmethodshow =  (item) => {
+  history.push({
+    pathname:'/pm',
+    state: item });
+}
   return (
     <>
      <div className="sweet-loading">
@@ -584,6 +605,7 @@ const editServiceHandler =  (item) => {
               }}
 
             />
+
              <CModal 
               show={overviewinfo} 
               onClose={() => setOverviewInfo(!overviewinfo)}
@@ -733,15 +755,15 @@ const editServiceHandler =  (item) => {
               ServiceRequest
               </CCol>
               <CCol xs="1">
-              <CButton block  color="info" onClick={() => setServiceInfo(!serviceinfo)} className="mr-1">New</CButton>
+              <CButton block  color="info" onClick={addServiceHandler} className="mr-1">New</CButton>
             </CCol>
             </CRow>
             <CDataTable
              items={servicedata}
               fields={fields}
               conditionalRowStyles={conditionalRowStyles}
-              itemsPerPage={2}
-              pagination
+              // itemsPerPage={2}
+              // pagination
               scopedSlots = {{
                 'servicerequestId':
                   (item)=>(
@@ -782,7 +804,10 @@ const editServiceHandler =  (item) => {
                      )
               }}
 
-            />
+            />  
+            
+                             <CLink color="info" width={50} onClick={servicerequestshow}>show more</CLink>
+
              <CModal 
               show={serviceinfo} 
               onClose={() => setServiceInfo(!serviceinfo)}
@@ -924,8 +949,8 @@ const editServiceHandler =  (item) => {
              items={data}
               fields={fields}
               conditionalRowStyles={conditionalRowStyles}
-              itemsPerPage={2}
-              pagination
+              // itemsPerPage={2}
+              // pagination
               scopedSlots = {{
                 'servicerequestId':
                   (item)=>(
@@ -948,6 +973,8 @@ const editServiceHandler =  (item) => {
               }}
 
             />
+                 <CLink color="info" width={50} onClick={SalesVisitshow}>show more</CLink>
+
              <CModal 
               show={info} 
               onClose={() => setInfo(!info)}
@@ -1104,8 +1131,8 @@ const editServiceHandler =  (item) => {
         items={pmData}
         fields={pmfields}
         conditionalRowStyles={conditionalRowStyles}
-        itemsPerPage={2}
-        pagination
+        // itemsPerPage={2}
+        // pagination
         scopedSlots = {{
           'name':
             (item)=>(
@@ -1124,6 +1151,8 @@ const editServiceHandler =  (item) => {
         }}
 
       /> 
+                 <CLink color="info" width={50} onClick={pmmethodshow}>show more</CLink>
+
        <CModal 
               show={pmAddModal} 
               onClose={() => setPmAddModal(!pmAddModal)}
