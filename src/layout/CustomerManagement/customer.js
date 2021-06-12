@@ -149,9 +149,9 @@ export default function Customer() {
 
     return (
         <div>
-     <div className="sweet-loading">
-      <ClipLoader  loading={loading}  css={override} size={50} color='#2f4f4f'/>
-     </div> 
+     {/* <div className="sweet-loading">
+      <ClipLoader  loading={!loading}  css={override} size={50} color='#2f4f4f'/>
+     </div>  */}
       
         <CAlert color="success" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
            Successfully Added!
@@ -165,7 +165,7 @@ export default function Customer() {
           </CAlert>
              <CRow>
         <CCol xs="12" lg="12">
-        {!loading ?
+        {/* {!loading ? */}
             <CCardBody>
               <CRow>
               <CCol xs="11">
@@ -306,7 +306,7 @@ export default function Customer() {
             </CModal>
 
             </CCardBody>
-         : null }
+         {/* : null } */}
         </CCol>
         <CModal 
               show={editModal} 

@@ -15,12 +15,31 @@ import {
 } from '@coreui/react'
 import Customer from './customer'
 import Machines from './machines'
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
+const override = css`
+display: block;
+margin: 0 auto;
+`;
 
 export default function CustomerManagement() {
 
+  const  [loading,setLoading] = useState(false)
+
+  React.useEffect(() => {
+    setLoading(true)
+    setTimeout(function(){  
+      setLoading(false)
+    }, 2000);
+  },[])
+
   return (
     <>
+     <div className="sweet-loading">
+      <ClipLoader  loading={loading}  css={override} size={50} color='#2f4f4f'/>
+     </div> 
        <CCol xs="6" md="12" className="mb-4">
+         { !loading ?
         <CCard>
           <CCardBody>   
             <CTabs activeTab="customers">
@@ -47,6 +66,7 @@ export default function CustomerManagement() {
             </CTabs>
           </CCardBody>
         </CCard>
+         : null}
       </CCol>
     </>
   )

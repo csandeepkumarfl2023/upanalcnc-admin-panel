@@ -157,7 +157,7 @@ React.useEffect(() => {
         items={data}
         fields={fields}
         conditionalRowStyles={conditionalRowStyles}
-        itemsPerPage={5}
+        itemsPerPage={2}
         pagination
         scopedSlots = {{
           'name':

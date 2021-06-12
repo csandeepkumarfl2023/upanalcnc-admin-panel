@@ -237,7 +237,7 @@ React.useEffect(() => {
                      'status':
                      (item)=>(
                        <td>
-                         <CBadge color="success">
+                         <CBadge color={getBadge(item.status)}>
                            {item.status}
                          </CBadge>
                        </td>

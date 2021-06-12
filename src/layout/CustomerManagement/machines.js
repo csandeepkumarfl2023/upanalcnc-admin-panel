@@ -145,18 +145,11 @@ export default function Machines() {
        }, 3000);
   }
 
-  React.useEffect(() => {
-    setLoading(true)
-    setTimeout(function(){  
-      setLoading(false)
-    }, 2000);
-  },[])
-
     return (
         <div>
-     <div className="sweet-loading">
+     {/* <div className="sweet-loading">
       <ClipLoader  loading={loading}  css={override} size={50} color='#2f4f4f'/>
-    </div>           
+    </div>            */}
             <CAlert color="success" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
            Successfully Added!
           </CAlert>
@@ -169,7 +162,7 @@ export default function Machines() {
           </CAlert>
              <CRow>
         <CCol xs="12" lg="12">
-        {!loading ?  
+        {/* {!loading ?   */}
             <CCardBody>
               <CRow>
               <CCol xs="11">
@@ -313,7 +306,7 @@ export default function Machines() {
             </CModal>
 
             </CCardBody>
-         : null }
+         {/* : null } */}
         </CCol>
         <CModal 
               show={editModal} 

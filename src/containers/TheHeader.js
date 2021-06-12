@@ -6,25 +6,9 @@ import {
   CHeaderBrand,
   CHeaderNav,
   CHeaderNavItem,
-  CHeaderNavLink,
-  CSubheader,
-  CBreadcrumbRouter,
-  CButton,
-  CButtonGroup,
-  CFormGroup,
-  CCol,
   CInput,
-  CLabel,
-  CCardHeader,
-  CCardBody,
-  CCard,
-  CLink,
-  CRow
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-
-// routes config
-import routes from '../routes'
 
 import { 
   TheHeaderDropdown,
@@ -82,25 +66,7 @@ const TheHeader = () => {
         <TheHeaderDropdown/>
       </CHeaderNav>
 
-      <CSubheader className="px-3 justify-content-between">
-        <CBreadcrumbRouter 
-          className="border-0 c-subheader-nav m-0 px-0 px-md-3" 
-          routes={routes} 
-        />
-           <CFormGroup row>
-             <CRow>
-          <div className="d-md-down-none mfe-2 c-subheader-nav">
-          <CButtonGroup>
-              <CButton color="secondary">Days</CButton>
-              <CButton color="secondary">Weeks</CButton>
-              <CButton color="secondary">Months</CButton>
-            </CButtonGroup>
-          </div>
-            <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{width:'30%',marginTop:'1.5%'}} />
-            <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{width:'30%',marginTop:'1.5%'}} />
-            </CRow>
-            </CFormGroup>
-      </CSubheader>
+     
     </CHeader>
   )
 }

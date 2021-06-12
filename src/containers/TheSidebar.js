@@ -28,7 +28,7 @@ const TheSidebar = () => {
       onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
     >
       <CSidebarBrand className="d-md-down-none" to="/" style={{backgroundColor:'white'}}>
-      <CImg style={{height:'60%',width:'60%'}}
+      <CImg style={{height:'60%',width:'50%'}}
             src={'avatars/logo.jpg'}
             className="c-logo-img"
             alt="admin@bootstrapmaster.com"
@@ -51,7 +51,7 @@ const TheSidebar = () => {
           }}
         />
       </CSidebarNav>
-      <CSidebarMinimizer className="c-d-md-down-none"/>
+      <CSidebarMinimizer  className="c-d-md-down-none"/>
     </CSidebar>
   )
 }

@@ -18,10 +18,16 @@ import {
   CFormGroup,
   CLabel,
   CInput,
+  CSubheader,
+  CBreadcrumbRouter,
+  CButtonGroup,
+  CSelect
 } from '@coreui/react'
 import { CChartDoughnut } from '@coreui/react-chartjs'
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
+import routes from '../../routes'
+import CIcon from '@coreui/icons-react'
 
 const fields = ['servicerequestId','company', 'priority','issueType','executive', 'status','createdDate','email']
 
@@ -44,11 +50,11 @@ export default function Overview() {
 
   const [servicedata, setServiceData]  =useState( [
     {id: 0, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
-    executive:'Naveen', status: 'on-site',createdDate:'2021-04-10',email:'adam@company.com'},
+    executive:'Assign', status: 'Assigned',createdDate:'2021-04-10',email:'adam@company.com'},
     {id: 1, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
-    executive:'Naveen', status: 'Pending',createdDate:'2021-04-10',email:'adam@company.com'},
+    executive:'Assign', status: 'Pending',createdDate:'2021-04-10',email:'adam@company.com'},
     {id: 2, servicerequestId: 'UPNLBKN202102', company: 'Company Two', priority: 'Low',issueType:'Electrical',
-    executive:'Naveen', status: 'Active',createdDate:'2021-04-10',email:'adam@company.com'}
+    executive:'Assign', status: 'Completed',createdDate:'2021-04-10',email:'adam@company.com'}
   
   ])
 
@@ -67,13 +73,18 @@ export default function Overview() {
     {id: 2,  name: 'Pm3', type: 'Pm Type',description:'Pm Desc'}
   ])
 
+  const [assign,setAssign] = useState ([])
+
   const getBadge = status => {
     switch (status) {
-      case 'Active': return 'success'
-      case 'on-site': return 'secondary'
-      case 'Pending': return 'warning'
-      case 'Banned': return 'danger'
-      default: return 'primary'
+      case 'Completed': return 'info'
+    case 'Overdue': return 'danger'
+    case 'Pending': return 'warning'
+    case 'Assigned': return 'light'
+    case 'Accepted': return 'secondary'
+    case 'new': return 'dark'
+    case 'open': return 'dark'
+    default: return 'primary'
     }
   }
   const [info, setInfo] = useState(false)
@@ -105,6 +116,11 @@ export default function Overview() {
   const [name,setName] = useState("")
   const [pmEditModal, setPmEditModal] = useState(false)
   const [pmAddModal,setPmAddModal] = useState(false)
+  const [executiveinfo,setExecutiveInfo] = useState(false)
+
+  const [employee,setEmployee] = useState("")
+  const [sheduleDate,setSheduleDate] = useState("")
+  const [sheduleTime,setSheduleTime] = useState("")
 
   const submitHandler = () => {
     let currentData = {}
@@ -184,7 +200,7 @@ const submitServie = () => {
   currentData.priority=priority
   currentData.company=company
   currentData.createdDate=createdDate
-  currentData.executive=executive
+//  currentData.executive=executive
   currentData.email=email
   let allData = [...servicedata] 
   allData.push(currentData)
@@ -353,8 +369,34 @@ const pmDeleteHandler = () => {
     setDeleteAlert(true)
   }, 3000);
 }
+
+const executiveHandler = () => {
+  // let currentData = {}
+  // currentData.employee=employee
+  // let allData = [...assign] 
+  // allData.push(currentData)
+  // setAssign(employee)
+   console.log('exeeeeeeeeeeee',employee,executive);
+
+
+    let updatedData = {}
+    updatedData.id = updateId
+    updatedData.executive=employee
+    let filteredArr = servicedata.filter(function( obj ) {
+      return obj.id !== updateId;
+    });
+    console.log(updatedData)
+  //  setServiceData([...filteredArr, updatedData])
+    setLoading(true)
+    setTimeout(function(){  
+       setLoading(false)
+       setEditAlert(true)
+     }, 3000); 
+     setExecutiveInfo(!executiveinfo)
+  }
   return (
     <>
+    
      <div className="sweet-loading">
       <ClipLoader  loading={loading}  css={override} size={50} color='#2f4f4f'/>
     </div>
@@ -372,6 +414,26 @@ const pmDeleteHandler = () => {
     <CRow>
     {!loading ? 
     <> 
+     <CSubheader className="px-3 justify-content-between" style={{ marginTop:'1px'}}>
+        <CBreadcrumbRouter 
+          className="border-0 c-subheader-nav m-0 px-0 px-md-3" 
+          routes={routes} 
+        />
+           <CFormGroup row>
+             <CRow>
+          <div className="d-md-down-none mfe-2 c-subheader-nav">
+          <CButtonGroup>
+              <CButton color="secondary">Days</CButton>
+              <CButton color="secondary">Weeks</CButton>
+              <CButton color="secondary">Months</CButton>
+            </CButtonGroup>
+          </div>
+            <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{width:'30%',marginTop:'1.5%'}} />
+            <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{width:'30%',marginTop:'1.5%'}} />
+            </CRow>
+            </CFormGroup>
+      </CSubheader>
+
     <CCol xs="4" sm="3">
       <CCard >
         <CCardHeader>
@@ -713,11 +775,30 @@ const pmDeleteHandler = () => {
                      setPriority(item.priority)
                      setCreatedDate(item.createdDate)
                      setEmail(item.email)
+                 //    setEmployee(item.employee)
                       setServiceEditModal(!serviceeditModal)}
                    }
                       >{item.servicerequestId}</a>
                     </td>
-                  )
+                  ),
+                  'executive':
+                     (item)=>(
+                       <td>
+                        <p>  <a  onClick={()=>{
+                        setExecutiveInfo(!executiveinfo)}
+                      }>{item.executive}
+                          {<CIcon name="cil-phone"  size="1xl"/>}</a></p>
+                    
+                       </td>
+                     ),
+                     'status':
+                     (item)=>(
+                       <td>
+                         <CBadge color={getBadge(item.status)}>
+                           {item.status}
+                         </CBadge>
+                       </td>
+                     )
               }}
 
             />
@@ -861,8 +942,52 @@ const pmDeleteHandler = () => {
         </CRow>
 
 
+        <CModal 
+              show={executiveinfo} 
+              onClose={() => setExecutiveInfo(!executiveinfo)}
+            //  color="info"
+            >
+              <CModalHeader closeButton>
+                <CModalTitle>Assign Service Request</CModalTitle>
+              </CModalHeader>
+              <CModalBody>
+              <CRow>
+       
+              <CCol xs="10" lg="10">
+              <CFormGroup >
+                <CLabel htmlFor="name">Sales/Service Executive Name</CLabel>
+                <CSelect custom size="md" name="name" id="name" value={employee} onChange={(e) => setEmployee(e.target.value)}>
+                  <option value="undefined">Open this select menu</option>
+                  <option value="Vamsi">Vamsi</option>
+                  <option value="Sandeep">Sandeep</option>
+                  <option value="Pooja">Pooja</option>
+                  <option value="Vikram">Vikram</option>
+                  <option value="Arun">Arun</option>
+                </CSelect>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+            <CCol xs="10" lg="10">
+              <CFormGroup >
+                <CLabel htmlFor="sheduleDate">Shedule Date</CLabel>
+                <CInput type="date" id="sheduleDate" name="sheduleDate" placeholder="sheduleDate" value={sheduleDate} onChange={(e) => setSheduleDate(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" lg="10">
+              <CFormGroup >
+                <CLabel htmlFor="sheduleTime">Shedule Time</CLabel>
+                <CInput type="time" id="sheduleTime" name="sheduleTime" placeholder="sheduleTime" value={sheduleTime} onChange={(e) => setSheduleTime(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+              </CModalBody>
+              <CModalFooter>
+                <CButton color="secondary" onClick={() => setExecutiveInfo(!executiveinfo)}>Cancel</CButton>
+                <CButton color="info" onClick={(item) => {executiveHandler(item.id)}}>Assign</CButton>{' '}
+              </CModalFooter>
+            </CModal>
 
-                 {/* salesVisit */}
+
+         {/* salesVisit */}
         <CRow>
         <CCol xs="12" lg="12">
           <CCard>
@@ -1063,7 +1188,7 @@ const pmDeleteHandler = () => {
         items={pmData}
         fields={pmfields}
         conditionalRowStyles={conditionalRowStyles}
-        itemsPerPage={2}
+        itemsPerPage={3}
         pagination
         scopedSlots = {{
           'name':
