@@ -21,7 +21,8 @@ import {
   CSubheader,
   CBreadcrumbRouter,
   CButtonGroup,
-  CSelect
+  CSelect,
+  CLink
 } from '@coreui/react'
 import { CChartDoughnut } from '@coreui/react-chartjs'
 import { css } from "@emotion/react";
@@ -29,6 +30,8 @@ import ClipLoader from "react-spinners/ClipLoader";
 import routes from '../../routes'
 import CIcon from '@coreui/icons-react'
 import { useHistory } from "react-router-dom";
+import EditServiceRequest from '../ServiceRequests/editServiceRequest';
+import SalesVisit from '../SalesVisit/salesVisit';
 
 const fields = ['servicerequestId','company', 'priority','issueType','executive', 'status','createdDate','email']
 
@@ -382,11 +385,22 @@ const editServiceHandler =  (item) => {
     pathname:'/editServiceRequest',
     state: item });
 }
-
-const addServiceHandler = () => {
-  history.push('./createServiceRequest')
+const servicerequestshow =  (item) => {
+  history.push({
+    pathname:'/serviceRequest',
+    state: item });
 }
 
+const SalesVisitshow =  (item) => {
+  history.push({
+    pathname:'/sales_visit',
+    state: item });
+}
+const pmmethodshow =  (item) => {
+  history.push({
+    pathname:'/pm',
+    state: item });
+}
   return (
     <>
      <div className="sweet-loading">
@@ -587,6 +601,7 @@ const addServiceHandler = () => {
               }}
 
             />
+
              <CModal 
               show={overviewinfo} 
               onClose={() => setOverviewInfo(!overviewinfo)}
@@ -743,8 +758,8 @@ const addServiceHandler = () => {
              items={servicedata}
               fields={fields}
               conditionalRowStyles={conditionalRowStyles}
-              itemsPerPage={2}
-              pagination
+              // itemsPerPage={2}
+              // pagination
               scopedSlots = {{
                 'servicerequestId':
                   (item)=>(
@@ -786,6 +801,77 @@ const addServiceHandler = () => {
               }}
 
             />  
+            
+                             <CLink color="info" width={50} onClick={servicerequestshow}>show more</CLink>
+
+             <CModal 
+              show={serviceinfo} 
+              onClose={() => setServiceInfo(!serviceinfo)}
+              color="info"
+            >
+              <CModalHeader closeButton>
+                <CModalTitle>Add New ServiceRequest</CModalTitle>
+              </CModalHeader>
+              <CModalBody>
+              <CRow>
+
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="company">Company</CLabel>
+                <CInput type="text" id="company" name="company" placeholder="company" value={company} onChange={(e) => setCompany(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+            <CRow>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="priority">Priority</CLabel>
+                <CInput type="text" id="priority" name="priority" placeholder="Priority" value={priority} onChange={(e) => setPriority(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="issueType">Issue Type</CLabel>
+                <CInput type="text" id="issueType" name="issueType" placeholder="Issue Type" value={issueType} onChange={(e) => setIssueType(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+            <CRow>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="executive">Executive</CLabel>
+                <CInput type="text" id="executive" name="executive" placeholder="Executive" value={executive} onChange={(e) => setExecutive(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="status">Status</CLabel>
+                <CInput type="text" id="status" name="status" placeholder="Status" value={status} onChange={(e) => setStatus(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+            <CRow>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="createdDate">Created Date</CLabel>
+                <CInput type="date" id="createdDate" name="createdDate" placeholder="Created Date" value={createdDate} onChange={(e) => setCreatedDate(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            <CCol xs="10" md="6">
+              <CFormGroup >
+                <CLabel htmlFor="email">Email</CLabel>
+                <CInput type="text" id="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+              </CFormGroup>
+            </CCol>
+            </CRow>
+              </CModalBody>
+              <CModalFooter>
+                <CButton color="secondary" onClick={() => setServiceInfo(!serviceinfo)}>Cancel</CButton>
+                <CButton color="info" onClick={submitServie}>Submit</CButton>{' '}
+              </CModalFooter>
+            </CModal>  
+
+    
             </CCardBody>
           </CCard>
         </CCol>
@@ -859,8 +945,8 @@ const addServiceHandler = () => {
              items={data}
               fields={fields}
               conditionalRowStyles={conditionalRowStyles}
-              itemsPerPage={2}
-              pagination
+              // itemsPerPage={2}
+              // pagination
               scopedSlots = {{
                 'servicerequestId':
                   (item)=>(
@@ -883,6 +969,8 @@ const addServiceHandler = () => {
               }}
 
             />
+                 <CLink color="info" width={50} onClick={SalesVisitshow}>show more</CLink>
+
              <CModal 
               show={info} 
               onClose={() => setInfo(!info)}
@@ -1039,8 +1127,8 @@ const addServiceHandler = () => {
         items={pmData}
         fields={pmfields}
         conditionalRowStyles={conditionalRowStyles}
-        itemsPerPage={2}
-        pagination
+        // itemsPerPage={2}
+        // pagination
         scopedSlots = {{
           'name':
             (item)=>(
@@ -1059,6 +1147,8 @@ const addServiceHandler = () => {
         }}
 
       /> 
+                 <CLink color="info" width={50} onClick={pmmethodshow}>show more</CLink>
+
        <CModal 
               show={pmAddModal} 
               onClose={() => setPmAddModal(!pmAddModal)}
