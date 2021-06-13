@@ -40,7 +40,7 @@ const pmfields = ['name','type', 'description']
 const override = css`
 display: block;
 margin: 0 auto;
-`;
+`;  
 
 export default function Overview() {
 
@@ -385,6 +385,10 @@ const editServiceHandler =  (item) => {
     pathname:'/editServiceRequest',
     state: item });
 }
+const addServiceHandler = () => {
+ history.push('./createServiceRequest')
+}
+
 const servicerequestshow =  (item) => {
   history.push({
     pathname:'/serviceRequest',
