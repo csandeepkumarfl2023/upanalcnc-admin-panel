@@ -29,7 +29,6 @@ import ClipLoader from "react-spinners/ClipLoader";
 import routes from '../../routes'
 import CIcon from '@coreui/icons-react'
 import { useHistory } from "react-router-dom";
-import EditServiceRequest from '../ServiceRequests/editServiceRequest';
 
 const fields = ['servicerequestId','company', 'priority','issueType','executive', 'status','createdDate','email']
 
@@ -384,6 +383,10 @@ const editServiceHandler =  (item) => {
     state: item });
 }
 
+const addServiceHandler = () => {
+  history.push('./createServiceRequest')
+}
+
   return (
     <>
      <div className="sweet-loading">
@@ -733,7 +736,7 @@ const editServiceHandler =  (item) => {
               ServiceRequest
               </CCol>
               <CCol xs="1">
-              <CButton block  color="info" onClick={() => setServiceInfo(!serviceinfo)} className="mr-1">New</CButton>
+              <CButton block  color="info" onClick={addServiceHandler} className="mr-1">New</CButton>
             </CCol>
             </CRow>
             <CDataTable
@@ -782,75 +785,7 @@ const editServiceHandler =  (item) => {
                      )
               }}
 
-            />
-             <CModal 
-              show={serviceinfo} 
-              onClose={() => setServiceInfo(!serviceinfo)}
-              color="info"
-            >
-              <CModalHeader closeButton>
-                <CModalTitle>Add New ServiceRequest</CModalTitle>
-              </CModalHeader>
-              <CModalBody>
-              <CRow>
-
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="company">Company</CLabel>
-                <CInput type="text" id="company" name="company" placeholder="company" value={company} onChange={(e) => setCompany(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            </CRow>
-            <CRow>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="priority">Priority</CLabel>
-                <CInput type="text" id="priority" name="priority" placeholder="Priority" value={priority} onChange={(e) => setPriority(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="issueType">Issue Type</CLabel>
-                <CInput type="text" id="issueType" name="issueType" placeholder="Issue Type" value={issueType} onChange={(e) => setIssueType(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            </CRow>
-            <CRow>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="executive">Executive</CLabel>
-                <CInput type="text" id="executive" name="executive" placeholder="Executive" value={executive} onChange={(e) => setExecutive(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="status">Status</CLabel>
-                <CInput type="text" id="status" name="status" placeholder="Status" value={status} onChange={(e) => setStatus(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            </CRow>
-            <CRow>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="createdDate">Created Date</CLabel>
-                <CInput type="date" id="createdDate" name="createdDate" placeholder="Created Date" value={createdDate} onChange={(e) => setCreatedDate(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="email">Email</CLabel>
-                <CInput type="text" id="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            </CRow>
-              </CModalBody>
-              <CModalFooter>
-                <CButton color="secondary" onClick={() => setServiceInfo(!serviceinfo)}>Cancel</CButton>
-                <CButton color="info" onClick={submitServie}>Submit</CButton>{' '}
-              </CModalFooter>
-            </CModal>  
-
-    
+            />  
             </CCardBody>
           </CCard>
         </CCol>

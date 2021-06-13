@@ -1,22 +1,13 @@
 import React,{useState} from 'react'
 import {
-    CBadge,
     CCard,
     CCardHeader,
     CCardBody,
-    CModal,
-    CModalBody,
-    CModalFooter,
-    CModalHeader,
-    CModalTitle,
     CCol,
-    CAlert,
-    CDataTable,
     CSelect,
     CRow,
     CButton,
     CFormGroup,
-    CLabel,
     CInput,
     CCardSubtitle,
     CCardFooter,
@@ -54,24 +45,6 @@ export default function EditServiceRequest(props) {
     console.log('alldata',allData);
     }
 
-    // let updatedData = {}
-    // updatedData.id = updateId
-    // updatedData.servicerequestId = servicerequestId
-    // updatedData.status = status
-    // updatedData.issueType=issueType
-    // updatedData.company=company
-    // updatedData.executive=executive
-    // updatedData.email=email
-    // updatedData.createdDate=createdDate
-    // updatedData.priority=priority
-    // let filteredArr = data.filter(function( obj ) {
-    //   return obj.id !== updateId;
-    // });
-    // console.log(filteredArr)
-    // setData([...filteredArr, updatedData])
-
-    // setEditModal(false)
-    // setEditAlert(true)
     return (
         <CCard>
             <CCardHeader>

@@ -9,6 +9,7 @@ const Payment = React.lazy(() => import('./layout/Payments/payments'));
 const PM = React.lazy(() => import('./layout/PM/pm'));
 const Profile =  React.lazy(() => import('./layout/Profile/profile'));
 const EditServiceRequest = React.lazy(() => import('./layout/ServiceRequests/editServiceRequest'));
+const CreateServiceRequest = React.lazy(() => import('./layout/ServiceRequests/createServiceRequest'));
 
 const routes = [
   { path: '/login', exact: true, name: 'login' },
@@ -21,6 +22,7 @@ const routes = [
   { path: '/pm', name: 'PM', component: PM },
   { path: '/profile', name: 'Profile', component: Profile },
   { path: '/editServiceRequest', name: 'EditServiceRequest', component: EditServiceRequest },
+  { path: '/createServiceRequest', name: 'createServiceRequest', component: CreateServiceRequest },
 
 ];
 
