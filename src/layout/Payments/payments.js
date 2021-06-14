@@ -17,6 +17,7 @@ import {
   CFormGroup,
   CLabel,
   CInput,
+  CLink
 } from '@coreui/react'
 
 import { css } from "@emotion/react";
@@ -159,7 +160,7 @@ export default function Payments() {
                     'name':
                       (item) => (
                         <td>
-                          <a onClick={() => {
+                         <CLink> <a onClick={() => {
                             setUpdateId(item.id)
                             setName(item.name)
                             setDescription(item.description)
@@ -168,7 +169,7 @@ export default function Payments() {
                             setEditModal(!editModal)
                           }
                           }
-                          >{item.name}</a>
+                          >{item.name}</a></CLink>
                         </td>
                       )
                   }}

@@ -18,7 +18,8 @@ import {
   CLabel,
   CSelect,
   CInput,
-  CCardHeader
+  CCardHeader,
+  CLink
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
@@ -221,7 +222,7 @@ React.useEffect(() => {
                 'servicerequestId':
                   (item)=>(
                     <td>
-                   <a  onClick={()=>{
+                  <CLink> <a  onClick={()=>{
                      setUpdateId(item.id)
                      setServiceRequestId(item.servicerequestId)
                      setCompany(item.company)
@@ -233,7 +234,7 @@ React.useEffect(() => {
                      setEmail(item.email)
                       setEditModal(!editModal)}
                    }
-                      >{item.servicerequestId}</a>
+                      >{item.servicerequestId}</a></CLink>
                     </td>
                   ),
                      'executive':

@@ -87,7 +87,7 @@ export default function EditServiceRequest(props) {
          <CCardHeader>
             <CRow>
                <CCol xs="6" md="11">
-                  <CCardSubtitle>Service Request UPNLSR2021001</CCardSubtitle>
+                  <CCardSubtitle style={{marginTop:'1%'}}>Service Request UPNLSR2021001</CCardSubtitle>
                </CCol>
                <CCol xs="6" md="1">
                   <CIcon name="cil-pen" size="1xl" onClick={() => setEdit(true)} />
@@ -120,7 +120,7 @@ export default function EditServiceRequest(props) {
                </CCol>
             </CRow>
 
-            <CRow style={{ marginTop: '2%' }}>
+            <CRow style={{ marginTop: '2%'}}>
                <CCol xs="10" sm="4">
                   Executive: 
                   {edit ?
@@ -162,11 +162,9 @@ export default function EditServiceRequest(props) {
             </CRow>
          </CCardBody>
 
-         <CCardFooter>
             <CCardHeader>
                <CCardSubtitle> Machine Details</CCardSubtitle>
             </CCardHeader>
-         </CCardFooter>
          <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
             <CCol xs="10" lg="4">
                Machine ID: {machineDetails ? machineDetails.machineId : null}
@@ -200,11 +198,9 @@ export default function EditServiceRequest(props) {
             </CCol>
          </CRow>
 
-         <CCardFooter>
             <CCardHeader>
-               <CCardSubtitle>Customer Contact Details</CCardSubtitle>
+               <CCardSubtitle style={{marginTop:'2%'}}>Customer Contact Details</CCardSubtitle>
             </CCardHeader>
-         </CCardFooter>
          <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
             <CCol xs="10" lg="4">
                Contact Person Name: {customerDetails ? customerDetails.contactPerson : null}
