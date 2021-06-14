@@ -56,7 +56,7 @@ const TheHeader = () => {
                <CInput
                     className="mr-sm-2"
                     placeholder="Search"
-                    size="sm"
+                    style={{width:'200%'}}
                   >
                   {/* <CIcon name="cil-phone"  size="1xl"/> */}
                   </CInput>
