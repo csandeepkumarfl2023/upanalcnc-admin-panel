@@ -1,25 +1,39 @@
-import axios from 'axios';
-import api from './apiService'
+import { constants } from '../constants';
 
-const apiServices = api()
+let employeeManagementsData = [
+    {id: 0,  name: 'EmployeeManagements', type: 'EmployeeManagements Type',description:'EmployeeManagements Desc'}
+]
 
-const postEmployeeManagement = async (data) => {
-    let response = await axios.post(`${apiServices}/EmployeeManagement`, data)
+export default class EmployeeManagementsService{
+
+ async postEmployeeManagements(data) {
+    // let response = await axios.post(`${apiServices}/EmployeeManagements`, data)
+    employeeManagementsData.push(data)
+    let response = employeeManagementsData
+    return response
+};
+
+ async getAllEmployeeManagements() {
+    // let response = await axios.get(`${apiServices}/EmployeeManagements`)
+    let response = employeeManagementsData
     return response
 }
 
-const getEmployeeManagement = async () => {
-    let response = await axios.get(`${apiServices}/EmployeeManagement`)
-    return response
+ async putEmployeeManagements(data, id) {
+    // let response = await axios.put(`${apiServices}/EmployeeManagements`, data)
+    let filteredArr = employeeManagementsData.filter(function (obj) {
+        return obj.id !== id;
+      });
+    employeeManagementsData = [
+        ...filteredArr, data
+    ]
+    return employeeManagementsData
 }
 
-const putEmployeeManagement = async (data) => {
-    let response = await axios.put(`${apiServices}/EmployeeManagement`, data)
-    return response
+ async deleteEmployeeManagements(id) {
+    // let response = await axios.delete(`${apiServices}/EmployeeManagements`)
+    employeeManagementsData = employeeManagementsData.filter(item => item.id !== id);
+    return employeeManagementsData
+}
 }
 
-const deleteEmployeeManagement = async (data) => {
-    let response = await axios.delete(`${apiServices}/EmployeeManagement`)
-    return response
-}
-export { postEmployeeManagement, getEmployeeManagement,putEmployeeManagement,deleteEmployeeManagement }

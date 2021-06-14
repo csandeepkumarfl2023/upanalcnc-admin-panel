@@ -24,6 +24,8 @@ import {
 import CIcon from '@coreui/icons-react'
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
+import SalesVisitService from '../../services/salesVisitService'
+const salesvisitService = new SalesVisitService()
 
 const getBadge = status => {
     switch (status) {
@@ -44,10 +46,7 @@ const getBadge = status => {
   margin: 0 auto;
 `;
 export default function SalesVisit() {
-    const [data, setData] = useState([
-      {id: 0, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
-      executive:'Naveen', status: 'Completed',createdDate:'2021-04-10',email:'adam@company.com'},
-    ])
+    const [data, setData] = useState([])
     const [servicerequestId,setServiceRequestId] = useState("")
     const [status,setStatus] = useState("")
     const [issueType,setIssueType] = useState("")
@@ -70,6 +69,12 @@ export default function SalesVisit() {
     const [sheduleTime,setSheduleTime] = useState("")
 
 
+    const getData = async () => {
+      let res = await salesvisitService.getAllSalesVisits()
+      setData(res)
+    }
+
+
     const addnewBtnHandler = () => {
       setUpdateId('')
       setStatus('')
@@ -82,7 +87,7 @@ export default function SalesVisit() {
       setInfo(true)
     }
 
-    const submitHandler = () => {
+    const submitHandler =async () => {
       let currentData = {}
       currentData.id = Math.round(Math.random() * 10000000)
       currentData.servicerequestId = 'Uld32351'
@@ -93,10 +98,8 @@ export default function SalesVisit() {
       currentData.createdDate=createdDate
       currentData.executive=executive
       currentData.email=email
-      let allData = [...data] 
-      allData.push(currentData)
-      setData(allData)
-      console.log('alldata',allData);
+      let res = await salesvisitService.postSalesVisit(currentData)
+      getData()
       setInfo(!info)
       setLoading(true)
       setTimeout(function(){   
@@ -107,7 +110,7 @@ export default function SalesVisit() {
   }
 
 
-  const editBtnHandler = () => {   
+  const editBtnHandler =async () => {   
     let updatedData = {}
       updatedData.id = updateId
       updatedData.servicerequestId = servicerequestId
@@ -119,11 +122,8 @@ export default function SalesVisit() {
       updatedData.createdDate=createdDate
       updatedData.priority=priority
       console.log('updatedData', updatedData)
-      let filteredArr = data.filter(function( obj ) {
-        return obj.id !== updateId;
-      });
-      console.log(filteredArr)
-      setData([...filteredArr, updatedData])
+      let res = await salesvisitService.putSalesVisit(updatedData, updateId)
+      getData()
       setEditModal(false)
       setLoading(true)
       setTimeout(function(){  
@@ -160,13 +160,9 @@ export default function SalesVisit() {
       },
     }
   ];
-  const deleteHandler = () => {
-    let element = [...data]
-    let updatedData = {}
-    updatedData.id = updateId
-    console.log(updatedData.id);
-    element = element.filter(item => item.id !==updatedData.id);
-    setData(element)
+  const deleteHandler =async () => {
+    let res = await salesvisitService.deleteSalesVisit(updateId)
+    getData()
     setEditModal(false)
     setLoading(true)
     setTimeout(function(){  
@@ -176,6 +172,7 @@ export default function SalesVisit() {
 }
 
 React.useEffect(() => {
+  getData()
   setLoading(true)
   setTimeout(function(){  
     setLoading(false)

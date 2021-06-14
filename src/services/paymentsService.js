@@ -1,25 +1,39 @@
-import axios from 'axios';
-import api from './apiService'
+import { constants } from '../constants';
 
-const apiServices = api()
+let paymentsData = [
+    {id: 0,  name: 'Payments', type: 'Payments Type',description:'Payments Desc'}
+]
 
-const postPayments = async (data) => {
-    let response = await axios.post(`${apiServices}/Payments`, data)
+export default class PaymentsService{
+
+ async postPayments(data) {
+    // let response = await axios.post(`${apiServices}/Payments`, data)
+    paymentsData.push(data)
+    let response = paymentsData
+    return response
+};
+
+ async getAllPayments() {
+    // let response = await axios.get(`${apiServices}/Payments`)
+    let response = paymentsData
     return response
 }
 
-const getPayments = async () => {
-    let response = await axios.get(`${apiServices}/Payments`)
-    return response
+ async putPayments(data, id) {
+    // let response = await axios.put(`${apiServices}/Payments`, data)
+    let filteredArr = paymentsData.filter(function (obj) {
+        return obj.id !== id;
+      });
+    paymentsData = [
+        ...filteredArr, data
+    ]
+    return paymentsData
 }
 
-const putPayments = async (data) => {
-    let response = await axios.put(`${apiServices}/Payments`, data)
-    return response
+ async deletePayments(id) {
+    // let response = await axios.delete(`${apiServices}/Payments`)
+    paymentsData = paymentsData.filter(item => item.id !== id);
+    return paymentsData
+}
 }
 
-const deletePayments = async (data) => {
-    let response = await axios.delete(`${apiServices}/Payments`)
-    return response
-}
-export { postPayments, getPayments,putPayments,deletePayments }
