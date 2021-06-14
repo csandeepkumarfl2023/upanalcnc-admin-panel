@@ -125,8 +125,8 @@ export default function Overview() {
   const [executiveinfo,setExecutiveInfo] = useState(false)
 
   const [employee,setEmployee] = useState("")
-  const [scheduleDate,setSheduleDate] = useState("")
-  const [scheduleTime,setSheduleTime] = useState("")
+  const [scheduleDate,setScheduleDate] = useState("")
+  const [scheduleTime,setScheduleTime] = useState("")
 
   const submitHandler = () => {
     let currentData = {}
@@ -562,187 +562,6 @@ const pmmethodshow =  (item) => {
       </CRow>
       {!loading ? 
           <>
-      <CRow>
-        <CCol xs="12" lg="12">
-          <CCard>
-            <CCardBody>
-              <CRow>
-              <CCol xs="11">
-              OverView
-              </CCol>
-              <CCol xs="1">
-              <CButton block  color="info" onClick={() => setOverviewInfo(!overviewinfo)} className="mr-1">New</CButton>
-            </CCol>
-            </CRow>
-            <CDataTable
-             items={overviewdata}
-              fields={fields}
-              conditionalRowStyles={conditionalRowStyles}
-              itemsPerPage={2}
-              pagination
-              scopedSlots = {{
-                'servicerequestId':
-                  (item)=>(
-                    <td>
-                   <a  onClick={()=>{
-                     setUpdateId(item.id)
-                     setServiceRequestId(item.servicerequestId)
-                     setCompany(item.company)
-                     setIssueType(item.issueType)
-                     setStatus(item.status)
-                     setExecutive(item.executive)
-                     setPriority(item.priority)
-                     setCreatedDate(item.createdDate)
-                     setEmail(item.email)
-                      setOverviewEditModal(!overvieweditModal)}
-                   }
-                      >{item.servicerequestId}</a>
-                    </td>
-                  )
-              }}
-
-            />
-
-             <CModal 
-              show={overviewinfo} 
-              onClose={() => setOverviewInfo(!overviewinfo)}
-              color="info"
-            >
-              <CModalHeader closeButton>
-                <CModalTitle>Add New Overview</CModalTitle>
-              </CModalHeader>
-              <CModalBody>
-              <CRow>
-
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="company">Company</CLabel>
-                <CInput type="text" id="company" name="company" placeholder="company" value={company} onChange={(e) => setCompany(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            </CRow>
-            <CRow>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="priority">Priority</CLabel>
-                <CInput type="text" id="priority" name="priority" placeholder="Priority" value={priority} onChange={(e) => setPriority(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="issueType">Issue Type</CLabel>
-                <CInput type="text" id="issueType" name="issueType" placeholder="Issue Type" value={issueType} onChange={(e) => setIssueType(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            </CRow>
-            <CRow>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="executive">Executive</CLabel>
-                <CInput type="text" id="executive" name="executive" placeholder="Executive" value={executive} onChange={(e) => setExecutive(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="status">Status</CLabel>
-                <CInput type="text" id="status" name="status" placeholder="Status" value={status} onChange={(e) => setStatus(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            </CRow>
-            <CRow>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="createdDate">Created Date</CLabel>
-                <CInput type="date" id="createdDate" name="createdDate" placeholder="Created Date" value={createdDate} onChange={(e) => setCreatedDate(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="email">Email</CLabel>
-                <CInput type="text" id="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            </CRow>
-              </CModalBody>
-              <CModalFooter>
-                <CButton color="secondary" onClick={() => setOverviewInfo(!overviewinfo)}>Cancel</CButton>
-                <CButton color="info" onClick={overviewsubmitServie}>Submit</CButton>{' '}
-              </CModalFooter>
-            </CModal>  
-
-
-            </CCardBody>
-          </CCard>
-        </CCol>
-        <CModal 
-              show={overvieweditModal} 
-              onClose={() => setOverviewEditModal(!overvieweditModal)}
-              color="info"
-            >
-              <CModalHeader closeButton>
-                <CModalTitle>Edit Overview</CModalTitle>
-              </CModalHeader>
-              <CModalBody>
-              <CRow>
-      
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="company">Company</CLabel>
-                <CInput type="text" id="company" name="company" placeholder="company" value={company? company: ''} onChange={(e) => setCompany(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            </CRow>
-            <CRow>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="priority">Priority</CLabel>
-                <CInput type="text" id="priority" name="priority" placeholder="Priority" value={priority?priority: ''} onChange={(e) => setPriority(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="issueType">Issue Type</CLabel>
-                <CInput type="text" id="issueType" name="issueType" placeholder="Issue Type" value={issueType?issueType: ''} onChange={(e) => setIssueType(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            </CRow>
-            <CRow>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="executive">Executive</CLabel>
-                <CInput type="text" id="executive" name="executive" placeholder="Executive" value={executive? executive: ''} onChange={(e) => setExecutive(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="status">Status</CLabel>
-                <CInput type="text" id="status" name="status" placeholder="Status" value={status? status: ''} onChange={(e) => setStatus(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            </CRow>
-            <CRow>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="createdDate">Created Date</CLabel>
-                <CInput type="date" id="createdDate" name="createdDate" placeholder="Created Date" value={createdDate?createdDate:''} onChange={(e) => setCreatedDate(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="email">Email</CLabel>
-                <CInput type="text" id="email" name="email" placeholder="Email" value={email?email:''} onChange={(e) => setEmail(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            </CRow>
-              </CModalBody>
-              <CModalFooter>
-                <CButton color="secondary" onClick={ overviewdeleteservice}>Delete</CButton>
-                <CButton color="info" onClick={overvieweditservice}>Edit</CButton>{' '}
-              </CModalFooter>
-            </CModal>
-        </CRow>
-
-
         <CRow>
         <CCol xs="12" lg="12">
           <CCard>
@@ -765,11 +584,11 @@ const pmmethodshow =  (item) => {
                 'servicerequestId':
                   (item)=>(
                     <td>
-                    <a  onClick={()=>{
+                   <CLink> <a  onClick={()=>{
                      editServiceHandler(item)
                   }
                    }
-                      >{item.servicerequestId}</a>
+                      >{item.servicerequestId}</a> </CLink>
 
                     </td>
                   ),
@@ -803,7 +622,7 @@ const pmmethodshow =  (item) => {
 
             />  
             
-                             <CLink color="info" width={50} onClick={servicerequestshow}>show more</CLink>
+            <CLink color="info" width={50}  onClick={servicerequestshow}>Show More</CLink>
 
              <CModal 
               show={serviceinfo} 
@@ -891,7 +710,7 @@ const pmmethodshow =  (item) => {
               <CModalBody>
               <CRow>
        
-              <CCol xs="10" lg="10">
+              <CCol xs="8" style={{marginLeft:'2%'}}>
               <CFormGroup >
                 <CLabel htmlFor="name">Sales/Service Executive Name</CLabel>
                 <CSelect custom size="md" name="name" id="name" value={employee} onChange={(e) => setEmployee(e.target.value)}>
@@ -905,16 +724,16 @@ const pmmethodshow =  (item) => {
               </CFormGroup>
             </CCol>
             </CRow>
-            <CCol xs="10" lg="10">
+            <CCol xs="8">
               <CFormGroup >
-                <CLabel htmlFor="scheduleDate">Shedule Date</CLabel>
-                <CInput type="date" id="scheduleDate" name="scheduleDate" placeholder="scheduleDate" value={scheduleDate} onChange={(e) => setSheduleDate(e.target.value)}/>
+                <CLabel htmlFor="scheduleDate">Schedule Date</CLabel>
+                <CInput type="date" id="scheduleDate" name="scheduleDate" placeholder="scheduleDate" value={scheduleDate} onChange={(e) => setScheduleDate(e.target.value)}/>
               </CFormGroup>
             </CCol>
-            <CCol xs="10" lg="10">
+            <CCol xs="8">
               <CFormGroup >
-                <CLabel htmlFor="scheduleTime">Shedule Time</CLabel>
-                <CInput type="time" id="scheduleTime" name="scheduleTime" placeholder="scheduleTime" value={scheduleTime} onChange={(e) => setSheduleTime(e.target.value)}/>
+                <CLabel htmlFor="scheduleTime">Schedule Time</CLabel>
+                <CInput type="time" id="scheduleTime" name="scheduleTime" placeholder="scheduleTime" value={scheduleTime} onChange={(e) => setScheduleTime(e.target.value)}/>
               </CFormGroup>
             </CCol>
               </CModalBody>
@@ -952,7 +771,7 @@ const pmmethodshow =  (item) => {
                 'servicerequestId':
                   (item)=>(
                     <td>
-                   <a  onClick={()=>{
+                  <CLink> <a  onClick={()=>{
                      setUpdateId(item.id)
                      setServiceRequestId(item.servicerequestId)
                      setCompany(item.company)
@@ -964,13 +783,13 @@ const pmmethodshow =  (item) => {
                      setEmail(item.email)
                       setEditModal(!editModal)}
                    }
-                      >{item.servicerequestId}</a>
+                      >{item.servicerequestId}</a></CLink>
                     </td>
                   )
               }}
 
             />
-                 <CLink color="info" width={50} onClick={SalesVisitshow}>show more</CLink>
+                 <CLink color="info" width={50} onClick={SalesVisitshow}>Show More</CLink>
 
              <CModal 
               show={info} 
@@ -1134,7 +953,7 @@ const pmmethodshow =  (item) => {
           'name':
             (item)=>(
               <td>
-             <a  onClick={()=>{
+             <CLink> <a  onClick={()=>{
               setUpdateId(item.id)
                setName(item.name)
                setDescription(item.description)
@@ -1142,13 +961,13 @@ const pmmethodshow =  (item) => {
               
                setPmEditModal(!pmEditModal)}
              }
-                >{item.name}</a>
+                >{item.name}</a></CLink>
               </td>
             )
         }}
 
       /> 
-                 <CLink color="info" width={50} onClick={pmmethodshow}>show more</CLink>
+    <CLink color="info" width={50} onClick={pmmethodshow}>Show More</CLink>
 
        <CModal 
               show={pmAddModal} 

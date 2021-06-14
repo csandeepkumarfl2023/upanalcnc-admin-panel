@@ -7,8 +7,12 @@ import {
   CHeaderNav,
   CHeaderNavItem,
   CInput,
+  CSubheader,
+  CBreadcrumbRouter,
+  CLink
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
+import routes from '../routes'
 
 import { 
   TheHeaderDropdown,
@@ -65,7 +69,12 @@ const TheHeader = () => {
         <TheHeaderDropdownMssg/> */}
         <TheHeaderDropdown/>
       </CHeaderNav>
-
+      <CSubheader className="px-3 justify-content-between">
+        <CBreadcrumbRouter 
+          className="border-0 c-subheader-nav m-0 px-0 px-md-3" 
+          routes={routes} 
+        />
+      </CSubheader>
      
     </CHeader>
   )
