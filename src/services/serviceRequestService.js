@@ -1,25 +1,41 @@
-import axios from 'axios';
-import api from './apiService'
+import { constants } from '../constants';
 
-const apiServices = api()
+let serviceReqData = [
+    {id: 0, servicerequestId: 'UPNLBKN202101', status:'Completed',priority:'High', issueType:'Electrical',description:'value proposition', contactNumber: '8765964234', 
+    executive:'Assign',reports:'no', company: 'Aravindan', email: 'aravindan@gmail.com',createdDate: 'June 14th 2021, 1:23:09 pm', machine: 0, customerName: 0}
+]
 
-const postServiceRequests = async (data) => {
-    let response = await axios.post(`${apiServices}/serviceRequests`, data)
+export default class ServiveRequestService{
+
+ async createServiceReq(data) {
+    serviceReqData.push(data)
+    let response = serviceReqData
+    return response
+};
+
+ async getAllServiceRequests() {
+    let response = serviceReqData
     return response
 }
 
-const getServiceRequests = async () => {
-    let response = await axios.get(`${apiServices}/serviceRequests`)
+async getServiceRequest(id) {
+    let response = serviceReqData.find(item => item.id == id)
     return response
 }
 
-const putServiceRequests = async (data) => {
-    let response = await axios.put(`${apiServices}/serviceRequests`, data)
-    return response
+ async updateServiceRequest(data, id) {
+    let filteredArr = serviceReqData.filter(function (obj) {
+        return obj.id !== id;
+      });
+    serviceReqData = [
+        ...filteredArr, data
+    ]
+    return serviceReqData
 }
 
-const deleteServiceRequests = async (data) => {
-    let response = await axios.delete(`${apiServices}/serviceRequests`)
-    return response
+ async deleteServiceRequest(id) {
+    serviceReqData = serviceReqData.filter(item => item.id !== id);
+    return serviceReqData
 }
-export { postServiceRequests, getServiceRequests,putServiceRequests,deleteServiceRequests }
+}
+
