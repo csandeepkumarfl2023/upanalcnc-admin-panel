@@ -30,8 +30,6 @@ import ClipLoader from "react-spinners/ClipLoader";
 import routes from '../../routes'
 import CIcon from '@coreui/icons-react'
 import { useHistory } from "react-router-dom";
-import EditServiceRequest from '../ServiceRequests/editServiceRequest';
-import SalesVisit from '../SalesVisit/salesVisit';
 
 const fields = ['servicerequestId','company', 'priority','issueType','executive', 'status','createdDate','email']
 
@@ -362,7 +360,6 @@ const executiveHandler = () => {
      updatedData.status = status
     updatedData.issueType=issueType
     updatedData.company=company
-    updatedData.executive=employee
     updatedData.email=email
     updatedData.createdDate=createdDate
     updatedData.priority=priority
