@@ -11,7 +11,8 @@ import {
   CInputGroup,
   CInputGroupPrepend,
   CInputGroupText,
-  CRow
+  CRow,
+  CImg
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
@@ -21,9 +22,16 @@ const Login = (props) => {
     props.history.push('/overview')
   }
   return (
+    
     <div className="c-app c-default-layout flex-row align-items-center">
+   
       <CContainer>
-        <CRow className="justify-content-center">
+      <CImg style={{height:'50%',width:'30%', marginLeft: '30%'}}
+            src={'avatars/logo.jpg'}
+            className="c-logo-img"
+            alt="admin@bootstrapmaster.com"
+          />
+        <CRow className="justify-content-center">   
           <CCol md="8">
             <CCardGroup>
               <CCard className="p-4">
