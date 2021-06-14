@@ -30,8 +30,9 @@ import ClipLoader from "react-spinners/ClipLoader";
 import routes from '../../routes'
 import CIcon from '@coreui/icons-react'
 import { useHistory } from "react-router-dom";
+import ServiceRequestService from '../../services/serviceRequestService'
 
-const fields = ['servicerequestId','company', 'priority','issueType','executive', 'status','createdDate','email']
+const fields = ['servicerequestId','company','priority','issueType','executive', 'status','contactNumber', 'email', 'createdDate']
 
 const pmfields = ['name','type', 'description']
 
@@ -39,7 +40,7 @@ const override = css`
 display: block;
 margin: 0 auto;
 `;  
-
+const serviceRequestService = new ServiceRequestService()
 export default function Overview() {
 
   const history = useHistory();
@@ -53,15 +54,7 @@ export default function Overview() {
     executive:'Naveen', status: 'Active',createdDate:'2021-04-10',email:'adam@company.com'}
   ])
 
-  const [servicedata, setServiceData]  =useState( [
-    {id: 0, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
-    executive:'Assign', status: 'Assigned',createdDate:'2021-04-10',email:'adam@company.com'},
-    {id: 1, servicerequestId: 'UPNLBKN202102', company: 'Company one', priority: 'High',issueType:'Electrical',
-    executive:'Assign', status: 'Pending',createdDate:'2021-04-10',email:'adam@company.com'},
-    {id: 2, servicerequestId: 'UPNLBKN202103', company: 'Company Two', priority: 'Low',issueType:'Electrical',
-    executive:'Assign', status: 'Completed',createdDate:'2021-04-10',email:'adam@company.com'}
-  
-  ])
+  const [servicedata, setServiceData]  =useState([])
 
   const [overviewdata, setOverviewData]  =useState([
     {id: 0, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
@@ -219,19 +212,6 @@ const submitServie = () => {
    }, 3000);
 
 }
-// const deleteservice = () => {
-// let element = [...servicedata]
-// let updatedData = {}
-// updatedData.id = updateId
-// console.log(updatedData.id);
-// element = element.filter(item => item.id !==updatedData.id);
-// setServiceData(element)
-// //setServiceEditModal(false)
-// setLoading(true)
-// setTimeout(function(){  
-//   setLoading(false)
-//   setDeleteAlert(true)
-// }, 3000);}
 
 const overviewsubmitServie = () => {
   let currentData = {}
@@ -294,7 +274,12 @@ setTimeout(function(){
 }, 3000);
 }
 
+const getServiceData = async () => {
+  let res = await serviceRequestService.getAllServiceRequests()
+  setServiceData(res)
+}
 React.useEffect(() => {
+  getServiceData()
   setLoading(true)
   setTimeout(function(){  
     setLoading(false)
