@@ -30,8 +30,11 @@ import ClipLoader from "react-spinners/ClipLoader";
 import routes from '../../routes'
 import CIcon from '@coreui/icons-react'
 import { useHistory } from "react-router-dom";
+import ServiceRequestService from '../../services/serviceRequestService'
+import SalesVisitService from '../../services/salesVisitService'
+import PmService from '../../services/pmService';
 
-const fields = ['servicerequestId','company', 'priority','issueType','executive', 'status','createdDate','email']
+const fields = ['servicerequestId','company','priority','issueType','executive', 'status','contactNumber', 'email', 'createdDate']
 
 const pmfields = ['name','type', 'description']
 
@@ -39,7 +42,9 @@ const override = css`
 display: block;
 margin: 0 auto;
 `;  
-
+const salesvisitService = new SalesVisitService()
+const serviceRequestService = new ServiceRequestService()
+const pmservice = new PmService()
 export default function Overview() {
 
   const history = useHistory();
@@ -53,15 +58,7 @@ export default function Overview() {
     executive:'Naveen', status: 'Active',createdDate:'2021-04-10',email:'adam@company.com'}
   ])
 
-  const [servicedata, setServiceData]  =useState( [
-    {id: 0, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
-    executive:'Assign', status: 'Assigned',createdDate:'2021-04-10',email:'adam@company.com'},
-    {id: 1, servicerequestId: 'UPNLBKN202102', company: 'Company one', priority: 'High',issueType:'Electrical',
-    executive:'Assign', status: 'Pending',createdDate:'2021-04-10',email:'adam@company.com'},
-    {id: 2, servicerequestId: 'UPNLBKN202103', company: 'Company Two', priority: 'Low',issueType:'Electrical',
-    executive:'Assign', status: 'Completed',createdDate:'2021-04-10',email:'adam@company.com'}
-  
-  ])
+  const [servicedata, setServiceData]  =useState([])
 
   const [overviewdata, setOverviewData]  =useState([
     {id: 0, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
@@ -72,11 +69,7 @@ export default function Overview() {
     executive:'Naveen', status: 'Active',createdDate:'2021-04-10',email:'adam@company.com'}
   ])
 
-  const [pmData, setPmData] = useState([
-    {id: 0,  name: 'Pm1', type: 'Pm Type',description:'Pm Desc'},
-    {id: 1,  name: 'Pm2', type: 'Pm Type',description:'Pm Desc'},
-    {id: 2,  name: 'Pm3', type: 'Pm Type',description:'Pm Desc'}
-  ])
+  const [pmData, setPmData] = useState([])
 
   const [assign,setAssign] = useState ([])
 
@@ -128,10 +121,10 @@ export default function Overview() {
   const [scheduleDate,setScheduleDate] = useState("")
   const [scheduleTime,setScheduleTime] = useState("")
 
-  const submitHandler = () => {
+  const submitHandler = async() => {
     let currentData = {}
     currentData.id = Math.round(Math.random() * 10000000)
-    currentData.servicerequestId = "Uld32351"
+    currentData.servicerequestId = "UPNLBKN" + Math.round(Math.random() * 100000)
     currentData.status = status
     currentData.issueType=issueType
     currentData.priority=priority
@@ -139,18 +132,12 @@ export default function Overview() {
     currentData.createdDate=createdDate
     currentData.executive=executive
     currentData.email=email
-    let allData = [...data] 
-    allData.push(currentData)
-    setData(allData)
-    setInfo(!info)
-    setLoading(true)
-    setTimeout(function(){  
-       setLoading(false)
-       setAlert(true)
-     }, 3000);
+    let res = await salesvisitService.postSalesVisit(currentData)
+    getSalesvisitData()
+    setInfo(false)
 
 }
-const editBtnHandler = () => {   
+const editBtnHandler = async() => {   
   let updatedData = {}
     updatedData.id = updateId
     updatedData.servicerequestId = servicerequestId
@@ -161,15 +148,10 @@ const editBtnHandler = () => {
     updatedData.email=email
     updatedData.createdDate=createdDate
     updatedData.priority=priority
-    let filteredArr = data.filter(function( obj ) {
-      return obj.id !== updateId;
-    });
-    console.log(filteredArr)
-    setData([...filteredArr, updatedData])
-
+    let res = await salesvisitService.putSalesVisit(updatedData, updateId)
     setEditModal(false)
     setEditAlert(true)
-   
+   getSalesvisitData()
 }
 const conditionalRowStyles = [
   {
@@ -183,13 +165,9 @@ const conditionalRowStyles = [
     },
   }
 ];
-const deleteHandler = () => {
-  let element = [...data]
-  let updatedData = {}
-  updatedData.id = updateId
-  console.log(updatedData.id);
-  element = element.filter(item => item.id !==updatedData.id);
-  setData(element)
+const deleteHandler = async() => {
+  let res = await salesvisitService.deleteSalesVisit(updateId)
+  getSalesvisitData()
   setEditModal(false)
   setLoading(true)
   setTimeout(function(){  
@@ -219,19 +197,6 @@ const submitServie = () => {
    }, 3000);
 
 }
-// const deleteservice = () => {
-// let element = [...servicedata]
-// let updatedData = {}
-// updatedData.id = updateId
-// console.log(updatedData.id);
-// element = element.filter(item => item.id !==updatedData.id);
-// setServiceData(element)
-// //setServiceEditModal(false)
-// setLoading(true)
-// setTimeout(function(){  
-//   setLoading(false)
-//   setDeleteAlert(true)
-// }, 3000);}
 
 const overviewsubmitServie = () => {
   let currentData = {}
@@ -294,23 +259,39 @@ setTimeout(function(){
 }, 3000);
 }
 
+const getServiceData = async () => {
+  let res = await serviceRequestService.getAllServiceRequests()
+  setServiceData(res)
+}
+
+const getSalesvisitData = async () => {
+  let res = await salesvisitService.getAllSalesVisits()
+  setData(res)
+}
+
+const getPmData = async () => {
+  let res = await pmservice.getAllPms()
+  setPmData(res)
+}
+
 React.useEffect(() => {
+  getServiceData()
+  getSalesvisitData()
+  getPmData()
   setLoading(true)
   setTimeout(function(){  
     setLoading(false)
   }, 2000);
 },[])
 
-const pmSubmitHandler = () => {
+const pmSubmitHandler = async() => {
   let currentData = {}
   currentData.id = Math.round(Math.random() * 10000000)
   currentData.description=description
   currentData.type=type
   currentData.name=name
-  let allData = [...pmData]
-  allData.push(currentData)
-  setPmData(allData)
-  console.log('alldata',allData);
+  let res = await pmservice.postPm(currentData)
+  getPmData()
   setPmAddModal(!pmAddModal)
   setLoading(true)
   setTimeout(function(){   
@@ -318,18 +299,14 @@ const pmSubmitHandler = () => {
     setAlert(true)
    }, 3000);
 }
-const pmeEditHandler = () => {   
+const pmeEditHandler = async() => {   
   let updatedData = {}
     updatedData.id = updateId
     updatedData.description=description
     updatedData.type=type
     updatedData.name=name
-    console.log('updatedData', updatedData)
-    let filteredArr = pmData.filter(function( obj ) {
-      return obj.id !== updateId;
-    });
-    console.log(filteredArr)
-    setPmData([...filteredArr, updatedData])
+    let res = await pmservice.putPm(updatedData, updateId)
+    getPmData()
     setPmEditModal(false)
     setLoading(true)
     setTimeout(function(){   
@@ -337,13 +314,9 @@ const pmeEditHandler = () => {
       setEditAlert(true)
     }, 3000);   
 }
-const pmDeleteHandler = () => {
-  let element = [...pmData]
-  let updatedData = {}
-  updatedData.id = updateId
-  console.log(updatedData.id);
-  element = element.filter(item => item.id !==updatedData.id);
-  setPmData(element)
+const pmDeleteHandler = async() => {
+  let res = await pmservice.deletePm(updateId)
+  getPmData()
   setPmEditModal(false)
   setLoading(true)
   setTimeout(function(){   

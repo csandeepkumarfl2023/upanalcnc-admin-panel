@@ -18,6 +18,7 @@ import {
   CFormGroup,
   CLabel,
   CInput,
+  CLink,
   CNav,
   CNavItem,
   CNavLink
@@ -180,11 +181,11 @@ export default function ServiceRequest() {
                 'servicerequestId':
                   (item)=>(
                     <td>
-                    <a  onClick={()=>{
+                   <CLink> <a  onClick={()=>{
                      editServiceHandler(item)
                   }
                    }
-                      >{item.servicerequestId}</a>
+                      >{item.servicerequestId}</a></CLink>
 
                     </td>
                   ),
@@ -234,7 +235,7 @@ export default function ServiceRequest() {
               <CModalBody>
               <CRow>
        
-              <CCol xs="10" lg="10">
+              <CCol xs="8" style={{marginLeft:'1%'}}>
               <CFormGroup >
                 <CLabel htmlFor="name">Sales/Service Executive Name</CLabel>
                 <CSelect custom size="md" name="name" id="name" value={employee} onChange={(e) => setEmployee(e.target.value)}>
@@ -248,13 +249,13 @@ export default function ServiceRequest() {
               </CFormGroup>
             </CCol>
             </CRow>
-            <CCol xs="10" lg="10">
+            <CCol xs="8">
               <CFormGroup >
                 <CLabel htmlFor="scheduleDate">Shedule Date</CLabel>
                 <CInput type="date" id="scheduleDate" name="scheduleDate" placeholder="scheduleDate" value={scheduleDate} onChange={(e) => setSheduleDate(e.target.value)}/>
               </CFormGroup>
             </CCol>
-            <CCol xs="10" lg="10">
+            <CCol xs="8" >
               <CFormGroup >
                 <CLabel htmlFor="scheduleTime">Shedule Time</CLabel>
                 <CInput type="time" id="scheduleTime" name="scheduleTime" placeholder="scheduleTime" value={scheduleTime} onChange={(e) => setSheduleTime(e.target.value)}/>

@@ -17,7 +17,8 @@ import {
   CFormGroup,
   CLabel,
   CInput,
-  CSelect
+  CSelect,
+  CLink
 } from '@coreui/react'
 import CustomerService from '../../services/customerService'
 
@@ -188,7 +189,7 @@ export default function Customer() {
                 'customerName':
                   (item) => (
                     <td>
-                      <a onClick={() => {
+                    <CLink>  <a onClick={() => {
                         setUpdateId(item.id)
                         setCustomerName(item.customerName)
                         setCustomerCode(item.customerCode)
@@ -205,7 +206,7 @@ export default function Customer() {
                         setEditModal(!editModal)
                       }
                       }
-                      >{item.customerName}</a>
+                      >{item.customerName}</a></CLink>
                     </td>
                   )
               }}

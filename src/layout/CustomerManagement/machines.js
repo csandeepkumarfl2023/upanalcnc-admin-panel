@@ -16,6 +16,7 @@ import {
     CFormGroup,
     CLabel,
     CInput,
+    CLink
 } from '@coreui/react'
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -198,7 +199,7 @@ export default function Machines() {
                 'machineId':
                   (item)=>(
                     <td>
-                   <a  onClick={()=>{
+                  <CLink> <a  onClick={()=>{
                      setUpdateId(item.id)
                      setCustomerCode(item.customerCode)
                      setMachineType(item.machineType)
@@ -212,7 +213,7 @@ export default function Machines() {
                      setControllerModel(item.controllerModel)
                       setEditModal(!editModal)}
                    }
-                      >{item.machineId}</a>
+                      >{item.machineId}</a></CLink>
                     </td>
                   )
               }}
