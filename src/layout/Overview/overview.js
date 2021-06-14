@@ -622,7 +622,7 @@ const pmmethodshow =  (item) => {
 
             />  
             
-            <CLink color="info" width={50}  onClick={servicerequestshow}>Show More</CLink>
+            <CLink color="info" style={{ marginLeft: '45%'}}  onClick={servicerequestshow}>Show More</CLink>
 
              <CModal 
               show={serviceinfo} 
@@ -789,7 +789,7 @@ const pmmethodshow =  (item) => {
               }}
 
             />
-                 <CLink color="info" width={50} onClick={SalesVisitshow}>Show More</CLink>
+                 <CLink color="info" style={{ marginLeft: '45%'}} onClick={SalesVisitshow}>Show More</CLink>
 
              <CModal 
               show={info} 
@@ -967,7 +967,7 @@ const pmmethodshow =  (item) => {
         }}
 
       /> 
-    <CLink color="info" width={50} onClick={pmmethodshow}>Show More</CLink>
+    <CLink color="info" style={{ marginLeft: '45%'}} onClick={pmmethodshow}>Show More</CLink>
 
        <CModal 
               show={pmAddModal} 
