@@ -27,6 +27,7 @@ import CIcon from '@coreui/icons-react'
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useHistory } from "react-router-dom";
+import ServiceRequestService from '../../services/serviceRequestService'
 
 const getBadge = status => {
   switch (status) {
@@ -40,25 +41,19 @@ const getBadge = status => {
     default: return 'primary'
   }
 }
-const fields = ['servicerequestId','company','description','priority','issueType','executive', 'status','contactNumber', 'reports']
+const fields = ['servicerequestId','company','priority','issueType','executive', 'status','contactNumber', 'email', 'createdDate']
 
 const override = css`
   display: block;
   margin: 0 auto;
 `;
 
+const serviceRequestService = new ServiceRequestService()
 export default function ServiceRequest() {
 
   const history = useHistory();
 
-    const [data, setData] = useState([
-        {id: 0, servicerequestId: 'UPNLBKN202101', status:'Completed',priority:'High', issueType:'Electrical',description:'value proposition', company: 'Upanal CNC', contactNumber: '8765964234', 
-        executive:'Assign',reports:'no'},
-        {id: 1, servicerequestId: 'UPNLBKN202102', status:'Overdue',priority:'Low', issueType:'Mechanical',description:'Prospecting', company: 'ABC', contactNumber: '97543281231', 
-        executive:'Assign',reports:'no'},
-        {id: 2, servicerequestId: 'UPNLBKN202103', status:'Pending',priority:'High',issueType:'Electrical',description:'Id.decision Makers', company: 'XYZ', contactNumber: '76854012334', 
-        executive:'Assign',reports:'no'},
-      ])
+    const [data, setData] = useState([])
 
     const [alert,setAlert] = useState(false)
     const [editAlert,setEditAlert] = useState(false)
@@ -133,7 +128,13 @@ export default function ServiceRequest() {
        setExecutiveInfo(!executiveinfo)
     }
 
+    const getData = async () => {
+      let res = await serviceRequestService.getAllServiceRequests()
+      setData(res)
+    }
+
   React.useEffect(() => {
+    getData()
     setLoading(true)
     setTimeout(function(){  
       setLoading(false)

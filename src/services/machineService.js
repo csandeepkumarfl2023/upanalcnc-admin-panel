@@ -2,8 +2,12 @@ import { constants } from '../constants';
 
 let machineData = [
     { 
-        id: 0, machineId: 'UPLMCH001', customerCode: 'UPNLCUSTT01', machineType: 'ABC',make:'908000000',
+        id: 0, machineId: 'UPLMCH001', customerCode: 'UPNLCUSTT01', machineType: 'Electrical',make:'908000000',
         model:'2020', machineSerialNo: 'UPNL163573839',machineAge:'8',controller:'FANUC',controllerModel:'201ABC',generateQRCode:'yes'
+    },
+    { 
+        id: 1, machineId: 'UPLMCH002', customerCode: 'UPNLCUSTT02', machineType: 'Mechanical',make:'908000000',
+        model:'2020', machineSerialNo: 'UPNL16357000',machineAge:'2',controller:'LIGHTUC',controllerModel:'201123',generateQRCode:'no'
     }
 ]
 
