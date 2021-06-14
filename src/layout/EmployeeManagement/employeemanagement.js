@@ -45,6 +45,15 @@ export default function EmployeeMangement() {
     const [updateId, setUpdateId] = useState()
     const  [loading,setLoading] = useState(false)
 
+    const addnewBtnHandler = () => {
+      setUpdateId('')
+      setName('')
+      setType('')
+      setDescription('')
+      setInfo(true)
+    }
+
+
     const submitHandler = () => {
       let currentData = {}
       currentData.id = Math.round(Math.random() * 10000000)
@@ -146,7 +155,7 @@ React.useEffect(() => {
               Employee Management
               </CCol>
               <CCol xs="1">
-              <CButton  color="info" onClick={() => setInfo(!info)} className="mr-1">New</CButton>
+              <CButton color="info" onClick={addnewBtnHandler} className="mr-1">New</CButton>
             </CCol>
             </CRow>
             <CDataTable

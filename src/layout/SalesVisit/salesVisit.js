@@ -69,6 +69,19 @@ export default function SalesVisit() {
     const [sheduleDate,setSheduleDate] = useState("")
     const [sheduleTime,setSheduleTime] = useState("")
 
+
+    const addnewBtnHandler = () => {
+      setUpdateId('')
+      setStatus('')
+      setIssueType('')
+      setPriority('')
+      setCompany('')
+      setCreatedDate('')
+      setExecutive('')
+      setEmail('')
+      setInfo(true)
+    }
+
     const submitHandler = () => {
       let currentData = {}
       currentData.id = Math.round(Math.random() * 10000000)
@@ -92,6 +105,8 @@ export default function SalesVisit() {
        }, 3000);
 
   }
+
+
   const editBtnHandler = () => {   
     let updatedData = {}
       updatedData.id = updateId
@@ -196,7 +211,7 @@ React.useEffect(() => {
               Sales Visit
               </CCol>
               <CCol xs="1">
-              <CButton block  color="info" onClick={() => setInfo(!info)} className="mr-1">New</CButton>
+              <CButton color="info" onClick={addnewBtnHandler} className="mr-1">New</CButton>
             </CCol>
             </CRow>
             <CDataTable

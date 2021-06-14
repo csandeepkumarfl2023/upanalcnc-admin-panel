@@ -56,6 +56,19 @@ export default function Machines() {
         model:'2012', machineSerialNo: 'UPNL163573839',machineAge:'15',controller:'FANUC',controllerModel:'2021CDF',generateQRCode:'yes'},
     ])
 
+
+    const addnewBtnHandler = () => {
+      setUpdateId('')
+      setMachineType('')
+      setCustomerCode('')
+      setMake('')
+      setModel('')
+      setMachineSerialNo('')
+      setMachineAge('')
+      setController('')
+      setControllerModel('')
+      setInfo(true)
+    }
     
     const submitHandler = () => {
         let currentData = {}
@@ -169,7 +182,7 @@ export default function Machines() {
              Machines
               </CCol>
               <CCol xs="1">
-              <CButton  color="info"onClick={() => setInfo(!info)} className="mr-1">New</CButton>
+              <CButton color="info" onClick={addnewBtnHandler} className="mr-1">New</CButton>
             </CCol>
             </CRow>
             <CDataTable
