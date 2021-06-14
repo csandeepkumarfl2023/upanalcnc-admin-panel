@@ -19,6 +19,10 @@ import {
 } from '@coreui/react'
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
+import MachineService  from '../../services/machineService';
+
+const machineService = new MachineService()
+
 const fields = ['machineId','customerCode', 'machineType','make','model', 'machineSerialNo','machineAge','controller','controllerModel','generateQRCode']
 const override = css`
 display: block;
@@ -26,6 +30,20 @@ margin: 0 auto;
 `;
 
 export default function Machines() {
+
+  const conditionalRowStyles = [
+    {
+      when: row => row.calories < 300,
+      style: {
+        backgroundColor: 'green',
+        color: 'white',
+        '&:hover': {
+          cursor: 'pointer',
+        },
+      },
+    }
+  ];
+
     const [info, setInfo] = useState(false)
     const [customerCode,setCustomerCode] = useState("")
     const [machineType,setMachineType] = useState("")
@@ -47,15 +65,12 @@ export default function Machines() {
 
     const [deleteAlert,setDeleteAlert] = useState(false)
     const [updateId, setUpdateId] = useState()
-    const [data,setData] = useState([
-        {id: 0, machineId: 'UPLMCH001', customerCode: 'UPNLCUSTT01', machineType: 'ABC',make:'908000000',
-        model:'2020', machineSerialNo: 'UPNL163573839',machineAge:'8',controller:'FANUC',controllerModel:'201ABC',generateQRCode:'yes'},
-        {id: 1, machineId: 'UPLMCH002', customerCode: 'UPNLCUSTT02', machineType: 'XYZ',make:'907600000',
-        model:'2021', machineSerialNo: 'UPNL163573839',machineAge:'10',controller:'FANUC',controllerModel:'2021CDF',generateQRCode:'yes'},
-        {id: 2, machineId: 'UPLMCH003', customerCode: 'UPNLCUSTT02', machineType: 'XYZ',make:'907600000',
-        model:'2012', machineSerialNo: 'UPNL163573839',machineAge:'15',controller:'FANUC',controllerModel:'2021CDF',generateQRCode:'yes'},
-    ])
+    const [data,setData] = useState([])
 
+    const getData = async () => {
+      let res = await machineService.getAllMachines()
+      setData(res)
+    }
 
     const addnewBtnHandler = () => {
       setUpdateId('')
@@ -70,7 +85,7 @@ export default function Machines() {
       setInfo(true)
     }
     
-    const submitHandler = () => {
+    const submitHandler = async () => {
         let currentData = {}
         currentData.id = Math.round(Math.random() * 10000000)
         currentData.customerCode = 'UPNLCUSTT03'
@@ -83,8 +98,8 @@ export default function Machines() {
         currentData.controllerModel=controllerModel
         let allData = [...data]
         allData.push(currentData)
-        setData(allData)
-        console.log('alldata',controller);
+        let res = await machineService.createMachine(currentData)
+        getData()       
         setInfo(!info)  
         setLoading(true)
         setTimeout(function(){ 
@@ -92,7 +107,7 @@ export default function Machines() {
             setAlert(true)
          }, 3000);
     }
-    const editBtnHandler = () => {   
+    const editBtnHandler = async () => {   
       let updatedData = {}
         updatedData.id = updateId
         updatedData.machineId =machineId
@@ -106,12 +121,8 @@ export default function Machines() {
         updatedData.controller=controller
         updatedData.controllerModel=controllerModel
         console.log('updatedData', updatedData)
-        let filteredArr = data.filter(function( obj ) {
-          return obj.id !== updateId;
-        });
-        console.log(filteredArr)
-        setData([...filteredArr, updatedData])
-  
+        let res = await machineService.updateMachine(updatedData, updateId)
+        getData()  
         setEditModal(false)
         setLoading(true)
         setTimeout(function(){  
@@ -120,36 +131,10 @@ export default function Machines() {
          }, 3000);
        
    }
-    const conditionalRowStyles = [
-      {
-        when: row => row.calories < 300,
-        style: {
-          backgroundColor: 'green',
-          color: 'white',
-          '&:hover': {
-            cursor: 'pointer',
-          },
-        },
-      }
-    ];
 
-    const controllerHandler = (e) => {
-      e.target.value == 'Others' ? setOthers(true) :  setOthers(false)
-       setController(e.target.value)
-    }
-
-    const typeHandler = (e) => {
-      e.target.value == 'Others' ? setTypeOthers(true) :  setTypeOthers(false)
-       setMachineType(e.target.value)
-    }
-
-    const deleteHandler = () => {
-      let element = [...data]
-      let updatedData = {}
-      updatedData.id = updateId
-      console.log(updatedData.id);
-      element = element.filter(item => item.id !==updatedData.id);
-      setData(element)
+    const deleteHandler = async () => {
+      let res = await machineService.deleteMachine(updateId)
+      getData()
       setEditModal(false)
       setLoading(true)
       setTimeout(function(){  
@@ -157,6 +142,24 @@ export default function Machines() {
          setDeleteAlert(true)
        }, 3000);
   }
+
+  const controllerHandler = (e) => {
+    e.target.value == 'Others' ? setOthers(true) :  setOthers(false)
+     setController(e.target.value)
+  }
+
+  const typeHandler = (e) => {
+    e.target.value == 'Others' ? setTypeOthers(true) :  setTypeOthers(false)
+     setMachineType(e.target.value)
+  }
+
+  React.useEffect(() => {
+    getData()
+    setLoading(true)
+    setTimeout(function () {
+      setLoading(false)
+    }, 2000);
+  }, [])
 
     return (
         <div>

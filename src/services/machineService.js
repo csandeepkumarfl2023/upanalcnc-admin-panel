@@ -1,25 +1,38 @@
-import axios from 'axios';
-import api from './apiService'
+import { constants } from '../constants';
 
-const apiServices = api()
+let machineData = [
+    { 
+        id: 0, machineId: 'UPLMCH001', customerCode: 'UPNLCUSTT01', machineType: 'ABC',make:'908000000',
+        model:'2020', machineSerialNo: 'UPNL163573839',machineAge:'8',controller:'FANUC',controllerModel:'201ABC',generateQRCode:'yes'
+    }
+]
 
-const postMachine = async (data) => {
-    let response = await axios.post(`${apiServices}/Machine`, data)
+export default class MachineService{
+
+ async createMachine(data) {
+    machineData.push(data)
+    let response = machineData
+    return response
+};
+
+ async getAllMachines() {
+    let response = machineData
     return response
 }
 
-const getMachine = async () => {
-    let response = await axios.get(`${apiServices}/Machine`)
-    return response
+ async updateMachine(data, id) {
+    let filteredArr = machineData.filter(function (obj) {
+        return obj.id !== id;
+      });
+    machineData = [
+        ...filteredArr, data
+    ]
+    return machineData
 }
 
-const putMachine = async (data) => {
-    let response = await axios.put(`${apiServices}/Machine`, data)
-    return response
+ async deleteMachine(id) {
+    machineData = machineData.filter(item => item.id !== id);
+    return machineData
+}
 }
 
-const deleteMachine = async (data) => {
-    let response = await axios.delete(`${apiServices}/Machine`)
-    return response
-}
-export { postMachine, getMachine,putMachine,deleteMachine }
