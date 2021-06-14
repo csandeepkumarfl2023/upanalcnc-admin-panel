@@ -1,5 +1,6 @@
 import React from 'react';
 
+const Breadcrumbs = React.lazy(() => import('./containers/Breadcrumbs'));
 const Overview = React.lazy(() => import('./layout/Overview/overview'));
 const ServiceRequest = React.lazy(() => import('./layout/ServiceRequests/servicerequest'));
 const SalesVisit = React.lazy(() => import('./layout/SalesVisit/salesVisit'));
@@ -12,6 +13,7 @@ const EditServiceRequest = React.lazy(() => import('./layout/ServiceRequests/edi
 const CreateServiceRequest = React.lazy(() => import('./layout/ServiceRequests/createServiceRequest'));
 
 const routes = [
+  { path: '/', exact: true, name: 'Home' },
   { path: '/login', exact: true, name: 'login' },
   { path: '/overview', name: 'Overview', component: Overview },
   { path: '/servicerequest', name: 'ServiceRequest', component: ServiceRequest },
@@ -23,6 +25,7 @@ const routes = [
   { path: '/profile', name: 'Profile', component: Profile },
   { path: '/editServiceRequest', name: 'EditServiceRequest', component: EditServiceRequest },
   { path: '/createServiceRequest', name: 'createServiceRequest', component: CreateServiceRequest },
+  { path: '/overview/breadcrumbs', name: 'Breadcrumbs', component: Breadcrumbs },
 
 ];
 
