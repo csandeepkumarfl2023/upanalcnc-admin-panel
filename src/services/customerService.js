@@ -31,6 +31,11 @@ export default class CustomerService{
     return response
 }
 
+async getCustomer(id) {
+    let response = customerData.find(item => item.id == id)
+    return response
+}
+
  async updateCustomer(data, id) {
     let filteredArr = customerData.filter(function (obj) {
         return obj.id !== id;

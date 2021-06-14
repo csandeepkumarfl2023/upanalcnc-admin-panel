@@ -24,6 +24,11 @@ export default class MachineService{
     return response
 }
 
+async getMachine(id) {
+    let response = machineData.find(elem => elem.id == id)
+    return response
+}
+
  async updateMachine(data, id) {
     let filteredArr = machineData.filter(function (obj) {
         return obj.id !== id;

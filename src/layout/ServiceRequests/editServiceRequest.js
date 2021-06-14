@@ -1,206 +1,243 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import {
-    CCard,
-    CCardHeader,
-    CCardBody,
-    CCol,
-    CSelect,
-    CRow,
-    CButton,
-    CFormGroup,
-    CInput,
-    CCardSubtitle,
-    CCardFooter,
-  } from '@coreui/react'
+   CCard,
+   CCardHeader,
+   CCardBody,
+   CCol,
+   CSelect,
+   CRow,
+   CButton,
+   CFormGroup,
+   CInput,
+   CCardSubtitle,
+   CCardFooter,
+} from '@coreui/react'
 
-  import CIcon from '@coreui/icons-react'
-  import { useHistory } from "react-router-dom";
+import CIcon from '@coreui/icons-react'
+import { useHistory } from "react-router-dom";
+import ServiceRequestService from '../../services/serviceRequestService'
+import CustomerService from '../../services/customerService'
+import MachineService from '../../services/machineService'
+import moment from 'moment'
+
+const serviceRequestService = new ServiceRequestService()
+const customerSerice = new CustomerService()
+const machineService = new MachineService()
 
 export default function EditServiceRequest(props) {
 
-    console.log('item',props.location.state);
-    const history = useHistory();
-    const [edit,setEdit] = React.useState(false)
-    const [executive,setExecutive] = useState("")
-    const [date,setDate] = useState("")
-    const [time,setTime] = useState("")
-    const [data,setData] = useState([])
+   console.log('item', props.location.state);
+   const history = useHistory();
+   const [item, setItem] = useState(props.location.state)
+   const [edit, setEdit] = React.useState(false)
+   const [executive, setExecutive] = useState("")
+   const [date, setDate] = useState("")
+   const [time, setTime] = useState("")
+   const [data, setData] = useState([])
 
-    const closeHandler = () => {
-     history.push('/overview');
-    }
-    const cancelHandler = () => {
-        setEdit(false)
-    }
+   const [customerDetails, setCustomerDetails] = useState()
+   const [machineDetails, setMachineDetails] = useState()
+   const [serviceReqDetails, setServiceReqDetails] = useState()
 
-    const submitHandler = () => {
-    let currentData = {}
-    currentData.executive = executive
-    currentData.date = date
-    currentData.time=time
-    let allData = [...data] 
-    allData.push(currentData)
-    setData(allData)
-    setEdit(false)
-    console.log('alldata',allData);
-    }
+   const closeHandler = () => {
+      history.push('/overview');
+   }
+   const cancelHandler = () => {
+      setEdit(false)
+   }
 
-    return (
-        <CCard>
-            <CCardHeader>
-                <CRow>
-            <CCol xs="6" md="11">
-            <CCardSubtitle>Service Request UPNLSR2021001</CCardSubtitle>
-           </CCol>
-           <CCol xs="6" md="1">
-           <CIcon name="cil-pen"  size="1xl" onClick={() => setEdit(true)}/>
-           </CCol>
-           </CRow>
-            </CCardHeader>
-            <CCardBody>
+   const getCustomerDetails = async () => {
+      let res = await customerSerice.getCustomer(item.customerName)
+      setCustomerDetails(res)
+      console.log('cus', res)
+   }
+
+   const getMachineDetails = async () => {
+      let res = await machineService.getMachine(item.machine)
+      setMachineDetails(res)
+      console.log('mac', res)
+   }
+
+   const getServicerequestDetails = async() => {
+      let res = await serviceRequestService.getServiceRequest(item.id)
+      setServiceReqDetails(res)
+      console.log('serreq', res)
+   }
+
+   const submitHandler = async() => {
+      let currentData = {...item}
+      currentData.executive = executive
+      currentData.date = date
+      currentData.time = time
+      let res = await serviceRequestService.updateServiceRequest(currentData, currentData.id)
+      history.push('./servicerequest')
+   }
+
+   React.useEffect(() => {
+      setItem(props.location.state)
+      if (props.location.state) {
+         getCustomerDetails()
+         getMachineDetails()
+         getServicerequestDetails()
+      }
+   }, [])
+
+   return (
+      <CCard>
+         <CCardHeader>
             <CRow>
-             <CCol xs="12" md="4">
-               Customer Name: Upanal CNC Solutions
+               <CCol xs="6" md="11">
+                  <CCardSubtitle>Service Request UPNLSR2021001</CCardSubtitle>
+               </CCol>
+               <CCol xs="6" md="1">
+                  <CIcon name="cil-pen" size="1xl" onClick={() => setEdit(true)} />
+               </CCol>
+            </CRow>
+         </CCardHeader>
+         <CCardBody>
+            <CRow>
+               <CCol xs="12" md="4">
+                  Customer Name: {customerDetails ? customerDetails.customerName : null}
                </CCol>
                <CCol xs="12" md="4">
-               Customer Code: UPNLCUST001
+                  Customer Code: {customerDetails ? customerDetails.customerCode : null}
                </CCol>
                <CCol xs="12" lg="4">
-              View Report: N/A
+                  View Report: N/A
                </CCol>
-           </CRow>
-           
-
-        <CRow style={{marginTop:'2%'}}>
-        <CCol xs="10" lg="4">
-            Issue Type: {props.location.state.issueType}
-        </CCol>
-        <CCol xs="10" lg="4">
-           Priority: {props.location.state.priority}
-        </CCol>
-        <CCol xs="10" lg="4">
-           Status:  {props.location.state.status}
-        </CCol>
-        </CRow>
-
-        <CRow style={{marginTop:'2%'}}>
-        <CCol xs="10" sm="4">
-           Executive:   
-           {edit ? 
-             <CFormGroup >
-               <CSelect custom size="md" name="name" id="name" value={executive} onChange={(e)=> setExecutive(e.target.value)}>
-                 <option value="undefined">Open this select menu</option>
-                 <option value="Vamsi">Vamsi</option>
-                 <option value="Sandeep">Sandeep</option>
-                 <option value="Pooja">Pooja</option>
-                 <option value="Vikram">Vikram</option>
-                 <option value="Arun">Arun</option>
-               </CSelect>
-             </CFormGroup>
-           :   props.location.state.executive }
-        </CCol>
-        <CCol xs="10" sm="4">
-           Schedule Date: {edit ? 
-            <CFormGroup >
-            <CInput type="date" id="sheduleDate" name="sheduleDate" placeholder="sheduleDate" value={date} onChange={(e) => {setDate(e.target.value)}}/>
-          </CFormGroup>
-           :  props.location.state.date }
-        </CCol>
-        <CCol xs="10" lg="4">
-        Schedule Time:  {edit ? 
-         <CFormGroup >
-         <CInput type="time" id="sheduleTime" name="sheduleTime" placeholder="sheduleTime" value={time} onChange={(e) => {setTime(e.target.value)}}/>
-       </CFormGroup>
-        :   props.location.state.time }
-        </CCol>
-        </CRow>
-
-        <CRow style={{marginTop:'2%'}}>
-        <CCol xs="10" lg="6">
-           Issue Details:
-        </CCol>
-        <CCol xs="10" lg="6">
-           Machine Pictures:
-        </CCol>
-        </CRow>
-            </CCardBody>
-
-        <CCardFooter>
-            <CCardHeader>
-            <CCardSubtitle> Machine Details</CCardSubtitle>
-            </CCardHeader>
-        </CCardFooter>
-        <CRow style={{marginLeft:'2%',marginTop:'2%'}}>
-        <CCol xs="10" lg="4">
-            Machine ID: UPNLMACH001
-        </CCol>
-        <CCol xs="10" lg="4">
-           Machine Serial Number: HP012345
-        </CCol>
-        <CCol xs="10" lg="4">
-           Machine Type: +91-980012345
-        </CCol>
-        </CRow>
-
-        <CRow style={{marginLeft:'2%',marginTop:'2%'}}>
-        <CCol xs="10" lg="4">
-            Make: UPNLMACH001
-        </CCol>
-        <CCol xs="10" lg="4">
-           Model: HP012345
-        </CCol>
-        <CCol xs="10" lg="4">
-           Machine Age: 2 Years old
-        </CCol>
-        </CRow>
-
-        <CRow style={{marginLeft:'2%',marginTop:'2%'}}>
-        <CCol xs="10" lg="4">
-            Machine Controller: +91-980012345
-        </CCol>
-        <CCol xs="10" lg="4">
-          Controller Model: +91-980012345
-        </CCol>  
-        </CRow>
-
-        <CCardFooter>
-            <CCardHeader>
-            <CCardSubtitle>Customer Contact Details</CCardSubtitle>
-            </CCardHeader>
-        </CCardFooter>
-        <CRow style={{marginLeft:'2%',marginTop:'2%'}}>
-        <CCol xs="10" lg="4">
-           Contact Person Name: Mr. Arun Upanal
-        </CCol>
-        <CCol xs="10" lg="4">
-           Contact Number: +91-980012345
-        </CCol>
-        <CCol xs="10" lg="4">
-           Alternate Number: +91-914512345
-        </CCol>
-        </CRow>
-
-        <CRow style={{marginLeft:'2%',marginTop:'2%'}}>
-        <CCol xs="10" lg="6">
-            Customer Address: #104,1st cross,Peenya Industrial Area
-        </CCol>
-        <CCol xs="10" lg="6">
-           Email: customermailbox@gmail.com
-        </CCol>
-        </CRow>
-              <CRow>
-            <CCardFooter style={{width:'15%',marginLeft:'70%'}}>
-            { edit ?  
-            <CRow>
-             <CButton block  color="info" className="mr-1" onClick={submitHandler}
-            >Submit</CButton>    
-            <CButton block  color="info" className="mr-1" onClick={cancelHandler}
-            >Cancel</CButton> 
-            </CRow> 
-              :  <CButton block  color="info" className="mr-1" onClick={closeHandler}>Close</CButton>}
-            </CCardFooter>
             </CRow>
-        </CCard>
 
-    )
+
+            <CRow style={{ marginTop: '2%' }}>
+               <CCol xs="10" lg="4">
+                  Issue Type: {serviceReqDetails ? serviceReqDetails.issueType : null}
+               </CCol>
+               <CCol xs="10" lg="4">
+                  Priority: {serviceReqDetails ? serviceReqDetails.priority : null}
+               </CCol>
+               <CCol xs="10" lg="4">
+                  Status: {serviceReqDetails ? serviceReqDetails.status : null}
+               </CCol>
+            </CRow>
+
+            <CRow style={{ marginTop: '2%' }}>
+               <CCol xs="10" sm="4">
+                  Executive: 
+                  {edit ?
+                     <CFormGroup >
+                        <CSelect custom size="md" name="name" id="name" value={executive} onChange={(e) => setExecutive(e.target.value)}>
+                           <option value="undefined">Open this select menu</option>
+                           <option value="Vamsi">Vamsi</option>
+                           <option value="Sandeep">Sandeep</option>
+                           <option value="Pooja">Pooja</option>
+                           <option value="Vikram">Vikram</option>
+                           <option value="Arun">Arun</option>
+                        </CSelect>
+                     </CFormGroup>
+                     : serviceReqDetails ? serviceReqDetails.executive : null}
+               </CCol>
+               <CCol xs="10" sm="4">
+                  Schedule Date: {edit ?
+                     <CFormGroup >
+                        <CInput type="date" id="sheduleDate" name="sheduleDate" placeholder="sheduleDate" value={date} onChange={(e) => { setDate(e.target.value) }} />
+                     </CFormGroup>
+                     : serviceReqDetails ? serviceReqDetails.date : null}
+               </CCol>
+               <CCol xs="10" lg="4">
+                  Schedule Time:  {edit ?
+                     <CFormGroup >
+                        <CInput type="time" id="sheduleTime" name="sheduleTime" placeholder="sheduleTime" value={time} onChange={(e) => { setTime(e.target.value) }} />
+                     </CFormGroup>
+                     : serviceReqDetails ? serviceReqDetails.time : null}
+               </CCol>
+            </CRow>
+
+            <CRow style={{ marginTop: '2%' }}>
+               <CCol xs="10" lg="6">
+                  Issue Details: {serviceReqDetails ? serviceReqDetails.issueDetails : null}
+               </CCol>
+               <CCol xs="10" lg="6">
+                  Machine Pictures:
+               </CCol>
+            </CRow>
+         </CCardBody>
+
+         <CCardFooter>
+            <CCardHeader>
+               <CCardSubtitle> Machine Details</CCardSubtitle>
+            </CCardHeader>
+         </CCardFooter>
+         <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
+            <CCol xs="10" lg="4">
+               Machine ID: {machineDetails ? machineDetails.machineId : null}
+            </CCol>
+            <CCol xs="10" lg="4">
+               Machine Serial Number: {machineDetails ? machineDetails.machineSerialNo : null}
+            </CCol>
+            <CCol xs="10" lg="4">
+               Machine Type: {machineDetails ? machineDetails.machineType : null}
+            </CCol>
+         </CRow>
+
+         <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
+            <CCol xs="10" lg="4">
+               Make: {machineDetails ? machineDetails.make : null}
+            </CCol>
+            <CCol xs="10" lg="4">
+               Model: {machineDetails ? machineDetails.model : null}
+            </CCol>
+            <CCol xs="10" lg="4">
+               Machine Age: {machineDetails ? machineDetails.machineAge : null}
+            </CCol>
+         </CRow>
+
+         <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
+            <CCol xs="10" lg="4">
+               Machine Controller: {machineDetails ? machineDetails.machineType : null}
+            </CCol>
+            <CCol xs="10" lg="4">
+               Controller Model: {machineDetails ? machineDetails.controllerModel : null}
+            </CCol>
+         </CRow>
+
+         <CCardFooter>
+            <CCardHeader>
+               <CCardSubtitle>Customer Contact Details</CCardSubtitle>
+            </CCardHeader>
+         </CCardFooter>
+         <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
+            <CCol xs="10" lg="4">
+               Contact Person Name: {customerDetails ? customerDetails.contactPerson : null}
+            </CCol>
+            <CCol xs="10" lg="4">
+               Contact Number: {customerDetails ? customerDetails.mobileNo : null}
+            </CCol>
+            <CCol xs="10" lg="4">
+               Alternate Number: {customerDetails ? customerDetails.alternateNo : null}
+            </CCol>
+         </CRow>
+
+         <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
+            <CCol xs="10" lg="6">
+               Customer Address: {customerDetails ? customerDetails.address : null}
+            </CCol>
+            <CCol xs="10" lg="6">
+               Email: {customerDetails ? customerDetails.email : null}
+            </CCol>
+         </CRow>
+         <CRow>
+            <CCardFooter style={{ width: '15%', marginLeft: '70%' }}>
+               {edit ?
+                  <CRow>
+                     <CButton block color="info" className="mr-1" onClick={submitHandler}
+                     >Submit</CButton>
+                     <CButton block color="info" className="mr-1" onClick={cancelHandler}
+                     >Cancel</CButton>
+                  </CRow>
+                  : <CButton block color="info" className="mr-1" onClick={closeHandler}>Close</CButton>}
+            </CCardFooter>
+         </CRow>
+      </CCard>
+
+   )
 }
