@@ -84,9 +84,9 @@ export default function Overview() {
     switch (status) {
       case 'Completed': return '#50D2C2'
     case 'Overdue': return '#FF3366'
-    case 'Pending': return '#FCAB53'
+    case 'Pending': return 'warning'
     case 'Assigned': return '#D667CD'
-    case 'Accepted': return '#8C88FF'
+    case 'Accepted': return 'secondary'
     case 'new': return '#00B9FF'
     case 'open': return '#00B9FF'
     default: return 'secondary'
@@ -205,66 +205,66 @@ const submitServie = () => {
 
 }
 
-const overviewsubmitServie = () => {
-  let currentData = {}
-  currentData.id = Math.round(Math.random() * 10000000)
-  currentData.servicerequestId = "Ul45S365TY78"
-  currentData.status = status
-  currentData.issueType=issueType
-  currentData.priority=priority
-  currentData.company=company
-  currentData.createdDate=createdDate
-  currentData.executive=executive
-  currentData.email=email
-  let allData = [...overviewdata] 
-  allData.push(currentData)
-  setOverviewData(allData)
-  setOverviewInfo(!overviewinfo)
-  setLoading(true)
-  setTimeout(function(){  
-     setLoading(false)
-     setAlert(true)
-   }, 3000);
+// const overviewsubmitServie = () => {
+//   let currentData = {}
+//   currentData.id = Math.round(Math.random() * 10000000)
+//   currentData.servicerequestId = "Ul45S365TY78"
+//   currentData.status = status
+//   currentData.issueType=issueType
+//   currentData.priority=priority
+//   currentData.company=company
+//   currentData.createdDate=createdDate
+//   currentData.executive=executive
+//   currentData.email=email
+//   let allData = [...overviewdata] 
+//   allData.push(currentData)
+//   setOverviewData(allData)
+//   setOverviewInfo(!overviewinfo)
+//   setLoading(true)
+//   setTimeout(function(){  
+//      setLoading(false)
+//      setAlert(true)
+//    }, 3000);
 
-}
-const overvieweditservice = () => {   
-let updatedData = {}
-  updatedData.id = updateId
-  updatedData.servicerequestId = servicerequestId
-  updatedData.status = status
-  updatedData.issueType=issueType
-  updatedData.company=company
-  updatedData.executive=executive
-  updatedData.email=email
-  updatedData.createdDate=createdDate
-  updatedData.priority=priority
-  let filteredArr = overviewdata.filter(function( obj ) {
-    return obj.id !== updateId;
-  });
-  setOverviewData([...filteredArr, updatedData])
-  setOverviewEditModal(false)
-  setLoading(true)
-  setTimeout(function(){  
-     setLoading(false)
-     setEditAlert(true)
-   }, 3000);
+// }
+// const overvieweditservice = () => {   
+// let updatedData = {}
+//   updatedData.id = updateId
+//   updatedData.servicerequestId = servicerequestId
+//   updatedData.status = status
+//   updatedData.issueType=issueType
+//   updatedData.company=company
+//   updatedData.executive=executive
+//   updatedData.email=email
+//   updatedData.createdDate=createdDate
+//   updatedData.priority=priority
+//   let filteredArr = overviewdata.filter(function( obj ) {
+//     return obj.id !== updateId;
+//   });
+//   setOverviewData([...filteredArr, updatedData])
+//   setOverviewEditModal(false)
+//   setLoading(true)
+//   setTimeout(function(){  
+//      setLoading(false)
+//      setEditAlert(true)
+//    }, 3000);
  
-}
+// }
 
-const overviewdeleteservice = () => {
-let element = [...overviewdata]
-let updatedData = {}
-updatedData.id = updateId
-console.log(updatedData.id);
-element = element.filter(item => item.id !==updatedData.id);
-setOverviewData(element)
-setOverviewEditModal(false)
-setLoading(true)
-setTimeout(function(){  
-  setLoading(false)
-  setDeleteAlert(true)
-}, 3000);
-}
+// const overviewdeleteservice = () => {
+// let element = [...overviewdata]
+// let updatedData = {}
+// updatedData.id = updateId
+// console.log(updatedData.id);
+// element = element.filter(item => item.id !==updatedData.id);
+// setOverviewData(element)
+// setOverviewEditModal(false)
+// setLoading(true)
+// setTimeout(function(){  
+//   setLoading(false)
+//   setDeleteAlert(true)
+// }, 3000);
+// }
 
 const getServiceData = async () => {
   let res = await serviceRequestService.getAllServiceRequests()
@@ -333,7 +333,13 @@ const pmDeleteHandler = async() => {
 }
 
 const executiveHandler = () => {
-    let updatedData = {}
+  if(employee ===  '')
+  {
+    setExecutiveInfo(executiveinfo)
+  }
+  else
+    {
+      let updatedData = {}
     updatedData.id = exeUpdateId
     updatedData.executive=employee
     updatedData.servicerequestId = servicerequestId
@@ -354,8 +360,9 @@ const executiveHandler = () => {
     setTimeout(function(){  
        setLoading(false)
        setEditAlert(true)
-     }, 3000); 
+     }, 3000);
      setExecutiveInfo(!executiveinfo)
+    }
   }
 const editServiceHandler =  (item) => {
   history.push({
@@ -610,9 +617,9 @@ const pmmethodshow =  (item) => {
                      'status':
                      (item)=>(
                        <td>
-                         <button color={getBadge(item.status)}>
+                         <CButton color={getBadge(item.status)}>
                            {item.status}
-                         </button>
+                         </CButton>
                        </td>
                      )
               }}
@@ -790,9 +797,9 @@ const pmmethodshow =  (item) => {
                   'status':
                   (item)=>(
                     <td>
-                      <button color={getBadge(item.status)}>
+                      <CButton color={getBadge(item.status)}>
                         {item.status}
-                      </button>
+                      </CButton>
                     </td>
                   )
            }}
