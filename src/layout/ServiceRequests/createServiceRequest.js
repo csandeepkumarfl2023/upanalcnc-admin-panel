@@ -135,7 +135,7 @@ export default function CreateServiceRequest() {
     
     return (
         <CCard>
-           <CCardHeader><CCardSubtitle>Create Service Request</CCardSubtitle></CCardHeader>
+           <CCardHeader><CCardSubtitle style={{marginTop:'1%'}}>Create Service Request</CCardSubtitle></CCardHeader>
            <CCardBody>
            <CRow style={{marginTop:'2%'}}>
         <CCol xs="10" lg="4">
@@ -180,8 +180,7 @@ export default function CreateServiceRequest() {
 
         <CRow><CCol xs="10" lg="10" style={{marginTop:'2%'}}>Customer Address : {customerAddress}</CCol></CRow>
         <CCardHeader>
-      <CCardFooter>
-      <CCardSubtitle>Machine Details</CCardSubtitle></CCardFooter></CCardHeader>
+      <CCardSubtitle style={{marginTop:'2%'}}>Machine Details</CCardSubtitle></CCardHeader>
       <CRow style={{marginTop:'2%'}}>
         <CCol xs="10" lg="4">
         <CRow style={{marginLeft:'0.1%'}}>
@@ -225,16 +224,14 @@ export default function CreateServiceRequest() {
         </CCol>  
         </CRow>
 
-        <CCardFooter>
             <CCardHeader>
-            <CCardSubtitle>Issue Details</CCardSubtitle>
+            <CCardSubtitle style={{marginTop:'2%'}}>Issue Details</CCardSubtitle>
             </CCardHeader>
-        </CCardFooter>
         <CRow style={{marginTop:'2%'}}>
         <CCol xs="10" lg="4">
         <CRow style={{marginLeft:'1%'}}>
         Issue Type: 
-           <CFormGroup style={{marginLeft:'3%'}} value={issueType} onChange={(e)=> setIssueType(e.target.value)}>
+           <CFormGroup style={{marginLeft:'9%'}} value={issueType} onChange={(e)=> setIssueType(e.target.value)} className="w-50">
                <CSelect custom size="md" name="name" id="name">
                  <option value="undefined">Open this select menu</option>
                  <option value="Electrical">Electrical</option>
@@ -246,7 +243,7 @@ export default function CreateServiceRequest() {
         <CCol xs="10" lg="4">
         <CRow style={{marginLeft:'1%'}}>
         Priority:
-           <CFormGroup style={{marginLeft:'3%'}} value={priority} onChange={(e)=> setPriority(e.target.value)}>
+           <CFormGroup style={{marginLeft:'15%'}} value={priority} onChange={(e)=> setPriority(e.target.value)} className="w-50">
                <CSelect custom size="md" name="name" id="name">
                  <option value="undefined">Open this select menu</option>
                  <option value="High">High</option>
@@ -258,7 +255,7 @@ export default function CreateServiceRequest() {
         <CCol xs="10" lg="4">
         <CRow style={{marginLeft:'1%'}}>
         Executive:
-           <CFormGroup style={{marginLeft:'3%'}} value={executive} onChange={(e)=> setExecutive(e.target.value)}>
+           <CFormGroup style={{marginLeft:'3%'}} value={executive} onChange={(e)=> setExecutive(e.target.value)} className="w-50">
                <CSelect custom size="md" name="name" id="name">
                  <option value="undefined">Open this select menu</option>
                  <option value="Naveen">Naveen</option>
@@ -272,7 +269,7 @@ export default function CreateServiceRequest() {
         <CCol xs="10" sm="4">
             <CRow style={{marginLeft:'1%'}}>
            Schedule Date: 
-            <CFormGroup style={{marginLeft:'3%'}} value={date} onChange={(e)=> setDate(e.target.value)}>
+            <CFormGroup style={{marginLeft:'3%'}} value={date} onChange={(e)=> setDate(e.target.value)} className="w-50">
             <CInput type="date" id="sheduleDate" name="sheduleDate" placeholder="sheduleDate" />
           </CFormGroup>
           </CRow>
@@ -280,7 +277,7 @@ export default function CreateServiceRequest() {
         <CCol xs="10" sm="4">
             <CRow style={{marginLeft:'1%'}}>
            Schedule Time: 
-            <CFormGroup style={{marginLeft:'3%'}} value={time} onChange={(e)=> setTime(e.target.value)}>
+            <CFormGroup style={{marginLeft:'3%'}} value={time} onChange={(e)=> setTime(e.target.value)} className="w-50">
             <CInput type="time" id="sheduleTime" name="sheduleTime" placeholder="sheduleTime" />
           </CFormGroup>
           </CRow>
@@ -293,6 +290,8 @@ export default function CreateServiceRequest() {
          <CTextarea
                   name="issueDetails"
                   id="issueDetails"
+                  className="w-50"
+                  style={{marginLeft:'6%'}}
                   rows="2"
                   placeholder=" Issue Details"
                   value={issueDetails}
@@ -301,11 +300,13 @@ export default function CreateServiceRequest() {
             </CRow>
         </CCol>
 
-        <CCol xs="10" lg="4">
-           Upload Machine Pictures: 
-           <CFormGroup style={{marginLeft:'3%'}}>
-            <CInput type="text" id="picture" name="picture" placeholder="Machine Picture" />
+        <CCol xs="7" lg="4">
+        <CRow style={{marginLeft:'1%'}}>
+           MachinePicture: 
+           <CFormGroup style={{marginLeft:'2%'}}>
+            <CInput type="text" id="picture" name="picture" placeholder="Upload" className="w-70"/>
           </CFormGroup>
+          </CRow>
         </CCol>
         </CRow>
 
