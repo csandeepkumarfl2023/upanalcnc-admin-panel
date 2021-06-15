@@ -34,6 +34,7 @@ import { useHistory } from "react-router-dom";
 import ServiceRequestService from '../../services/serviceRequestService'
 import SalesVisitService from '../../services/salesVisitService'
 import PmService from '../../services/pmService';
+import { Doughnut } from 'react-chartjs-2'
 
 const fields = ['servicerequestId', 'company', 'priority', 'issueType', 'executive', 'status', 'contactNumber', 'email', 'createdDate']
 
@@ -53,6 +54,80 @@ const override = css`
 const salesvisitService = new SalesVisitService()
 const serviceRequestService = new ServiceRequestService()
 const pmservice = new PmService()
+
+const serviceReqChartData = {
+  // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+  datasets: [
+    {
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2],
+      backgroundColor: [
+        '#50D2C2',
+        '#FF3366',
+        '#FCAB53',
+        '#D667CD',
+        '#8C88FF'
+      ],
+      borderWidth: 1,
+    },
+  ],
+  
+};
+
+const salesVisitChartData = {
+  // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+  datasets: [
+    {
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2],
+      backgroundColor: [
+        '#50D2C2',
+        '#FF3366',
+        '#FCAB53',
+        '#D667CD',
+        '#8C88FF'
+      ],
+      borderWidth: 1,
+    },
+  ],
+};
+
+const paymentsChartData = {
+  // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+  datasets: [
+    {
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2],
+      backgroundColor: [
+        '#50D2C2',
+        '#FF3366',
+        '#FCAB53',
+        '#D667CD',
+        '#8C88FF'
+      ],
+      borderWidth: 1,
+    },
+  ],
+};
+
+const pmChartData = {
+  // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+  datasets: [
+    {
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2],
+      backgroundColor: [
+        '#50D2C2',
+        '#FF3366',
+        '#FCAB53',
+        '#D667CD',
+        '#8C88FF'
+      ],
+      borderWidth: 1,
+    },
+  ],
+};
+
 export default function Overview() {
 
   const history = useHistory();
@@ -445,151 +520,95 @@ export default function Overview() {
 
             <CCol xs="4" sm="3">
               <CCard >
-              <CCardHeader>
+                <CCardHeader>
 
-              <CRow>
-              <CCol sm="3">
-              <CIcon style={{height:'50%',width:'80%'}}
-            src={'images/servicerequest.jpg'}
-            className="c-logo-img"
-            alt="admin@bootstrapmaster.com"
-          />
-                        </CCol>
-                        <CCol>    
-                  Service Requests
-                </CCol>
-         
-                </CRow>
+                  <CRow>
+                    <CCol sm="3">
+                      <CIcon style={{ height: '50%', width: '80%' }}
+                        src={'images/servicerequest.jpg'}
+                        className="c-logo-img"
+                        alt="admin@bootstrapmaster.com"
+                      />
+                    </CCol>
+                    <CCol>
+                      Service Requests
+                    </CCol>
+
+                  </CRow>
                 </CCardHeader>
 
                 <CCardBody>
-                  <CChartDoughnut
-                    datasets={[
-                      {
-                        backgroundColor: [
-                          '#50D2C2',
-                          '#FF3366',
-                          '#FCAB53',
-                          '#D667CD',
-                          '#8C88FF'
-                        ],
-                        data: [10, 10, 10, 10, 10]
-                      }
-                    ]}
-                    //  labels={['Completed', 'Overdue', 'Pending', 'Assigned','Accepted']}
-                    options={{
-                      tooltips: {
-                        enabled: true
-                      }
-                    }}
-                  />
+             <Doughnut data={serviceReqChartData}/>
                 </CCardBody>
               </CCard>
             </CCol>
             <CCol xs="4" sm="3">
               <CCard>
-              <CCardHeader>
+                <CCardHeader>
 
-            <CRow>
-            <CCol sm="3">
-            <CIcon style={{height:'70%',width:'60%'}}
-            src={'images/salesvisit.jpg'}
-            className="c-logo-img"
-            alt="admin@bootstrapmaster.com"
-            />
-                      </CCol>
-                      <CCol>    
-                Sales Visit
-              </CCol>
+                  <CRow>
+                    <CCol sm="3">
+                      <CIcon style={{ height: '70%', width: '60%' }}
+                        src={'images/salesvisit.jpg'}
+                        className="c-logo-img"
+                        alt="admin@bootstrapmaster.com"
+                      />
+                    </CCol>
+                    <CCol>
+                      Sales Visit
+                    </CCol>
 
-              </CRow>
-              </CCardHeader>
-                <CCardBody>
-                  <CChartDoughnut
-                    datasets={[
-                      {
-                        backgroundColor: [
-                          '#50D2C2',
-                          '#FF3366',
-                          '#FCAB53',
-                          '#D667CD',
-                          '#8C88FF'
-                        ],
-                        data: [10, 10, 10, 10, 10]
-                      }
-                    ]}
-                    //  labels={['Completed', 'Overdue', 'Pending', 'Assigned','Accepted']}
-                    options={{
-                      tooltips: {
-                        enabled: true
-                      }
-                    }}
-                  />
-                </CCardBody>
-              </CCard>
-            </CCol>
-            <CCol xs="4" sm="3">
-              <CCard>
-              <CCardHeader>
-
-              <CRow>
-            <CCol sm="3">
-            <CIcon style={{height:'70%',width:'60%'}}
-            src={'images/payments.jpg'}
-            className="c-logo-img"
-            alt="admin@bootstrapmaster.com"
-            />
-          </CCol>
-          <CCol>    
-    Payments 
-  </CCol>
-
-  </CRow>
-  </CCardHeader>
-                <CCardBody>
-                  <CChartDoughnut
-                    datasets={[
-                      {
-                        backgroundColor: [
-                          '#50D2C2',
-                          '#FF3366',
-                          '#FCAB53',
-                          '#D667CD',
-                          '#8C88FF'
-                        ],
-                        data: [10, 10, 10, 10, 10]
-                      }
-                    ]}
-                    //  labels={['Completed', 'Overdue', 'Pending', 'Assigned','Accepted']}
-                    options={{
-                      tooltips: {
-                        enabled: true
-                      }
-                    }}
-                  />
-                </CCardBody>
-              </CCard>
-            </CCol>
-            <CCol xs="4" sm="3">
-              <CCard>
-              <CCardHeader>
-
-                <CRow>
-                <CCol sm="3">
-                <CIcon style={{height:'50%',width:'80%'}}
-                src={'images/pm.jpg'}
-                className="c-logo-img"
-                alt="admin@bootstrapmaster.com"
-                />
-                </CCol>
-                <CCol>    
-                PM
-                </CCol>
-
-                </CRow>
+                  </CRow>
                 </CCardHeader>
                 <CCardBody>
-                  <CChartDoughnut
+                <Doughnut data={salesVisitChartData} />
+                </CCardBody>
+              </CCard>
+            </CCol>
+            <CCol xs="4" sm="3">
+              <CCard>
+                <CCardHeader>
+
+                  <CRow>
+                    <CCol sm="3">
+                      <CIcon style={{ height: '70%', width: '60%' }}
+                        src={'images/payments.jpg'}
+                        className="c-logo-img"
+                        alt="admin@bootstrapmaster.com"
+                      />
+                    </CCol>
+                    <CCol>
+                      Payments
+                    </CCol>
+
+                  </CRow>
+                </CCardHeader>
+                <CCardBody>
+                <Doughnut data={paymentsChartData} />
+                </CCardBody>
+              </CCard>
+            </CCol>
+            <CCol xs="4" sm="3">
+              <CCard>
+                <CCardHeader>
+
+                  <CRow>
+                    <CCol sm="3">
+                      <CIcon style={{ height: '50%', width: '80%' }}
+                        src={'images/pm.jpg'}
+                        className="c-logo-img"
+                        alt="admin@bootstrapmaster.com"
+                      />
+                    </CCol>
+                    <CCol>
+                      PM
+                    </CCol>
+
+                  </CRow>
+                </CCardHeader>
+                <CCardBody>
+                  <Doughnut data={pmChartData} />
+                  {/* <CChartDoughnut
                     datasets={[
                       {
                         backgroundColor: [
@@ -608,7 +627,7 @@ export default function Overview() {
                         enabled: true
                       }
                     }}
-                  />
+                  /> */}
                 </CCardBody>
               </CCard>
             </CCol>
@@ -622,13 +641,13 @@ export default function Overview() {
               <CCard>
                 <CCardBody>
                   <CRow className="mb-2">
-                    <CCol xs="11" style={{display: 'flex', alignItems: 'center'}}>
+                    <CCol xs="11" style={{ display: 'flex', alignItems: 'center' }}>
                       <h5>
                         ServiceRequest
                       </h5>
                     </CCol>
-                    <CCol xs="1" style={{display: 'flex', alignItems: 'center'}}>
-                        <CButton block color="info" onClick={addServiceHandler}>New</CButton>
+                    <CCol xs="1" style={{ display: 'flex', alignItems: 'center' }}>
+                      <CButton block color="info" onClick={addServiceHandler}>New</CButton>
                     </CCol>
                   </CRow>
                   <CDataTable
@@ -821,14 +840,14 @@ export default function Overview() {
               <DocsLink name="CModal"/>
             </CCardHeader> */}
                 <CCardBody>
-                <CRow className="mb-2">
-                <CCol xs="11" style={{display: 'flex', alignItems: 'center'}}>
+                  <CRow className="mb-2">
+                    <CCol xs="11" style={{ display: 'flex', alignItems: 'center' }}>
                       <h5>
                         Sales Visit
                       </h5>
                     </CCol>
-                    <CCol xs="1" style={{display: 'flex', alignItems: 'center'}}>
-                        <CButton block color="info" onClick={() => setInfo(!info)}>New</CButton>
+                    <CCol xs="1" style={{ display: 'flex', alignItems: 'center' }}>
+                      <CButton block color="info" onClick={() => setInfo(!info)}>New</CButton>
                     </CCol>
                   </CRow>
                   <CDataTable
@@ -1024,12 +1043,12 @@ export default function Overview() {
             <CCol xs="12" lg="12">
               <CCard>
                 <CCardBody>
-                <CRow className="mb-2">
-                    <CCol xs="11" style={{display: 'flex', alignItems: 'center'}}>
+                  <CRow className="mb-2">
+                    <CCol xs="11" style={{ display: 'flex', alignItems: 'center' }}>
                       <h5>PM</h5>
                     </CCol>
-                    <CCol xs="1" style={{display: 'flex', alignItems: 'center'}}>
-                        <CButton color="info" onClick={() => setPmAddModal(!pmAddModal)} style={{ height: '100%', width: '100%' }}>New</CButton>
+                    <CCol xs="1" style={{ display: 'flex', alignItems: 'center' }}>
+                      <CButton color="info" onClick={() => setPmAddModal(!pmAddModal)} style={{ height: '100%', width: '100%' }}>New</CButton>
                     </CCol>
                   </CRow>
                   <CDataTable
