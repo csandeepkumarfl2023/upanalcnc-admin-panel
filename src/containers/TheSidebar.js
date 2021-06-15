@@ -21,14 +21,18 @@ import navigation from './_nav'
 const TheSidebar = () => {
   const dispatch = useDispatch()
   const show = useSelector(state => state.sidebarShow)
+  
+  const [isMinimized, setMinimized] = React.useState(false)
+ 
 
   return (  
     <CSidebar
+    onMinimizeChange={() => setMinimized(!isMinimized)}
       show={show}
       onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
     >
       <CSidebarBrand className="d-md-down-none" to="/" style={{backgroundColor:'white'}}>
-      <CImg style={{height:'60%',width:'50%'}}
+      <CImg style={{height:'60%',width:'50%', display: isMinimized ? 'none' : 'block'}}
             src={'avatars/logo.jpg'}
             className="c-logo-img"
             alt="admin@bootstrapmaster.com"
