@@ -125,7 +125,7 @@ export default function EditServiceRequest(props) {
                   Executive: 
                   {edit ?
                      <CFormGroup >
-                        <CSelect custom size="md" name="name" id="name" value={executive} onChange={(e) => setExecutive(e.target.value)}>
+                        <CSelect custom size="md" name="name" id="name" className="w-50" value={executive} onChange={(e) => setExecutive(e.target.value)}>
                            <option value="undefined">Open this select menu</option>
                            <option value="Vamsi">Vamsi</option>
                            <option value="Sandeep">Sandeep</option>
@@ -139,14 +139,15 @@ export default function EditServiceRequest(props) {
                <CCol xs="10" sm="4">
                   Schedule Date: {edit ?
                      <CFormGroup >
-                        <CInput type="date" id="sheduleDate" name="sheduleDate" placeholder="sheduleDate" value={date} onChange={(e) => { setDate(e.target.value) }} />
+                        <CInput type="date" id="sheduleDate" className="w-50"
+    name="sheduleDate" placeholder="sheduleDate" value={date} onChange={(e) => { setDate(e.target.value) }} />
                      </CFormGroup>
                      : serviceReqDetails ? serviceReqDetails.date : null}
                </CCol>
                <CCol xs="10" lg="4">
                   Schedule Time:  {edit ?
                      <CFormGroup >
-                        <CInput type="time" id="sheduleTime" name="sheduleTime" placeholder="sheduleTime" value={time} onChange={(e) => { setTime(e.target.value) }} />
+                        <CInput type="time" id="sheduleTime" className="w-50" name="sheduleTime" placeholder="sheduleTime" value={time} onChange={(e) => { setTime(e.target.value) }} />
                      </CFormGroup>
                      : serviceReqDetails ? serviceReqDetails.time : null}
                </CCol>
