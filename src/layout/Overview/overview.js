@@ -39,9 +39,16 @@ const fields = ['servicerequestId','company','priority','issueType','executive',
 const pmfields = ['name','type', 'description']
 
 const override = css`
-display: block;
-margin: 0 auto;
-`;  
+  width: 5em;
+  height: 5em;
+  display: block;
+  position: absolute;
+  top: 50%;
+  margin-top: -4.05em;
+  left: 55%;
+  margin-left: -5em;
+`;
+
 const salesvisitService = new SalesVisitService()
 const serviceRequestService = new ServiceRequestService()
 const pmservice = new PmService()
@@ -75,14 +82,14 @@ export default function Overview() {
 
   const getBadge = status => {
     switch (status) {
-      case 'Completed': return 'info'
+      case 'Completed': return 'light'
     case 'Overdue': return 'danger'
     case 'Pending': return 'warning'
     case 'Assigned': return 'light'
     case 'Accepted': return 'secondary'
     case 'new': return 'dark'
     case 'open': return 'dark'
-    default: return 'primary'
+    default: return 'secondary'
     }
   }
   const [info, setInfo] = useState(false)
@@ -394,7 +401,7 @@ const pmmethodshow =  (item) => {
     <CRow>
     {!loading ? 
     <> 
-     <CSubheader className="px-3 justify-content-between" style={{ marginTop:'1px'}}>
+     {/* <CSubheader className="px-3 justify-content-between" style={{ marginTop:'1px'}}>
         <CBreadcrumbRouter 
           className="border-0 c-subheader-nav m-0 px-0 px-md-3" 
           routes={routes} 
@@ -412,7 +419,20 @@ const pmmethodshow =  (item) => {
             <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{width:'30%',marginTop:'1.5%'}} />
             </CRow>
             </CFormGroup>
-      </CSubheader>
+      </CSubheader> */}
+      <CFormGroup style={{marginLeft:'60%',marginTop:'-2.5%'}}>
+             <CRow>
+          <div className="d-md-down-none mfe-2 c-subheader-nav">
+          <CButtonGroup>
+              <CButton color="secondary">Days</CButton>
+              <CButton color="secondary">Weeks</CButton>
+              <CButton color="secondary">Months</CButton>
+            </CButtonGroup>
+          </div>
+            <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{width:'30%',marginTop:'1.5%'}} />
+            <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{width:'30%',marginTop:'1.5%'}} />
+            </CRow>
+            </CFormGroup>
 
     <CCol xs="4" sm="3">
       <CCard >
@@ -586,9 +606,9 @@ const pmmethodshow =  (item) => {
                      'status':
                      (item)=>(
                        <td>
-                         <CBadge color={getBadge(item.status)}>
+                         <CButton color={getBadge(item.status)}>
                            {item.status}
-                         </CBadge>
+                         </CButton>
                        </td>
                      )
               }}
@@ -683,7 +703,7 @@ const pmmethodshow =  (item) => {
               <CModalBody>
               <CRow>
        
-              <CCol xs="8" style={{marginLeft:'2%'}}>
+              <CCol xs="8" className="w-20" style={{marginLeft:'2.5%'}}>
               <CFormGroup >
                 <CLabel htmlFor="name">Sales/Service Executive Name</CLabel>
                 <CSelect custom size="md" name="name" id="name" value={employee} onChange={(e) => setEmployee(e.target.value)}>
@@ -758,8 +778,16 @@ const pmmethodshow =  (item) => {
                    }
                       >{item.servicerequestId}</a></CLink>
                     </td>
+                  ),
+                  'status':
+                  (item)=>(
+                    <td>
+                      <CButton color={getBadge(item.status)}>
+                        {item.status}
+                      </CButton>
+                    </td>
                   )
-              }}
+           }}
 
             />
                  <CLink color="info" style={{ marginLeft: '45%'}} onClick={SalesVisitshow}>Show More</CLink>

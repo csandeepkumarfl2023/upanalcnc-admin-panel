@@ -42,8 +42,14 @@ export default function Pms() {
 
   const fields = ['name', 'type', 'description',]
   const override = css`
-    display: block;
-    margin: 0 auto;
+  width: 5em;
+  height: 5em;
+  display: block;
+    position: absolute;
+    top: 50%;
+    margin-top: -4.05em;
+    left: 55%;
+    margin-left: -5em;
   `;
 
   const submitHandler = async () => {

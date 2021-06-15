@@ -42,9 +42,16 @@ export default function EmployeeManagements() {
 
   const fields = ['name', 'type', 'description',]
   const override = css`
+    width: 5em;
+    height: 5em;
     display: block;
-    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    margin-top: -4.05em;
+    left: 55%;
+    margin-left: -5em;
   `;
+
 
   const submitHandler = async () => {
     let currentData = {}

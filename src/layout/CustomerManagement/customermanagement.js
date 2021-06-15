@@ -18,9 +18,16 @@ import Machines from './machines'
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 const override = css`
-display: block;
-margin: 0 auto;
+  width: 5em;
+  height: 5em;
+  display: block;
+  position: absolute;
+  top: 50%;
+  margin-top: -4.05em;
+  left: 55%;
+  margin-left: -5em;
 `;
+
 
 export default function CustomerManagement() {
 
