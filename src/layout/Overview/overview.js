@@ -45,7 +45,7 @@ const override = css`
   position: absolute;
   top: 50%;
   margin-top: -4.05em;
-  left: 55%;
+  left: 60%;
   margin-left: -5em;
 `;
 
@@ -82,13 +82,13 @@ export default function Overview() {
 
   const getBadge = status => {
     switch (status) {
-      case 'Completed': return 'light'
-    case 'Overdue': return 'danger'
-    case 'Pending': return 'warning'
-    case 'Assigned': return 'light'
-    case 'Accepted': return 'secondary'
-    case 'new': return 'dark'
-    case 'open': return 'dark'
+      case 'Completed': return '#50D2C2'
+    case 'Overdue': return '#FF3366'
+    case 'Pending': return '#FCAB53'
+    case 'Assigned': return '#D667CD'
+    case 'Accepted': return '#8C88FF'
+    case 'new': return '#00B9FF'
+    case 'open': return '#00B9FF'
     default: return 'secondary'
     }
   }
@@ -561,10 +561,14 @@ const pmmethodshow =  (item) => {
             <CCardBody>
               <CRow>
               <CCol xs="11">
+              <h3>
               ServiceRequest
+              </h3>
               </CCol>
               <CCol xs="1">
-              <CButton block  color="info" onClick={addServiceHandler} style={{height:'83%',width:'100%', textAlign:'center', marginLeft: '5%'}}className="mr-1">New</CButton>
+              <CCard style={{height:'10%',width:'100%', }}>
+              <CButton block  color="info" onClick={addServiceHandler}  className="mr-1">New</CButton>
+              </CCard>
             </CCol>
             </CRow>
             <CDataTable
@@ -606,9 +610,9 @@ const pmmethodshow =  (item) => {
                      'status':
                      (item)=>(
                        <td>
-                         <CButton color={getBadge(item.status)}>
+                         <button color={getBadge(item.status)}>
                            {item.status}
-                         </CButton>
+                         </button>
                        </td>
                      )
               }}
@@ -748,10 +752,14 @@ const pmmethodshow =  (item) => {
             <CCardBody>
               <CRow>
               <CCol xs="11">
+                <h3>
               Sales Visit
+              </h3>
               </CCol>
               <CCol xs="1">
-              <CButton block  color="info" onClick={() => setInfo(!info)} style={{height:'83%',width:'100%', textAlign:'center', marginLeft: '5%'}}className="mr-1">New</CButton>
+              <CCard >
+              <CButton block  color="info" onClick={() => setInfo(!info)} style={{height:'100%',width:'100%'}}className="mr-1">New</CButton>
+              </CCard>
             </CCol>
             </CRow>
             <CDataTable
@@ -782,9 +790,9 @@ const pmmethodshow =  (item) => {
                   'status':
                   (item)=>(
                     <td>
-                      <CButton color={getBadge(item.status)}>
+                      <button color={getBadge(item.status)}>
                         {item.status}
-                      </CButton>
+                      </button>
                     </td>
                   )
            }}
@@ -938,10 +946,12 @@ const pmmethodshow =  (item) => {
             <CCardBody>
               <CRow>
               <CCol xs="11">
-              PM
+                <h3>PM</h3>           
               </CCol>
               <CCol xs="1">
-              <CButton  color="info" onClick={() => setPmAddModal(!pmAddModal)} style={{height:'83%',width:'100%', textAlign:'center', marginLeft: '5%'}}className="mr-1">New</CButton>
+              <CCard >
+              <CButton  color="info" onClick={() => setPmAddModal(!pmAddModal)} style={{height:'100%',width:'100%'}}className="mr-1">New</CButton>
+              </CCard>                     
             </CCol>
             </CRow>   
         <CDataTable

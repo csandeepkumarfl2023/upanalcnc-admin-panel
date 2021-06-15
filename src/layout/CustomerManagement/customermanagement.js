@@ -24,7 +24,7 @@ const override = css`
   position: absolute;
   top: 50%;
   margin-top: -4.05em;
-  left: 55%;
+  left: 60%;
   margin-left: -5em;
 `;
 

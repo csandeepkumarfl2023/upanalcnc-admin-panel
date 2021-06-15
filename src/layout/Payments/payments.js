@@ -48,7 +48,7 @@ export default function Payments() {
     position: absolute;
     top: 50%;
     margin-top: -4.05em;
-    left: 55%;
+    left: 60%;
     margin-left: -5em;
   `;
 
@@ -151,10 +151,14 @@ export default function Payments() {
               <CCardBody>
                 <CRow>
                   <CCol xs="11">
+                    <h3>
                     Payments
+                    </h3>
                   </CCol>
                   <CCol xs="1">
-                    <CButton color="info" onClick={addBtnHandler}style={{height:'83%',width:'100%', textAlign:'center', marginLeft: '5%'}} className="mr-1">New</CButton>
+                    <CCard>
+                    <CButton color="info" onClick={addBtnHandler}style={{height:'90%',width:'100%'}} className="mr-1">New</CButton>
+                    </CCard>
                   </CCol>
                 </CRow>
                 <CDataTable
