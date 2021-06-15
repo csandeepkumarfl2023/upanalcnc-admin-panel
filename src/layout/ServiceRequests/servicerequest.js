@@ -45,8 +45,14 @@ const getBadge = status => {
 const fields = ['servicerequestId','company','priority','issueType','executive', 'status','contactNumber', 'email', 'createdDate']
 
 const override = css`
-  display: block;
-  margin: 0 auto;
+width: 5em;
+height: 5em;
+display: block;
+  position: absolute;
+  top: 50%;
+  margin-top: -4.05em;
+  left: 55%;
+  margin-left: -5em;
 `;
 
 const serviceRequestService = new ServiceRequestService()
@@ -211,9 +217,9 @@ export default function ServiceRequest() {
                   'status':
                   (item)=>(
                     <td>
-                      <CBadge color={getBadge(item.status)}>
+                      <CButton color={getBadge(item.status)}>
                         {item.status}
-                      </CBadge>
+                      </CButton>
                     </td>
                   )
               }}

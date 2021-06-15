@@ -2,7 +2,7 @@ import { constants } from '../constants';
 
 let salesVisitData = [
     {id: 0, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High',issueType:'Electrical',
-    executive:'Naveen', status: 'Completed',createdDate:'2021-04-10',email:'adam@company.com'},
+    executive:'Naveen', status: 'Accepted',createdDate:'2021-04-10',email:'adam@company.com'},
 ]
 
 export default class SalesVisitService{

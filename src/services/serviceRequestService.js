@@ -1,7 +1,7 @@
 import { constants } from '../constants';
 
 let serviceReqData = [
-    {id: 0, servicerequestId: 'UPNLBKN202101', status:'Completed',priority:'High', issueType:'Electrical',description:'value proposition', contactNumber: '8765964234', 
+    {id: 0, servicerequestId: 'UPNLBKN202101', status:'Accepted',priority:'High', issueType:'Electrical',description:'value proposition', contactNumber: '8765964234', 
     executive:'Assign',reports:'no', company: 'Aravindan', email: 'aravindan@gmail.com',createdDate: 'June 14th 2021, 1:23:09 pm', machine: 0, customerName: 0}
 ]
 
