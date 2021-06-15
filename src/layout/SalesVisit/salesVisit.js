@@ -32,9 +32,9 @@ const getBadge = status => {
   switch (status) {
     case 'Completed': return '#50D2C2'
   case 'Overdue': return '#FF3366'
-  case 'Pending': return '#FCAB53'
+  case 'Pending': return 'warning'
   case 'Assigned': return '#D667CD'
-  case 'Accepted': return '#8C88FF'
+  case 'Accepted': return 'light'
   case 'new': return '#00B9FF'
   case 'open': return '#00B9FF'
   default: return 'secondary'
@@ -261,9 +261,9 @@ React.useEffect(() => {
                      'status':
                      (item)=>(
                        <td>
-                         <button color={getBadge(item.status)}>
+                         <CButton color={getBadge(item.status)}>
                            {item.status}
-                         </button>
+                         </CButton>
                        </td>
                      )
                  }}
