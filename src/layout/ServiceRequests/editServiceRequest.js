@@ -87,7 +87,7 @@ export default function EditServiceRequest(props) {
          <CCardHeader>
             <CRow>
                <CCol xs="6" md="11">
-                  <CCardSubtitle style={{marginTop:'1%'}}>Service Request UPNLSR2021001</CCardSubtitle>
+                  <CCardSubtitle style={{marginTop:'1%'}}>Service Request {item ? item.servicerequestId : null}</CCardSubtitle>
                </CCol>
                <CCol xs="6" md="1">
                   <CIcon name="cil-pen" size="1xl" onClick={() => setEdit(true)} />

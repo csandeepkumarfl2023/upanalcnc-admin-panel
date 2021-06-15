@@ -103,7 +103,7 @@ export default function ServiceRequest() {
 
      const editServiceHandler =  (item) => {
       history.push({
-        pathname:'/editServiceRequest',
+        pathname:`/editServiceRequest/${item.servicerequestId}`,
         state: item });
     }
  

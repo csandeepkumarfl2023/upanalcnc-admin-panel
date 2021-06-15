@@ -20,7 +20,7 @@ const _nav =  [
     {
       _tag: 'CSidebarNavItem',
       name: 'Sales Visit',
-      to: '/sales_visit',
+      to: '/salesvisit',
       icon: <CIcon name="cil-share-all" customClasses="c-sidebar-nav-icon"/>,
     },
     {
