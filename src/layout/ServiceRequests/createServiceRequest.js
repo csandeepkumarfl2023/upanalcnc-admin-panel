@@ -12,6 +12,7 @@ import {
     CCardSubtitle,
     CCardFooter,
     CTextarea,
+    CInputFile
   } from '@coreui/react'
 import { useHistory } from 'react-router'
 import ServiceRequestService from '../../services/serviceRequestService'
@@ -304,7 +305,7 @@ export default function CreateServiceRequest() {
         <CRow style={{marginLeft:'1%'}}>
            MachinePicture: 
            <CFormGroup style={{marginLeft:'2%'}}>
-            <CInput type="text" id="picture" name="picture" placeholder="Upload" className="w-70"/>
+           <CInputFile id="machinePicture" name="machinePicture"/>
           </CFormGroup>
           </CRow>
         </CCol>
