@@ -12,7 +12,7 @@ const _nav =  [
    _tag: 'CSidebarNavItem',
     name: 'ServiceRequest',
     to: '/servicerequest',
-    icon: <CIcon name="cil-settings" customClasses="c-sidebar-nav-icon"/>,
+    icon:     <CIcon style={{ marginRight:'7%' }} src={'images/serviceReqicon.svg'}/>
     // badge: {
     //   color: 'info',
     //   text: 'NEW',
@@ -21,25 +21,25 @@ const _nav =  [
       _tag: 'CSidebarNavItem',
       name: 'Sales Visit',
       to: '/sales_visit',
-      icon: <CIcon name="cil-share-all" customClasses="c-sidebar-nav-icon"/>,
+      icon: <CIcon style={{ height: '10%', width: '10%', marginRight:'7%'}} src={'images/salesvisiticon.svg'}/>
     },
     {
       _tag: 'CSidebarNavItem',
       name: 'Payments',
       to: '/payments',
-      icon: <CIcon name= "cil-dollar" customClasses="c-sidebar-nav-icon"/>,
+      icon:     <CIcon style={{height: '10%', width: '10%', marginRight:'7%' }} src={'images/paymentsicon.svg'}/>
     },
     {
       _tag: 'CSidebarNavItem',
       name: 'Employee Management',
       to: '/employeemanagement',
-      icon: <CIcon name="cil-user-follow" customClasses="c-sidebar-nav-icon"/>,
+      icon: <CIcon style={{ marginRight:'7%' }} src={'images/employeeicon.svg'}/>
     },
     {
       _tag: 'CSidebarNavItem',
       name: 'Customer Management',
       to: '/customermanagement',
-      icon: <CIcon name="cil-user" customClasses="c-sidebar-nav-icon"/>,
+      icon: <CIcon style={{ marginRight:'7%' }} src={'images/customericon.svg'}/>
     },
     {
       _tag: 'CSidebarNavItem',
