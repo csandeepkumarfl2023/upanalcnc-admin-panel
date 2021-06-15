@@ -30,14 +30,28 @@ const salesvisitService = new SalesVisitService()
 
 const getBadge = status => {
   switch (status) {
-    case 'Completed': return '#50D2C2'
-  case 'Overdue': return '#FF3366'
-  case 'Pending': return 'warning'
-  case 'Assigned': return '#D667CD'
-  case 'Accepted': return 'light'
-  case 'new': return '#00B9FF'
-  case 'open': return '#00B9FF'
-  default: return 'secondary'
+    case 'Completed':
+    case 'completed':
+      return '#50D2C2'
+    case 'Overdue':
+    case 'overdue':
+      return '#FF3366'
+    case 'Pending':
+    case 'pending':
+      return '#FCAB53'
+    case 'Assigned':
+    case 'assigned':
+      return '#D667CD'
+    case 'Accepted':
+    case 'accepted':
+      return '#8C88FF'
+    case 'new':
+    case 'New':
+      return '#00B9FF'
+    case 'open':
+    case 'Open':
+      return '#00B9FF'
+    default: return 'secondary'
   }
 }
   const fields = ['servicerequestId','company', 'priority','issueType','executive', 'status','createdDate','email']
@@ -261,9 +275,19 @@ React.useEffect(() => {
                      'status':
                      (item)=>(
                        <td>
-                         <CButton color={getBadge(item.status)}>
-                           {item.status}
-                         </CButton>
+                              <button
+                              style={{
+                                backgroundColor: getBadge(item.status),
+                                padding: '5px 8px',
+                                borderRadius: '3px',
+                                color: 'white',
+                                fontSize: '13px',
+                                width: '70px',
+                                textTransform: 'capitalize',
+                                textAlign: 'center',
+                                outline: 'none',
+                                border: 'none',
+                              }}>{item.status}</button>
                        </td>
                      )
                  }}
