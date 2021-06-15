@@ -137,9 +137,9 @@ export default function CreateServiceRequest() {
         <CCard>
            <CCardHeader><CCardSubtitle>Create Service Request</CCardSubtitle></CCardHeader>
            <CCardBody>
-            <CRow>
-             <CCol xs="12" md="4">
-                <CRow style={{marginLeft:'1%'}}>
+           <CRow style={{marginTop:'2%'}}>
+        <CCol xs="10" lg="4">
+        <CRow style={{marginLeft:'0.1%'}}>
                  Customer Name: 
                <CFormGroup style={{marginLeft:'3%'}}>
                <CSelect custom size="md" name="name" id="name" value={customerName} onChange={customerChangeHandler}>
@@ -158,10 +158,10 @@ export default function CreateServiceRequest() {
              </CFormGroup>
              </CRow>
                </CCol>
-               <CCol xs="12" md="4">
+               <CCol xs="10" md="4">
                Customer Code : {customerCode}
                </CCol>
-               <CCol xs="12" lg="4">
+               <CCol xs="10" lg="4">
               Contact Person Name : {contactName}
                </CCol>
            </CRow>
@@ -184,7 +184,7 @@ export default function CreateServiceRequest() {
       <CCardSubtitle>Machine Details</CCardSubtitle></CCardFooter></CCardHeader>
       <CRow style={{marginTop:'2%'}}>
         <CCol xs="10" lg="4">
-        <CRow style={{marginLeft:'1%'}}>
+        <CRow style={{marginLeft:'0.1%'}}>
            Select Machine : 
            <CFormGroup style={{marginLeft:'3%'}}>
                <CSelect custom size="md" name="name" id="name"  value={machine} onChange={machineChangeController}>
