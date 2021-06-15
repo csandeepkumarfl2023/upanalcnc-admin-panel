@@ -18,6 +18,7 @@ import {
   CFormGroup,
   CLabel,
   CInput,
+  CImg,
   CSubheader,
   CBreadcrumbRouter,
   CButtonGroup,
@@ -444,9 +445,23 @@ export default function Overview() {
 
             <CCol xs="4" sm="3">
               <CCard >
-                <CCardHeader>
+              <CCardHeader>
+
+              <CRow>
+              <CCol sm="3">
+              <CIcon style={{height:'50%',width:'80%'}}
+            src={'images/servicerequest.jpg'}
+            className="c-logo-img"
+            alt="admin@bootstrapmaster.com"
+          />
+                        </CCol>
+                        <CCol>    
                   Service Requests
+                </CCol>
+         
+                </CRow>
                 </CCardHeader>
+
                 <CCardBody>
                   <CChartDoughnut
                     datasets={[
@@ -473,9 +488,22 @@ export default function Overview() {
             </CCol>
             <CCol xs="4" sm="3">
               <CCard>
-                <CCardHeader>
-                  Sales Visits
-                </CCardHeader>
+              <CCardHeader>
+
+            <CRow>
+            <CCol sm="3">
+            <CIcon style={{height:'70%',width:'60%'}}
+            src={'images/salesvisit.jpg'}
+            className="c-logo-img"
+            alt="admin@bootstrapmaster.com"
+            />
+                      </CCol>
+                      <CCol>    
+                Sales Visit
+              </CCol>
+
+              </CRow>
+              </CCardHeader>
                 <CCardBody>
                   <CChartDoughnut
                     datasets={[
@@ -502,9 +530,22 @@ export default function Overview() {
             </CCol>
             <CCol xs="4" sm="3">
               <CCard>
-                <CCardHeader>
-                  Payment Follo-Ups
-                </CCardHeader>
+              <CCardHeader>
+
+              <CRow>
+            <CCol sm="3">
+            <CIcon style={{height:'70%',width:'60%'}}
+            src={'images/payments.jpg'}
+            className="c-logo-img"
+            alt="admin@bootstrapmaster.com"
+            />
+          </CCol>
+          <CCol>    
+    Payments 
+  </CCol>
+
+  </CRow>
+  </CCardHeader>
                 <CCardBody>
                   <CChartDoughnut
                     datasets={[
@@ -531,8 +572,21 @@ export default function Overview() {
             </CCol>
             <CCol xs="4" sm="3">
               <CCard>
-                <CCardHeader>
-                  PM
+              <CCardHeader>
+
+                <CRow>
+                <CCol sm="3">
+                <CIcon style={{height:'50%',width:'80%'}}
+                src={'images/pm.jpg'}
+                className="c-logo-img"
+                alt="admin@bootstrapmaster.com"
+                />
+                </CCol>
+                <CCol>    
+                PM
+                </CCol>
+
+                </CRow>
                 </CCardHeader>
                 <CCardBody>
                   <CChartDoughnut
@@ -574,7 +628,7 @@ export default function Overview() {
                       </h3>
                     </CCol>
                     <CCol xs="1">
-                      <CCard style={{ height: '10%', width: '100%', }}>
+                      <CCard style={{ height: '10%', width: '80%', }}>
                         <CButton block color="info" onClick={addServiceHandler} className="mr-1">New</CButton>
                       </CCard>
                     </CCol>

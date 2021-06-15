@@ -9,6 +9,10 @@ const Employeemanagement = React.lazy(() => import('./layout/EmployeeManagement/
 const Payment = React.lazy(() => import('./layout/Payments/payments'));
 const PM = React.lazy(() => import('./layout/PM/pm'));
 const Profile =  React.lazy(() => import('./layout/Profile/profile'));
+const Invoices =  React.lazy(() => import('./layout/Invoices/invoices'));
+const BroadcastMessages =  React.lazy(() => import('./layout/BroadcastMessages/broadcastMessages'));
+const Attendance =  React.lazy(() => import('./layout/Attendance/attendance'));
+const Settings =  React.lazy(() => import('./layout/Settings/settings'));
 const EditServiceRequest = React.lazy(() => import('./layout/ServiceRequests/editServiceRequest'));
 const CreateServiceRequest = React.lazy(() => import('./layout/ServiceRequests/createServiceRequest'));
 
@@ -24,6 +28,10 @@ const routes = [
   { path: '/pm', name: 'PM', component: PM },
   { path: '/profile', name: 'Profile', component: Profile },
   { path: '/editServiceRequest/:id', name: 'EditServiceRequest', component: EditServiceRequest },
+  { path: '/invoices', name: 'Invoices', component: Invoices },
+  { path: '/broadcastMessages', name: 'BroadcastMessages', component: BroadcastMessages },
+  { path: '/attendance', name: 'Attendance', component: Attendance },
+  { path: '/settings', name: 'Settings', component: Settings },
   { path: '/createServiceRequest', name: 'createServiceRequest', component: CreateServiceRequest },
   { path: '/overview/breadcrumbs', name: 'Breadcrumbs', component: Breadcrumbs },
 

@@ -3,7 +3,6 @@ import React from 'react';
 import './App.css';
 import './scss/style.scss';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import Login from './pages/Login/login'
 
 const loading = (
   <div className="pt-3 text-center">
