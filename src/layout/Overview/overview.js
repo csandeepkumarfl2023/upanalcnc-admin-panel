@@ -564,7 +564,7 @@ const pmmethodshow =  (item) => {
               ServiceRequest
               </CCol>
               <CCol xs="1">
-              <CButton block  color="info" onClick={addServiceHandler} style={{height:'90%',width:'100%', marginLeft: '5%'}}className="mr-1">New</CButton>
+              <CButton block  color="info" onClick={addServiceHandler} style={{height:'83%',width:'100%', textAlign:'center', marginLeft: '5%'}}className="mr-1">New</CButton>
             </CCol>
             </CRow>
             <CDataTable
@@ -751,7 +751,7 @@ const pmmethodshow =  (item) => {
               Sales Visit
               </CCol>
               <CCol xs="1">
-              <CButton block  color="info" onClick={() => setInfo(!info)} style={{height:'90%',width:'100%', marginLeft: '5%'}}className="mr-1">New</CButton>
+              <CButton block  color="info" onClick={() => setInfo(!info)} style={{height:'83%',width:'100%', textAlign:'center', marginLeft: '5%'}}className="mr-1">New</CButton>
             </CCol>
             </CRow>
             <CDataTable
@@ -941,7 +941,7 @@ const pmmethodshow =  (item) => {
               PM
               </CCol>
               <CCol xs="1">
-              <CButton  color="info" onClick={() => setPmAddModal(!pmAddModal)} style={{height:'90%',width:'100%', marginLeft: '5%'}}className="mr-1">New</CButton>
+              <CButton  color="info" onClick={() => setPmAddModal(!pmAddModal)} style={{height:'83%',width:'100%', textAlign:'center', marginLeft: '5%'}}className="mr-1">New</CButton>
             </CCol>
             </CRow>   
         <CDataTable
