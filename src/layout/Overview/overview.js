@@ -56,37 +56,9 @@ export default function Overview() {
 
   const history = useHistory();
 
-  const [data, setData] = useState([
-    {
-      id: 0, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High', issueType: 'Electrical',
-      executive: 'Naveen', status: 'Pending', createdDate: '2021-04-10', email: 'adam@company.com'
-    },
-    {
-      id: 1, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High', issueType: 'Electrical',
-      executive: 'Naveen', status: 'Pending', createdDate: '2021-04-10', email: 'adam@company.com'
-    },
-    {
-      id: 2, servicerequestId: 'UPNLBKN202102', company: 'Company Two', priority: 'Low', issueType: 'Electrical',
-      executive: 'Naveen', status: 'Active', createdDate: '2021-04-10', email: 'adam@company.com'
-    }
-  ])
+  const [data, setData] = useState([])
 
   const [servicedata, setServiceData] = useState([])
-
-  const [overviewdata, setOverviewData] = useState([
-    {
-      id: 0, servicerequestId: 'UPNLBKN202101', company: 'Company one', priority: 'High', issueType: 'Electrical',
-      executive: 'Naveen', status: 'Pending', createdDate: '2021-04-10', email: 'adam@company.com'
-    },
-    {
-      id: 1, servicerequestId: 'UPNLBKN202102', company: 'Company Two', priority: 'Low', issueType: 'Electrical',
-      executive: 'Naveen', status: 'Active', createdDate: '2021-04-10', email: 'adam@company.com'
-    },
-    {
-      id: 2, servicerequestId: 'UPNLBKN202103', company: 'Company three', priority: 'High', issueType: 'Mechanical',
-      executive: 'Naveen', status: 'Active', createdDate: '2021-04-10', email: 'adam@company.com'
-    }
-  ])
 
   const [pmData, setPmData] = useState([])
 
@@ -295,17 +267,17 @@ export default function Overview() {
 
   const getServiceData = async () => {
     let res = await serviceRequestService.getAllServiceRequests()
-    setServiceData(res)
+    setServiceData(res.slice(0, 3))
   }
 
   const getSalesvisitData = async () => {
     let res = await salesvisitService.getAllSalesVisits()
-    setData(res)
+    setData(res.slice(0, 3))
   }
 
   const getPmData = async () => {
     let res = await pmservice.getAllPms()
-    setPmData(res)
+    setPmData(res.slice(0, 3))
   }
 
   React.useEffect(() => {
