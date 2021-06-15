@@ -189,14 +189,13 @@ export default function ServiceRequest() {
         {!loading ?  
           <CCard>
             <CCardBody>
-              <CRow>
-              <CCol xs="11">
-                <h3>ServiceRequest</h3>            
+            <CRow className="mb-2">
+                    <CCol xs="11" style={{display: 'flex', alignItems: 'center'}}>
+                      <h5>
+                  ServiceRequest</h5>            
               </CCol>
-              <CCol xs="1">
-              <CCard style={{height:'10%',width:'100%', }}>
-              <CButton block  color="info" onClick={addServiceHandler} className="mr-1">New</CButton>
-              </CCard> 
+              <CCol xs="1" style={{display: 'flex', alignItems: 'center'}}>
+              <CButton block  color="info" onClick={addServiceHandler}>New</CButton>
             </CCol>
             </CRow>
       

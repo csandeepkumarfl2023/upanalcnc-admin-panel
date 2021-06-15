@@ -149,16 +149,15 @@ export default function EmployeeManagements() {
           {!loading ?
             <CCard>
               <CCardBody>
-                <CRow>
-                  <CCol xs="11">
-                    <h3>
+              <CRow className="mb-2">
+                    <CCol xs="11" style={{display: 'flex', alignItems: 'center'}}>
+                      <h5>
                     EmployeeManagements
-                    </h3>
+                    </h5>
                   </CCol>
-                  <CCol xs="1">
-                    <CCard>
-                    <CButton color="info" onClick={addBtnHandler} style={{height:'100%',width:'100%'}} className="mr-1">New</CButton>
-                    </CCard>
+                  <CCol xs="1" style={{display: 'flex', alignItems: 'center'}}>
+                    <CButton color="info" block onClick={addBtnHandler}>New</CButton>
+                    
                   </CCol>
                 </CRow>
                 <CDataTable

@@ -220,21 +220,15 @@ React.useEffect(() => {
         <CCol xs="12" lg="12">
         {!loading ?  
           <CCard>
-            {/* <CCardHeader>
-             All
-              <DocsLink name="CModal"/>
-            </CCardHeader> */}
             <CCardBody>
-              <CRow>
-              <CCol xs="11">
-                <h3>              
+            <CRow className="mb-2">
+                    <CCol xs="11" style={{display: 'flex', alignItems: 'center'}}>
+                      <h5>              
                   Sales Visit
-                </h3>
+                </h5>
               </CCol>
-              <CCol xs="1">
-              <CCard >
-              <CButton color="info" onClick={addnewBtnHandler} style={{height:'10%',width:'100%'}} className="mr-1">New</CButton>
-              </CCard>
+              <CCol xs="1" style={{display: 'flex', alignItems: 'center'}}>
+              <CButton block color="info" onClick={addnewBtnHandler}>New</CButton>
             </CCol>
             </CRow>
             <CDataTable

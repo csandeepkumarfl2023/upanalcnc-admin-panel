@@ -621,16 +621,14 @@ export default function Overview() {
             <CCol xs="12" lg="12">
               <CCard>
                 <CCardBody>
-                  <CRow>
-                    <CCol xs="11">
-                      <h3>
+                  <CRow className="mb-2">
+                    <CCol xs="11" style={{display: 'flex', alignItems: 'center'}}>
+                      <h5>
                         ServiceRequest
-                      </h3>
+                      </h5>
                     </CCol>
-                    <CCol xs="1">
-                      <CCard style={{ height: '10%', width: '80%', }}>
-                        <CButton block color="info" onClick={addServiceHandler} className="mr-1">New</CButton>
-                      </CCard>
+                    <CCol xs="1" style={{display: 'flex', alignItems: 'center'}}>
+                        <CButton block color="info" onClick={addServiceHandler}>New</CButton>
                     </CCol>
                   </CRow>
                   <CDataTable
@@ -823,16 +821,14 @@ export default function Overview() {
               <DocsLink name="CModal"/>
             </CCardHeader> */}
                 <CCardBody>
-                  <CRow>
-                    <CCol xs="11">
-                      <h3>
+                <CRow className="mb-2">
+                <CCol xs="11" style={{display: 'flex', alignItems: 'center'}}>
+                      <h5>
                         Sales Visit
-                      </h3>
+                      </h5>
                     </CCol>
-                    <CCol xs="1">
-                      <CCard >
-                        <CButton block color="info" onClick={() => setInfo(!info)} style={{ height: '100%', width: '100%' }} className="mr-1">New</CButton>
-                      </CCard>
+                    <CCol xs="1" style={{display: 'flex', alignItems: 'center'}}>
+                        <CButton block color="info" onClick={() => setInfo(!info)}>New</CButton>
                     </CCol>
                   </CRow>
                   <CDataTable
@@ -1028,14 +1024,12 @@ export default function Overview() {
             <CCol xs="12" lg="12">
               <CCard>
                 <CCardBody>
-                  <CRow>
-                    <CCol xs="11">
-                      <h3>PM</h3>
+                <CRow className="mb-2">
+                    <CCol xs="11" style={{display: 'flex', alignItems: 'center'}}>
+                      <h5>PM</h5>
                     </CCol>
-                    <CCol xs="1">
-                      <CCard >
-                        <CButton color="info" onClick={() => setPmAddModal(!pmAddModal)} style={{ height: '100%', width: '100%' }} className="mr-1">New</CButton>
-                      </CCard>
+                    <CCol xs="1" style={{display: 'flex', alignItems: 'center'}}>
+                        <CButton color="info" onClick={() => setPmAddModal(!pmAddModal)} style={{ height: '100%', width: '100%' }}>New</CButton>
                     </CCol>
                   </CRow>
                   <CDataTable
