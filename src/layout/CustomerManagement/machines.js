@@ -16,7 +16,8 @@ import {
     CFormGroup,
     CLabel,
     CInput,
-    CLink
+    CLink,
+    CCard
 } from '@coreui/react'
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -183,10 +184,14 @@ export default function Machines() {
             <CCardBody>
               <CRow>
               <CCol xs="11">
-             Machines
+                <h3>
+                Machines
+                </h3>
               </CCol>
               <CCol xs="1">
-              <CButton color="info" onClick={addnewBtnHandler}style={{height:'90%',width:'100%', marginLeft: '5%'}} className="mr-1">New</CButton>
+                <CCard>              
+                  <CButton color="info" onClick={addnewBtnHandler}style={{height:'100%',width:'100%'}} className="mr-1">New</CButton>
+                </CCard>
             </CCol>
             </CRow>
             <CDataTable

@@ -173,10 +173,14 @@ export default function Customer() {
           <CCardBody>
             <CRow>
               <CCol xs="11">
+                <h3>
                 Customers
+                </h3>
               </CCol>
               <CCol xs="1">
-                <CButton color="info" onClick={addnewBtnHandler}style={{height:'83%',width:'100%', textAlign:'center', marginLeft: '5%'}} className="mr-1">New</CButton>
+                <CCard>
+                <CButton color="info" onClick={addnewBtnHandler}style={{height:'100%',width:'100%'}} className="mr-1">New</CButton>
+                </CCard>
               </CCol>
             </CRow>
             <CDataTable
