@@ -17,6 +17,7 @@ const EditServiceRequest = React.lazy(() => import('./layout/ServiceRequests/edi
 const CreateServiceRequest = React.lazy(() => import('./layout/ServiceRequests/createServiceRequest'));
 const EditCustomer = React.lazy(() => import('./layout/CustomerManagement/Customers/editCustomer'));
 const CreateCustomer = React.lazy(() => import('./layout/CustomerManagement/Customers/createCustomer'));
+const CreateMachine = React.lazy(() => import('./layout/CustomerManagement/Machines/createMachine'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -38,6 +39,7 @@ const routes = [
   { path: '/overview/breadcrumbs', name: 'Breadcrumbs', component: Breadcrumbs },
   { path: '/editCustomer/:id', name: 'EditCustomer', component: EditCustomer },
   { path: '/createCustomer', name: 'createCustomer', component: CreateCustomer },
+  { path: '/createMachine', name: 'CreateMachine', component: CreateMachine },
 
 
 ];
