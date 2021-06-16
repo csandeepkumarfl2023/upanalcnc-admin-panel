@@ -492,7 +492,7 @@ export default function Overview() {
 
             <CRow>
             <CCol sm="3">
-            <CIcon style={{height:'50%',width:'80%'}}
+            <CIcon style={{height:'70%',width:'60%'}}
             src={'images/salesvisit.jpg'}
             className="c-logo-img"
             alt="admin@bootstrapmaster.com"
@@ -534,7 +534,7 @@ export default function Overview() {
 
               <CRow>
             <CCol sm="3">
-            <CIcon style={{height:'50%',width:'80%'}}
+            <CIcon style={{height:'70%',width:'60%'}}
             src={'images/payments.jpg'}
             className="c-logo-img"
             alt="admin@bootstrapmaster.com"

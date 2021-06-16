@@ -6,7 +6,7 @@ const _nav =  [
     _tag: 'CSidebarNavItem',
     name: 'Overview',
     to: '/overview',
-    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
+    icon: <CIcon name="cil-speedometer" style={{ color:'gray' }} customClasses="c-sidebar-nav-icon"/>,
   },
   {
    _tag: 'CSidebarNavItem',
@@ -46,6 +46,30 @@ const _nav =  [
       name: 'PM',
       to: '/pm',
       icon: <CIcon name="cil-people" customClasses="c-sidebar-nav-icon"/>,
+    },
+    {
+      _tag: 'CSidebarNavItem',
+      name: 'Invoices',
+      to: '/invoices',
+      icon: <CIcon style={{ marginRight:'7%' }} src={'images/Invoices.svg'}/>
+    },
+    {
+      _tag: 'CSidebarNavItem',
+      name: 'BroadcastMessages',
+      to: '/broadcastMessages',
+      icon: <CIcon style={{ marginRight:'7%' }} src={'images/broadcastMessages.svg'}/>
+    },
+    {
+      _tag: 'CSidebarNavItem',
+      name: 'Attendance',
+      to: '/attendance',
+      icon: <CIcon style={{ marginRight:'6%' }} src={'images/attendance.svg'}/>
+    },
+    {
+      _tag: 'CSidebarNavItem',
+      name: 'Settings',
+      to: '/settings',
+      icon: <CIcon style={{ marginRight:'7%' }} src={'images/settings.svg'}/>
     },
   // {
   //   _tag: 'CSidebarNavTitle',
