@@ -12,7 +12,8 @@ const _nav =  [
    _tag: 'CSidebarNavItem',
     name: 'ServiceRequest',
     to: '/servicerequest',
-    icon:     <CIcon style={{ marginRight:'7%' }} src={'images/serviceReqicon.svg'}/>
+    icon:    <CIcon name="cib-aurelia" style={{ color:'gray' }} customClasses="c-sidebar-nav-icon"/>
+
     // badge: {
     //   color: 'info',
     //   text: 'NEW',
@@ -21,55 +22,56 @@ const _nav =  [
       _tag: 'CSidebarNavItem',
       name: 'Sales Visit',
       to: '/salesvisit',
-      icon: <CIcon style={{ height: '10%', width: '10%', marginRight:'7%'}} src={'images/salesvisiticon.svg'}/>
+      icon:    <CIcon name="cil-briefcase" style={{ color:'gray' }} customClasses="c-sidebar-nav-icon"/>
     },
     {
       _tag: 'CSidebarNavItem',
       name: 'Payments',
       to: '/payments',
-      icon:     <CIcon style={{height: '10%', width: '10%', marginRight:'7%' }} src={'images/paymentsicon.svg'}/>
+      icon: <CIcon name="cib-cc-amazon-pay" style={{ color:'gray' }} customClasses="c-sidebar-nav-icon"/>
+
     },
     {
       _tag: 'CSidebarNavItem',
       name: 'Employee Management',
       to: '/employeemanagement',
-      icon: <CIcon style={{ marginRight:'7%' }} src={'images/employeeicon.svg'}/>
+      icon: <CIcon name="cil-people" style={{ color:'gray' }} customClasses="c-sidebar-nav-icon"/>
     },
     {
       _tag: 'CSidebarNavItem',
       name: 'Customer Management',
       to: '/customermanagement',
-      icon: <CIcon style={{ marginRight:'7%' }} src={'images/customericon.svg'}/>
+      icon: <CIcon name="cil-user" style={{ color:'gray' }} customClasses="c-sidebar-nav-icon"/>
     },
     {
       _tag: 'CSidebarNavItem',
       name: 'PM',
       to: '/pm',
-      icon: <CIcon name="cil-people" customClasses="c-sidebar-nav-icon"/>,
+      icon: <CIcon name="cib-semaphoreci"style={{ color:'gray' }} customClasses="c-sidebar-nav-icon"/>,
     },
     {
       _tag: 'CSidebarNavItem',
       name: 'Invoices',
       to: '/invoices',
-      icon: <CIcon style={{ marginRight:'7%' }} src={'images/Invoices.svg'}/>
+      icon: <CIcon name="cib-hackhands"style={{ color:'gray' }} customClasses="c-sidebar-nav-icon"/>,
     },
     {
       _tag: 'CSidebarNavItem',
       name: 'BroadcastMessages',
       to: '/broadcastMessages',
-      icon: <CIcon style={{ marginRight:'7%' }} src={'images/broadcastMessages.svg'}/>
+      icon: <CIcon name="cib-wechat"style={{ color:'gray' }} customClasses="c-sidebar-nav-icon"/>,
     },
     {
       _tag: 'CSidebarNavItem',
       name: 'Attendance',
       to: '/attendance',
-      icon: <CIcon style={{ marginRight:'6%' }} src={'images/attendance.svg'}/>
+      icon: <CIcon name="cil-browser"style={{ color:'gray' }} customClasses="c-sidebar-nav-icon"/>,
     },
     {
       _tag: 'CSidebarNavItem',
       name: 'Settings',
       to: '/settings',
-      icon: <CIcon style={{ marginRight:'7%' }} src={'images/settings.svg'}/>
+      icon: <CIcon name="cil-settings"style={{ color:'gray' }} customClasses="c-sidebar-nav-icon"/>,
     },
   // {
   //   _tag: 'CSidebarNavTitle',

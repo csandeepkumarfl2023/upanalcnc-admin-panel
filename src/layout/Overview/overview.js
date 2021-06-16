@@ -462,11 +462,8 @@ export default function Overview() {
 
                   <CRow>
                     <CCol sm="3">
-                      <CIcon style={{ height: '50%', width: '80%' }}
-                        src={'images/servicerequest.jpg'}
-                        className="c-logo-img"
-                        alt="admin@bootstrapmaster.com"
-                      />
+                    <CIcon name="cib-aurelia" style={{ color:'gray' }} />
+
                     </CCol>
                     <CCol>
                       Service Requests
@@ -486,11 +483,8 @@ export default function Overview() {
 
                   <CRow>
                     <CCol sm="3">
-                      <CIcon style={{ height: '70%', width: '60%' }}
-                        src={'images/salesvisit.jpg'}
-                        className="c-logo-img"
-                        alt="admin@bootstrapmaster.com"
-                      />
+                    <CIcon name="cil-briefcase" style={{ color:'gray' }} />
+
                     </CCol>
                     <CCol>
                       Sales Visit
@@ -509,11 +503,8 @@ export default function Overview() {
 
                   <CRow>
                     <CCol sm="3">
-                      <CIcon style={{ height: '70%', width: '60%' }}
-                        src={'images/payments.jpg'}
-                        className="c-logo-img"
-                        alt="admin@bootstrapmaster.com"
-                      />
+                    <CIcon name="cib-cc-amazon-pay" style={{ color:'gray' }} />
+
                     </CCol>
                     <CCol>
                       Payments
@@ -532,11 +523,7 @@ export default function Overview() {
 
                   <CRow>
                     <CCol sm="3">
-                      <CIcon style={{ height: '50%', width: '80%' }}
-                        src={'images/pm.jpg'}
-                        className="c-logo-img"
-                        alt="admin@bootstrapmaster.com"
-                      />
+                    <CIcon name="cib-semaphoreci" style={{ color:'gray' }} />
                     </CCol>
                     <CCol>
                       PM
