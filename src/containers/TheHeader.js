@@ -106,7 +106,7 @@ const TheHeader = (props) => {
             :
             <>
               <CBreadcrumbItem>
-                <CLink to={location.pathname.includes('editServiceRequest') ? '/servicerequest' : '/'}  style={{ textTransform: 'capitalize' }}>{location.pathname.slice(1, childRouteNameIndex + 1)}</CLink>
+                <CLink to={location.pathname.includes('editCustomer') ? '/customermanagement' : '/'}  style={{ textTransform: 'capitalize' }}>{location.pathname.slice(1, childRouteNameIndex + 1)}</CLink>
               </CBreadcrumbItem>
               <CBreadcrumbItem>
                 <a style={{ textTransform: 'capitalize' }}>{location.pathname.slice(childRouteNameIndex + 2)}</a>

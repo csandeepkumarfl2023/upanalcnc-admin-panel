@@ -146,13 +146,17 @@ export default function Customer() {
     setCountry('')
     setGstNumber('')
     setEmail('')
-    setInfo(true)
-  }
+    addCustomerHandler() 
+   }
 
-  const editCustomer = (item) => {
+  const editCustomerHandler = (item) => {
     history.push({
       pathname:`/editCustomer/${item.customerName}`,
       state: item });
+  }
+
+  const addCustomerHandler = (item) => {
+    history.push('./createCustomer')
   }
 
   React.useEffect(() => {
@@ -201,7 +205,7 @@ export default function Customer() {
                   (item) => (
                     <td>
                     <CLink>  <a onClick={() => {
-                       editCustomer(item)
+                       editCustomerHandler(item)
                       }
                       }
                       >{item.customerName}</a></CLink>
@@ -210,105 +214,7 @@ export default function Customer() {
               }}
 
             />
-            <CModal
-              show={info}
-              onClose={() => setInfo(false)}
-              color="info"
-            >
-              <CModalHeader closeButton>
-                <CModalTitle>Add New Customer</CModalTitle>
-              </CModalHeader>
-              <CModalBody>
-                <CRow>
-                  <CCol xs="10" md="6">
-                    <CFormGroup >
-                      <CLabel htmlFor="Customer Name">Customer Name</CLabel>
-                      <CSelect custom size="md" name="customerName" id="customerName" value={customerName} onChange={(e) => setCustomerName(e.target.value)}>
-                        <option value="0">Open this select menu</option>
-                        <option value="Vamsi">Vamsi</option>
-                        <option value="Sandeep">Sandeep</option>
-                        <option value="Pooja">Pooja</option>
-                        <option value="Vikram">Vikram</option>
-                        <option value="Arun">Arun</option>
-                      </CSelect>
-                    </CFormGroup>
-                  </CCol>
-                  <CCol xs="10" md="6">
-                    <CFormGroup >
-                      <CLabel htmlFor="contactPerson">Contact Person</CLabel>
-                      <CInput type="text" id="contactPerson" name="contactPerson" placeholder="Contact Person" value={contactPerson} onChange={(e) => setContactPerson(e.target.value)} />
-                    </CFormGroup>
-                  </CCol>
-                </CRow>
-                <CRow>
-                  <CCol xs="10" md="6">
-                    <CFormGroup >
-                      <CLabel htmlFor="mobileNo">Contact Number</CLabel>
-                      <CInput type="text" id="mobileNo" name="mobileNo" placeholder="Mobile No" value={mobileNo} onChange={(e) => setMobileNo(e.target.value)} />
-                    </CFormGroup>
-                  </CCol>
-                  <CCol xs="10" md="6">
-                    <CFormGroup >
-                      <CLabel htmlFor="alternateNo">Alternate No</CLabel>
-                      <CInput type="text" id="alternateNo" name="alternateNo" placeholder="Alternate No" value={alternateNo} onChange={(e) => setAlternateNo(e.target.value)} />
-                    </CFormGroup>
-                  </CCol>
-                </CRow>
-                <CRow>
-                  <CCol xs="10" md="4">
-                    <CFormGroup >
-                      <CLabel htmlFor="address">Address</CLabel>
-                      <CInput type="text" id="address" name="address" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} />
-                    </CFormGroup>
-                  </CCol>
-                  <CCol xs="10" md="4">
-                    <CFormGroup >
-                      <CLabel htmlFor="city">City</CLabel>
-                      <CInput type="text" id="city" name="city" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} />
-                    </CFormGroup>
-                  </CCol>
-                  <CCol xs="10" md="4">
-                    <CFormGroup >
-                      <CLabel htmlFor="zipCode">Zip Code</CLabel>
-                      <CInput type="text" id="zipCode" name="zipCode" placeholder="Zip Code" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
-                    </CFormGroup>
-                  </CCol>
-                </CRow>
-                <CRow>
-                  <CCol xs="10" md="6">
-                    <CFormGroup >
-                      <CLabel htmlFor="state">State</CLabel>
-                      <CInput type="text" id="state" name="state" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} />
-                    </CFormGroup>
-                  </CCol>
-                  <CCol xs="10" md="6">
-                    <CFormGroup >
-                      <CLabel htmlFor="country">Country</CLabel>
-                      <CInput type="text" id="country" name="country" placeholder="Country" value={country} onChange={(e) => setCountry(e.target.value)} />
-                    </CFormGroup>
-                  </CCol>
-                </CRow>
-                <CRow>
-                  <CCol xs="10" md="6">
-                    <CFormGroup >
-                      <CLabel htmlFor="email">Email</CLabel>
-                      <CInput type="text" id="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                    </CFormGroup>
-                  </CCol>
-                  <CCol xs="10" md="6">
-                    <CFormGroup >
-                      <CLabel htmlFor="gstNumber">GSTN</CLabel>
-                      <CInput type="text" id="gstNumber" name="gstNumber" placeholder="GSTN" value={gstNumber} onChange={(e) => setGstNumber(e.target.value)} />
-                    </CFormGroup>
-                  </CCol>
-                </CRow>
-              </CModalBody>
-              <CModalFooter>
-                <CButton color="secondary" onClick={() => setInfo(false)}>Cancel</CButton>
-                <CButton color="info" onClick={submitHandler}>Submit</CButton>{' '}
-              </CModalFooter>
-            </CModal>
-
+          
           </CCardBody>
           {/* : null } */}
         </CCol>
