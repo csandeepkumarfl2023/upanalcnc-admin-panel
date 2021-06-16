@@ -174,60 +174,100 @@ export default function CreateServiceRequest() {
            </CRow>
 
            <CRow >
-        <CCol xs="10" lg="4" style={{fontWeight:'bold'}}>
-           Contact Number : {contactNumber}
+        <CCol xs="10" lg="4" >
+          <CRow>
+        <div style={{ fontWeight:'bold',marginLeft:'3%'}}>Contact Number :  </div> 
+             <CCol xs="10" md="4">
+           {contactNumber}  </CCol> </CRow>
         </CCol>
-        <CCol xs="10" lg="4" style={{fontWeight:'bold'}}>
-           Alternate Number : {alternateNumber}
+        <CCol xs="10" lg="4" >
+          <CRow>
+          <div style={{ fontWeight:'bold'}}>Alternate Number :  </div> 
+          <CCol xs="10" md="4">
+           {alternateNumber} </CCol> </CRow>
         </CCol>
-        <CCol xs="10" lg="4" style={{fontWeight:'bold'}}>
-          Email : {email}
+        <CCol xs="10" lg="4">
+          <CRow>
+          <div style={{ fontWeight:'bold'}}>Email :  </div> 
+          <CCol xs="10" md="6">
+              {email}</CCol> </CRow>
         </CCol>
         </CRow>
 
-        <CRow><CCol xs="10" lg="10" style={{marginTop:'2%',fontWeight:'bold'}}>Customer Address : {customerAddress}</CCol></CRow>
+        <CRow><CCol xs="10" lg="10" style={{marginTop:'2%',marginLeft:'1%'}}>
+        <CRow>
+          <div style={{ fontWeight:'bold'}}> Customer Address : </div> 
+          <CCol xs="10" md="6">
+            {customerAddress} 
+            </CCol> </CRow>
+            </CCol></CRow>
         <CCardHeader>
-      <CCardSubtitle style={{marginTop:'2%',fontWeight:'bold',fontSize:'1rem',marginLeft:'-2%'}}>Machine Details</CCardSubtitle></CCardHeader>
+      <CCardSubtitle style={{marginTop:'2%',fontSize:'1rem',marginLeft:'-2%'}}>Machine Details</CCardSubtitle></CCardHeader>
       <CRow style={{marginTop:'2%'}}>
-        <CCol xs="10" lg="4">
-        <CRow style={{marginLeft:'0.1%',fontWeight:'bold'}}>
-           Select Machine : 
-           <CFormGroup style={{marginLeft:'3%'}}>
-               <CSelect custom size="md" name="name" id="name"  value={machine} onChange={machineChangeController}>
+        <CCol xs="12" lg="4">
+        <CRow style={{marginLeft:'3%'}}>
+        <CRow>
+          <div style={{ fontWeight:'bold'}}> Select Machine : </div> 
+          <CCol xs="10" md="6">
+           <CFormGroup style={{marginLeft:'3%'}} >
+               <CSelect custom size="md" name="name" id="name"  value={machine} onChange={machineChangeController} style={{width:'150%'}}>
                  <option value="">Open this select menu</option>
                  {machineArr && machineArr.length ? machineArr.map((elem) => {
                    return <option key={elem.id} value={elem.id}>{elem.machineType}</option>
                  }
-                   ) : null}
+                   ) : null} 
                 
                </CSelect>
              </CFormGroup>
+             </CCol>
+             </CRow>
              </CRow>
         </CCol>
-        <CCol xs="10" lg="4" style={{fontWeight:'bold'}}>
-          Machine Serial Number : {machineSerialNo}
+        <CCol xs="10" lg="4" >
+        <CRow>
+          <div style={{ fontWeight:'bold'}}> Machine Serial Number : </div> 
+          <CCol xs="10" md="6">
+         {machineSerialNo} </CCol> </CRow>
         </CCol>
-        <CCol xs="10" lg="4" style={{fontWeight:'bold'}}>
-          Machine Type : {machineType}
+        <CCol xs="10" lg="4" >
+        <CRow>
+          <div style={{ fontWeight:'bold'}}>  Machine Type :</div> 
+          <CCol xs="10" md="6">
+          {machineType} </CCol> </CRow>
         </CCol>
         </CRow>
         <CRow >
-        <CCol xs="10" lg="4" style={{fontWeight:'bold'}}>
-            Make: {make}
+        <CCol xs="10" lg="4" >
+        <CRow style={{marginLeft:'0%'}}>
+          <div style={{ fontWeight:'bold'}}>  Make: </div> 
+          <CCol xs="10" md="6">
+           {make} </CCol></CRow>     
+            </CCol>
+        <CCol xs="10" lg="4" >
+        <CRow>
+          <div style={{ fontWeight:'bold'}}>   Model: </div> 
+          <CCol xs="10" md="6">
+           {model} </CCol> </CRow>
         </CCol>
-        <CCol xs="10" lg="4" style={{fontWeight:'bold'}}>
-           Model: {model}
-        </CCol>
-        <CCol xs="10" lg="4" style={{fontWeight:'bold'}}>
-           Machine Age: {machineAge}
+        <CCol xs="10" lg="4">
+        <CRow>
+          <div style={{ fontWeight:'bold'}}>   Machine Age:  </div> 
+          <CCol xs="10" md="6">
+          {machineAge} </CCol> </CRow>
         </CCol>
         </CRow>
-        <CRow style={{marginTop:'2%',fontWeight:'bold'}} >
+        <CRow style={{marginTop:'2%'}} >
         <CCol xs="10" lg="4">
-            Machine Controller: {machineController}
+        <CRow style={{marginLeft:'1%'}}>
+          <div style={{ fontWeight:'bold'}}>   Machine Controller: </div> 
+          <CCol xs="10" md="6">
+           {machineController} </CCol> </CRow>
         </CCol>
-        <CCol xs="10" lg="4" style={{fontWeight:'bold'}}>
-          Controller Model: {controllerModel}
+        <CCol xs="10" lg="4" >
+        <CRow >
+          <div style={{ fontWeight:'bold'}}>  Controller Model: </div> 
+          <CCol xs="10" md="6">
+       {controllerModel} </CCol> </CRow>
         </CCol>  
         </CRow>
 

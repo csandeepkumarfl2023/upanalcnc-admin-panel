@@ -17,7 +17,7 @@ const EditServiceRequest = React.lazy(() => import('./layout/ServiceRequests/edi
 const CreateServiceRequest = React.lazy(() => import('./layout/ServiceRequests/createServiceRequest'));
 const EditCustomer = React.lazy(() => import('./layout/CustomerManagement/Customers/editCustomer'));
 const CreateCustomer = React.lazy(() => import('./layout/CustomerManagement/Customers/createCustomer'));
-const CreateMachine = React.lazy(() => import('./layout/CustomerManagement/Machines/createMachine'));
+const CreateMachine = React.lazy(() => import('./layout/CustomerManagement/machines/createMachine'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
