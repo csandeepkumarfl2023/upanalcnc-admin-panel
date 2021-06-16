@@ -14,7 +14,7 @@ import {
   CCardHeader
 } from '@coreui/react'
 import Customer from './Customers/customer'
-import Machines from './machines/machines'
+import Machines from './Machines/machines'
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 const override = css`

@@ -21,7 +21,8 @@ import {
 } from '@coreui/react'
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
-import MachineService  from '../../services/machineService';
+import MachineService  from '../../../services/machineService';
+import { useHistory } from "react-router-dom";
 
 const machineService = new MachineService()
 
@@ -32,6 +33,7 @@ margin: 0 auto;
 `;
 
 export default function Machines() {
+  const history = useHistory();
 
   const conditionalRowStyles = [
     {
@@ -84,9 +86,12 @@ export default function Machines() {
       setMachineAge('')
       setController('')
       setControllerModel('')
-      setInfo(true)
+      addMachineHandler()
+        }
+
+    const addMachineHandler = () => {
+      history.push('./createMachine')
     }
-    
     const submitHandler = async () => {
         let currentData = {}
         currentData.id = Math.round(Math.random() * 10000000)
@@ -222,108 +227,6 @@ export default function Machines() {
               }}
 
             />
-             <CModal 
-              show={info} 
-              onClose={() => setInfo(!info)}
-              color="info"
-            >
-              <CModalHeader closeButton>
-                <CModalTitle>Add New Machine</CModalTitle>
-              </CModalHeader>
-              <CModalBody>
-              <CRow>
-            <CCol xs="10" md="6">
-              <CFormGroup >
-                <CLabel htmlFor="customerCode">Customer Code</CLabel>
-                <CInput type="text" id="customerCode" name="customerCode" placeholder="Customer Code" value={customerCode} onChange={(e) => setCustomerCode(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            <CCol xs="10" md="6">
-            <CFormGroup >
-                <CLabel htmlFor="machineType">Machine Type</CLabel>
-                <CSelect custom size="md" name="machineType" id="machineType" value={machineType} onChange={typeHandler}>
-                  <option value="0">Open this select menu</option>
-                  <option value="VMC">VMC</option>
-                  <option value="TURNING">TURNING</option>
-                  <option value="VTL">VTL</option>
-                  <option value="HMC">HMC</option>
-                  <option value="SPM">SPM</option>
-                  <option value="Others">Others</option>
-                </CSelect>
-                { typeOthers ? 
-                  <>
-                  <CLabel htmlFor="controller">Enter Your Option</CLabel>                  
-                <CInput type="text" id="others" name="others" placeholder="Machine Type"  value={machineType} onChange={(e) => setMachineType(e.target.value)}/>
-                 </>
-                  : null } 
-              </CFormGroup>
-            </CCol>
-            </CRow>
-           
-            <CRow>
-            <CCol xs="10" md="4">
-              <CFormGroup >
-                <CLabel htmlFor="make">Make</CLabel>
-                <CInput type="text" id="make" name="make" placeholder="Make" value={make} onChange={(e) => setMake(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            <CCol xs="10" md="4">
-              <CFormGroup >
-                <CLabel htmlFor="model">Model</CLabel>
-                <CInput type="text" id="model" name="model" placeholder="Model" value={model} onChange={(e) => setModel(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            <CCol xs="10" md="4">
-              <CFormGroup >
-                <CLabel htmlFor="machineSerialNo">Machine Serial No</CLabel>
-                <CInput type="text" id="machineSerialNo" name="machineSerialNo" placeholder="Machine Serial No" value={machineSerialNo} onChange={(e) => setMachineSerialNo(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            </CRow>
-          
-            <CRow>
-            <CCol xs="10" md="4">
-              <CFormGroup >
-                <CLabel htmlFor="machineAge">Machine Age</CLabel>
-                <CInput type="text" id="machineAge" name="machineAge" placeholder="Machine Age" value={machineAge} onChange={(e) => setMachineAge(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            <CCol xs="10" md="4">
-              <CFormGroup >
-                <CLabel htmlFor="controllerModel">Controller Model</CLabel>
-                <CInput type="text" id="controllerModel" name="controllerModel" placeholder="Controller Model" value={controllerModel} onChange={(e) => setControllerModel(e.target.value)}/>
-              </CFormGroup>
-            </CCol>
-            </CRow> 
-
-            <CRow>    
-            <CCol xs="10" md="6">
-            <CFormGroup >
-                <CLabel htmlFor="controller">Machine Controller</CLabel>
-                <CSelect custom size="md" name="controller" id="controller" value={controller} onChange={controllerHandler}>
-                  <option value="0">Open this select menu</option>
-                  <option value="Funac">Funac</option>
-                  <option value="Siemens">Siemens</option>
-                  <option value="Mitsubishi">Mitsubishi</option>
-                  <option value="Others">Others</option>
-                </CSelect>
-                
-                 { others ?   
-                  <>
-                  <CLabel htmlFor="controller">Enter Your Option</CLabel>             
-                <CInput type="text" id="others" name="others" placeholder="Machine controller"  value={controller} onChange={(e) => setController(e.target.value)}/>
-                </>
-                  : null } 
-              </CFormGroup>
-            </CCol>
-            </CRow>  
-
-              </CModalBody>
-              <CModalFooter>
-                <CButton color="secondary" onClick={() => setInfo(!info)}>Cancel</CButton>
-                <CButton color="info" onClick={submitHandler}>Submit</CButton>{' '}
-              </CModalFooter>
-            </CModal>
 
             </CCardBody>
          {/* : null } */}
