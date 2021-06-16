@@ -30,14 +30,23 @@ export default function EditCustomer(props) {
    const history = useHistory();
    const [item, setItem] = useState(props.location.state)
    const [edit, setEdit] = React.useState(false)
-   const [executive, setExecutive] = useState("")
-   const [date, setDate] = useState("")
-   const [time, setTime] = useState("")
+   const [customerName, setCustomerName] = useState("")
+   const [contactPerson, setContactPerson] = useState("")
+   const [customerCode, setCustomerCode] = useState("")
+   const [mobileNo, setMobileNo] = useState("")
+   const [email, setEmail] = useState("")
+   const [address, setAddress] = useState("")
+   const [gstNumber, setGstNumber] = useState("")
+   const [alternateNo, setAlternateNo] = useState("")
+   const [city, setCity] = useState("")
+   const [zip, setZip] = useState("")
+   const [state, setState] = useState("")
+   const [country, setCountry] = useState("")
    const [data, setData] = useState([])
-
    const [customerDetails, setCustomerDetails] = useState()
    const [machineDetails, setMachineDetails] = useState()
    const [serviceReqDetails, setServiceReqDetails] = useState()
+   const [updateId, setUpdateId] = useState()
 
    const closeHandler = () => {
       history.push('/customermanagement');
@@ -47,41 +56,51 @@ export default function EditCustomer(props) {
    }
 
    const getCustomerDetails = async () => {
-      let res = await customerSerice.getCustomer(item.customerName)
+      const res = await customerSerice.getCustomer(item.id)
       setCustomerDetails(res)
       console.log('getCustomerDetails', res)
-   }
-
-   const getMachineDetails = async () => {
-      let res = await machineService.getMachine(item.machine)
-      setMachineDetails(res)
-      console.log('getMachineDetails', res)
-   }
-
-   const getServicerequestDetails = async() => {
-      let res = await serviceRequestService.getServiceRequest(item.id)
-      setServiceReqDetails(res)
-      console.log('getServicerequestDetails', res)
+      setCustomerCode(res.customerCode)
+      setCustomerName(res.customerName)
+      setContactPerson(res.contactPerson)
+      setMobileNo(res.mobileNo)
+      setEmail(res.email)
+      setAddress(res.address)
+      setGstNumber(res.gstNumber)
+      setAlternateNo(res.alternateNo)
+      setCity(res.city)
+      setZip(res.zip)
+      setState(res.state)
+      setCountry(res.country)
    }
 
    const submitHandler = async() => {
       let currentData = {...item}
-      currentData.executive = executive
-      currentData.date = date
-      currentData.time = time
-      let res = await serviceRequestService.updateServiceRequest(currentData, currentData.id)
-      history.push('./servicerequest')
+      currentData.customerName = customerName
+      currentData.contactPerson = contactPerson
+      currentData.customerCode = customerCode 
+      currentData.mobileNo = mobileNo
+      currentData.email = email
+      currentData.address = address
+      currentData.gstNumber = gstNumber
+      currentData.alternateNo = alternateNo
+      currentData.city = city
+      currentData.zip = zip
+      currentData.state = state
+      currentData.country = country
+
+      console.log(currentData);
+      let res = await customerSerice.updateCustomer(currentData, currentData.id)
+      history.push('./customermanagement')
    }
 
    React.useEffect(() => {
       setItem(props.location.state)
       if (props.location.state) {
          getCustomerDetails()
-         getMachineDetails()
-         getServicerequestDetails()
+
       }
    }, [])
-
+ 
    return (
       <CCard>
          <CCardHeader>
@@ -90,148 +109,128 @@ export default function EditCustomer(props) {
                   <CCardSubtitle style={{marginTop:'1%'}}>Customer {item ? item.customerName : null}</CCardSubtitle>
                </CCol>
                <CCol xs="6" md="1">
-                  <CIcon name="cil-pen" size="1xl" onClick={() => setEdit(true)} />
+                  {/* <CIcon name="cil-pen" size="1xl" onClick={() => setEdit(true)} /> */}
                </CCol>
             </CRow>
          </CCardHeader>
          <CCardBody>
-            <CRow>
+            <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
                <CCol xs="12" md="4">
-                  Customer Name: {customerDetails ? customerDetails.customerName : null}
-               </CCol>
-               <CCol xs="12" md="4">
-                  Customer Code: {customerDetails ? customerDetails.customerCode : null}
-               </CCol>
+               Customer Name: 
+                     <CFormGroup >
+                        <CInput type="text" id="customerName" className="w-50"
+                   name="customerName" placeholder="customerName" value={customerName} onChange={(e) => { setCustomerName(e.target.value) }} />
+                     </CFormGroup>
+                      </CCol>
+                      <CCol xs="12" md="4">
+               Customer Code: 
+                     <CFormGroup >
+                        <CInput type="text" id="customerCode" className="w-50"
+                   name="customerCode" placeholder="customerCode" value={customerCode} onChange={(e) => { setCustomerCode(e.target.value) }} />
+                     </CFormGroup>
+                      </CCol>
                <CCol xs="12" lg="4">
-                  View Report: N/A
-               </CCol>
-            </CRow>
-
-
-            <CRow style={{ marginTop: '2%' }}>
-               <CCol xs="10" lg="4">
-                  Issue Type: {serviceReqDetails ? serviceReqDetails.issueType : null}
-               </CCol>
-               <CCol xs="10" lg="4">
-                  Priority: {serviceReqDetails ? serviceReqDetails.priority : null}
-               </CCol>
-               <CCol xs="10" lg="4">
-                  Status: {serviceReqDetails ? serviceReqDetails.status : null}
-               </CCol>
-            </CRow>
-
-            <CRow style={{ marginTop: '2%'}}>
-               <CCol xs="10" sm="4">
-                  Executive: 
-                  {edit ?
+               Contact Person Name: 
                      <CFormGroup >
-                        <CSelect custom size="md" name="name" id="name" className="w-50" value={executive} onChange={(e) => setExecutive(e.target.value)}>
-                           <option value="undefined">Open this select menu</option>
-                           <option value="Vamsi">Vamsi</option>
-                           <option value="Sandeep">Sandeep</option>
-                           <option value="Pooja">Pooja</option>
-                           <option value="Vikram">Vikram</option>
-                           <option value="Arun">Arun</option>
-                        </CSelect>
+                        <CInput type="text" id="contactPerson" className="w-50"
+                   name="contactPerson" placeholder="contactPerson" value={contactPerson} onChange={(e) => { setContactPerson(e.target.value) }} />
                      </CFormGroup>
-                     : serviceReqDetails ? serviceReqDetails.executive : null}
-               </CCol>
-               <CCol xs="10" sm="4">
-                  Schedule Date: {edit ?
-                     <CFormGroup >
-                        <CInput type="date" id="sheduleDate" className="w-50"
-    name="sheduleDate" placeholder="sheduleDate" value={date} onChange={(e) => { setDate(e.target.value) }} />
-                     </CFormGroup>
-                     : serviceReqDetails ? serviceReqDetails.date : null}
-               </CCol>
-               <CCol xs="10" lg="4">
-                  Schedule Time:  {edit ?
-                     <CFormGroup >
-                        <CInput type="time" id="sheduleTime" className="w-50" name="sheduleTime" placeholder="sheduleTime" value={time} onChange={(e) => { setTime(e.target.value) }} />
-                     </CFormGroup>
-                     : serviceReqDetails ? serviceReqDetails.time : null}
-               </CCol>
+                     
+            </CCol>
             </CRow>
 
-            <CRow style={{ marginTop: '2%' }}>
-               <CCol xs="10" lg="6">
-                  Issue Details: {serviceReqDetails ? serviceReqDetails.issueDetails : null}
-               </CCol>
-               <CCol xs="10" lg="6">
-                  Machine Pictures:
-               </CCol>
-            </CRow>
+               <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
+
+         
+            <CCol xs="12" lg="4">
+               Contact Number: 
+                     <CFormGroup >
+                        <CInput type="text" id="mobileNo" className="w-50"
+                   name="mobileNo" placeholder="mobileNo" value={mobileNo} onChange={(e) => { setMobileNo(e.target.value) }} />
+                     </CFormGroup>
+                
+            </CCol>
+            <CCol xs="12" lg="4">
+               Alternate Number: 
+                     <CFormGroup >
+                        <CInput type="text" id="alternateNo" className="w-50"
+                   name="alternateNo" placeholder="alternateNo" value={alternateNo} onChange={(e) => { setAlternateNo(e.target.value) }} />
+                     </CFormGroup>
+            </CCol>
+            <CCol xs="12" lg="4">
+               Customer Address: 
+                     <CFormGroup >
+                        <CInput type="text" id="address" className="w-50"
+                   name="address" placeholder="address" value={address} onChange={(e) => { setAddress(e.target.value) }} />
+                     </CFormGroup>
+            </CCol>
+         </CRow>
+
+         <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
+       
+            <CCol xs="12" lg="4">
+               Email:
+                     <CFormGroup >
+                        <CInput type="text" id="email" className="w-50"
+                   name="email" placeholder="email" value={email} onChange={(e) => { setEmail(e.target.value) }} />
+                     </CFormGroup>
+            </CCol>
+            <CCol xs="12" lg="4">
+            GstNumber: 
+                     <CFormGroup >
+                        <CInput type="text" id="gstNumber" className="w-50"
+                   name="gstNumber" placeholder="gstNumber" value={gstNumber} onChange={(e) => { setGstNumber(e.target.value) }} />
+                     </CFormGroup>
+            </CCol>
+            <CCol xs="12" lg="4">
+            City:
+                     <CFormGroup >
+                        <CInput type="text" id="city" className="w-50"
+                   name="city" placeholder="city" value={city} onChange={(e) => { setCity(e.target.value) }} />
+                     </CFormGroup>
+            </CCol>
+         </CRow>
+
+               <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
+            
+            <CCol xs="12" lg="4">
+                Zip: 
+                     <CFormGroup >
+                        <CInput type="text" id="zip" className="w-50"
+                   name="zip" placeholder="zip" value={zip} onChange={(e) => { setZip(e.target.value) }} />
+                     </CFormGroup>
+            </CCol>
+            <CCol xs="12" lg="4">
+            State:
+                     <CFormGroup >
+                        <CInput type="text" id="state" className="w-50"
+                   name="state" placeholder="state" value={state} onChange={(e) => { setState(e.target.value) }} />
+                     </CFormGroup>
+            </CCol>
+            <CCol xs="12" lg="4">
+            Country: 
+                     <CFormGroup >
+                        <CInput type="text" id="country" className="w-50"
+                   name="country" placeholder="country" value={country} onChange={(e) => { setCountry(e.target.value) }} />
+                     </CFormGroup>
+            </CCol>
+         </CRow>
+
+  
+
+  
          </CCardBody>
 
-            <CCardHeader>
-               <CCardSubtitle> Machine Details</CCardSubtitle>
-            </CCardHeader>
-         <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
-            <CCol xs="10" lg="4">
-               Machine ID: {machineDetails ? machineDetails.machineId : null}
-            </CCol>
-            <CCol xs="10" lg="4">
-               Machine Serial Number: {machineDetails ? machineDetails.machineSerialNo : null}
-            </CCol>
-            <CCol xs="10" lg="4">
-               Machine Type: {machineDetails ? machineDetails.machineType : null}
-            </CCol>
-         </CRow>
-
-         <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
-            <CCol xs="10" lg="4">
-               Make: {machineDetails ? machineDetails.make : null}
-            </CCol>
-            <CCol xs="10" lg="4">
-               Model: {machineDetails ? machineDetails.model : null}
-            </CCol>
-            <CCol xs="10" lg="4">
-               Machine Age: {machineDetails ? machineDetails.machineAge : null}
-            </CCol>
-         </CRow>
-
-         <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
-            <CCol xs="10" lg="4">
-               Machine Controller: {machineDetails ? machineDetails.machineType : null}
-            </CCol>
-            <CCol xs="10" lg="4">
-               Controller Model: {machineDetails ? machineDetails.controllerModel : null}
-            </CCol>
-         </CRow>
-
-            <CCardHeader>
-               <CCardSubtitle style={{marginTop:'2%'}}>Customer Contact Details</CCardSubtitle>
-            </CCardHeader>
-         <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
-            <CCol xs="10" lg="4">
-               Contact Person Name: {customerDetails ? customerDetails.contactPerson : null}
-            </CCol>
-            <CCol xs="10" lg="4">
-               Contact Number: {customerDetails ? customerDetails.mobileNo : null}
-            </CCol>
-            <CCol xs="10" lg="4">
-               Alternate Number: {customerDetails ? customerDetails.alternateNo : null}
-            </CCol>
-         </CRow>
-
-         <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
-            <CCol xs="10" lg="6">
-               Customer Address: {customerDetails ? customerDetails.address : null}
-            </CCol>
-            <CCol xs="10" lg="6">
-               Email: {customerDetails ? customerDetails.email : null}
-            </CCol>
-         </CRow>
          <CRow>
             <CCardFooter style={{ width: '15%', marginLeft: '70%' }}>
-               {edit ?
+               
                   <CRow>
                      <CButton block color="info" className="mr-1" onClick={submitHandler}
                      >Submit</CButton>
                      <CButton block color="info" className="mr-1" onClick={cancelHandler}
                      >Cancel</CButton>
                   </CRow>
-                  : <CButton block color="info" className="mr-1" onClick={closeHandler}>Close</CButton>}
+                  
             </CCardFooter>
          </CRow>
       </CCard>
