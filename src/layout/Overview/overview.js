@@ -32,7 +32,7 @@ import routes from '../../routes'
 import CIcon from '@coreui/icons-react'
 import { useHistory } from "react-router-dom";
 import ServiceRequestService from '../../services/serviceRequestService'
-import SalesVisitService from '../../services/salesVisitService'
+import SalesVisitService from '../../services/salesVisitService'  
 import PmService from '../../services/pmService';
 import { Doughnut } from 'react-chartjs-2'
 
@@ -280,67 +280,6 @@ export default function Overview() {
 
   }
 
-  // const overviewsubmitServie = () => {
-  //   let currentData = {}
-  //   currentData.id = Math.round(Math.random() * 10000000)
-  //   currentData.servicerequestId = "Ul45S365TY78"
-  //   currentData.status = status
-  //   currentData.issueType=issueType
-  //   currentData.priority=priority
-  //   currentData.company=company
-  //   currentData.createdDate=createdDate
-  //   currentData.executive=executive
-  //   currentData.email=email
-  //   let allData = [...overviewdata] 
-  //   allData.push(currentData)
-  //   setOverviewData(allData)
-  //   setOverviewInfo(!overviewinfo)
-  //   setLoading(true)
-  //   setTimeout(function(){  
-  //      setLoading(false)
-  //      setAlert(true)
-  //    }, 3000);
-
-  // }
-  // const overvieweditservice = () => {   
-  // let updatedData = {}
-  //   updatedData.id = updateId
-  //   updatedData.servicerequestId = servicerequestId
-  //   updatedData.status = status
-  //   updatedData.issueType=issueType
-  //   updatedData.company=company
-  //   updatedData.executive=executive
-  //   updatedData.email=email
-  //   updatedData.createdDate=createdDate
-  //   updatedData.priority=priority
-  //   let filteredArr = overviewdata.filter(function( obj ) {
-  //     return obj.id !== updateId;
-  //   });
-  //   setOverviewData([...filteredArr, updatedData])
-  //   setOverviewEditModal(false)
-  //   setLoading(true)
-  //   setTimeout(function(){  
-  //      setLoading(false)
-  //      setEditAlert(true)
-  //    }, 3000);
-
-  // }
-
-  // const overviewdeleteservice = () => {
-  // let element = [...overviewdata]
-  // let updatedData = {}
-  // updatedData.id = updateId
-  // console.log(updatedData.id);
-  // element = element.filter(item => item.id !==updatedData.id);
-  // setOverviewData(element)
-  // setOverviewEditModal(false)
-  // setLoading(true)
-  // setTimeout(function(){  
-  //   setLoading(false)
-  //   setDeleteAlert(true)
-  // }, 3000);
-  // }
-
   const getServiceData = async () => {
     let res = await serviceRequestService.getAllServiceRequests()
     setServiceData(res.slice(0, 3))
@@ -437,11 +376,10 @@ export default function Overview() {
       setExecutiveInfo(!executiveinfo)
     }
   }
-  const editServiceHandler = (item) => {
+  const editServiceHandler =  (item) => {
     history.push({
-      pathname: '/editServiceRequest',
-      state: item
-    });
+      pathname:`/editServiceRequest/${item.servicerequestId}`,
+      state: item });
   }
   const addServiceHandler = () => {
     history.push('./createServiceRequest')

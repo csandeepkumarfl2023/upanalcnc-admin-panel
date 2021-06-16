@@ -15,6 +15,7 @@ const Attendance =  React.lazy(() => import('./layout/Attendance/attendance'));
 const Settings =  React.lazy(() => import('./layout/Settings/settings'));
 const EditServiceRequest = React.lazy(() => import('./layout/ServiceRequests/editServiceRequest'));
 const CreateServiceRequest = React.lazy(() => import('./layout/ServiceRequests/createServiceRequest'));
+const EditCustomer = React.lazy(() => import('./layout/CustomerManagement/Customers/customer'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -34,6 +35,7 @@ const routes = [
   { path: '/settings', name: 'Settings', component: Settings },
   { path: '/createServiceRequest', name: 'createServiceRequest', component: CreateServiceRequest },
   { path: '/overview/breadcrumbs', name: 'Breadcrumbs', component: Breadcrumbs },
+  { path: '/editCustomer/:id', name: 'EditCustomer', component: EditCustomer },
 
 ];
 

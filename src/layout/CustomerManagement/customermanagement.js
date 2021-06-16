@@ -13,7 +13,7 @@ import {
   CTabs,
   CCardHeader
 } from '@coreui/react'
-import Customer from './customer'
+import Customer from './Customers/customer'
 import Machines from './machines'
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -36,7 +36,7 @@ export default function CustomerManagement() {
   React.useEffect(() => {
     setLoading(true)
     setTimeout(function(){  
-      setLoading(false)
+      setLoading(false)             
     }, 2000);
   },[])
 

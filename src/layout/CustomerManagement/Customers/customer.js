@@ -20,11 +20,14 @@ import {
   CSelect,
   CLink
 } from '@coreui/react'
-import CustomerService from '../../services/customerService'
+import CustomerService from '../../../services/customerService'
+import { useHistory } from "react-router-dom";
 
 const customerService = new CustomerService()
 
 export default function Customer() {
+  const history = useHistory();
+
   const [info, setInfo] = useState(false)
   const [customerName, setCustomerName] = useState("")
   const [customerCode, setCustomerCode] = useState("")
@@ -146,6 +149,12 @@ export default function Customer() {
     setInfo(true)
   }
 
+  const editCustomer = (item) => {
+    history.push({
+      pathname:`/editCustomer/${item.customerName}`,
+      state: item });
+  }
+
   React.useEffect(() => {
     getData()
     setLoading(true)
@@ -192,20 +201,7 @@ export default function Customer() {
                   (item) => (
                     <td>
                     <CLink>  <a onClick={() => {
-                        setUpdateId(item.id)
-                        setCustomerName(item.customerName)
-                        setCustomerCode(item.customerCode)
-                        setContactPerson(item.contactPerson)
-                        setMobileNo(item.mobileNo)
-                        setAlternateNo(item.alternateNo)
-                        setAddress(item.address)
-                        setCity(item.city)
-                        setZipCode(item.zipCode)
-                        setState(item.state)
-                        setCountry(item.country)
-                        setGstNumber(item.gstNumber)
-                        setEmail(item.email)
-                        setEditModal(!editModal)
+                       editCustomer(item)
                       }
                       }
                       >{item.customerName}</a></CLink>
@@ -316,97 +312,7 @@ export default function Customer() {
           </CCardBody>
           {/* : null } */}
         </CCol>
-        <CModal
-          show={editModal}
-          onClose={() => setEditModal(false)}
-          color="info"
-        >
-          <CModalHeader closeButton>
-            <CModalTitle>Edit Customers</CModalTitle>
-          </CModalHeader>
-          <CModalBody>
-            <CRow>
-              <CCol xs="10" md="6">
-                <CFormGroup >
-                  <CLabel htmlFor="customerName">Customer Name</CLabel>
-                  <CInput type="text" id="customerName" name="customerName" placeholder="Customer Name" value={customerName ? customerName : ''} onChange={(e) => setCustomerName(e.target.value)} />
-                </CFormGroup>
-              </CCol>
-              <CCol xs="10" md="6">
-                <CFormGroup >
-                  <CLabel htmlFor="contactPerson">Contact Person</CLabel>
-                  <CInput type="text" id="contactPerson" name="contactPerson" placeholder="Contact Person" value={contactPerson ? contactPerson : ''} onChange={(e) => setContactPerson(e.target.value)} />
-                </CFormGroup>
-              </CCol>
-            </CRow>
-            <CRow>
-              <CCol xs="10" md="6">
-                <CFormGroup >
-                  <CLabel htmlFor="mobileNo">Contact Number</CLabel>
-                  <CInput type="text" id="mobileNo" name="mobileNo" placeholder="Mobile No" value={mobileNo ? mobileNo : ''} onChange={(e) => setMobileNo(e.target.value)} />
-                </CFormGroup>
-              </CCol>
-              <CCol xs="10" md="6">
-                <CFormGroup >
-                  <CLabel htmlFor="alternateNo">Alternate No</CLabel>
-                  <CInput type="text" id="alternateNo" name="alternateNo" placeholder="Alternate No" value={alternateNo ? alternateNo : ''} onChange={(e) => setAlternateNo(e.target.value)} />
-                </CFormGroup>
-              </CCol>
-            </CRow>
-            <CRow>
-              <CCol xs="10" md="4">
-                <CFormGroup >
-                  <CLabel htmlFor="address">Address</CLabel>
-                  <CInput type="text" id="address" name="address" placeholder="Address" value={address ? address : ''} onChange={(e) => setAddress(e.target.value)} />
-                </CFormGroup>
-              </CCol>
-              <CCol xs="10" md="4">
-                <CFormGroup >
-                  <CLabel htmlFor="city">City</CLabel>
-                  <CInput type="text" id="city" name="city" placeholder="City" value={city ? city : ''} onChange={(e) => setCity(e.target.value)} />
-                </CFormGroup>
-              </CCol>
-              <CCol xs="10" md="4">
-                <CFormGroup >
-                  <CLabel htmlFor="zipCode">Zip Code</CLabel>
-                  <CInput type="text" id="zipCode" name="zipCode" placeholder="Zip Code" value={zipCode ? zipCode : ''} onChange={(e) => setZipCode(e.target.value)} />
-                </CFormGroup>
-              </CCol>
-            </CRow>
-            <CRow>
-              <CCol xs="10" md="6">
-                <CFormGroup >
-                  <CLabel htmlFor="state">State</CLabel>
-                  <CInput type="text" id="state" name="state" placeholder="State" value={state ? state : ''} onChange={(e) => setState(e.target.value)} />
-                </CFormGroup>
-              </CCol>
-              <CCol xs="10" md="6">
-                <CFormGroup >
-                  <CLabel htmlFor="country">Country</CLabel>
-                  <CInput type="text" id="country" name="country" placeholder="Country" value={country ? country : ''} onChange={(e) => setCountry(e.target.value)} />
-                </CFormGroup>
-              </CCol>
-            </CRow>
-            <CRow>
-              <CCol xs="10" md="6">
-                <CFormGroup >
-                  <CLabel htmlFor="email">Email</CLabel>
-                  <CInput type="text" id="email" name="email" placeholder="Email" value={email ? email : ''} onChange={(e) => setEmail(e.target.value)} />
-                </CFormGroup>
-              </CCol>
-              <CCol xs="10" md="6">
-                <CFormGroup >
-                  <CLabel htmlFor="gstNumber">GSTN</CLabel>
-                  <CInput type="text" id="gstNumber" name="gstNumber" placeholder="GSTN" value={gstNumber ? gstNumber : ''} onChange={(e) => setGstNumber(e.target.value)} />
-                </CFormGroup>
-              </CCol>
-            </CRow>
-          </CModalBody>
-          <CModalFooter>
-            <CButton color="secondary" onClick={deleteHandler}>Delete</CButton>
-            <CButton color="info" onClick={editBtnHandler}>Edit</CButton>{' '}
-          </CModalFooter>
-        </CModal>
+       
       </CRow>
     </div>
 
