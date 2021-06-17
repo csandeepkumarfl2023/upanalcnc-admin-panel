@@ -63,6 +63,8 @@ export default function CreateServiceRequest() {
         currentData.id = Math.round(Math.random() * 10000000)
         currentData.servicerequestId = 'UPNLSR' + Math.round(Math.random() * 100000)
         currentData.status = 'Assigned'
+        currentData.client_id = customerName
+        currentData.machine_id = machine
         currentData.customerName = customerName
         currentData.company = company
         currentData.customerCode = customerCode
@@ -79,12 +81,13 @@ export default function CreateServiceRequest() {
         currentData.machineAge = machineAge
         currentData.machineController = machineController
         currentData.controllerModel = controllerModel
-        currentData.issueType=issueType
+        currentData.ISSUE_TYPE=issueType
         currentData.priority=priority
         currentData.executive=executive
-        currentData.date=date
+        currentData.expected_resolution_date=date
         currentData.time=time
-        currentData.issueDetails=issueDetails
+        currentData.request_detail=issueDetails
+        // currentData.ISSUE_TYPE= { 0: "ELECTRICAL", 1: "MECHANICAL" }
         currentData.createdDate = moment().format('MMMM Do YYYY, h:mm:ss a')
         console.log(currentData)
         let res = await serviceRequestService.createServiceReq(currentData)
@@ -93,40 +96,40 @@ export default function CreateServiceRequest() {
 
     const customerChangeHandler = (e) => {
       let customerId = e.target.value
-      let selectedCustomer = customerArr.find((elem) => elem.id == customerId )
+      let selectedCustomer = customerArr.find((elem) => elem.client_id == customerId )
       console.log(selectedCustomer)
-      setCompany(selectedCustomer.customerName)
-      setCustomerName(selectedCustomer.id)
+      setCompany(selectedCustomer.company)
+      setCustomerName(selectedCustomer.client_id)
       setCustomerCode(selectedCustomer.customerCode)
-      setContactName(selectedCustomer.contactPerson)
-      setContactNumber(selectedCustomer.mobileNo)
-      setAlternateNumber(selectedCustomer.alternateNo)
-      setEmail(selectedCustomer.email)
+      setContactName(selectedCustomer.contact_person)
+      setContactNumber(selectedCustomer.phone_number)
+      setAlternateNumber(selectedCustomer.alternate_phone_number)
+      setEmail(selectedCustomer.email_id)
       setCustomerAddress(selectedCustomer.address)
     }
 
     const machineChangeController = (e) => {
       let machineId = e.target.value
-      let selectedMachine = machineArr.find((elem) => elem.id == machineId )
+      let selectedMachine = machineArr.find((elem) => elem.machine_id == machineId )
       console.log(selectedMachine)
-      setMachine(selectedMachine.id)
-      setMachineSerialNo(selectedMachine.machineSerialNo)
-      setMachineType(selectedMachine.machineType)
-      setMake(selectedMachine.make)
-      setModel(selectedMachine.model)
-      setMachineAge(selectedMachine.machineAge)
-      setMachineController(selectedMachine.controller)
-      setControllerModel(selectedMachine.controllerModel)
+      setMachine(selectedMachine.machine_id)
+      setMachineSerialNo(selectedMachine.machine_serial_number)
+      setMachineType(selectedMachine.machine_type)
+      setMake(selectedMachine.machine_make)
+      setModel(selectedMachine.machine_model)
+      setMachineAge(selectedMachine.machine_age_as_on_installation)
+      setMachineController(selectedMachine.machine_controller)
+      setControllerModel(selectedMachine.machine_controller_model)
     }
 
     const getCustomersList = async() => {
       let res = await customerSerice.getAllCustomers()
-      setCustomerArr(res)
+      setCustomerArr(res.data)
     }
 
     const getMachinesList = async() => {
       let res = await machineService.getAllMachines()
-      setMachineArr(res)
+      setMachineArr(res.data)
     }
 
     React.useEffect(() => {
@@ -146,7 +149,7 @@ export default function CreateServiceRequest() {
                <CSelect custom size="md" name="name" id="name" value={customerName} onChange={customerChangeHandler}>
                  <option value="">Open this select menu</option>
                  {customerArr && customerArr.length ? customerArr.map((elem) => {
-                   return <option key={elem.id} value={elem.id}>{elem.customerName}</option>
+                   return <option key={elem.client_id} value={elem.client_id}>{elem.company}</option>
                  }
                    ) : null}
                  
@@ -213,7 +216,7 @@ export default function CreateServiceRequest() {
                <CSelect custom size="md" name="name" id="name"  value={machine} onChange={machineChangeController} style={{width:'150%'}}>
                  <option value="">Open this select menu</option>
                  {machineArr && machineArr.length ? machineArr.map((elem) => {
-                   return <option key={elem.id} value={elem.id}>{elem.machineType}</option>
+                   return <option key={elem.machine_id} value={elem.machine_id}>{elem.machine_name}</option>
                  }
                    ) : null} 
                 

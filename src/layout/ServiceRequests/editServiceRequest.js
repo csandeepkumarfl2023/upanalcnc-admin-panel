@@ -75,13 +75,13 @@ export default function EditServiceRequest(props) {
 
    const getCustomerDetails = async () => {
       let res = await customerSerice.getCustomer(item.customerName)
-      setCustomerDetails(res)
+      setCustomerDetails(res.data)
       console.log('cus', res)
    }
 
    const getMachineDetails = async () => {
       let res = await machineService.getMachine(item.machine)
-      setMachineDetails(res)
+      setMachineDetails(res.data)
       console.log('mac', res)
    }
 
@@ -128,7 +128,7 @@ export default function EditServiceRequest(props) {
                   <CRow>
                <div style={{ fontWeight:'bold'}}> Customer Name: </div>
                <CCol xs="10" md="6">
-                {customerDetails ? customerDetails.customerName : null} 
+                {customerDetails ? customerDetails.company : null} 
                 </CCol>
                 </CRow>
                </CCol>
@@ -249,7 +249,7 @@ export default function EditServiceRequest(props) {
                <CRow>
                <div style={{ fontWeight:'bold'}}>Machine ID: </div>
                <CCol xs="10" md="6">
-               {machineDetails ? machineDetails.machineId : null}
+               {machineDetails ? machineDetails.machine_id : null}
                </CCol> </CRow>
             </CCol>
             <CCol xs="10" lg="4">

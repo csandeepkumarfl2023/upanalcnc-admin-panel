@@ -209,13 +209,17 @@ export default function EditCustomer(props) {
          </CCardBody>
 
          <CRow>
-            <CCardFooter style={{ width: '15%', marginLeft: '70%' }}>
+            <CCardFooter style={{ width: '25%', marginLeft: '60%' }}>
                
                   <CRow>
+                     <CCol xs="6">
                      <CButton block color="info" className="mr-1" onClick={submitHandler}
                      >Submit</CButton>
+                     </CCol>
+                     <CCol xs="6">
                      <CButton block color="info" className="mr-1" onClick={cancelHandler}
                      >Cancel</CButton>
+                     </CCol>
                   </CRow>
                   
             </CCardFooter>
