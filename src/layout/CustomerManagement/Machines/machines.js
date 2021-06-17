@@ -92,6 +92,12 @@ export default function Machines() {
     const addMachineHandler = () => {
       history.push('./createMachine')
     }
+    const editMachineHandler = (item) => {
+      history.push({
+        pathname:`/editMachine/${item.machineId}`,
+        state: item });
+    }
+
     const submitHandler = async () => {
         let currentData = {}
         currentData.id = Math.round(Math.random() * 10000000)
@@ -208,18 +214,8 @@ export default function Machines() {
                   (item)=>(
                     <td>
                   <CLink> <a  onClick={()=>{
-                     setUpdateId(item.id)
-                     setCustomerCode(item.customerCode)
-                     setMachineType(item.machineType)
-                     setMake(item.make)
-                     setModel(item.model)
-                     setGenerateQRCode(item.generateQRCode)
-                     setMachineId(item.machineId)
-                     setMachineAge(item.machineAge)
-                     setMachineSerialNo(item.machineSerialNo)
-                     setController(item.controller)
-                     setControllerModel(item.controllerModel)
-                      setEditModal(!editModal)}
+                                        editMachineHandler(item)
+                                      }
                    }
                       >{item.machineId}</a></CLink>
                     </td>
@@ -299,7 +295,7 @@ export default function Machines() {
               </CModalBody>
               <CModalFooter>
                 <CButton color="secondary" onClick={ deleteHandler}>Delete</CButton>
-                <CButton color="info" onClick={editBtnHandler}>Edit</CButton>{' '}
+                {/* <CButton color="info" onClick={editBtnHandler}>Edit</CButton>{' '} */}
               </CModalFooter>
             </CModal>
         </CRow>
