@@ -127,7 +127,7 @@ export default function EditServiceRequest(props) {
                <CCol xs="10" md="4">
                   <CRow>
                <div style={{ fontWeight:'bold'}}> Customer Name: </div>
-               <CCol xs="10" md="3">
+               <CCol xs="10" md="6">
                 {customerDetails ? customerDetails.customerName : null} 
                 </CCol>
                 </CRow>
@@ -135,7 +135,7 @@ export default function EditServiceRequest(props) {
                <CCol xs="10" md="4">
                   <CRow>
                <div style={{ fontWeight:'bold'}}> Customer Code: </div>
-               <CCol xs="10" md="4">
+               <CCol xs="10" md="6">
                 {customerDetails ? customerDetails.customerCode : null}  </CCol>
                  </CRow>
                </CCol>
@@ -248,14 +248,14 @@ export default function EditServiceRequest(props) {
             <CCol xs="10" lg="4">
                <CRow>
                <div style={{ fontWeight:'bold'}}>Machine ID: </div>
-               <CCol xs="10" md="4">
+               <CCol xs="10" md="6">
                {machineDetails ? machineDetails.machineId : null}
                </CCol> </CRow>
             </CCol>
             <CCol xs="10" lg="4">
             <CRow>  
             <div style={{ fontWeight:'bold'}}>Machine Serial Number: </div>
-            <CCol xs="10" md="4">
+            <CCol xs="10" md="6">
              {machineDetails ? machineDetails.machineSerialNo : null} 
              </CCol> </CRow>
             </CCol>
@@ -272,14 +272,14 @@ export default function EditServiceRequest(props) {
             <CCol xs="10" lg="4">
                <CRow>
             <div style={{ fontWeight:'bold'}}>Make: </div>
-            <CCol xs="10" md="4">
+            <CCol xs="10" md="6">
                 {machineDetails ? machineDetails.make : null} 
                 </CCol> </CRow>
             </CCol>
             <CCol xs="10" lg="4">
                <CRow>
             <div style={{ fontWeight:'bold'}}>Model: </div>
-            <CCol xs="10" md="4">
+            <CCol xs="10" md="6">
                 {machineDetails ? machineDetails.model : null} 
                 </CCol> </CRow>
             </CCol>
@@ -324,7 +324,7 @@ export default function EditServiceRequest(props) {
             <CCol xs="10" lg="4">
                <CRow>
             <div style={{ fontWeight:'bold'}}>  Contact Number: </div>
-            <CCol xs="10" md="3">
+            <CCol xs="10" md="6">
                {customerDetails ? customerDetails.mobileNo : null}
                </CCol>
                 </CRow>
@@ -332,7 +332,7 @@ export default function EditServiceRequest(props) {
             <CCol xs="10" lg="4">
                <CRow>
             <div style={{ fontWeight:'bold'}}>  Alternate Number: </div>
-            <CCol xs="10" md="3">
+            <CCol xs="10" md="6">
                {customerDetails ? customerDetails.alternateNo : null} 
                
                </CCol></CRow>
