@@ -29,6 +29,12 @@ export default function CreateMachine() {
     const [controller,setController] = useState("")
 
     const submitHandler = async (value) =>  {
+        if(value.controller == 'Others') {
+            value.controller = value.otherMachineController
+        }
+        if(value.machineType == 'Others') {
+            value.machineType = value.otherMachineType
+        }
         let res = await machineservice.createMachine(value)
         console.log(res);
         history.push('./customermanagement')
@@ -48,8 +54,9 @@ export default function CreateMachine() {
              initialValues={data}
             onSubmit={async (values) => {
                submitHandler(values)
+               console.log(values)
             }}>
-            {({ handleSubmit, handleChange, values, errors, touched }) => (
+            {({ handleSubmit, handleChange, values, errors, touched, setFieldValue }) => (
 
                 <div >
                     <CCard style={{ padding: '40px', borderColor: 'lightgray' }}>
@@ -114,7 +121,11 @@ export default function CreateMachine() {
                     <CCol xs="10" sm="3">
                     Machine Controller: 
                 <CFormGroup >
-                <CSelect custom size="md" name="controller" id="controller"  value={controller} onChange={controllerHandler}>
+                <CSelect custom size="md" name="controller" id="controller"  value={values.controller} 
+                onChange={(e) => {
+                    setFieldValue('controller', e.target.value)
+                    e.target.value == 'Others' ? setOthers(true) :  setOthers(false)
+                    }}>
                   <option value="0">Open this select menu</option>
                   <option value="Funac">Funac</option>
                   <option value="Siemens">Siemens</option>
@@ -125,7 +136,7 @@ export default function CreateMachine() {
                  { others ?   
                   <>
                 <CLabel htmlFor="controller">Enter Your Option</CLabel>                  
-                <CInput type="text" id="others" name="others" placeholder="Machine controller"  onChange={handleChange}/>
+                <CInput type="text" id="others" name="otherMachineController" placeholder="Machine controller"  onChange={handleChange}/>
                 </>
                   : null } 
               </CFormGroup>
@@ -134,7 +145,12 @@ export default function CreateMachine() {
                         <CCol xs="10" sm="3">
                         Machine Type: 
                         <CFormGroup >
-                <CSelect custom size="md" name="machineType" id="machineType" value={machineType}  onChange={typeHandler}>
+                <CSelect custom size="md" name="machineType" id="machineType"
+                    value={values.machineType} 
+                onChange={(e) => {
+                    setFieldValue('machineType', e.target.value)
+                    e.target.value == 'Others' ? setTypeOthers(true) :  setTypeOthers(false)
+                    }}>
                   <option value="0">Open this select menu</option>
                   <option value="VMC">VMC</option>
                   <option value="TURNING">TURNING</option>
@@ -146,7 +162,7 @@ export default function CreateMachine() {
                 { typeOthers ? 
                   <>
                  <CLabel htmlFor="controller">Enter Your Option</CLabel>                  
-                <CInput type="text" id="others" name="others" placeholder="Machine Type"  onChange={handleChange}/>
+                <CInput type="text" id="others" name="otherMachineType" placeholder="Machine Type"  onChange={handleChange}/>
                  </>
                   : null } 
               </CFormGroup>
