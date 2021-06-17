@@ -22,7 +22,6 @@ let customerData = [
 export default class CustomerService{
 
  async createCustomer(data) {
-    customerData.push(data)
     let response = await Axios.post(`${constants.apiEndPoint}client`, data)
     return response
 };

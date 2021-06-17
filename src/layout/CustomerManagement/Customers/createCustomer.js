@@ -1,16 +1,11 @@
 import React, { useState } from 'react'
 import {
     CCard,
-    CCardHeader,
-    CCardBody,
     CCol,
-    CSelect,
     CRow,
     CButton,
     CFormGroup,
     CInput,
-    CCardSubtitle,
-    CCardFooter,
 } from '@coreui/react'
 import { Formik } from "formik"
 import CustomerService from '../../../services/customerService';

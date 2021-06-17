@@ -12,17 +12,11 @@ import {
    CCardSubtitle,
    CCardFooter,
 } from '@coreui/react'
-
-import CIcon from '@coreui/icons-react'
 import { useHistory } from "react-router-dom";
-import ServiceRequestService from '../../../services/serviceRequestService'
 import CustomerService from '../../../services/customerService'
-import MachineService from '../../../services/machineService'
 import moment from 'moment'
 
-const serviceRequestService = new ServiceRequestService()
 const customerSerice = new CustomerService()
-const machineService = new MachineService()
 
 export default function EditCustomer(props) {
    const history = useHistory();

@@ -1,4 +1,5 @@
 import { constants } from '../constants';
+import Axios from '../helper/axios.helper';
 
 let machineData = [
     { 
@@ -14,29 +15,23 @@ let machineData = [
 export default class MachineService{
 
  async createMachine(data) {
-    machineData.push(data)
-    let response = machineData
+    let response = await Axios.post(`${constants.apiEndPoint}machine`, data)
     return response
 };
 
  async getAllMachines() {
-    let response = machineData
+    let response = await Axios.get(`${constants.apiEndPoint}machine`)
     return response
 }
 
 async getMachine(id) {
-    let response = machineData.find(elem => elem.id == id)
+    let response = await Axios.get(`${constants.apiEndPoint}machine/${id}`)
     return response
 }
 
- async updateMachine(data, id) {
-    let filteredArr = machineData.filter(function (obj) {
-        return obj.id !== id;
-      });
-    machineData = [
-        ...filteredArr, data
-    ]
-    return machineData
+ async updateMachine(data) {
+    let response = await Axios.put(`${constants.apiEndPoint}machine`, data)
+    return response
 }
 
  async deleteMachine(id) {

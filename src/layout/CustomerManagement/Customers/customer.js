@@ -53,57 +53,6 @@ export default function Customer() {
 
   const fields = ['customerName', 'customerCode', 'contact_person', 'phone_number', 'email_id', 'address', 'gst_number']
 
-
-  const submitHandler = async () => {
-    let currentData = {}
-    currentData.id = Math.round(Math.random() * 10000000)
-    currentData.customerName = customerName
-    currentData.contactPerson = contactPerson
-    currentData.mobileNo = mobileNo
-    currentData.customerCode = 'UPNLCUS' + Math.round(Math.random() * 10000)
-    currentData.alternateNo = alternateNo
-    currentData.address = address
-    currentData.city = city
-    currentData.zipCode = zipCode
-    currentData.state = state
-    currentData.country = country
-    currentData.email = email
-    currentData.gstNumber = gstNumber
-    let res = await customerService.createCustomer(currentData)
-    getData()
-    setInfo(!info)
-    setLoading(true)
-    setTimeout(function () {
-      setLoading(false)
-      setAlert(true)
-    }, 3000);
-  }
-  const editBtnHandler = async () => {
-    let updatedData = {}
-    updatedData.id = updateId
-    updatedData.customerName = customerName
-    updatedData.customerCode = customerCode
-    updatedData.contactPerson = contactPerson
-    updatedData.mobileNo = mobileNo
-    updatedData.alternateNo = alternateNo
-    updatedData.address = address
-    updatedData.city = city
-    updatedData.zipCode = zipCode
-    updatedData.state = state
-    updatedData.country = country
-    updatedData.email = email
-    updatedData.gstNumber = gstNumber
-    console.log('updatedData', updatedData)
-    let res = await customerService.updateCustomer(updatedData, updateId)
-    getData()
-    setEditModal(false)
-    setLoading(true)
-    setTimeout(function () {
-      setLoading(false)
-      setEditAlert(true)
-    }, 3000);
-  }
-
   const getData = async () => {
     let res = await customerService.getAllCustomers()
     setData(res.data)

@@ -29,7 +29,6 @@ export default function EditMachine(props) {
     console.log('item', props.location.state);
     const history = useHistory();
     const [item, setItem] = useState(props.location.state)
-    const [edit, setEdit] = React.useState(false)
     const [machineType, setMachineType] = useState("")
     const [customerCode, setCustomerCode] = useState("")
     const [make, setMake] = useState("")
@@ -39,50 +38,40 @@ export default function EditMachine(props) {
     const [controller, setController] = useState("")
     const [controllerModel, setControllerModel] = useState("")
     const [generateQRCode, setGenerateQRCode] = useState("")
-    const [data, setData] = useState([])
-    const [machineDetails, setMachineDetails] = useState()
-    const [serviceReqDetails, setServiceReqDetails] = useState()
-    const [updateId, setUpdateId] = useState()
 
-
-    // const closeHandler = () => {
-    //     history.push('/customermanagement');
-    // }
     const cancelHandler = () => {
         history.push('/customermanagement');
     }
 
     const getMachineDetails = async () => {
-        const res = await machineService.getMachine(item.id)
-        setMachineDetails(res)
-        console.log('getCustomerDetails', res)
-        setCustomerCode(res.customerCode)
-        setMachineType(res.machineType)
-        setMake(res.make)
-        setModel(res.model)
-        setMachineSerialNo(res.machineSerialNo)
-        setMachineAge(res.machineAge)
-        setController(res.controller)
-        setControllerModel(res.controllerModel)
-        setGenerateQRCode(res.generateQRCode)
+        const res = await machineService.getMachine(item.machine_id)
+        console.log('getMachinedetails', res.data)
+        setCustomerCode(res.data.customerCode)
+        setMachineType(res.data.machine_type)
+        setMake(res.data.machine_make)
+        setModel(res.data.machine_model)
+        setMachineSerialNo(res.data.machine_serial_number)
+        setMachineAge(res.data.machine_age_as_on_installation)
+        setController(res.data.machine_controller)
+        setControllerModel(res.data.machine_controller_model)
+        setGenerateQRCode(res.data.generateQRCode)
 
     }
 
     const submitHandler = async () => {
         let currentData = { ...item }
-        currentData.machineType = machineType
+        currentData.machine_type = machineType
         currentData.customerCode = customerCode
-        currentData.make = make
-        currentData.model = model
-        currentData.machineSerialNo = machineSerialNo
-        currentData.machineAge = machineAge
-        currentData.controller = controller
-        currentData.controllerModel = controllerModel
+        currentData.machine_make = make
+        currentData.machine_model = model
+        currentData.machine_serial_number = machineSerialNo
+        currentData.machine_age_as_on_installation = machineAge
+        currentData.machine_controller = controller
+        currentData.machine_controller_model = controllerModel
         currentData.generateQRCode = generateQRCode
 
-
         console.log(currentData);
-        let res = await machineService.updateMachine(currentData, currentData.id)
+        let res = await machineService.updateMachine(currentData)
         history.push('/customermanagement');
     }
 
@@ -99,7 +88,7 @@ export default function EditMachine(props) {
             <CCardHeader>
                 <CRow>
                     <CCol xs="6" md="11">
-                        <CCardSubtitle style={{ marginTop: '1%' }}>Manchine {item ? item.machineId : null}</CCardSubtitle>
+                        <CCardSubtitle style={{ marginTop: '1%' }}>Machine {item ? item.machine_id : null}</CCardSubtitle>
                     </CCol>
                     <CCol xs="6" md="1">
                         {/* <CIcon name="cil-pen" size="1xl" onClick={() => setEdit(true)} /> */}
