@@ -29,19 +29,19 @@ const Login = (props) => {
   const loginHandler =  async (e) => {
     e.preventDefault()
     console.log('loginn');
-   // props.history.push('/overview')
-   let data = {
-      username: "1",
-      password: "welcome",
-      client_app_type: "EMPLOYEE"
-    }
-    try {
-    let res = await loginService.postLogin(data)
-    console.log('res', res);
-    }
-    catch ( err) {
-    console.log(err.message);
-    }
+   props.history.push('/overview')
+  //  let data = {
+  //     username: "1",
+  //     password: "welcome",
+  //     client_app_type: "EMPLOYEE"
+  //   }
+  //   try {
+  //   let res = await loginService.postLogin(data)
+  //   console.log('res', res);
+  //   }
+  //   catch ( err) {
+  //   console.log(err.message);
+  //   }
   }   
 
   return (

@@ -1,4 +1,5 @@
 import { constants } from '../constants';
+import Axios from '../helper/axios.helper';
 
 let customerData = [
     { 
@@ -22,7 +23,7 @@ export default class CustomerService{
 
  async createCustomer(data) {
     customerData.push(data)
-    let response = customerData
+    let response = await Axios.post(`${constants.apiEndPoint}client`, data)
     return response
 };
 
