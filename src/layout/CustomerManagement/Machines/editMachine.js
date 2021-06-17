@@ -45,11 +45,11 @@ export default function EditMachine(props) {
     const [updateId, setUpdateId] = useState()
 
 
-    const closeHandler = () => {
-        history.push('/customermanagement');
-    }
+    // const closeHandler = () => {
+    //     history.push('/customermanagement');
+    // }
     const cancelHandler = () => {
-        setEdit(false)
+        history.push('/customermanagement');
     }
 
     const getMachineDetails = async () => {
@@ -83,7 +83,7 @@ export default function EditMachine(props) {
 
         console.log(currentData);
         let res = await machineService.updateMachine(currentData, currentData.id)
-        history.push('./customermanagement')
+        history.push('/customermanagement');
     }
 
     React.useEffect(() => {
