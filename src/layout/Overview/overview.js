@@ -35,7 +35,7 @@ import ServiceRequestService from '../../services/serviceRequestService'
 import SalesVisitService from '../../services/salesVisitService'  
 import PmService from '../../services/pmService';
 import { Doughnut } from 'react-chartjs-2'
-
+  
 const fields = ['servicerequestId', 'company', 'priority', 'issueType', 'executive', 'status', 'contactNumber', 'email', 'createdDate']
 
 const pmfields = ['name', 'type', 'description']
@@ -141,6 +141,7 @@ export default function Overview() {
   const [assign, setAssign] = useState([])
 
   const getBadge = status => {
+    
     switch (status) {
       case 'Completed':
       case 'completed':
