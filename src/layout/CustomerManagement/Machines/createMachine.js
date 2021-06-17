@@ -59,68 +59,58 @@ export default function CreateMachine() {
             {({ handleSubmit, handleChange, values, errors, touched, setFieldValue }) => (
 
                 <div >
-                    <CCard style={{ padding: '40px', borderColor: 'lightgray' }}>
+                    <CCard style={{ padding: '40px', borderColor: 'lightgray'}}>
                      <CRow>
-                    <CCol xs="10" sm="3">
+                    <CCol xs="10" sm="4">
                         Machine Id: 
                         <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                        <CInput type="text" id="machineId" className="w-55" name="machineId" placeholder="Machine Id" onChange={handleChange}/>
+                        <CInput type="text" id="machineId" className="w-52" name="machineId" placeholder="Machine Id" onChange={handleChange}/>
                             </CFormGroup>
                             </CCol>
-                        <CCol xs="10" sm="3">
-                        Customer Code: 
-                        <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                        <CInput type="text" id="customerCode" className="w-55" name="customerCode" placeholder="Customer Code" onChange={handleChange}/>
-                        </CFormGroup>
-                        </CCol>
                       
-                        <CCol xs="10" sm="3">
+                        <CCol xs="10" sm="4">
                          Make: 
                         <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                        <CInput type="text" id="make" className="w-55" name="make" placeholder="Make" onChange={handleChange}/>
+                        <CInput type="text" id="make" className="w-52" name="make" placeholder="Make" onChange={handleChange}/>
                         </CFormGroup>
                         </CCol>
-                        <CCol xs="10" sm="3">
+                        <CCol xs="10" sm="4">
                         Controller Model: 
                         <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                        <CInput type="text" id="controllerModel" className="w-55" name="controllerModel" placeholder="Controller Model" onChange={handleChange}/>
+                        <CInput type="text" id="controllerModel" className="w-52" name="controllerModel" placeholder="Controller Model" onChange={handleChange}/>
                             </CFormGroup>
                             </CCol>
                         </CRow>   
    
                     <CRow>
-                    <CCol xs="10" sm="3">
+                    <CCol xs="10" sm="4">
                        Model: 
                         <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                        <CInput type="text" id="model" className="w-55" name="model" placeholder="Model" onChange={handleChange}/>
+                        <CInput type="text" id="model" className="w-52" name="model" placeholder="Model" onChange={handleChange}/>
                             </CFormGroup>
                             </CCol>
-                        <CCol xs="10" sm="3">
+                        <CCol xs="10" sm="4">
                         MachineSerialNo: 
                         <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                        <CInput type="text" id="machineSerialNo" className="w-55" name="machineSerialNo" placeholder="Machine SerialNo" onChange={handleChange}/>
+                        <CInput type="text" id="machineSerialNo" className="w-52" name="machineSerialNo" placeholder="Machine SerialNo" onChange={handleChange}/>
                         </CFormGroup>
                         </CCol>
-                        <CCol xs="10" sm="3">
+                        <CCol xs="10" sm="4">
                         Machine Age: 
                         <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                        <CInput type="text" id="machineAge" className="w-55" name="machineAge" placeholder="Machine Age" onChange={handleChange}/>
+                        <CInput type="text" id="machineAge" className="w-52" name="machineAge" placeholder="Machine Age" onChange={handleChange}/>
                         </CFormGroup>
                         </CCol>
-                        <CCol xs="10" sm="3">
-                        Generate QRCode: 
-                        <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                        <CInput type="text" id="generateQRCode" className="w-55" name="generateQRCode" placeholder="Generate QRCode" onChange={handleChange}/>
-                        </CFormGroup>
-                        </CCol>
+                      
                        
                         </CRow>   
 
                         
                     <CRow>
-                    <CCol xs="10" sm="3">
+                        
+                    <CCol xs="10" sm="4">
                     Machine Controller: 
-                <CFormGroup >
+                <CFormGroup className="w-52">
                 <CSelect custom size="md" name="controller" id="controller"  value={values.controller} 
                 onChange={(e) => {
                     setFieldValue('controller', e.target.value)
@@ -142,9 +132,9 @@ export default function CreateMachine() {
               </CFormGroup>
             </CCol>
                       
-                        <CCol xs="10" sm="3">
+                        <CCol xs="10" sm="4">
                         Machine Type: 
-                        <CFormGroup >
+                        <CFormGroup className="w-52">
                 <CSelect custom size="md" name="machineType" id="machineType"
                     value={values.machineType} 
                 onChange={(e) => {
@@ -166,6 +156,12 @@ export default function CreateMachine() {
                  </>
                   : null } 
               </CFormGroup>
+                        </CCol>
+                        <CCol xs="10" sm="4">
+                        Generate QRCode: 
+                        <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
+                        <CInput type="text" id="generateQRCode" className="w-52" name="generateQRCode" placeholder="Generate QRCode" onChange={handleChange}/>
+                        </CFormGroup>
                         </CCol>
                         </CRow>  
                         <CCol xs="10" sm="4">
