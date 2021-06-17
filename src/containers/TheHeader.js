@@ -44,9 +44,7 @@ const TheHeader = (props) => {
   }
 
   React.useEffect(() => {
-    console.log(location)
     let childRouteCheck = location.pathname.split('').slice(1).findIndex((elem => elem == '/'))
-    console.log(childRouteCheck)
     if (childRouteCheck) {
       setChildRouteNameIndex(childRouteCheck)
     } else {

@@ -51,7 +51,7 @@ export default function Customer() {
 
   const [data, setData] = useState([])
 
-  const fields = ['customerName', 'customerCode', 'contactPerson', 'mobileNo', 'email', 'address', 'gstNumber']
+  const fields = ['customerName', 'customerCode', 'contact_person', 'phone_number', 'email_id', 'address', 'gst_number']
 
 
   const submitHandler = async () => {
@@ -106,7 +106,7 @@ export default function Customer() {
 
   const getData = async () => {
     let res = await customerService.getAllCustomers()
-    setData(res)
+    setData(res.data)
   }
 
   const conditionalRowStyles = [
@@ -151,7 +151,7 @@ export default function Customer() {
 
   const editCustomerHandler = (item) => {
     history.push({
-      pathname:`/editCustomer/${item.customerName}`,
+      pathname:`/editCustomer/${item.client_id}`,
       state: item });
   }
 
@@ -208,7 +208,7 @@ export default function Customer() {
                        editCustomerHandler(item)
                       }
                       }
-                      >{item.customerName}</a></CLink>
+                      >{item.company}</a></CLink>
                     </td>
                   )
               }}

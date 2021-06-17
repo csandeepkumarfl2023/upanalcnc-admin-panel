@@ -1,9 +1,12 @@
 import Axios from "axios";
+import CommonService from '../services/commonService'
+
+const commonService = new CommonService()
 
 Axios.interceptors.request.use(async (config) => {
-    let token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiUk9MRVMiOlsiQURNSU4iXSwiaXNzIjoiaHR0cDovL3VwYW5hbC5jb20iLCJpYXQiOjE2MjM5MDUyNzcsImV4cCI6MTYyNDUwNTI3N30.Ri71sNO8e16hG_26G54xw_eR2MLVd8vDcRpgEP8UQQ-0rYc6eKKsH9gkZTs-6PvU7PDIPVboOxTeDZcAqgLpRA'
+    let token = await commonService.getToken('userToken')
     if(token){
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers['X-Authorization'] = `Bearer ${token}`;
     }
     return config;
 }, (error) => {

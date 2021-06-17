@@ -16,33 +16,37 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import AdminService from '../../../src/services/adminService'
+import CommonService from '../../services/commonService'
 import axios from 'axios'
 
 const loginService = new AdminService()
+const commonService = new CommonService()
 
 const Login = (props) => {
 
 
-
-
-
-  const loginHandler =  async (e) => {
+  const loginHandler = async (e) => {
     e.preventDefault()
     console.log('loginn');
-   props.history.push('/overview')
-  //  let data = {
-  //     username: "1",
-  //     password: "welcome",
-  //     client_app_type: "EMPLOYEE"
-  //   }
-  //   try {
-  //   let res = await loginService.postLogin(data)
-  //   console.log('res', res);
-  //   }
-  //   catch ( err) {
-  //   console.log(err.message);
-  //   }
-  }   
+
+    let data = {
+      username: "1",
+      password: "welcome",
+      client_app_type: "EMPLOYEE"
+    }
+    try {
+      let res = await loginService.postLogin(data)
+      if(res) {
+      let userToken = res.data.data.access_token
+      await commonService.setToken(userToken)
+      //  props.history.push('/overview')
+      }
+      props.history.push('/overview')
+    }
+    catch (err) {
+      console.log(err.message);
+    }
+  }
 
   return (
 
@@ -81,7 +85,7 @@ const Login = (props) => {
                     <CRow>
                       <CCol xs="6" className="text-center">
                         {/* <CButton color="primary" className="px-4" onClick={loginHandler} style={{ marginLeft: "120px" }}>Login</CButton> */}
-                        <button type="button"  style={{backgroundColor: '#321FDB',outline: 'none', border: 'none', borderRadius: '4px', color: 'white' }}  className="px-4 py-2" onClick={(e)=>loginHandler(e)}>Login</button>
+                        <button type="button" style={{ backgroundColor: '#321FDB', outline: 'none', border: 'none', borderRadius: '4px', color: 'white' }} className="px-4 py-2" onClick={(e) => loginHandler(e)}>Login</button>
                       </CCol>
                       <CCol xs="6" className="text-right">
                         {/* <CButton color="link" className="px-0">Forgot password?</CButton> */}

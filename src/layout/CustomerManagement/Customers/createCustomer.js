@@ -26,13 +26,17 @@ export default function CreateCustomer() {
         address: "", gst_number: "", alternate_phone_number: "", city: "", pincode: "", state: "", country: ""
     })
 
+    // const submitHandler = async (value) =>  {
+    //     let res = await customerservice.createCustomer(value)
+    //     console.log(res);
+    //     history.push('./customermanagement')
+    // }
+
     const submitHandler = async (value) => {
         try {
             value.company = 'test'
             value.password = 'welcome'
-            console.log(value)
             let res = await customerservice.createCustomer(value)
-            console.log('customerres', res);
             history.push('./customermanagement')
         } catch (err) {
             console.log('err', err)

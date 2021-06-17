@@ -25,8 +25,6 @@ const customerSerice = new CustomerService()
 const machineService = new MachineService()
 
 export default function EditCustomer(props) {
-
-   console.log('item', props.location.state);
    const history = useHistory();
    const [item, setItem] = useState(props.location.state)
    const [edit, setEdit] = React.useState(false)
@@ -42,55 +40,50 @@ export default function EditCustomer(props) {
    const [zip, setZip] = useState("")
    const [state, setState] = useState("")
    const [country, setCountry] = useState("")
-   const [data, setData] = useState([])
-   const [customerDetails, setCustomerDetails] = useState()
-   const [machineDetails, setMachineDetails] = useState()
-   const [serviceReqDetails, setServiceReqDetails] = useState()
-   const [updateId, setUpdateId] = useState()
 
-   const closeHandler = () => {
-      history.push('/customermanagement');
-   }
+
    const cancelHandler = () => {
       setEdit(false)
    }
 
    const getCustomerDetails = async () => {
-      const res = await customerSerice.getCustomer(item.id)
-      setCustomerDetails(res)
-      console.log('getCustomerDetails', res)
-      setCustomerCode(res.customerCode)
-      setCustomerName(res.customerName)
-      setContactPerson(res.contactPerson)
-      setMobileNo(res.mobileNo)
-      setEmail(res.email)
-      setAddress(res.address)
-      setGstNumber(res.gstNumber)
-      setAlternateNo(res.alternateNo)
-      setCity(res.city)
-      setZip(res.zip)
-      setState(res.state)
-      setCountry(res.country)
+      const res = await customerSerice.getCustomer(item.client_id)
+      setCustomerCode(res.data.customerCode)
+      setCustomerName(res.data.company)
+      setContactPerson(res.data.contact_person)
+      setMobileNo(res.data.phone_number)
+      setEmail(res.data.email_id)
+      setAddress(res.data.address)
+      setGstNumber(res.data.gst_number)
+      setAlternateNo(res.data.alternate_phone_number)
+      setCity(res.data.city)
+      setZip(res.data.pincode)
+      setState(res.data.state)
+      setCountry(res.data.country)
    }
 
    const submitHandler = async() => {
       let currentData = {...item}
+      currentData.company = customerName
       currentData.customerName = customerName
-      currentData.contactPerson = contactPerson
+      currentData.contact_person = contactPerson
       currentData.customerCode = customerCode 
-      currentData.mobileNo = mobileNo
-      currentData.email = email
+      currentData.phone_number = mobileNo
+      currentData.email_id = email
       currentData.address = address
-      currentData.gstNumber = gstNumber
-      currentData.alternateNo = alternateNo
+      currentData.gst_number = gstNumber
+      currentData.alternate_phone_number = alternateNo
       currentData.city = city
-      currentData.zip = zip
+      currentData.pincode = zip
       currentData.state = state
       currentData.country = country
-
       console.log(currentData);
-      let res = await customerSerice.updateCustomer(currentData, currentData.id)
-      history.push('./customermanagement')
+      try{
+      let res = await customerSerice.updateCustomer(currentData)
+      history.push('/customermanagement')
+      } catch(err) {
+         console.log(err.message)
+      }
    }
 
    React.useEffect(() => {
@@ -106,7 +99,7 @@ export default function EditCustomer(props) {
          <CCardHeader>
             <CRow>
                <CCol xs="6" md="11">
-                  <CCardSubtitle style={{marginTop:'1%'}}>Customer {item ? item.customerName : null}</CCardSubtitle>
+                  <CCardSubtitle style={{marginTop:'1%'}}>Customer: {item ? item.company : null}</CCardSubtitle>
                </CCol>
                <CCol xs="6" md="1">
                   {/* <CIcon name="cil-pen" size="1xl" onClick={() => setEdit(true)} /> */}

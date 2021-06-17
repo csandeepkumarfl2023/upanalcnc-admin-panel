@@ -1,6 +1,6 @@
 import { constants } from '../constants';
 import Axios from '../helper/axios.helper';
-
+import axios from 'axios'
 let customerData = [
     { 
       id: 0, customerName: 'Cloudhub', customerCode: 'UPNLCUS7672', contactPerson: 'ABC', mobileNo: '908000000',
@@ -28,23 +28,18 @@ export default class CustomerService{
 };
 
  async getAllCustomers() {
-    let response = customerData
+    let response = await Axios.get(`${constants.apiEndPoint}client`)
     return response
 }
 
 async getCustomer(id) {
-    let response = customerData.find(item => item.id == id)
+    let response = await Axios.get(`${constants.apiEndPoint}client/${id}`)
     return response
 }
 
- async updateCustomer(data, id) {
-    let filteredArr = customerData.filter(function (obj) {
-        return obj.id !== id;
-      });
-    customerData = [
-        ...filteredArr, data
-    ]
-    return customerData
+ async updateCustomer(data) {
+    let response = await Axios.put(`${constants.apiEndPoint}client`, data)
+    return response
 }
 
  async deleteCustomer(id) {
