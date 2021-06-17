@@ -110,22 +110,22 @@ export default function EditMachine(props) {
                 <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
                     <CCol xs="12" md="4">
                         Customer Code:
-                        <CFormGroup >
-                            <CInput type="text" id="customerCode" className="w-50"
+                        <CFormGroup style={{ marginTop: '10px' }}>
+                            <CInput type="text" id="customerCode" className="w-52"
                                 name="customerCode" placeholder="customerCode" value={customerCode} onChange={(e) => { setCustomerCode(e.target.value) }} />
                         </CFormGroup>
                     </CCol>
                     <CCol xs="12" lg="4">
-                        Contact Person Name:
-                        <CFormGroup >
-                            <CInput type="text" id="machineType" className="w-50"
+                        Machine Type:
+                        <CFormGroup style={{ marginTop: '10px' }} >
+                            <CInput type="text" id="machineType" className="w-52"
                                 name="machineType" placeholder="machineType" value={machineType} onChange={(e) => { setMachineType(e.target.value) }} />
                         </CFormGroup>
                     </CCol>
                     <CCol xs="12" lg="4">
                 GenerateQRCode: 
-                     <CFormGroup >
-                        <CInput type="text" id="generateQRCode" className="w-50"
+                     <CFormGroup style={{ marginTop: '10px' }}>
+                        <CInput type="text" id="generateQRCode" className="w-52"
                    name="generateQRCode" placeholder="generateQRCode" value={generateQRCode} onChange={(e) => { setGenerateQRCode(e.target.value) }} />
                      </CFormGroup>
             </CCol>
@@ -136,24 +136,24 @@ export default function EditMachine(props) {
 
 
                     <CCol xs="12" lg="4">
-                        Contact Number:
-                        <CFormGroup >
-                            <CInput type="text" id="make" className="w-50"
+                        Make:
+                        <CFormGroup style={{ marginTop: '10px' }}>
+                            <CInput type="text" id="make" className="w-52"
                                 name="make" placeholder="make" value={make} onChange={(e) => { setMake(e.target.value) }} />
                         </CFormGroup>
 
                     </CCol>
                     <CCol xs="12" lg="4">
-                        Alternate Number:
-                        <CFormGroup >
-                            <CInput type="text" id="controller" className="w-50"
+                    Controller:
+                        <CFormGroup style={{ marginTop: '10px' }}>
+                            <CInput type="text" id="controller" className="w-52"
                                 name="controller" placeholder="controller" value={controller} onChange={(e) => { setController(e.target.value) }} />
                         </CFormGroup>
                     </CCol>
                     <CCol xs="12" lg="4">
-                        Customer MachineSerialNo:
-                        <CFormGroup >
-                            <CInput type="text" id="machineSerialNo" className="w-50"
+                         Machine SerialNo:
+                        <CFormGroup style={{ marginTop: '10px' }}>
+                            <CInput type="text" id="machineSerialNo" className="w-52"
                                 name="machineSerialNo" placeholder="machineSerialNo" value={machineSerialNo} onChange={(e) => { setMachineSerialNo(e.target.value) }} />
                         </CFormGroup>
                     </CCol>
@@ -163,22 +163,22 @@ export default function EditMachine(props) {
 
                     <CCol xs="12" lg="4">
                         Model:
-                        <CFormGroup >
-                            <CInput type="text" id="model" className="w-50"
+                        <CFormGroup style={{ marginTop: '10px' }}>
+                            <CInput type="text" id="model" className="w-52"
                                 name="model" placeholder="model" value={model} onChange={(e) => { setModel(e.target.value) }} />
                         </CFormGroup>
                     </CCol>
                     <CCol xs="12" lg="4">
                         MachineAge:
-                        <CFormGroup >
-                            <CInput type="text" id="machineAge" className="w-50"
+                        <CFormGroup style={{ marginTop: '10px' }}>
+                            <CInput type="text" id="machineAge" className="w-52"
                                 name="machineAge" placeholder="machineAge" value={machineAge} onChange={(e) => { setMachineAge(e.target.value) }} />
                         </CFormGroup>
                     </CCol>
                     <CCol xs="12" lg="4">
                         ControllerModel:
-                        <CFormGroup >
-                            <CInput type="text" id="controllerModel" className="w-50"
+                        <CFormGroup style={{ marginTop: '10px' }}>
+                            <CInput type="text" id="controllerModel" className="w-52"
                                 name="controllerModel" placeholder="controllerModel" value={controllerModel} onChange={(e) => { setControllerModel(e.target.value) }} />
                         </CFormGroup>
                     </CCol>
