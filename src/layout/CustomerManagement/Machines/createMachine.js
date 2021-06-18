@@ -22,7 +22,7 @@ export default function CreateMachine() {
     const history = useHistory();
 
     const [data, setData] = useState({
-        machine_type: "", machine_make: "", machine_model: "", machine_name: "",
+        machine_type: "", machine_make: "", machine_model: "", machine_name: "",customerCode: "",
         machine_serial_number: "", machineAge: "", machine_controller: "", machine_controller_model: "", generateQRCode: ""
     })
     const [typeOthers, setTypeOthers] = useState(false)
@@ -31,7 +31,8 @@ export default function CreateMachine() {
     const [machinetypesArr, setMachineTypesArr] = useState()
 
     const submitHandler = async (value) => {
-        value.client_id = 'client_123'
+        value.client_id = value.customerCode
+        console.log(value)
         value.machine_manufactured_date = "2020-03-03 03:03:03"
         value.machine_installation_date = "2020-03-03 03:03:03"
         value.machine_manufacturer = "test"
@@ -69,7 +70,7 @@ export default function CreateMachine() {
         <div>
             <Formik
                 initialValues={data}
-                onSubmit={async (values) => {
+                onSubmit={(values) => {
                     submitHandler(values)
                     console.log(values)
                 }}>
@@ -86,9 +87,9 @@ export default function CreateMachine() {
                                 </CCol> */}
 
                                 <CCol xs="10" sm="4">
-                                    <b>Name:</b>
+                                    <b>Customer code:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="machine_name" className="w-52" name="machine_name" placeholder="Name" onChange={handleChange} />
+                                        <CInput type="text" id="customerCode" className="w-52" name="customerCode" placeholder="Name" onChange={handleChange} />
                                     </CFormGroup>
                                 </CCol>
 
@@ -195,7 +196,7 @@ export default function CreateMachine() {
                                             >Cancel</CButton>
                                         </CCol>
                                         <CCol xs="6">
-                                            <CButton block color="info" className="mr-1" onClick={submitHandler}
+                                            <CButton block color="info" className="mr-1" onClick={handleSubmit}
                                             >Submit</CButton>
                                         </CCol>
                                     </CRow>

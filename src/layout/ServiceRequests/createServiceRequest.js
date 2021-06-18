@@ -12,7 +12,8 @@ import {
   CCardSubtitle,
   CCardFooter,
   CTextarea,
-  CInputFile
+  CInputFile,
+  CAlert
 } from '@coreui/react'
 import { useHistory } from 'react-router'
 import ServiceRequestService from '../../services/serviceRequestService'
@@ -97,18 +98,26 @@ export default function CreateServiceRequest() {
     history.push('./servicerequest')
   }
 
-  const customerChangeHandler = (e) => {
+  const customerChangeHandler = async(e) => {
     let customerId = e.target.value
     let selectedCustomer = customerArr.find((elem) => elem.client_id == customerId)
     console.log(selectedCustomer)
     setCompany(selectedCustomer.company)
     setCustomerName(selectedCustomer.client_id)
-    setCustomerCode(selectedCustomer.customerCode)
+    setCustomerCode(selectedCustomer.client_id)
     setContactName(selectedCustomer.contact_person)
     setContactNumber(selectedCustomer.phone_number)
     setAlternateNumber(selectedCustomer.alternate_phone_number)
     setEmail(selectedCustomer.email_id)
     setCustomerAddress(selectedCustomer.address)
+
+    console.log(machineArr)
+    console.log(customerId)
+    let res = await machineService.getAllMachines()
+    console.log(res.data)
+    let filteredMachinesArr = res.data.filter(item => item.client_id == customerId )
+    console.log(filteredMachinesArr)
+    setMachineArr(filteredMachinesArr)
   }
 
   const machineChangeController = (e) => {
@@ -156,6 +165,7 @@ export default function CreateServiceRequest() {
   }, [])
 
   return (
+    <>
     <CCard>
       <CCardHeader><CCardSubtitle style={{ marginTop: '1%', fontWeight: 'bold', fontSize: '1.1rem' }}>Create Service Request</CCardSubtitle></CCardHeader>
       <CCardBody>
@@ -232,9 +242,9 @@ export default function CreateServiceRequest() {
                 <CCol xs="10" md="6">
                   <CFormGroup style={{ marginLeft: '3%' }} >
                     <CSelect custom size="md" name="name" id="name" value={machine} onChange={machineChangeController} style={{ width: '150%' }}>
-                      <option value="">Open this select menu</option>
+                    <option value="">Open this select menu</option>
                       {machineArr && machineArr.length ? machineArr.map((elem) => {
-                        return <option key={elem.machine_id} value={elem.machine_id}>{elem.machine_name}</option>
+                        return <option key={elem.machine_id} value={elem.machine_id}>{elem.machine_model}</option>
                       }
                       ) : null}
 
@@ -400,5 +410,6 @@ export default function CreateServiceRequest() {
 
       </CCardBody>
     </CCard>
+    </>
   )
 }

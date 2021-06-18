@@ -15,8 +15,12 @@ let machineData = [
 export default class MachineService{
 
  async createMachine(data) {
+     try{
     let response = await Axios.post(`${constants.apiEndPoint}machine`, data)
     return response
+     } catch (err) {
+         console.log(err)
+     }
 };
 
  async getAllMachines() {

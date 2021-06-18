@@ -159,7 +159,12 @@ export default function Customer() {
                       }
                       >{item.company}</a></CLink>
                     </td>
-                  )
+                  ),
+                  'customerCode':
+                  (item) => (
+                    <td>{item.client_id}
+                    </td>
+                  ),
               }}
 
             />

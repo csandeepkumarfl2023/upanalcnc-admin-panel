@@ -126,6 +126,11 @@ export default function Machines() {
                       >{item.machine_id}</a></CLink>
                     </td>
                   ),
+                  'customerCode':
+                  (item) => (
+                    <td>{item.client_id}
+                    </td>
+                  ),
                 'make':
                   (item) => (
                     <td>{item.machine_make}
