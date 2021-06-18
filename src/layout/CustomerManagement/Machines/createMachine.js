@@ -12,9 +12,11 @@ import {
 } from '@coreui/react'
 import { Formik } from "formik"
 import MachineService from '../../../services/machineService';
+import CustomerService from '../../../services/customerService';
 import CommonService from '../../../services/commonService'
 import { useHistory } from "react-router-dom";
 
+const customerservice = new CustomerService()
 const machineservice = new MachineService()
 const commonService = new CommonService()
 
@@ -29,6 +31,7 @@ export default function CreateMachine() {
     const [others, setOthers] = useState(false)
     const [controllersArr, setControllersArr] = useState()
     const [machinetypesArr, setMachineTypesArr] = useState()
+    const [customerseArr, setCustomersArr] = useState()
 
     const submitHandler = async (value) => {
         value.client_id = value.customerCode
@@ -39,6 +42,12 @@ export default function CreateMachine() {
         let res = await machineservice.createMachine(value)
         console.log(res);
         history.push('/customermanagement')
+    }
+
+    const getCustomer = async() => {
+        let res = await customerservice.getAllCustomers()
+        console.log(res)
+        setCustomersArr(res.data)
     }
 
     const getEnum = async () => {
@@ -63,6 +72,7 @@ export default function CreateMachine() {
     }
 
     React.useEffect(() => {
+        getCustomer()
         getEnum()
     }, [])
 
@@ -89,7 +99,15 @@ export default function CreateMachine() {
                                 <CCol xs="10" sm="4">
                                     <b>Customer code:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="customerCode" className="w-52" name="customerCode" placeholder="Name" onChange={handleChange} />
+                                        <CSelect custom size="md" name="customerCode" id="customerCode"
+                                        onChange={(e) => setFieldValue('customerCode', e.target.value)}
+                                            value={values.customerCode}>
+                                            <option value="0">Open this select menu</option>
+                                            {customerseArr && customerseArr.length ? customerseArr.map((elem) => {
+                                                return <option key={elem.client_id} value={elem.client_id} style={{ textTransform: 'capitalize' }}>{elem.client_id}</option>
+                                            }
+                                            ) : null}
+                                        </CSelect>
                                     </CFormGroup>
                                 </CCol>
 
