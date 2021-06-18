@@ -18,7 +18,7 @@ export default function CreateCustomer() {
     const history = useHistory();
 
     const [data, setData] = useState({
-        customerName: "", customerCode: "", contact_person: "", phone_number: "", email_id: "",
+        customerName: "", contact_person: "", phone_number: "", email_id: "",
         address: "", gst_number: "", alternate_phone_number: "", city: "", pincode: "", state: "", country: ""
     })
 
