@@ -631,7 +631,7 @@ export default function Overview() {
                                 borderRadius: '3px',
                                 color: 'white',
                                 fontSize: '13px',
-                                width: '70px',
+                                width: '90px',
                                 textTransform: 'capitalize',
                                 textAlign: 'center',
                                 outline: 'none',
