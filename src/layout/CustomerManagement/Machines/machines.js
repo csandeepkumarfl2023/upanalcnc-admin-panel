@@ -153,12 +153,17 @@ export default function Machines() {
                   ),
                   'controller':
                   (item) => (
-                    <td>{item.machine_controller}
+                    <td>{item.other_machine_controller ? item.other_machine_controller : item.machine_controller}
                     </td>
                   ), 
                   'controllerModel':
                   (item) => (
                     <td>{item.machine_controller_model}
+                    </td>
+                  ),
+                  'machine_type':
+                  (item) => (
+                    <td>{item.other_machine_type ? item.other_machine_type : item.machine_type}
                     </td>
                   )
               }}

@@ -1,3 +1,5 @@
+import { constants } from '../constants';
+import Axios from '../helper/axios.helper';
 export default class CommonService {
 
     async setToken(token) {
@@ -12,5 +14,10 @@ export default class CommonService {
         // let result = await localStorage.clear()
         let result = await localStorage.removeItem("userToken")
         return result
+      }
+
+      async getenum () {
+        let response = await Axios.get(`${constants.apiEndPoint}general/enumMaps`)
+        return response
       }
 }

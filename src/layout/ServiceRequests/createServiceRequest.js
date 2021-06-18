@@ -18,11 +18,13 @@ import { useHistory } from 'react-router'
 import ServiceRequestService from '../../services/serviceRequestService'
 import CustomerService from '../../services/customerService'
 import MachineService from '../../services/machineService'
+import CommonService from '../../services/commonService'
 import moment from 'moment'
 
 const serviceRequestService = new ServiceRequestService()
 const customerSerice = new CustomerService()
 const machineService = new MachineService()
+const commonService = new CommonService()
 export default function CreateServiceRequest() {
 
     const  history  = useHistory();
@@ -47,6 +49,7 @@ export default function CreateServiceRequest() {
     const [machineController, setMachineController] = useState("")
     const [controllerModel, setControllerModel] = useState("")
 
+    const [allIssueTypes, setAllIssueTypes] = useState()
     const [issueType,setIssueType] = useState("")
     const [priority,setPriority] = useState("")
     const [executive,setExecutive] = useState("")
@@ -84,7 +87,7 @@ export default function CreateServiceRequest() {
         currentData.issue_type=issueType
         currentData.priority=priority
         currentData.executive=executive
-        currentData.expected_resolution_date=date
+        currentData.expected_resolution_date=moment(date).format('YYYY-MM-DD hh: mm: ss')
         currentData.time=time
         currentData.request_detail=issueDetails
         // currentData.ISSUE_TYPE= { 0: "ELECTRICAL", 1: "MECHANICAL" }
@@ -122,6 +125,20 @@ export default function CreateServiceRequest() {
       setControllerModel(selectedMachine.machine_controller_model)
     }
 
+    
+    const getEnum = async() => {
+      let res = await commonService.getenum()
+      let issueTypeArr = [] 
+      for (const key in res.data.ISSUE_TYPE) {
+        let obj = {}
+        obj.key = key
+        obj.value = res.data.ISSUE_TYPE[key]
+        issueTypeArr.push(obj)
+      }
+      console.log(issueTypeArr)
+      setAllIssueTypes(issueTypeArr)
+    }
+
     const getCustomersList = async() => {
       let res = await customerSerice.getAllCustomers()
       setCustomerArr(res.data)
@@ -135,6 +152,7 @@ export default function CreateServiceRequest() {
     React.useEffect(() => {
       getCustomersList()
       getMachinesList()
+      getEnum()
     },[])
     
     return (
@@ -284,8 +302,10 @@ export default function CreateServiceRequest() {
            <CFormGroup style={{marginLeft:'9%'}} value={issueType} onChange={(e)=> setIssueType(e.target.value)} className="w-50">
                <CSelect custom size="md" name="name" id="name">
                  <option value="undefined">Open this select menu</option>
-                 <option value="Electrical">Electrical</option>
-                 <option value="Mechanical">Mechanical</option>
+                 {allIssueTypes && allIssueTypes.length ? allIssueTypes.map((elem) => {
+                   return <option key={elem.value} value={elem.value}>{elem.value}</option>
+                 }
+                   ) : null}
                </CSelect>
              </CFormGroup>
              </CRow>

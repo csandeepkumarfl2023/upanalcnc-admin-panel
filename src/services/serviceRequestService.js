@@ -13,7 +13,7 @@ let serviceReqData = [
 export default class ServiveRequestService{
 
  async createServiceReq(data) {
-    let response = await Axios.post(`${constants.apiEndPoint}serviceRequest`, data)
+    let response = await Axios.post(`${constants.apiEndPoint}client/request`, data)
     return response
 };
 

@@ -11,9 +11,11 @@ import {
 } from '@coreui/react'
 import { Formik } from "formik"
 import MachineService from '../../../services/machineService';
+import CommonService from '../../../services/commonService'
 import { useHistory } from "react-router-dom";
 
 const machineservice = new MachineService()
+const commonService = new CommonService()
 
 export default function CreateMachine() {
     const history = useHistory();
@@ -24,6 +26,8 @@ export default function CreateMachine() {
     })
     const [typeOthers, setTypeOthers] = useState(false)
     const [others, setOthers] = useState(false)
+    const [controllersArr, setControllersArr] = useState()
+    const [machinetypesArr, setMachineTypesArr] = useState()
 
     const submitHandler = async (value) => {
         value.client_id = 'client_123'
@@ -34,6 +38,31 @@ export default function CreateMachine() {
         console.log(res);
         history.push('/customermanagement')
     }
+
+    const getEnum = async() => {
+        let res = await commonService.getenum()
+        let machineControllers = [] 
+        for (const key in res.data.MACHINE_CONTROLLER) {
+          let obj = {}
+          obj.key = key
+          obj.value = res.data.MACHINE_CONTROLLER[key]
+          machineControllers.push(obj)
+        }
+        let machineTypes = []
+        for (const key in res.data.MACHINE_TYPE) {
+            let obj = {}
+            obj.key = key
+            obj.value = res.data.MACHINE_TYPE[key]
+            machineTypes.push(obj)
+          }
+
+        setControllersArr(machineControllers)
+        setMachineTypesArr(machineTypes)
+      }
+
+    React.useEffect(() => {
+        getEnum()
+    },[])
 
     return (
         <div>
@@ -111,10 +140,10 @@ export default function CreateMachine() {
                                                 e.target.value == 'others' ? setOthers(true) : setOthers(false)
                                             }}>
                                             <option value="0">Open this select menu</option>
-                                            <option value="funac">Funac</option>
-                                            <option value="siemens">Siemens</option>
-                                            <option value="mitsubishi">Mitsubishi</option>
-                                            <option value="others">Others</option>
+                                            {controllersArr && controllersArr.length ? controllersArr.map((elem) => {
+                                                return <option key={elem.key} value={elem.value} style={{textTransform: 'capitalize'}}>{elem.value}</option>
+                                                }
+                                                ) : null}
                                         </CSelect>
 
                                         {others ?
@@ -136,12 +165,10 @@ export default function CreateMachine() {
                                                 e.target.value == 'OTHERS' ? setTypeOthers(true) : setTypeOthers(false)
                                             }}>
                                             <option value="0">Open this select menu</option>
-                                            <option value="VMC">VMC</option>
-                                            <option value="TURNING">TURNING</option>
-                                            <option value="VTL">VTL</option>
-                                            <option value="HMC">HMC</option>
-                                            <option value="SPM">SPM</option>
-                                            <option value="OTHERS">Others</option>
+                                            {machinetypesArr && machinetypesArr.length ? machinetypesArr.map((elem) => {
+                                                return <option key={elem.key} value={elem.value} style={{textTransform: 'capitalize'}}>{elem.value}</option>
+                                                }
+                                                ) : null}
                                         </CSelect>
                                         {typeOthers ?
                                             <>
