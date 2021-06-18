@@ -54,7 +54,7 @@ export default function CreateCustomer() {
 
                     <div >
                         <CCard style={{ padding: '40px', borderColor: 'lightgray' }}>
-                            <CRow>
+                            <CRow style={{marginTop: '2%'}}> 
                                 <CCol xs="10" sm="3">
                                     <b>Customer Name:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
@@ -76,7 +76,7 @@ export default function CreateCustomer() {
                                 </CCol>
                             </CRow>
 
-                            <CRow>
+                            <CRow style={{marginTop: '2%'}}> 
                                 <CCol xs="10" sm="3">
                                     <b>Email:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
@@ -104,7 +104,7 @@ export default function CreateCustomer() {
                             </CRow>
 
 
-                            <CRow>
+                            <CRow style={{marginTop: '2%'}}> 
                                 <CCol xs="10" sm="3">
                                     <b>City:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
@@ -133,7 +133,7 @@ export default function CreateCustomer() {
                             <CRow style={{ justifyContent: 'flex-end', marginTop: '1%' }}>
                                 <CCardFooter style={{ width: '25%' }}>
 
-                                    <CRow>
+                                    <CRow style={{marginTop: '2%'}}> 
                                         <CCol xs="6">
                                             <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/customermanagement')}
                                             >Cancel</CButton>
