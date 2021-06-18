@@ -112,13 +112,13 @@ export default function EditMachine(props) {
                         </CFormGroup>
                     </CCol>
                     <CCol xs="12" lg="4">
-                <b>GenerateQRCode:</b>
-                     <CFormGroup style={{ marginTop: '10px' }}>
-                        <CInput type="text" id="generateQRCode" className="w-52"
-                   name="generateQRCode" placeholder="generateQRCode" value={generateQRCode} onChange={(e) => { setGenerateQRCode(e.target.value) }} />
-                     </CFormGroup>
-            </CCol>
-         
+                        <b>GenerateQRCode:</b>
+                        <CFormGroup style={{ marginTop: '10px' }}>
+                            <CInput type="text" id="generateQRCode" className="w-52"
+                                name="generateQRCode" placeholder="generateQRCode" value={generateQRCode} onChange={(e) => { setGenerateQRCode(e.target.value) }} />
+                        </CFormGroup>
+                    </CCol>
+
                 </CRow>
 
                 <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
@@ -133,14 +133,14 @@ export default function EditMachine(props) {
 
                     </CCol>
                     <CCol xs="12" lg="4">
-                    <b>Controller:</b>
+                        <b>Controller:</b>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="controller" className="w-52"
                                 name="controller" placeholder="controller" value={controller} onChange={(e) => { setController(e.target.value) }} />
                         </CFormGroup>
                     </CCol>
                     <CCol xs="12" lg="4">
-                         <b>Machine SerialNo:</b>
+                        <b>Machine SerialNo:</b>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="machineSerialNo" className="w-52"
                                 name="machineSerialNo" placeholder="machineSerialNo" value={machineSerialNo} onChange={(e) => { setMachineSerialNo(e.target.value) }} />
@@ -174,26 +174,23 @@ export default function EditMachine(props) {
                 </CRow>
 
 
-
-
-
-
-
-
-            </CCardBody>
-
-            <CRow>
-                <CCardFooter style={{ width: '15%', marginLeft: '70%' }}>
+            <CRow style={{ justifyContent: 'flex-end' }}>
+                <CCardFooter style={{ width: '25%' }}>
 
                     <CRow>
-                        <CButton block color="info" className="mr-1" onClick={submitHandler}
-                        >Submit</CButton>
-                        <CButton block color="info" className="mr-1" onClick={cancelHandler}
-                        >Cancel</CButton>
+                        <CCol xs="6">
+                            <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/customermanagement')}
+                            >Cancel</CButton>
+                        </CCol>
+                        <CCol xs="6">
+                            <CButton block color="info" className="mr-1" onClick={submitHandler}
+                            >Submit</CButton>
+                        </CCol>
                     </CRow>
 
                 </CCardFooter>
             </CRow>
+        </CCardBody>
         </CCard>
-)
+    )
 }

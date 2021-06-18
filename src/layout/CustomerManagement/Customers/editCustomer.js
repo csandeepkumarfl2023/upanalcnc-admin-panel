@@ -56,12 +56,12 @@ export default function EditCustomer(props) {
       setCountry(res.data.country)
    }
 
-   const submitHandler = async() => {
-      let currentData = {...item}
+   const submitHandler = async () => {
+      let currentData = { ...item }
       currentData.company = customerName
       currentData.customerName = customerName
       currentData.contact_person = contactPerson
-      currentData.customerCode = customerCode 
+      currentData.customerCode = customerCode
       currentData.phone_number = mobileNo
       currentData.email_id = email
       currentData.address = address
@@ -72,10 +72,10 @@ export default function EditCustomer(props) {
       currentData.state = state
       currentData.country = country
       console.log(currentData);
-      try{
-      let res = await customerSerice.updateCustomer(currentData)
-      history.push('/customermanagement')
-      } catch(err) {
+      try {
+         let res = await customerSerice.updateCustomer(currentData)
+         history.push('/customermanagement')
+      } catch (err) {
          console.log(err.message)
       }
    }
@@ -87,13 +87,13 @@ export default function EditCustomer(props) {
 
       }
    }, [])
- 
+
    return (
       <CCard>
          <CCardHeader>
             <CRow>
                <CCol xs="6" md="11">
-                  <CCardSubtitle style={{marginTop:'1%'}}>Customer: {item ? item.company : null}</CCardSubtitle>
+                  <CCardSubtitle style={{ marginTop: '1%' }}>Customer: {item ? item.company : null}</CCardSubtitle>
                </CCol>
                <CCol xs="6" md="1">
                   {/* <CIcon name="cil-pen" size="1xl" onClick={() => setEdit(true)} /> */}
@@ -101,132 +101,131 @@ export default function EditCustomer(props) {
             </CRow>
          </CCardHeader>
          <CCardBody>
-            <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
+            <CRow style={{ marginLeft: '2%', marginTop: '1%' }}>
                <CCol xs="12" md="4">
-               <b>Customer Name:</b>
-                     <CFormGroup >
-                        <CInput type="text" id="customerName" className="w-50"
-                   name="customerName" placeholder="customerName" value={customerName} onChange={(e) => { setCustomerName(e.target.value) }} />
-                     </CFormGroup>
-                      </CCol>
-                      <CCol xs="12" md="4">
-               <b>Customer Code: </b>
-                     <CFormGroup >
-                        <CInput type="text" id="customerCode" className="w-50"
-                   name="customerCode" placeholder="customerCode" value={customerCode} onChange={(e) => { setCustomerCode(e.target.value) }} />
-                     </CFormGroup>
-                      </CCol>
+                  <b>Customer Name:</b>
+                  <CFormGroup >
+                     <CInput style={{ marginTop: '10px' }} type="text" id="customerName" className="w-50"
+                        name="customerName" placeholder="customerName" value={customerName} onChange={(e) => { setCustomerName(e.target.value) }} />
+                  </CFormGroup>
+               </CCol>
+               <CCol xs="12" md="4">
+                  <b>Customer Code: </b>
+                  <CFormGroup >
+                     <CInput style={{ marginTop: '10px' }} type="text" id="customerCode" className="w-50"
+                        name="customerCode" placeholder="customerCode" value={customerCode} onChange={(e) => { setCustomerCode(e.target.value) }} />
+                  </CFormGroup>
+               </CCol>
                <CCol xs="12" lg="4">
-               <b>Contact Person Name: </b>
-                     <CFormGroup >
-                        <CInput type="text" id="contactPerson" className="w-50"
-                   name="contactPerson" placeholder="contactPerson" value={contactPerson} onChange={(e) => { setContactPerson(e.target.value) }} />
-                     </CFormGroup>
-                     
-            </CCol>
+                  <b>Contact Person Name: </b>
+                  <CFormGroup >
+                     <CInput style={{ marginTop: '10px' }} type="text" id="contactPerson" className="w-50"
+                        name="contactPerson" placeholder="contactPerson" value={contactPerson} onChange={(e) => { setContactPerson(e.target.value) }} />
+                  </CFormGroup>
+
+               </CCol>
             </CRow>
 
-               <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
+            <CRow style={{ marginLeft: '2%', marginTop: '1%' }}>
 
-         
-            <CCol xs="12" lg="4">
-            <b>Contact Number: </b>
-                     <CFormGroup >
-                        <CInput type="text" id="mobileNo" className="w-50"
-                   name="mobileNo" placeholder="mobileNo" value={mobileNo} onChange={(e) => { setMobileNo(e.target.value) }} />
-                     </CFormGroup>
-                
-            </CCol>
-            <CCol xs="12" lg="4">
-            <b>Alternate Number: </b>
-                     <CFormGroup >
-                        <CInput type="text" id="alternateNo" className="w-50"
-                   name="alternateNo" placeholder="alternateNo" value={alternateNo} onChange={(e) => { setAlternateNo(e.target.value) }} />
-                     </CFormGroup>
-            </CCol>
-            <CCol xs="12" lg="4">
-            <b>Customer Address: </b>
-                     <CFormGroup >
-                        <CInput type="text" id="address" className="w-50"
-                   name="address" placeholder="address" value={address} onChange={(e) => { setAddress(e.target.value) }} />
-                     </CFormGroup>
-            </CCol>
-         </CRow>
 
-         <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
-       
-            <CCol xs="12" lg="4">
-            <b>Email:</b>
-                     <CFormGroup >
-                        <CInput type="text" id="email" className="w-50"
-                   name="email" placeholder="email" value={email} onChange={(e) => { setEmail(e.target.value) }} />
-                     </CFormGroup>
-            </CCol>
-            <CCol xs="12" lg="4">
-            <b>GstNumber: </b>
-                     <CFormGroup >
-                        <CInput type="text" id="gstNumber" className="w-50"
-                   name="gstNumber" placeholder="gstNumber" value={gstNumber} onChange={(e) => { setGstNumber(e.target.value) }} />
-                     </CFormGroup>
-            </CCol>
-            <CCol xs="12" lg="4">
-            <b>City:</b>
-                     <CFormGroup >
-                        <CInput type="text" id="city" className="w-50"
-                   name="city" placeholder="city" value={city} onChange={(e) => { setCity(e.target.value) }} />
-                     </CFormGroup>
-            </CCol>
-         </CRow>
+               <CCol xs="12" lg="4">
+                  <b>Contact Number: </b>
+                  <CFormGroup >
+                     <CInput style={{ marginTop: '10px' }} type="text" id="mobileNo" className="w-50"
+                        name="mobileNo" placeholder="mobileNo" value={mobileNo} onChange={(e) => { setMobileNo(e.target.value) }} />
+                  </CFormGroup>
 
-               <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
-            
-            <CCol xs="12" lg="4">
-            <b>Zip:</b>
-                     <CFormGroup >
-                        <CInput type="text" id="zip" className="w-50"
-                   name="zip" placeholder="zip" value={zip} onChange={(e) => { setZip(e.target.value) }} />
-                     </CFormGroup>
-            </CCol>
-            <CCol xs="12" lg="4">
-            <b>State:</b>
-                     <CFormGroup >
-                        <CInput type="text" id="state" className="w-50"
-                   name="state" placeholder="state" value={state} onChange={(e) => { setState(e.target.value) }} />
-                     </CFormGroup>
-            </CCol>
-            <CCol xs="12" lg="4">
-            <b>Country: </b>
-                     <CFormGroup >
-                        <CInput type="text" id="country" className="w-50"
-                   name="country" placeholder="country" value={country} onChange={(e) => { setCountry(e.target.value) }} />
-                     </CFormGroup>
-            </CCol>
-         </CRow>
+               </CCol>
+               <CCol xs="12" lg="4">
+                  <b>Alternate Number: </b>
+                  <CFormGroup >
+                     <CInput style={{ marginTop: '10px' }} type="text" id="alternateNo" className="w-50"
+                        name="alternateNo" placeholder="alternateNo" value={alternateNo} onChange={(e) => { setAlternateNo(e.target.value) }} />
+                  </CFormGroup>
+               </CCol>
+               <CCol xs="12" lg="4">
+                  <b>Customer Address: </b>
+                  <CFormGroup >
+                     <CInput style={{ marginTop: '10px' }} type="text" id="address" className="w-50"
+                        name="address" placeholder="address" value={address} onChange={(e) => { setAddress(e.target.value) }} />
+                  </CFormGroup>
+               </CCol>
+            </CRow>
 
-  
+            <CRow style={{ marginLeft: '2%', marginTop: '1%' }}>
 
-  
-         </CCardBody>
+               <CCol xs="12" lg="4">
+                  <b>Email:</b>
+                  <CFormGroup >
+                     <CInput style={{ marginTop: '10px' }} type="text" id="email" className="w-50"
+                        name="email" placeholder="email" value={email} onChange={(e) => { setEmail(e.target.value) }} />
+                  </CFormGroup>
+               </CCol>
+               <CCol xs="12" lg="4">
+                  <b>GstNumber: </b>
+                  <CFormGroup >
+                     <CInput style={{ marginTop: '10px' }} type="text" id="gstNumber" className="w-50"
+                        name="gstNumber" placeholder="gstNumber" value={gstNumber} onChange={(e) => { setGstNumber(e.target.value) }} />
+                  </CFormGroup>
+               </CCol>
+               <CCol xs="12" lg="4">
+                  <b>City:</b>
+                  <CFormGroup >
+                     <CInput style={{ marginTop: '10px' }} type="text" id="city" className="w-50"
+                        name="city" placeholder="city" value={city} onChange={(e) => { setCity(e.target.value) }} />
+                  </CFormGroup>
+               </CCol>
+            </CRow>
 
-         <CRow>
-            <CCardFooter style={{ width: '25%', marginLeft: '60%' }}>
-               
+            <CRow style={{ marginLeft: '2%', marginTop: '1%' }}>
+
+               <CCol xs="12" lg="4">
+                  <b>Zip:</b>
+                  <CFormGroup >
+                     <CInput style={{ marginTop: '10px' }} type="text" id="zip" className="w-50"
+                        name="zip" placeholder="zip" value={zip} onChange={(e) => { setZip(e.target.value) }} />
+                  </CFormGroup>
+               </CCol>
+               <CCol xs="12" lg="4">
+                  <b>State:</b>
+                  <CFormGroup >
+                     <CInput style={{ marginTop: '10px' }} type="text" id="state" className="w-50"
+                        name="state" placeholder="state" value={state} onChange={(e) => { setState(e.target.value) }} />
+                  </CFormGroup>
+               </CCol>
+               <CCol xs="12" lg="4">
+                  <b>Country: </b>
+                  <CFormGroup >
+                     <CInput style={{ marginTop: '10px' }} type="text" id="country" className="w-50"
+                        name="country" placeholder="country" value={country} onChange={(e) => { setCountry(e.target.value) }} />
+                  </CFormGroup>
+               </CCol>
+            </CRow>
+
+
+
+
+
+            <CRow style={{ justifyContent: 'flex-end' }}>
+               <CCardFooter style={{ width: '25%' }}>
+
                   <CRow>
                      <CCol xs="6">
-                     <CButton block color="info" className="mr-1" onClick={submitHandler}
-                     >Submit</CButton>
+                        <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/customermanagement')}
+                        >Cancel</CButton>
                      </CCol>
                      <CCol xs="6">
-                     <CButton block color="info" className="mr-1" onClick={cancelHandler}
-                     >Cancel</CButton>
+                        <CButton block color="info" className="mr-1" onClick={submitHandler}
+                        >Submit</CButton>
                      </CCol>
                   </CRow>
-                  
-            </CCardFooter>
-         </CRow>
+
+               </CCardFooter>
+            </CRow>
+         </CCardBody>
       </CCard>
 
    )
 }
 
-         

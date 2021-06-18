@@ -6,6 +6,7 @@ import {
     CButton,
     CFormGroup,
     CInput,
+    CCardFooter
 } from '@coreui/react'
 import { Formik } from "formik"
 import CustomerService from '../../../services/customerService';
@@ -37,6 +38,11 @@ export default function CreateCustomer() {
             console.log('err', err)
         }
     }
+
+    const cancelHandler = () => {
+
+    }
+
     return (
         <div>
             <Formik
@@ -44,7 +50,7 @@ export default function CreateCustomer() {
                 onSubmit={async (values) => {
                     submitHandler(values)
                 }}>
-                {({ handleSubmit, handleChange, values, errors, touched }) => (
+                {({ handleSubmit, handleChange, values, errors, touched, resetForm }) => (
 
                     <div >
                         <CCard style={{ padding: '40px', borderColor: 'lightgray' }}>
@@ -72,19 +78,19 @@ export default function CreateCustomer() {
 
                             <CRow>
                                 <CCol xs="10" sm="3">
-                                <b>Email:</b>
+                                    <b>Email:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="email_id" className="w-55" name="email_id" placeholder="Email" onChange={handleChange} />
                                     </CFormGroup>
                                 </CCol>
                                 <CCol xs="10" sm="3">
-                                <b>Address:</b>
+                                    <b>Address:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="address" className="w-55" name="address" placeholder="Address" onChange={handleChange} />
                                     </CFormGroup>
                                 </CCol>
                                 <CCol xs="10" sm="3">
-                                <b>Gst Number:</b>
+                                    <b>Gst Number:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="gst_number" className="w-55" name="gst_number" placeholder="Gst Number" onChange={handleChange} />
                                     </CFormGroup>
@@ -100,33 +106,46 @@ export default function CreateCustomer() {
 
                             <CRow>
                                 <CCol xs="10" sm="3">
-                                <b>City:</b>
+                                    <b>City:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="city" className="w-55" name="city" placeholder="City" onChange={handleChange} />
                                     </CFormGroup>
                                 </CCol>
                                 <CCol xs="10" sm="3">
-                                <b>Zip:</b>
+                                    <b>Zip:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="pincode" className="w-55" name="pincode" placeholder="Zip" onChange={handleChange} />
                                     </CFormGroup>
                                 </CCol>
                                 <CCol xs="10" sm="3">
-                                <b>State:</b>
+                                    <b>State:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="state" className="w-55" name="state" placeholder="State" onChange={handleChange} />
                                     </CFormGroup>
                                 </CCol>
                                 <CCol xs="10" sm="3">
-                                <b>Country:</b>
+                                    <b>Country:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="country" className="w-55" name="country" placeholder="Country" onChange={handleChange} />
                                     </CFormGroup>
                                 </CCol>
                             </CRow>
-                            <CCol xs="10" sm="4">
-                                <CButton block color="info" className="w-25" style={{ marginRight: '0%', marginLeft: '250%' }} onClick={handleSubmit}>Submit</CButton>
-                            </CCol>
+                            <CRow style={{ justifyContent: 'flex-end', marginTop: '1%' }}>
+                                <CCardFooter style={{ width: '25%' }}>
+
+                                    <CRow>
+                                        <CCol xs="6">
+                                            <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/customermanagement')}
+                                            >Cancel</CButton>
+                                        </CCol>
+                                        <CCol xs="6">
+                                            <CButton block color="info" className="mr-1" onClick={handleSubmit}
+                                            >Submit</CButton>
+                                        </CCol>
+                                    </CRow>
+
+                                </CCardFooter>
+                            </CRow>
                         </CCard>
                     </div>
                 )}

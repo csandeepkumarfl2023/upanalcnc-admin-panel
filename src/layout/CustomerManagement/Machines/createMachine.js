@@ -7,7 +7,8 @@ import {
     CButton,
     CFormGroup,
     CInput,
-    CLabel
+    CLabel,
+    CCardFooter
 } from '@coreui/react'
 import { Formik } from "formik"
 import MachineService from '../../../services/machineService';
@@ -39,14 +40,14 @@ export default function CreateMachine() {
         history.push('/customermanagement')
     }
 
-    const getEnum = async() => {
+    const getEnum = async () => {
         let res = await commonService.getenum()
-        let machineControllers = [] 
+        let machineControllers = []
         for (const key in res.data.MACHINE_CONTROLLER) {
-          let obj = {}
-          obj.key = key
-          obj.value = res.data.MACHINE_CONTROLLER[key]
-          machineControllers.push(obj)
+            let obj = {}
+            obj.key = key
+            obj.value = res.data.MACHINE_CONTROLLER[key]
+            machineControllers.push(obj)
         }
         let machineTypes = []
         for (const key in res.data.MACHINE_TYPE) {
@@ -54,15 +55,15 @@ export default function CreateMachine() {
             obj.key = key
             obj.value = res.data.MACHINE_TYPE[key]
             machineTypes.push(obj)
-          }
+        }
 
         setControllersArr(machineControllers)
         setMachineTypesArr(machineTypes)
-      }
+    }
 
     React.useEffect(() => {
         getEnum()
-    },[])
+    }, [])
 
     return (
         <div>
@@ -76,7 +77,7 @@ export default function CreateMachine() {
 
                     <div >
                         <CCard style={{ padding: '40px', borderColor: 'lightgray' }}>
-                            <CRow>
+                            <CRow style={{ marginTop: '2%' }}>
                                 {/* <CCol xs="10" sm="4">
                                     Machine Id:
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
@@ -105,7 +106,7 @@ export default function CreateMachine() {
                                 </CCol>
                             </CRow>
 
-                            <CRow>
+                            <CRow style={{ marginTop: '2%' }}>
                                 <CCol xs="10" sm="4">
                                     <b>Model:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
@@ -129,7 +130,7 @@ export default function CreateMachine() {
                             </CRow>
 
 
-                            <CRow>
+                            <CRow style={{ marginTop: '2%' }}>
 
                                 <CCol xs="10" sm="4">
                                     <b>Machine Controller:</b>
@@ -141,9 +142,9 @@ export default function CreateMachine() {
                                             }}>
                                             <option value="0">Open this select menu</option>
                                             {controllersArr && controllersArr.length ? controllersArr.map((elem) => {
-                                                return <option key={elem.key} value={elem.value} style={{textTransform: 'capitalize'}}>{elem.value}</option>
-                                                }
-                                                ) : null}
+                                                return <option key={elem.key} value={elem.value} style={{ textTransform: 'capitalize' }}>{elem.value}</option>
+                                            }
+                                            ) : null}
                                         </CSelect>
 
                                         {others ?
@@ -166,9 +167,9 @@ export default function CreateMachine() {
                                             }}>
                                             <option value="0">Open this select menu</option>
                                             {machinetypesArr && machinetypesArr.length ? machinetypesArr.map((elem) => {
-                                                return <option key={elem.key} value={elem.value} style={{textTransform: 'capitalize'}}>{elem.value}</option>
-                                                }
-                                                ) : null}
+                                                return <option key={elem.key} value={elem.value} style={{ textTransform: 'capitalize' }}>{elem.value}</option>
+                                            }
+                                            ) : null}
                                         </CSelect>
                                         {typeOthers ?
                                             <>
@@ -185,9 +186,22 @@ export default function CreateMachine() {
                                     </CFormGroup>
                                 </CCol>
                             </CRow>
-                            <CCol xs="10" sm="4">
-                                <CButton block color="info" className="w-25" style={{ marginRight: '0%', marginLeft: '250%' }} onClick={handleSubmit}>Submit</CButton>
-                            </CCol>
+                            <CRow style={{ justifyContent: 'flex-end', marginTop: '2%' }}>
+                                <CCardFooter style={{ width: '25%' }}>
+
+                                    <CRow>
+                                        <CCol xs="6">
+                                            <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/customermanagement')}
+                                            >Cancel</CButton>
+                                        </CCol>
+                                        <CCol xs="6">
+                                            <CButton block color="info" className="mr-1" onClick={submitHandler}
+                                            >Submit</CButton>
+                                        </CCol>
+                                    </CRow>
+
+                                </CCardFooter>
+                            </CRow>
                         </CCard>
                     </div>
                 )}
