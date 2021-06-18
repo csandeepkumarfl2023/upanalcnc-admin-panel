@@ -141,30 +141,36 @@ export default function Overview() {
   const [assign, setAssign] = useState([])
 
   const getBadge = status => {
-    
     switch (status) {
       case 'Completed':
       case 'completed':
+      case 'COMPLETED':
         return '#50D2C2'
       case 'Overdue':
+      case 'OVERDUE':
       case 'overdue':
         return '#FF3366'
       case 'Pending':
+      case 'PENDING':
       case 'pending':
         return '#FCAB53'
       case 'Assigned':
       case 'assigned':
+      case 'ASSIGNED':
         return '#D667CD'
       case 'Accepted':
       case 'accepted':
+      case 'ACCEPTED':
         return '#8C88FF'
       case 'new':
+      case 'NEW':
       case 'New':
         return '#00B9FF'
       case 'open':
       case 'Open':
+      case 'OPEN':
         return '#00B9FF'
-      default: return 'secondary'
+      default: return 'gray'
     }
   }
   const [info, setInfo] = useState(false)
@@ -182,8 +188,7 @@ export default function Overview() {
   const [email, setEmail] = useState("")
   const [alert, setAlert] = useState(false)
   const [editModal, setEditModal] = useState(false)
-  // const [serviceeditModal, setServiceEditModal] = useState(false)
-  const [overvieweditModal, setOverviewEditModal] = useState(false)
+  
 
   const [editAlert, setEditAlert] = useState(false)
 
@@ -283,7 +288,10 @@ export default function Overview() {
 
   const getServiceData = async () => {
     let res = await serviceRequestService.getAllServiceRequests()
-    setServiceData(res.slice(0, 3))
+    let mappedRes = []
+    res.data.forEach(elem => mappedRes.push(...elem.service_requests))
+    console.log(mappedRes)
+    setServiceData(mappedRes.slice(0, 3))
   }
 
   const getSalesvisitData = async () => {
@@ -379,7 +387,7 @@ export default function Overview() {
   }
   const editServiceHandler =  (item) => {
     history.push({
-      pathname:`/editServiceRequest/${item.servicerequestId}`,
+      pathname:`/editServiceRequest/${item.service_request_id}`,
       state: item });
   }
   const addServiceHandler = () => {
@@ -590,7 +598,7 @@ export default function Overview() {
                               editServiceHandler(item)
                             }
                             }
-                            >{item.servicerequestId}</a> </CLink>
+                            >{item.service_request_id}</a> </CLink>
 
                           </td>
                         ),
@@ -618,7 +626,7 @@ export default function Overview() {
                           <td>
                             <button
                               style={{
-                                backgroundColor: getBadge(item.status),
+                                backgroundColor: getBadge(item.request_status),
                                 padding: '5px 8px',
                                 borderRadius: '3px',
                                 color: 'white',
@@ -628,7 +636,7 @@ export default function Overview() {
                                 textAlign: 'center',
                                 outline: 'none',
                                 border: 'none',
-                              }}>{item.status}</button>
+                              }}>{item.request_status}</button>
                           </td>
                         )
                     }}

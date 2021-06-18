@@ -27,27 +27,34 @@ const machineService = new MachineService()
 const getBadge = status => {
    switch (status) {
      case 'Completed':
+     case 'COMPLETED':
      case 'completed':
        return '#50D2C2'
      case 'Overdue':
+     case 'OVERDUE':
      case 'overdue':
        return '#FF3366'
      case 'Pending':
      case 'pending':
+     case 'PENDING':
        return '#FCAB53'
      case 'Assigned':
      case 'assigned':
+     case 'ASSIGNED':
        return '#D667CD'
      case 'Accepted':
      case 'accepted':
+     case 'ACCEPTED':
        return '#8C88FF'
      case 'new':
+     case 'NEW':
      case 'New':
        return '#00B9FF'
      case 'open':
+     case 'OPEN':
      case 'Open':
        return '#00B9FF'
-     default: return 'secondary'
+     default: return 'gray'
    }
  }
 
@@ -60,7 +67,6 @@ export default function EditServiceRequest(props) {
    const [executive, setExecutive] = useState("")
    const [date, setDate] = useState("")
    const [time, setTime] = useState("")
-   const [data, setData] = useState([])
 
    const [customerDetails, setCustomerDetails] = useState()
    const [machineDetails, setMachineDetails] = useState()
@@ -74,20 +80,20 @@ export default function EditServiceRequest(props) {
    }
 
    const getCustomerDetails = async () => {
-      let res = await customerSerice.getCustomer(item.customerName)
+      let res = await customerSerice.getCustomer(item.machine.client_id)
       setCustomerDetails(res.data)
       console.log('cus', res)
    }
 
    const getMachineDetails = async () => {
-      let res = await machineService.getMachine(item.machine)
+      let res = await machineService.getMachine(item.machine.machine_id)
       setMachineDetails(res.data)
       console.log('mac', res)
    }
 
    const getServicerequestDetails = async() => {
-      let res = await serviceRequestService.getServiceRequest(item.id)
-      setServiceReqDetails(res)
+      let res = await serviceRequestService.getServiceRequest(item.service_request_id)
+      setServiceReqDetails(res.data)
       console.log('serreq', res)
    }
 
@@ -155,7 +161,7 @@ export default function EditServiceRequest(props) {
                   <CRow>
                <div style={{ fontWeight:'bold'}}> Issue Type: </div>
                <CCol xs="10" md="4">
-                  {serviceReqDetails ? serviceReqDetails.issueType : null}
+                  {serviceReqDetails ? serviceReqDetails.issue_type : null}
                   </CCol> </CRow>
                </CCol>
                <CCol xs="10" lg="4">
@@ -169,10 +175,10 @@ export default function EditServiceRequest(props) {
                   <CRow>
                <div style={{ fontWeight:'bold'}}> Status: </div>
                <CCol xs="10" md="4">
-                  {serviceReqDetails ? 
+                  {serviceReqDetails && serviceReqDetails.request_status? 
                    <button
                    style={{
-                     backgroundColor: getBadge(item.status),
+                     backgroundColor: getBadge(serviceReqDetails.request_status),
                      padding: '5px 8px',
                      borderRadius: '3px',
                      color: 'white',
@@ -182,7 +188,7 @@ export default function EditServiceRequest(props) {
                      textAlign: 'center',
                      outline: 'none',
                      border: 'none',
-                   }}>{serviceReqDetails.status}</button> : null} 
+                   }}>{serviceReqDetails.request_status}</button> : null} 
                   </CCol>  </CRow>
                </CCol>
             </CRow>
@@ -215,7 +221,7 @@ export default function EditServiceRequest(props) {
                         <CInput type="date" id="sheduleDate" className="w-80"
                         name="sheduleDate" placeholder="sheduleDate" value={date} onChange={(e) => { setDate(e.target.value) }} />
                      </CFormGroup>
-                     : serviceReqDetails ? serviceReqDetails.date : null} 
+                     : serviceReqDetails ? serviceReqDetails.resolution_date : null} 
                      </CCol> </CRow>
                </CCol>
                <CCol xs="10" lg="4">
@@ -226,14 +232,14 @@ export default function EditServiceRequest(props) {
                      <CFormGroup >
                         <CInput type="time" id="sheduleTime" className="w-80" name="sheduleTime" placeholder="sheduleTime" value={time} onChange={(e) => { setTime(e.target.value) }} />
                      </CFormGroup>
-                     : serviceReqDetails ? serviceReqDetails.time : null} 
+                     : serviceReqDetails ? serviceReqDetails.resolution_date : null} 
                      </CCol> </CRow>
                </CCol>
             </CRow>
 
             <CRow style={{ marginTop: '2%',fontWeight:'bold', }}>
                <CCol xs="10" lg="6">
-                  Issue Details: {serviceReqDetails ? serviceReqDetails.issueDetails : null}
+                  Issue Details: {serviceReqDetails ? serviceReqDetails.request_detail : null}
                </CCol>
                <CCol xs="10" lg="6">
                   Machine Pictures:
@@ -256,14 +262,14 @@ export default function EditServiceRequest(props) {
             <CRow>  
             <div style={{ fontWeight:'bold'}}>Machine Serial Number: </div>
             <CCol xs="10" md="6">
-             {machineDetails ? machineDetails.machineSerialNo : null} 
+             {machineDetails ? machineDetails.machine_serial_number : null} 
              </CCol> </CRow>
             </CCol>
             <CCol xs="10" lg="4">
                <CRow>
             <div style={{ fontWeight:'bold'}}>Machine Type: </div>
             <CCol xs="10" md="4">
-              {machineDetails ? machineDetails.machineType : null}
+              {machineDetails ? machineDetails.other_machine_type ? machineDetails.other_machine_type : machineDetails.machine_type : null}
               </CCol> </CRow>
             </CCol>
          </CRow>
@@ -273,21 +279,21 @@ export default function EditServiceRequest(props) {
                <CRow>
             <div style={{ fontWeight:'bold'}}>Make: </div>
             <CCol xs="10" md="6">
-                {machineDetails ? machineDetails.make : null} 
+                {machineDetails ? machineDetails.machine_make : null} 
                 </CCol> </CRow>
             </CCol>
             <CCol xs="10" lg="4">
                <CRow>
             <div style={{ fontWeight:'bold'}}>Model: </div>
             <CCol xs="10" md="6">
-                {machineDetails ? machineDetails.model : null} 
+                {machineDetails ? machineDetails.machine_model : null} 
                 </CCol> </CRow>
             </CCol>
             <CCol xs="10" lg="4">
                <CRow>
             <div style={{ fontWeight:'bold'}}> Machine Age: </div>
             <CCol xs="10" md="4">
-                {machineDetails ? machineDetails.machineAge : null} 
+                {machineDetails ? machineDetails.machine_age_as_on_installation : null} 
                 </CCol> </CRow>
             </CCol>
          </CRow>
@@ -297,14 +303,14 @@ export default function EditServiceRequest(props) {
                <CRow>
             <div style={{ fontWeight:'bold'}}>  Machine Controller: </div>
             <CCol xs="10" md="4">
-                {machineDetails ? machineDetails.controller : null} 
+                {machineDetails ? machineDetails.other_machine_controller ? machineDetails.other_machine_controller : machineDetails.machine_controller : null} 
                 </CCol> </CRow>
             </CCol>
             <CCol xs="10" lg="4">
               <CRow>
             <div style={{ fontWeight:'bold'}}> Controller Model: </div>
             <CCol xs="10" md="4">
-                {machineDetails ? machineDetails.controllerModel : null} 
+                {machineDetails ? machineDetails.machine_controller_model : null} 
                 </CCol></CRow> 
             </CCol>
          </CRow>
@@ -317,7 +323,7 @@ export default function EditServiceRequest(props) {
                <CRow>
             <div style={{ fontWeight:'bold'}}>  Contact Person Name: </div>
             <CCol xs="10" md="3">
-               {customerDetails ? customerDetails.contactPerson : null}
+               {customerDetails ? customerDetails.contact_person : null}
                </CCol>
                 </CRow>
             </CCol>
@@ -325,7 +331,7 @@ export default function EditServiceRequest(props) {
                <CRow>
             <div style={{ fontWeight:'bold'}}>  Contact Number: </div>
             <CCol xs="10" md="6">
-               {customerDetails ? customerDetails.mobileNo : null}
+               {customerDetails ? customerDetails.phone_number : null}
                </CCol>
                 </CRow>
             </CCol>
@@ -333,7 +339,7 @@ export default function EditServiceRequest(props) {
                <CRow>
             <div style={{ fontWeight:'bold'}}>  Alternate Number: </div>
             <CCol xs="10" md="6">
-               {customerDetails ? customerDetails.alternateNo : null} 
+               {customerDetails ? customerDetails.alternate_phone_number : null} 
                
                </CCol></CRow>
             </CCol>
@@ -352,7 +358,7 @@ export default function EditServiceRequest(props) {
                <CRow>
             <div style={{ fontWeight:'bold'}}>  Email: </div>
             <CCol xs="10" md="6">
-               Email: {customerDetails ? customerDetails.email : null}
+               {customerDetails ? customerDetails.email_id : null}
                </CCol>
                 </CRow>
             </CCol>

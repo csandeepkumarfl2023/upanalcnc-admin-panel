@@ -13,22 +13,22 @@ let serviceReqData = [
 export default class ServiveRequestService{
 
  async createServiceReq(data) {
-    let response = await Axios.post(`${constants.apiEndPoint}client/request`, data)
+    let response = await Axios.post(`${constants.apiEndPoint}serviceRequest`, data)
     return response
 };
 
  async getAllServiceRequests() {
-    let response = await Axios.get(`${constants.apiEndPoint}client/request`)
+    let response = await Axios.get(`${constants.apiEndPoint}serviceRequest`)
     return response
 }
 
 async getServiceRequest(id) {
-    let response = await Axios.get(`${constants.apiEndPoint}client/request/${id}`)
+    let response = await Axios.get(`${constants.apiEndPoint}serviceRequest/${id}`)
     return response
 }
 
  async updateServiceRequest(data, id) {
-    let response = await Axios.put(`${constants.apiEndPoint}client/request`, data)
+    let response = await Axios.put(`${constants.apiEndPoint}serviceRequest`, data)
     return response
 }
 

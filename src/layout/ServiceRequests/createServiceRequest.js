@@ -60,8 +60,8 @@ export default function CreateServiceRequest() {
 
     const submitHandler = async() => {
         let currentData = {}
-        currentData.id = Math.round(Math.random() * 10000000)
-        currentData.servicerequestId = 'UPNLSR' + Math.round(Math.random() * 100000)
+        // currentData.id = Math.round(Math.random() * 10000000)
+        // currentData.servicerequestId = 'UPNLSR' + Math.round(Math.random() * 100000)
         currentData.status = 'Assigned'
         currentData.client_id = customerName
         currentData.machine_id = machine
@@ -81,7 +81,7 @@ export default function CreateServiceRequest() {
         currentData.machineAge = machineAge
         currentData.machineController = machineController
         currentData.controllerModel = controllerModel
-        currentData.ISSUE_TYPE=issueType
+        currentData.issue_type=issueType
         currentData.priority=priority
         currentData.executive=executive
         currentData.expected_resolution_date=date

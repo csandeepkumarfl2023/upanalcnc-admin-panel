@@ -34,29 +34,36 @@ const getBadge = status => {
   switch (status) {
     case 'Completed':
     case 'completed':
+    case 'COMPLETED':
       return '#50D2C2'
     case 'Overdue':
+    case 'OVERDUE':
     case 'overdue':
       return '#FF3366'
     case 'Pending':
+    case 'PENDING':
     case 'pending':
       return '#FCAB53'
     case 'Assigned':
     case 'assigned':
+    case 'ASSIGNED':
       return '#D667CD'
     case 'Accepted':
     case 'accepted':
+    case 'ACCEPTED':
       return '#8C88FF'
     case 'new':
+    case 'NEW':
     case 'New':
       return '#00B9FF'
     case 'open':
     case 'Open':
+    case 'OPEN':
       return '#00B9FF'
-    default: return 'secondary'
+    default: return 'gray'
   }
 }
-const fields = ['servicerequestId', 'company', 'priority', 'issueType', 'executive', 'status', 'contactNumber', 'email', 'createdDate']
+const fields = ['servicerequestId', 'company', 'priority', 'issue_type', 'executive', 'status', 'contactNumber', 'email', 'createdDate']
 
 const override = css`
 width: 5em;
@@ -103,7 +110,7 @@ export default function ServiceRequest() {
 
   const editServiceHandler = (item) => {
     history.push({
-      pathname: `/editServiceRequest/${item.servicerequestId}`,
+      pathname: `/editServiceRequest/${item.service_request_id}`,
       state: item
     });
   }
@@ -157,7 +164,10 @@ export default function ServiceRequest() {
 
   const getData = async () => {
     let res = await serviceRequestService.getAllServiceRequests()
-    setData(res.data)
+    let mappedRes = []
+    res.data.forEach(elem => mappedRes.push(...elem.service_requests))
+    console.log(mappedRes)
+    setData(mappedRes)
   }
 
   React.useEffect(() => {
@@ -212,16 +222,20 @@ export default function ServiceRequest() {
                             editServiceHandler(item)
                           }
                           }
-                          >{item.servicerequestId}</a></CLink>
+                          >{item.service_request_id}</a></CLink>
 
                         </td>
                       ),
+                      // 'status':
+                      // (item) => (
+                      //   <td>{item.request_status}</td>
+                      // ),
                     'executive':
                       (item) => (
                         <td>
                           <p>  <a onClick={() => {
                             setExeUpdateId(item.id)
-                            setServiceRequestId(item.servicerequestId)
+                            setServiceRequestId(item.service_request_id)
                             setCompany(item.company)
                             setIssueType(item.issueType)
                             setStatus(item.status)
@@ -241,7 +255,7 @@ export default function ServiceRequest() {
                         <td>
                           <button
                             style={{
-                              backgroundColor: getBadge(item.status),
+                              backgroundColor: getBadge(item.request_status),
                               padding: '5px 8px',
                               borderRadius: '3px',
                               color: 'white',
@@ -251,7 +265,7 @@ export default function ServiceRequest() {
                               textAlign: 'center',
                               outline: 'none',
                               border: 'none',
-                            }}>{item.status}</button>
+                            }}>{item.request_status}</button>
                         </td>
                       )
                   }}
