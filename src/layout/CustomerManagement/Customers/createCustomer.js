@@ -50,20 +50,20 @@ export default function CreateCustomer() {
                         <CCard style={{ padding: '40px', borderColor: 'lightgray' }}>
                             <CRow>
                                 <CCol xs="10" sm="3">
-                                    Customer Name:
+                                    <b>Customer Name:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="customerName" className="w-55" name="customerName" placeholder="Customer Name" onChange={handleChange} />
                                     </CFormGroup>
                                 </CCol>
 
                                 <CCol xs="10" sm="3">
-                                    Contact Person:
+                                    <b>Contact Person:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="contact_person" className="w-55" name="contact_person" placeholder="Contact Person" onChange={handleChange} />
                                     </CFormGroup>
                                 </CCol>
                                 <CCol xs="10" sm="3">
-                                    Mobile No:
+                                    <b>Mobile No:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="phone_number" className="w-55" name="phone_number" placeholder="Mobile No" onChange={handleChange} />
                                     </CFormGroup>
@@ -72,25 +72,25 @@ export default function CreateCustomer() {
 
                             <CRow>
                                 <CCol xs="10" sm="3">
-                                    Email:
+                                <b>Email:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="email_id" className="w-55" name="email_id" placeholder="Email" onChange={handleChange} />
                                     </CFormGroup>
                                 </CCol>
                                 <CCol xs="10" sm="3">
-                                    Address:
+                                <b>Address:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="address" className="w-55" name="address" placeholder="Address" onChange={handleChange} />
                                     </CFormGroup>
                                 </CCol>
                                 <CCol xs="10" sm="3">
-                                    Gst Number:
+                                <b>Gst Number:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="gst_number" className="w-55" name="gst_number" placeholder="Gst Number" onChange={handleChange} />
                                     </CFormGroup>
                                 </CCol>
                                 <CCol xs="10" sm="3">
-                                    Alternate No:
+                                    <b>Alternate No:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="alternate_phone_number" className="w-55" name="alternate_phone_number" placeholder="Alternate No" onChange={handleChange} />
                                     </CFormGroup>
@@ -100,25 +100,25 @@ export default function CreateCustomer() {
 
                             <CRow>
                                 <CCol xs="10" sm="3">
-                                    City:
+                                <b>City:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="city" className="w-55" name="city" placeholder="City" onChange={handleChange} />
                                     </CFormGroup>
                                 </CCol>
                                 <CCol xs="10" sm="3">
-                                    Zip:
+                                <b>Zip:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="pincode" className="w-55" name="pincode" placeholder="Zip" onChange={handleChange} />
                                     </CFormGroup>
                                 </CCol>
                                 <CCol xs="10" sm="3">
-                                    State:
+                                <b>State:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="state" className="w-55" name="state" placeholder="State" onChange={handleChange} />
                                     </CFormGroup>
                                 </CCol>
                                 <CCol xs="10" sm="3">
-                                    Country:
+                                <b>Country:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="country" className="w-55" name="country" placeholder="Country" onChange={handleChange} />
                                     </CFormGroup>

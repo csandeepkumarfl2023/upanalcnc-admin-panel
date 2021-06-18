@@ -98,21 +98,21 @@ export default function EditMachine(props) {
             <CCardBody>
                 <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
                     <CCol xs="12" md="4">
-                        Customer Code:
+                        <b>Customer Code:</b>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="customerCode" className="w-52"
                                 name="customerCode" placeholder="customerCode" value={customerCode} onChange={(e) => { setCustomerCode(e.target.value) }} />
                         </CFormGroup>
                     </CCol>
                     <CCol xs="12" lg="4">
-                        Machine Type:
+                        <b>Machine Type:</b>
                         <CFormGroup style={{ marginTop: '10px' }} >
                             <CInput type="text" id="machineType" className="w-52"
                                 name="machineType" placeholder="machineType" value={machineType} onChange={(e) => { setMachineType(e.target.value) }} />
                         </CFormGroup>
                     </CCol>
                     <CCol xs="12" lg="4">
-                GenerateQRCode: 
+                <b>GenerateQRCode:</b>
                      <CFormGroup style={{ marginTop: '10px' }}>
                         <CInput type="text" id="generateQRCode" className="w-52"
                    name="generateQRCode" placeholder="generateQRCode" value={generateQRCode} onChange={(e) => { setGenerateQRCode(e.target.value) }} />
@@ -125,7 +125,7 @@ export default function EditMachine(props) {
 
 
                     <CCol xs="12" lg="4">
-                        Make:
+                        <b>Make:</b>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="make" className="w-52"
                                 name="make" placeholder="make" value={make} onChange={(e) => { setMake(e.target.value) }} />
@@ -133,14 +133,14 @@ export default function EditMachine(props) {
 
                     </CCol>
                     <CCol xs="12" lg="4">
-                    Controller:
+                    <b>Controller:</b>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="controller" className="w-52"
                                 name="controller" placeholder="controller" value={controller} onChange={(e) => { setController(e.target.value) }} />
                         </CFormGroup>
                     </CCol>
                     <CCol xs="12" lg="4">
-                         Machine SerialNo:
+                         <b>Machine SerialNo:</b>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="machineSerialNo" className="w-52"
                                 name="machineSerialNo" placeholder="machineSerialNo" value={machineSerialNo} onChange={(e) => { setMachineSerialNo(e.target.value) }} />
@@ -151,21 +151,21 @@ export default function EditMachine(props) {
                 <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
 
                     <CCol xs="12" lg="4">
-                        Model:
+                        <b>Model:</b>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="model" className="w-52"
                                 name="model" placeholder="model" value={model} onChange={(e) => { setModel(e.target.value) }} />
                         </CFormGroup>
                     </CCol>
                     <CCol xs="12" lg="4">
-                        MachineAge:
+                        <b>MachineAge:</b>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="machineAge" className="w-52"
                                 name="machineAge" placeholder="machineAge" value={machineAge} onChange={(e) => { setMachineAge(e.target.value) }} />
                         </CFormGroup>
                     </CCol>
                     <CCol xs="12" lg="4">
-                        ControllerModel:
+                        <b>ControllerModel:</b>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="controllerModel" className="w-52"
                                 name="controllerModel" placeholder="controllerModel" value={controllerModel} onChange={(e) => { setControllerModel(e.target.value) }} />
