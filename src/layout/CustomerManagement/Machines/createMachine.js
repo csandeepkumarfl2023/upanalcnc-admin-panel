@@ -180,12 +180,12 @@ export default function CreateMachine() {
                                             : null}
                                     </CFormGroup>
                                 </CCol>
-                                <CCol xs="10" sm="4">
+                                {/* <CCol xs="10" sm="4">
                                     <b>Generate QRCode:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="generateQRCode" className="w-52" name="generateQRCode" placeholder="Generate QRCode" onChange={handleChange} />
                                     </CFormGroup>
-                                </CCol>
+                                </CCol> */}
                             </CRow>
                             <CRow style={{ justifyContent: 'flex-end', marginTop: '2%' }}>
                                 <CCardFooter style={{ width: '25%' }}>

@@ -111,13 +111,13 @@ export default function EditMachine(props) {
                                 name="machineType" placeholder="machineType" value={machineType} onChange={(e) => { setMachineType(e.target.value) }} />
                         </CFormGroup>
                     </CCol>
-                    <CCol xs="12" lg="4">
+                    {/* <CCol xs="12" lg="4">
                         <b>GenerateQRCode:</b>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="generateQRCode" className="w-52"
                                 name="generateQRCode" placeholder="generateQRCode" value={generateQRCode} onChange={(e) => { setGenerateQRCode(e.target.value) }} />
                         </CFormGroup>
-                    </CCol>
+                    </CCol> */}
 
                 </CRow>
 
