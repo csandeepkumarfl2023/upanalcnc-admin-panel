@@ -175,7 +175,6 @@ export default function Overview() {
   }
   const [info, setInfo] = useState(false)
   const [serviceinfo, setServiceInfo] = useState(false)
-  const [overviewinfo, setOverviewInfo] = useState(false)
 
   const [loading, setLoading] = useState(false)
   const [servicerequestId, setServiceRequestId] = useState("")
@@ -588,8 +587,6 @@ export default function Overview() {
                     items={servicedata}
                     fields={fields}
                     conditionalRowStyles={conditionalRowStyles}
-                    // itemsPerPage={2}
-                    // pagination
                     scopedSlots={{
                       'servicerequestId':
                         (item) => (
@@ -598,7 +595,7 @@ export default function Overview() {
                               editServiceHandler(item)
                             }
                             }
-                            >{item.service_request_id}</a> </CLink>
+                            >{item.service_request_id ? item.service_request_id : null}</a> </CLink>
 
                           </td>
                         ),
@@ -623,7 +620,7 @@ export default function Overview() {
                         ),
                       'status':
                         (item) => (
-                          <td>
+                          <td>{item.request_status ? 
                             <button
                               style={{
                                 backgroundColor: getBadge(item.request_status),
@@ -637,8 +634,39 @@ export default function Overview() {
                                 outline: 'none',
                                 border: 'none',
                               }}>{item.request_status}</button>
+                              : null }
                           </td>
-                        )
+                        ),
+                        'company':
+                        (item) => (
+                          <td>{item.company ? item.company : null}
+                          </td>
+                        ),
+                        'priority':
+                        (item) => (
+                          <td>{item.priority ? item.priority : null}
+                          </td>
+                        ),
+                        'issueType':
+                        (item) => (
+                          <td>{item.issueType ? item.issueType : null}
+                          </td>
+                        ),
+                        'contactNumber':
+                        (item) => (
+                          <td>{item.contactNumber ? item.contactNumber : null}
+                          </td>
+                        ),
+                        'email':
+                        (item) => (
+                          <td>{item.email ? item.email : null}
+                          </td>
+                        ),
+                        'createdDate':
+                        (item) => (
+                          <td>{item.createdDate ? item.createdDate : null}
+                          </td>
+                        ),
                     }}
 
                   />
@@ -827,7 +855,41 @@ export default function Overview() {
                                 border: 'none',
                               }}>{item.status}</button>
                           </td>
-                        )
+                        ),
+                        'executive':
+                        (item) => (
+                          <td>{item.executive ? item.executive : null}</td>
+                        ),
+                        'company':
+                        (item) => (
+                          <td>{item.company ? item.company : null}
+                          </td>
+                        ),
+                        'priority':
+                        (item) => (
+                          <td>{item.priority ? item.priority : null}
+                          </td>
+                        ),
+                        'issueType':
+                        (item) => (
+                          <td>{item.issueType ? item.issueType : null}
+                          </td>
+                        ),
+                        'contactNumber':
+                        (item) => (
+                          <td>{item.contactNumber ? item.contactNumber : null}
+                          </td>
+                        ),
+                        'email':
+                        (item) => (
+                          <td>{item.email ? item.email : null}
+                          </td>
+                        ),
+                        'createdDate':
+                        (item) => (
+                          <td>{item.createdDate ? item.createdDate : null}
+                          </td>
+                        ),
                     }}
 
                   />

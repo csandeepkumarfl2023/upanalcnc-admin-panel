@@ -222,28 +222,23 @@ export default function ServiceRequest() {
                             editServiceHandler(item)
                           }
                           }
-                          >{item.service_request_id}</a></CLink>
+                          >{item.service_request_id ? item.service_request_id : null}</a> </CLink>
 
                         </td>
                       ),
-                      // 'status':
-                      // (item) => (
-                      //   <td>{item.request_status}</td>
-                      // ),
                     'executive':
                       (item) => (
                         <td>
                           <p>  <a onClick={() => {
                             setExeUpdateId(item.id)
-                            setServiceRequestId(item.service_request_id)
+                            setServiceRequestId(item.servicerequestId)
                             setCompany(item.company)
                             setIssueType(item.issueType)
                             setStatus(item.status)
                             setExecutive(item.executive)
                             setPriority(item.priority)
-                            setDescription(item.description)
-                            setContactNumber(item.contactNumber)
-                            setReports(item.reports)
+                            setCreatedDate(item.createdDate)
+                            setEmail(item.email)
                             setExecutiveInfo(!executiveinfo)
                           }
                           }>{item.executive}
@@ -252,7 +247,7 @@ export default function ServiceRequest() {
                       ),
                     'status':
                       (item) => (
-                        <td>
+                        <td>{item.request_status ? 
                           <button
                             style={{
                               backgroundColor: getBadge(item.request_status),
@@ -266,10 +261,40 @@ export default function ServiceRequest() {
                               outline: 'none',
                               border: 'none',
                             }}>{item.request_status}</button>
+                            : null }
                         </td>
-                      )
+                      ),
+                      'company':
+                      (item) => (
+                        <td>{item.company ? item.company : null}
+                        </td>
+                      ),
+                      'priority':
+                      (item) => (
+                        <td>{item.priority ? item.priority : null}
+                        </td>
+                      ),
+                      'issueType':
+                      (item) => (
+                        <td>{item.issueType ? item.issueType : null}
+                        </td>
+                      ),
+                      'contactNumber':
+                      (item) => (
+                        <td>{item.contactNumber ? item.contactNumber : null}
+                        </td>
+                      ),
+                      'email':
+                      (item) => (
+                        <td>{item.email ? item.email : null}
+                        </td>
+                      ),
+                      'createdDate':
+                      (item) => (
+                        <td>{item.createdDate ? item.createdDate : null}
+                        </td>
+                      ),
                   }}
-
                 />
               </CCardBody>
             </CCard>
