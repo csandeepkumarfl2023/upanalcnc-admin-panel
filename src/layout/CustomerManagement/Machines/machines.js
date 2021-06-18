@@ -19,6 +19,7 @@ import {
   CLink,
   CCard
 } from '@coreui/react'
+import CIcon from '@coreui/icons-react'
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 import MachineService from '../../../services/machineService';
@@ -48,11 +49,14 @@ export default function Machines() {
     }
   ];
 
+  const [confirmPopup, setConfirmPopup] = useState(false)
+  const [qrPopup, setQrPopup] = useState(false)
 
   const [alert, setAlert] = useState(false)
   const [editModal, setEditModal] = useState(false)
   const [editAlert, setEditAlert] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [clickedMachine, setClickedMachine] = useState()
 
   const [deleteAlert, setDeleteAlert] = useState(false)
   const [updateId, setUpdateId] = useState()
@@ -126,7 +130,7 @@ export default function Machines() {
                       >{item.machine_id}</a></CLink>
                     </td>
                   ),
-                  'customerCode':
+                'customerCode':
                   (item) => (
                     <td>{item.client_id}
                     </td>
@@ -146,34 +150,83 @@ export default function Machines() {
                     <td>{item.machine_serial_number}
                     </td>
                   ),
-                  'machineSerialNo':
+                'machineSerialNo':
                   (item) => (
                     <td>{item.machine_serial_number}
                     </td>
                   ),
-                  'machineAge':
+                'machineAge':
                   (item) => (
                     <td>{item.machine_age_as_on_installation}
                     </td>
                   ),
-                  'controller':
+                'controller':
                   (item) => (
                     <td>{item.other_machine_controller ? item.other_machine_controller : item.machine_controller}
                     </td>
-                  ), 
-                  'controllerModel':
+                  ),
+                'controllerModel':
                   (item) => (
                     <td>{item.machine_controller_model}
                     </td>
                   ),
-                  'machine_type':
+                'machine_type':
                   (item) => (
                     <td>{item.other_machine_type ? item.other_machine_type : item.machine_type}
                     </td>
+                  ),
+                'generateQRCode':
+                  (item) => (
+                    <td style={{ textAlign: 'center' }}>
+                      <CLink><a onClick={() => {
+                        setConfirmPopup(true)
+                        setClickedMachine(item.machine_id)
+                      }
+                      }>
+                      <CIcon name="cil-user" style={{ color: 'gray' }} customClasses="c-sidebar-nav-icon" />
+                      </a></CLink>
+                    </td>
                   )
               }}
-
             />
+
+            <CModal
+              show={confirmPopup}
+              onClose={() => setConfirmPopup(false)}
+              color="info"
+            >
+              <CModalHeader>
+                <CModalTitle>Confirm ?</CModalTitle>
+              </CModalHeader>
+              <CModalBody>
+              Are you sure you want to generate QR Code for MachineID: {clickedMachine}
+              </CModalBody>
+              <CModalFooter>
+                <CButton color="secondary" onClick={() => setConfirmPopup(false)}>No</CButton>
+                <CButton color="info" onClick={() => {
+                  setConfirmPopup(false)
+                  setQrPopup(true)
+                }}>Yes</CButton>{' '}
+              </CModalFooter>
+            </CModal>
+
+            <CModal
+              show={qrPopup}
+              onClose={() => setQrPopup(false)}
+              color="info"
+            >
+              <CModalHeader>
+                <CModalTitle>QRCode for MachineID: {clickedMachine}</CModalTitle>
+              </CModalHeader>
+              <CModalBody>
+                Scanner...
+              </CModalBody>
+              <CModalFooter>
+                <CButton color="secondary" onClick={() => setQrPopup(false)}>Cancel</CButton>
+                <CButton color="info" >Print</CButton>{' '}
+              </CModalFooter>
+            </CModal>
+
 
           </CCardBody>
         </CCol>
