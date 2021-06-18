@@ -24,7 +24,7 @@ export default function CreateMachine() {
     const history = useHistory();
 
     const [data, setData] = useState({
-        machine_type: "", machine_make: "", machine_model: "", machine_name: "",customerCode: "",
+        machine_type: "", machine_make: "", machine_model: "", machine_name: "", customerCode: "",
         machine_serial_number: "", machineAge: "", machine_controller: "", machine_controller_model: "", generateQRCode: ""
     })
     const [typeOthers, setTypeOthers] = useState(false)
@@ -44,7 +44,7 @@ export default function CreateMachine() {
         history.push('/customermanagement')
     }
 
-    const getCustomer = async() => {
+    const getCustomer = async () => {
         let res = await customerservice.getAllCustomers()
         console.log(res)
         setCustomersArr(res.data)
@@ -89,18 +89,11 @@ export default function CreateMachine() {
                     <div >
                         <CCard style={{ padding: '40px', borderColor: 'lightgray' }}>
                             <CRow style={{ marginTop: '2%' }}>
-                                {/* <CCol xs="10" sm="4">
-                                    Machine Id:
-                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="machineId" className="w-52" name="machineId" placeholder="Machine Id" onChange={handleChange} />
-                                    </CFormGroup>
-                                </CCol> */}
-
-                                <CCol xs="10" sm="4">
+                                <CCol xs="10" sm="6">
                                     <b>Customer code:</b>
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CSelect custom size="md" name="customerCode" id="customerCode"
-                                        onChange={(e) => setFieldValue('customerCode', e.target.value)}
+                                            onChange={(e) => setFieldValue('customerCode', e.target.value)}
                                             value={values.customerCode}>
                                             <option value="0">Open this select menu</option>
                                             {customerseArr && customerseArr.length ? customerseArr.map((elem) => {
@@ -111,73 +104,9 @@ export default function CreateMachine() {
                                     </CFormGroup>
                                 </CCol>
 
-                                <CCol xs="10" sm="4">
-                                    <b>Make:</b>
-                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="machine_make" className="w-52" name="machine_make" placeholder="Make" onChange={handleChange} />
-                                    </CFormGroup>
-                                </CCol>
-                                <CCol xs="10" sm="4">
-                                    <b>Controller Model:</b>
-                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="machine_controller_model" className="w-52" name="machine_controller_model" placeholder="Controller Model" onChange={handleChange} />
-                                    </CFormGroup>
-                                </CCol>
-                            </CRow>
-
-                            <CRow style={{ marginTop: '2%' }}>
-                                <CCol xs="10" sm="4">
-                                    <b>Model:</b>
-                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="machine_model" className="w-52" name="machine_model" placeholder="Model" onChange={handleChange} />
-                                    </CFormGroup>
-                                </CCol>
-                                <CCol xs="10" sm="4">
-                                    <b>MachineSerialNo:</b>
-                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="machine_serial_number" className="w-52" name="machine_serial_number" placeholder="Machine SerialNo" onChange={handleChange} />
-                                    </CFormGroup>
-                                </CCol>
-                                <CCol xs="10" sm="4">
-                                    <b>Machine Age:</b>
-                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="machineAge" className="w-52" name="machineAge" placeholder="Machine Age" onChange={handleChange} />
-                                    </CFormGroup>
-                                </CCol>
-
-
-                            </CRow>
-
-
-                            <CRow style={{ marginTop: '2%' }}>
-
-                                <CCol xs="10" sm="4">
-                                    <b>Machine Controller:</b>
-                                    <CFormGroup className="w-52">
-                                        <CSelect custom size="md" name="machine_controller" id="machine_controller" value={values.machine_controller}
-                                            onChange={(e) => {
-                                                setFieldValue('machine_controller', e.target.value)
-                                                e.target.value == 'others' ? setOthers(true) : setOthers(false)
-                                            }}>
-                                            <option value="0">Open this select menu</option>
-                                            {controllersArr && controllersArr.length ? controllersArr.map((elem) => {
-                                                return <option key={elem.key} value={elem.value} style={{ textTransform: 'capitalize' }}>{elem.value}</option>
-                                            }
-                                            ) : null}
-                                        </CSelect>
-
-                                        {others ?
-                                            <>
-                                                <CLabel htmlFor="machine_controller">Enter Your Option</CLabel>
-                                                <CInput type="text" id="others" name="other_machine_controller" placeholder="Machine controller" onChange={handleChange} />
-                                            </>
-                                            : null}
-                                    </CFormGroup>
-                                </CCol>
-
-                                <CCol xs="10" sm="4">
+                                <CCol xs="10" sm="6">
                                     <b>Machine Type:</b>
-                                    <CFormGroup className="w-52">
+                                    <CFormGroup className="w-52" style={{ marginTop: '10px' }}>
                                         <CSelect custom size="md" name="machine_type" id="machine_type"
                                             value={values.machine_type}
                                             onChange={(e) => {
@@ -190,21 +119,84 @@ export default function CreateMachine() {
                                             }
                                             ) : null}
                                         </CSelect>
-                                        {typeOthers ?
-                                            <>
-                                                <CLabel htmlFor="controller">Enter Your Option</CLabel>
-                                                <CInput type="text" id="others" name="other_machine_type" placeholder="Machine Type" onChange={handleChange} />
-                                            </>
-                                            : null}
-                                    </CFormGroup>
-                                </CCol>
-                                <CCol xs="10" sm="4">
-                                    <b>Generate QRCode:</b>
-                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="generateQRCode" className="w-52" name="generateQRCode" placeholder="Generate QRCode" onChange={handleChange} />
                                     </CFormGroup>
                                 </CCol>
                             </CRow>
+
+
+                            {typeOthers ?
+                                <CRow>
+                                    <CCol xs="10" sm="4">
+                                        <CLabel htmlFor="controller" style={{ fontWeight: 'bold' }}>Enter Your Option:</CLabel>
+                                        <CInput type="text" id="others" name="other_machine_type" placeholder="Machine Type" onChange={handleChange} />
+                                    </CCol>
+                                </CRow>
+                                : null}
+
+                            <CRow style={{ marginTop: '2%' }}>
+                                <CCol xs="10" sm="4">
+                                    <b>Make:</b>
+                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
+                                        <CInput type="text" id="machine_make" className="w-52" name="machine_make" placeholder="Make" onChange={handleChange} />
+                                    </CFormGroup>
+                                </CCol>
+                                <CCol xs="10" sm="4">
+                                    <b>Model:</b>
+                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
+                                        <CInput type="text" id="machine_model" className="w-52" name="machine_model" placeholder="Model" onChange={handleChange} />
+                                    </CFormGroup>
+                                </CCol>
+                                <CCol xs="10" sm="4">
+
+                                    <b>MachineSerialNo:</b>
+                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
+                                        <CInput type="text" id="machine_serial_number" className="w-52" name="machine_serial_number" placeholder="Machine SerialNo" onChange={handleChange} />
+                                    </CFormGroup>
+                                </CCol>
+                            </CRow>
+
+                            <CRow style={{ marginTop: '2%' }}>
+                                <CCol xs="10" sm="4">
+                                    <b>Machine Age:</b>
+                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
+                                        <CInput type="text" id="machineAge" className="w-52" name="machineAge" placeholder="Machine Age" onChange={handleChange} />
+                                    </CFormGroup>
+                                </CCol>
+
+                                <CCol xs="10" sm="4">
+                                    <b>Machine Controller:</b>
+                                    <CFormGroup className="w-52" style={{ marginTop: '10px' }}>
+                                        <CSelect custom size="md" name="machine_controller" id="machine_controller" value={values.machine_controller}
+                                            onChange={(e) => {
+                                                setFieldValue('machine_controller', e.target.value)
+                                                e.target.value == 'others' ? setOthers(true) : setOthers(false)
+                                            }}>
+                                            <option value="0">Open this select menu</option>
+                                            {controllersArr && controllersArr.length ? controllersArr.map((elem) => {
+                                                return <option key={elem.key} value={elem.value} style={{ textTransform: 'capitalize' }}>{elem.value}</option>
+                                            }
+                                            ) : null}
+                                        </CSelect>
+                                    </CFormGroup>
+                                </CCol>
+
+                                <CCol xs="10" sm="4">
+                                    <b>Controller Model:</b>
+                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
+                                        <CInput type="text" id="machine_controller_model" className="w-52" name="machine_controller_model" placeholder="Controller Model" onChange={handleChange} />
+                                    </CFormGroup>
+                                </CCol>
+                            </CRow>
+
+
+                            {others ?
+                                 <CRow style={{ marginTop: '2%' }}>
+                                 <CCol xs="10" sm="4">
+                                    <CLabel htmlFor="machine_controller" style={{fontWeight: 'bold'}}>Enter Your Option</CLabel>
+                                    <CInput type="text" id="others" name="other_machine_controller" placeholder="Machine controller" onChange={handleChange} />
+                                </CCol>
+                                </CRow>
+                                : null}
                             <CRow style={{ justifyContent: 'flex-end', marginTop: '2%' }}>
                                 <CCardFooter style={{ width: '25%' }}>
 
