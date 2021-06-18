@@ -42,7 +42,7 @@ export default function EditCustomer(props) {
 
    const getCustomerDetails = async () => {
       const res = await customerSerice.getCustomer(item.client_id)
-      setCustomerCode(res.data.customerCode)
+      setCustomerCode(item.client_id)
       setCustomerName(res.data.company)
       setContactPerson(res.data.contact_person)
       setMobileNo(res.data.phone_number)
@@ -61,7 +61,7 @@ export default function EditCustomer(props) {
       currentData.company = customerName
       currentData.customerName = customerName
       currentData.contact_person = contactPerson
-      currentData.customerCode = customerCode
+      //currentData.customerCode = customerCode
       currentData.phone_number = mobileNo
       currentData.email_id = email
       currentData.address = address
@@ -113,7 +113,7 @@ export default function EditCustomer(props) {
                   <b>Customer Code: </b>
                   <CFormGroup >
                      <CInput style={{ marginTop: '10px' }} type="text" id="customerCode" className="w-50"
-                        name="customerCode" placeholder="customerCode" value={customerCode} onChange={(e) => { setCustomerCode(e.target.value) }} />
+                        name="customerCode" placeholder="customerCode" value={customerCode} readOnly />
                   </CFormGroup>
                </CCol>
                <CCol xs="12" lg="4">

@@ -46,7 +46,7 @@ export default function EditMachine(props) {
     const getMachineDetails = async () => {
         const res = await machineService.getMachine(item.machine_id)
         console.log('getMachinedetails', res.data)
-        setCustomerCode(res.data.customerCode)
+        setCustomerCode(res.data.client_id)
         setMachineType(res.data.machine_type)
         setMake(res.data.machine_make)
         setModel(res.data.machine_model)
