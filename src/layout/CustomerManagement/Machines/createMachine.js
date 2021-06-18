@@ -185,7 +185,7 @@ export default function CreateMachine() {
                                     <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
                                         <CInput type="text" id="machine_controller_model" className="w-52" name="machine_controller_model" placeholder="Controller Model" onChange={handleChange} />
                                     </CFormGroup>
-                                </CCol>
+                                </CCol> 
                             </CRow>
 
 
