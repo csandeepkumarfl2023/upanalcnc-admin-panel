@@ -129,7 +129,7 @@ export default function EditServiceRequest(props) {
             </CRow>
          </CCardHeader>
          <CCardBody >
-            <CRow style={{ marginLeft: '0%' }}>
+            <CRow style={{ marginLeft: '2%' }}>
                <CCol xs="10" md="4">
                   <CRow>
                      <div style={{ fontWeight: 'bold' }}> Customer Name: </div>
@@ -156,7 +156,7 @@ export default function EditServiceRequest(props) {
             </CRow>
 
 
-            <CRow style={{ marginTop: '2%', marginLeft: '0%' }}>
+            <CRow style={{ marginTop: '2%', marginLeft: '2%' }}>
                <CCol xs="10" lg="4">
                   <CRow>
                      <div style={{ fontWeight: 'bold' }}> Issue Type: </div>
@@ -183,7 +183,7 @@ export default function EditServiceRequest(props) {
                                  borderRadius: '3px',
                                  color: 'white',
                                  fontSize: '13px',
-                                 width: '70px',
+                                 width: '100px',
                                  textTransform: 'capitalize',
                                  textAlign: 'center',
                                  outline: 'none',
@@ -193,7 +193,7 @@ export default function EditServiceRequest(props) {
                </CCol>
             </CRow>
 
-            <CRow style={{ marginTop: '2%', marginLeft: '0%' }}>
+            <CRow style={{ marginTop: '2%', marginLeft: '2%' }}>
                <CCol xs="10" sm="4">
                   <CRow>
                      <div style={{ fontWeight: 'bold' }}> Executive: </div>
@@ -237,7 +237,7 @@ export default function EditServiceRequest(props) {
                </CCol>
             </CRow>
 
-            <CRow style={{ marginTop: '2%', fontWeight: 'bold', }}>
+            <CRow style={{ marginTop: '2%', marginLeft: '2%', fontWeight: 'bold', }}>
                <CCol xs="10" lg="6">
                   Issue Details: {serviceReqDetails ? serviceReqDetails.request_detail : null}
                </CCol>
