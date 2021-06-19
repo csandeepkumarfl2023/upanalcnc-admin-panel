@@ -21,7 +21,7 @@ function App() {
     <Route path="/login"  name="login" render={props => <Login {...props}/>}  />
     <Route path="/overview" name="Overview" render={props => <TheLayout {...props}/>} />
     <Route path="/" name="login" exact render={props => <Login {...props}/>} />
-    {/* <Route path="/" name="Home" render={props => <TheLayout {...props}/>} /> */}
+    <Route path="/" name="Home" render={props => <TheLayout {...props}/>} />
 
     </Switch>
     </React.Suspense>

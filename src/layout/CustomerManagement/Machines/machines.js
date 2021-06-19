@@ -21,9 +21,9 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { css } from "@emotion/react";
-import ClipLoader from "react-spinners/ClipLoader";
 import MachineService from '../../../services/machineService';
 import { useHistory } from "react-router-dom";
+import QRCode from 'qrcode.react';
 
 const machineService = new MachineService()
 
@@ -53,13 +53,11 @@ export default function Machines() {
   const [qrPopup, setQrPopup] = useState(false)
 
   const [alert, setAlert] = useState(false)
-  const [editModal, setEditModal] = useState(false)
   const [editAlert, setEditAlert] = useState(false)
   const [loading, setLoading] = useState(false)
   const [clickedMachine, setClickedMachine] = useState()
 
   const [deleteAlert, setDeleteAlert] = useState(false)
-  const [updateId, setUpdateId] = useState()
   const [data, setData] = useState([])
 
   const getData = async () => {
@@ -218,8 +216,8 @@ export default function Machines() {
               <CModalHeader>
                 <CModalTitle>QRCode for MachineID: {clickedMachine}</CModalTitle>
               </CModalHeader>
-              <CModalBody>
-                Scanner...
+              <CModalBody style={{display: 'flex', justifyContent: 'center'}}>
+              <QRCode value={clickedMachine} size="150" />
               </CModalBody>
               <CModalFooter>
                 <CButton color="secondary" onClick={() => setQrPopup(false)}>Cancel</CButton>
