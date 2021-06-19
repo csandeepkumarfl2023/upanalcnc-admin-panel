@@ -217,7 +217,9 @@ export default function Machines() {
                 <CModalTitle>QRCode for MachineID: {clickedMachine}</CModalTitle>
               </CModalHeader>
               <CModalBody style={{display: 'flex', justifyContent: 'center'}}>
+                {clickedMachine ?
               <QRCode value={clickedMachine} size="150" />
+              : null }
               </CModalBody>
               <CModalFooter>
                 <CButton color="secondary" onClick={() => setQrPopup(false)}>Cancel</CButton>
