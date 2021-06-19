@@ -20,12 +20,14 @@ import ServiceRequestService from '../../services/serviceRequestService'
 import CustomerService from '../../services/customerService'
 import MachineService from '../../services/machineService'
 import CommonService from '../../services/commonService'
+import EmployeeService from '../../services/employeeService';
 import moment from 'moment'
 
 const serviceRequestService = new ServiceRequestService()
 const customerSerice = new CustomerService()
 const machineService = new MachineService()
 const commonService = new CommonService()
+const employeeService = new EmployeeService()
 export default function CreateServiceRequest() {
 
   const history = useHistory();
@@ -49,6 +51,8 @@ export default function CreateServiceRequest() {
   const [machineAge, setMachineAge] = useState("")
   const [machineController, setMachineController] = useState("")
   const [controllerModel, setControllerModel] = useState("")
+
+  const [employeesArr, setEmployeesArr] = useState()
 
   const [allIssueTypes, setAllIssueTypes] = useState()
   const [issueType, setIssueType] = useState("")
@@ -86,8 +90,8 @@ export default function CreateServiceRequest() {
     currentData.machineController = machineController
     currentData.controllerModel = controllerModel
     currentData.issue_type = issueType
-    currentData.priority = priority
-    currentData.executive = executive
+    currentData.request_priority = priority
+    currentData.employee_id = executive
     currentData.expected_resolution_date = moment(date).format('YYYY-MM-DD hh: mm: ss')
     currentData.time = time
     currentData.request_detail = issueDetails
@@ -98,7 +102,7 @@ export default function CreateServiceRequest() {
     history.push('./servicerequest')
   }
 
-  const customerChangeHandler = async(e) => {
+  const customerChangeHandler = async (e) => {
     let customerId = e.target.value
     let selectedCustomer = customerArr.find((elem) => elem.client_id == customerId)
     console.log(selectedCustomer)
@@ -115,7 +119,7 @@ export default function CreateServiceRequest() {
     console.log(customerId)
     let res = await machineService.getAllMachines()
     console.log(res.data)
-    let filteredMachinesArr = res.data.filter(item => item.client_id == customerId )
+    let filteredMachinesArr = res.data.filter(item => item.client_id == customerId)
     console.log(filteredMachinesArr)
     setMachineArr(filteredMachinesArr)
   }
@@ -134,6 +138,12 @@ export default function CreateServiceRequest() {
     setControllerModel(selectedMachine.machine_controller_model)
   }
 
+  const getEmployees = async () => {
+    let res = await employeeService.getEmployees()
+    if (res.data) {
+      setEmployeesArr(res.data)
+    }
+  }
 
   const getEnum = async () => {
     let res = await commonService.getenum()
@@ -162,254 +172,257 @@ export default function CreateServiceRequest() {
     getCustomersList()
     getMachinesList()
     getEnum()
+    getEmployees()
   }, [])
 
   return (
     <>
-    <CCard>
-      <CCardHeader><CCardSubtitle style={{ marginTop: '1%', fontWeight: 'bold', fontSize: '1.1rem' }}>Create Service Request</CCardSubtitle></CCardHeader>
-      <CCardBody>
-        <CRow style={{ marginTop: '2%' }}>
-          <CCol xs="10" lg="4">
-            <CRow style={{ marginLeft: '0.1%' }}>
-              <div style={{ fontWeight: 'bold' }}> Customer Name: </div>
-              <CFormGroup style={{ marginLeft: '3%' }}>
-                <CSelect custom size="md" name="name" id="name" value={customerName} onChange={customerChangeHandler}>
-                  <option value="">Open this select menu</option>
-                  {customerArr && customerArr.length ? customerArr.map((elem) => {
-                    return <option key={elem.client_id} value={elem.client_id}>{elem.company}</option>
-                  }
-                  ) : null}
+      <CCard>
+        <CCardHeader><CCardSubtitle style={{ marginTop: '1%', fontWeight: 'bold', fontSize: '1.1rem' }}>Create Service Request</CCardSubtitle></CCardHeader>
+        <CCardBody>
+          <CRow style={{ marginTop: '2%' }}>
+            <CCol xs="10" lg="4">
+              <CRow style={{ marginLeft: '0.1%' }}>
+                <div style={{ fontWeight: 'bold' }}> Customer Name: </div>
+                <CFormGroup style={{ marginLeft: '3%' }}>
+                  <CSelect custom size="md" name="name" id="name" value={customerName} onChange={customerChangeHandler}>
+                    <option value="">Open this select menu</option>
+                    {customerArr && customerArr.length ? customerArr.map((elem) => {
+                      return <option key={elem.client_id} value={elem.client_id}>{elem.company}</option>
+                    }
+                    ) : null}
 
-                  {/* <option value="Vamsi">Vamsi</option>
+                    {/* <option value="Vamsi">Vamsi</option>
                  <option value="Sandeep">Sandeep</option>
                  <option value="Pooja">Pooja</option>
                  <option value="Vikram">Vikram</option>
                  <option value="Arun">Arun</option> */}
-                </CSelect>
-              </CFormGroup>
-            </CRow>
-          </CCol>
-          <CCol xs="10" md="4" >
-            <CRow>
-              <div style={{ fontWeight: 'bold' }}> Customer Code :</div>
-              <CCol xs="10" md="4">
-                {customerCode} </CCol> </CRow>
-          </CCol>
-          <CCol xs="10" lg="4" >
-            <CRow>
-              <div style={{ fontWeight: 'bold' }}>   Contact Person Name : </div>
-              <CCol xs="10" md="4">
-                {contactName}  </CCol> </CRow>
-          </CCol>
-        </CRow>
-
-        <CRow >
-          <CCol xs="10" lg="4" >
-            <CRow>
-              <div style={{ fontWeight: 'bold', marginLeft: '3%' }}>Contact Number :  </div>
-              <CCol xs="10" md="4">
-                {contactNumber}  </CCol> </CRow>
-          </CCol>
-          <CCol xs="10" lg="4" >
-            <CRow>
-              <div style={{ fontWeight: 'bold' }}>Alternate Number :  </div>
-              <CCol xs="10" md="4">
-                {alternateNumber} </CCol> </CRow>
-          </CCol>
-          <CCol xs="10" lg="4">
-            <CRow>
-              <div style={{ fontWeight: 'bold' }}>Email :  </div>
-              <CCol xs="10" md="6">
-                {email}</CCol> </CRow>
-          </CCol>
-        </CRow>
-
-        <CRow><CCol xs="10" lg="10" style={{ marginTop: '2%', marginLeft: '1%' }}>
-          <CRow>
-            <div style={{ fontWeight: 'bold' }}> Customer Address : </div>
-            <CCol xs="10" md="6">
-              {customerAddress}
-            </CCol> </CRow>
-        </CCol></CRow>
-        <CCardHeader>
-          <CCardSubtitle style={{ marginTop: '2%', fontSize: '1rem', marginLeft: '-2%' }}>Machine Details</CCardSubtitle></CCardHeader>
-        <CRow style={{ marginTop: '2%' }}>
-          <CCol xs="12" lg="4">
-            <CRow style={{ marginLeft: '3%' }}>
+                  </CSelect>
+                </CFormGroup>
+              </CRow>
+            </CCol>
+            <CCol xs="10" md="4" >
               <CRow>
-                <div style={{ fontWeight: 'bold' }}> Select Machine : </div>
-                <CCol xs="10" md="6">
-                  <CFormGroup style={{ marginLeft: '3%' }} >
-                    <CSelect custom size="md" name="name" id="name" value={machine} onChange={machineChangeController} style={{ width: '150%' }}>
-                    <option value="">Open this select menu</option>
-                      {machineArr && machineArr.length ? machineArr.map((elem) => {
-                        return <option key={elem.machine_id} value={elem.machine_id}>{elem.machine_model}</option>
-                      }
-                      ) : null}
+                <div style={{ fontWeight: 'bold' }}> Customer Code :</div>
+                <CCol xs="10" md="4">
+                  {customerCode} </CCol> </CRow>
+            </CCol>
+            <CCol xs="10" lg="4" >
+              <CRow>
+                <div style={{ fontWeight: 'bold' }}>   Contact Person Name : </div>
+                <CCol xs="10" md="4">
+                  {contactName}  </CCol> </CRow>
+            </CCol>
+          </CRow>
 
-                    </CSelect>
-                  </CFormGroup>
+          <CRow >
+            <CCol xs="10" lg="4" >
+              <CRow>
+                <div style={{ fontWeight: 'bold', marginLeft: '3%' }}>Contact Number :  </div>
+                <CCol xs="10" md="4">
+                  {contactNumber}  </CCol> </CRow>
+            </CCol>
+            <CCol xs="10" lg="4" >
+              <CRow>
+                <div style={{ fontWeight: 'bold' }}>Alternate Number :  </div>
+                <CCol xs="10" md="4">
+                  {alternateNumber} </CCol> </CRow>
+            </CCol>
+            <CCol xs="10" lg="4">
+              <CRow>
+                <div style={{ fontWeight: 'bold' }}>Email :  </div>
+                <CCol xs="10" md="6">
+                  {email}</CCol> </CRow>
+            </CCol>
+          </CRow>
+
+          <CRow><CCol xs="10" lg="10" style={{ marginTop: '2%', marginLeft: '1%' }}>
+            <CRow>
+              <div style={{ fontWeight: 'bold' }}> Customer Address : </div>
+              <CCol xs="10" md="6">
+                {customerAddress}
+              </CCol> </CRow>
+          </CCol></CRow>
+          <CCardHeader>
+            <CCardSubtitle style={{ marginTop: '2%', fontSize: '1rem', marginLeft: '-2%' }}>Machine Details</CCardSubtitle></CCardHeader>
+          <CRow style={{ marginTop: '2%' }}>
+            <CCol xs="12" lg="4">
+              <CRow style={{ marginLeft: '3%' }}>
+                <CRow>
+                  <div style={{ fontWeight: 'bold' }}> Select Machine : </div>
+                  <CCol xs="10" md="6">
+                    <CFormGroup style={{ marginLeft: '3%' }} >
+                      <CSelect custom size="md" name="name" id="name" value={machine} onChange={machineChangeController} style={{ width: '150%' }}>
+                        <option value="">Open this select menu</option>
+                        {machineArr && machineArr.length ? machineArr.map((elem) => {
+                          return <option key={elem.machine_id} value={elem.machine_id}>{elem.machine_model}</option>
+                        }
+                        ) : null}
+
+                      </CSelect>
+                    </CFormGroup>
+                  </CCol>
+                </CRow>
+              </CRow>
+            </CCol>
+            <CCol xs="10" lg="4" >
+              <CRow>
+                <div style={{ fontWeight: 'bold' }}> Machine Serial Number : </div>
+                <CCol xs="10" md="6">
+                  {machineSerialNo} </CCol> </CRow>
+            </CCol>
+            <CCol xs="10" lg="4" >
+              <CRow>
+                <div style={{ fontWeight: 'bold' }}>  Machine Type :</div>
+                <CCol xs="10" md="6">
+                  {machineType} </CCol> </CRow>
+            </CCol>
+          </CRow>
+          <CRow >
+            <CCol xs="10" lg="4" >
+              <CRow style={{ marginLeft: '0%' }}>
+                <div style={{ fontWeight: 'bold' }}>  Make: </div>
+                <CCol xs="10" md="6">
+                  {make} </CCol></CRow>
+            </CCol>
+            <CCol xs="10" lg="4" >
+              <CRow>
+                <div style={{ fontWeight: 'bold' }}>   Model: </div>
+                <CCol xs="10" md="6">
+                  {model} </CCol> </CRow>
+            </CCol>
+            <CCol xs="10" lg="4">
+              <CRow>
+                <div style={{ fontWeight: 'bold' }}>   Machine Age:  </div>
+                <CCol xs="10" md="6">
+                  {machineAge} </CCol> </CRow>
+            </CCol>
+          </CRow>
+          <CRow style={{ marginTop: '2%' }} >
+            <CCol xs="10" lg="4">
+              <CRow style={{ marginLeft: '1%' }}>
+                <div style={{ fontWeight: 'bold' }}>   Machine Controller: </div>
+                <CCol xs="10" md="6">
+                  {machineController} </CCol> </CRow>
+            </CCol>
+            <CCol xs="10" lg="4" >
+              <CRow >
+                <div style={{ fontWeight: 'bold' }}>  Controller Model: </div>
+                <CCol xs="10" md="6">
+                  {controllerModel} </CCol> </CRow>
+            </CCol>
+          </CRow>
+
+          <CCardHeader>
+            <CCardSubtitle style={{ marginTop: '2%', fontWeight: 'bold', fontSize: '1rem', marginLeft: '-2%' }}>Issue Details</CCardSubtitle>
+          </CCardHeader>
+          <CRow style={{ marginTop: '2%' }}>
+            <CCol xs="10" lg="4">
+              <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
+                Issue Type:
+                <CFormGroup style={{ marginLeft: '9%' }} value={issueType} onChange={(e) => setIssueType(e.target.value)} className="w-50">
+                  <CSelect custom size="md" name="name" id="name">
+                    <option value="undefined">Open this select menu</option>
+                    {allIssueTypes && allIssueTypes.length ? allIssueTypes.map((elem) => {
+                      return <option key={elem.value} value={elem.value}>{elem.value}</option>
+                    }
+                    ) : null}
+                  </CSelect>
+                </CFormGroup>
+              </CRow>
+            </CCol>
+            <CCol xs="10" lg="4">
+              <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
+                Priority:
+                <CFormGroup style={{ marginLeft: '15%' }} value={priority} onChange={(e) => setPriority(e.target.value)} className="w-50">
+                  <CSelect custom size="md" name="name" id="name">
+                    <option value="undefined">Open this select menu</option>
+                    <option value="High">High</option>
+                    <option value="Low">Low</option>
+                  </CSelect>
+                </CFormGroup>
+              </CRow>
+            </CCol>
+            <CCol xs="10" lg="4">
+              <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
+                Executive:
+                <CFormGroup style={{ marginLeft: '3%' }} value={executive} onChange={(e) => setExecutive(e.target.value)} className="w-50">
+                  <CSelect custom size="md" name="name" id="name">
+                    <option value="undefined">Open this select menu</option>
+                    {employeesArr && employeesArr.length ? employeesArr.map((elem) => {
+                      return <option key={elem.employee_id} value={elem.employee_id}>{elem.employee_name}</option>
+                    }
+                    ) : null}
+                  </CSelect>
+                </CFormGroup>
+              </CRow>
+            </CCol>
+          </CRow>
+          <CRow>
+            <CCol xs="10" sm="4">
+              <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
+                Schedule Date:
+                <CFormGroup style={{ marginLeft: '3%' }} value={date} onChange={(e) => setDate(e.target.value)} className="w-50">
+                  <CInput type="date" id="sheduleDate" name="sheduleDate" placeholder="sheduleDate" />
+                </CFormGroup>
+              </CRow>
+            </CCol>
+            <CCol xs="10" sm="4">
+              <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
+                Schedule Time:
+                <CFormGroup style={{ marginLeft: '3%' }} value={time} onChange={(e) => setTime(e.target.value)} className="w-50">
+                  <CInput type="time" id="sheduleTime" name="sheduleTime" placeholder="sheduleTime" />
+                </CFormGroup>
+              </CRow>
+            </CCol>
+          </CRow>
+          <CRow>
+            <CCol xs="12" lg="4">
+              <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
+                Issue Details:
+                <CTextarea
+                  name="issueDetails"
+                  id="issueDetails"
+                  className="w-50"
+                  style={{ marginLeft: '6%' }}
+                  rows="2"
+                  placeholder=" Issue Details"
+                  value={issueDetails}
+                  onChange={(e) => setIssueDetails(e.target.value)}
+                />
+              </CRow>
+            </CCol>
+
+            <CCol xs="7" lg="4">
+              <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
+                MachinePicture:
+                <CFormGroup style={{ marginLeft: '2%' }}>
+                  <CInputFile id="machinePicture" name="machinePicture" />
+                </CFormGroup>
+              </CRow>
+            </CCol>
+          </CRow>
+
+
+          <CRow style={{ justifyContent: 'flex-end' }}>
+            <CCardFooter style={{ width: '25%' }}>
+
+              <CRow>
+                <CCol xs="6">
+                  <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/overview')}
+                  >Cancel</CButton>
+                </CCol>
+                <CCol xs="6">
+                  <CButton block color="info" className="mr-1" onClick={submitHandler}
+                  >Submit</CButton>
                 </CCol>
               </CRow>
-            </CRow>
-          </CCol>
-          <CCol xs="10" lg="4" >
-            <CRow>
-              <div style={{ fontWeight: 'bold' }}> Machine Serial Number : </div>
-              <CCol xs="10" md="6">
-                {machineSerialNo} </CCol> </CRow>
-          </CCol>
-          <CCol xs="10" lg="4" >
-            <CRow>
-              <div style={{ fontWeight: 'bold' }}>  Machine Type :</div>
-              <CCol xs="10" md="6">
-                {machineType} </CCol> </CRow>
-          </CCol>
-        </CRow>
-        <CRow >
-          <CCol xs="10" lg="4" >
-            <CRow style={{ marginLeft: '0%' }}>
-              <div style={{ fontWeight: 'bold' }}>  Make: </div>
-              <CCol xs="10" md="6">
-                {make} </CCol></CRow>
-          </CCol>
-          <CCol xs="10" lg="4" >
-            <CRow>
-              <div style={{ fontWeight: 'bold' }}>   Model: </div>
-              <CCol xs="10" md="6">
-                {model} </CCol> </CRow>
-          </CCol>
-          <CCol xs="10" lg="4">
-            <CRow>
-              <div style={{ fontWeight: 'bold' }}>   Machine Age:  </div>
-              <CCol xs="10" md="6">
-                {machineAge} </CCol> </CRow>
-          </CCol>
-        </CRow>
-        <CRow style={{ marginTop: '2%' }} >
-          <CCol xs="10" lg="4">
-            <CRow style={{ marginLeft: '1%' }}>
-              <div style={{ fontWeight: 'bold' }}>   Machine Controller: </div>
-              <CCol xs="10" md="6">
-                {machineController} </CCol> </CRow>
-          </CCol>
-          <CCol xs="10" lg="4" >
-            <CRow >
-              <div style={{ fontWeight: 'bold' }}>  Controller Model: </div>
-              <CCol xs="10" md="6">
-                {controllerModel} </CCol> </CRow>
-          </CCol>
-        </CRow>
 
-        <CCardHeader>
-          <CCardSubtitle style={{ marginTop: '2%', fontWeight: 'bold', fontSize: '1rem', marginLeft: '-2%' }}>Issue Details</CCardSubtitle>
-        </CCardHeader>
-        <CRow style={{ marginTop: '2%' }}>
-          <CCol xs="10" lg="4">
-            <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
-              Issue Type:
-              <CFormGroup style={{ marginLeft: '9%' }} value={issueType} onChange={(e) => setIssueType(e.target.value)} className="w-50">
-                <CSelect custom size="md" name="name" id="name">
-                  <option value="undefined">Open this select menu</option>
-                  {allIssueTypes && allIssueTypes.length ? allIssueTypes.map((elem) => {
-                    return <option key={elem.value} value={elem.value}>{elem.value}</option>
-                  }
-                  ) : null}
-                </CSelect>
-              </CFormGroup>
-            </CRow>
-          </CCol>
-          <CCol xs="10" lg="4">
-            <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
-              Priority:
-              <CFormGroup style={{ marginLeft: '15%' }} value={priority} onChange={(e) => setPriority(e.target.value)} className="w-50">
-                <CSelect custom size="md" name="name" id="name">
-                  <option value="undefined">Open this select menu</option>
-                  <option value="High">High</option>
-                  <option value="Low">Low</option>
-                </CSelect>
-              </CFormGroup>
-            </CRow>
-          </CCol>
-          <CCol xs="10" lg="4">
-            <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
-              Executive:
-              <CFormGroup style={{ marginLeft: '3%' }} value={executive} onChange={(e) => setExecutive(e.target.value)} className="w-50">
-                <CSelect custom size="md" name="name" id="name">
-                  <option value="undefined">Open this select menu</option>
-                  <option value="Naveen">Naveen</option>
-                  <option value="Sandeep">Sandeep</option>
-                </CSelect>
-              </CFormGroup>
-            </CRow>
-          </CCol>
-        </CRow>
-        <CRow>
-          <CCol xs="10" sm="4">
-            <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
-              Schedule Date:
-              <CFormGroup style={{ marginLeft: '3%' }} value={date} onChange={(e) => setDate(e.target.value)} className="w-50">
-                <CInput type="date" id="sheduleDate" name="sheduleDate" placeholder="sheduleDate" />
-              </CFormGroup>
-            </CRow>
-          </CCol>
-          <CCol xs="10" sm="4">
-            <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
-              Schedule Time:
-              <CFormGroup style={{ marginLeft: '3%' }} value={time} onChange={(e) => setTime(e.target.value)} className="w-50">
-                <CInput type="time" id="sheduleTime" name="sheduleTime" placeholder="sheduleTime" />
-              </CFormGroup>
-            </CRow>
-          </CCol>
-        </CRow>
-        <CRow>
-          <CCol xs="12" lg="4">
-            <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
-              Issue Details:
-              <CTextarea
-                name="issueDetails"
-                id="issueDetails"
-                className="w-50"
-                style={{ marginLeft: '6%' }}
-                rows="2"
-                placeholder=" Issue Details"
-                value={issueDetails}
-                onChange={(e) => setIssueDetails(e.target.value)}
-              />
-            </CRow>
-          </CCol>
+            </CCardFooter>
+          </CRow>
 
-          <CCol xs="7" lg="4">
-            <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
-              MachinePicture:
-              <CFormGroup style={{ marginLeft: '2%' }}>
-                <CInputFile id="machinePicture" name="machinePicture" />
-              </CFormGroup>
-            </CRow>
-          </CCol>
-        </CRow>
-
-
-        <CRow style={{ justifyContent: 'flex-end'}}>
-          <CCardFooter style={{ width: '25%' }}>
-
-            <CRow>
-              <CCol xs="6">
-                <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/overview')}
-                >Cancel</CButton>
-              </CCol>
-              <CCol xs="6">
-                <CButton block color="info" className="mr-1" onClick={submitHandler}
-                >Submit</CButton>
-              </CCol>
-            </CRow>
-
-          </CCardFooter>
-        </CRow>
-
-      </CCardBody>
-    </CCard>
+        </CCardBody>
+      </CCard>
     </>
   )
 }

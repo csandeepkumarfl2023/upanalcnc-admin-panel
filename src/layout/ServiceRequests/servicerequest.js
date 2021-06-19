@@ -274,7 +274,7 @@ export default function ServiceRequest() {
                         <td>{item.priority ? item.priority : null}
                         </td>
                       ),
-                      'issueType':
+                      'issue_type':
                       (item) => (
                         <td>{item.issueType ? item.issueType : null}
                         </td>

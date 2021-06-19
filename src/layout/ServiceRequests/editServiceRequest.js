@@ -18,11 +18,13 @@ import { useHistory } from "react-router-dom";
 import ServiceRequestService from '../../services/serviceRequestService'
 import CustomerService from '../../services/customerService'
 import MachineService from '../../services/machineService'
+import EmployeeService from '../../services/employeeService';
 import moment from 'moment'
 
 const serviceRequestService = new ServiceRequestService()
 const customerSerice = new CustomerService()
 const machineService = new MachineService()
+const employeeService = new EmployeeService()
 
 const getBadge = status => {
    switch (status) {
@@ -67,44 +69,48 @@ export default function EditServiceRequest(props) {
    const [executive, setExecutive] = useState("")
    const [date, setDate] = useState("")
    const [time, setTime] = useState("")
+   const [employeesArr, setEmployeesArr] = useState()
 
    const [customerDetails, setCustomerDetails] = useState()
    const [machineDetails, setMachineDetails] = useState()
    const [serviceReqDetails, setServiceReqDetails] = useState()
 
-   const closeHandler = () => {
-      history.push('/overview');
-   }
-   const cancelHandler = () => {
-      setEdit(false)
-   }
-
    const getCustomerDetails = async () => {
       let res = await customerSerice.getCustomer(item.machine.client_id)
       setCustomerDetails(res.data)
-      console.log('cus', res)
    }
 
    const getMachineDetails = async () => {
       let res = await machineService.getMachine(item.machine.machine_id)
       setMachineDetails(res.data)
-      console.log('mac', res)
    }
 
    const getServicerequestDetails = async () => {
       let res = await serviceRequestService.getServiceRequest(item.service_request_id)
       setServiceReqDetails(res.data)
-      console.log('serreq', res)
    }
 
    const submitHandler = async () => {
-      let currentData = { ...item }
-      currentData.executive = executive
-      currentData.date = date
-      currentData.time = time
-      let res = await serviceRequestService.updateServiceRequest(currentData, currentData.id)
-      console.log('updated', res)
+      let currentData = {}
+      currentData.employee_id = executive
+      currentData.request_status = 'ASSIGNED'
+      currentData.workstep_detail = {
+         site_visit_date : moment(date).format('YYYY-MM-DD hh:mm:ss')
+      }
+      console.log(currentData)
+      try{
+      let res = await serviceRequestService.updateServiceRequest(currentData, item.service_request_id)
       history.push('/servicerequest')
+      } catch (err) {
+         console.log(err)
+      }
+   }
+
+   const getEmployees = async () => {
+      let res = await employeeService.getEmployees()
+      if (res.data) {
+         setEmployeesArr(res.data)
+      }
    }
 
    React.useEffect(() => {
@@ -113,6 +119,7 @@ export default function EditServiceRequest(props) {
          getCustomerDetails()
          getMachineDetails()
          getServicerequestDetails()
+         getEmployees()
       }
    }, [])
 
@@ -202,11 +209,10 @@ export default function EditServiceRequest(props) {
                            <CFormGroup >
                               <CSelect custom size="md" name="name" id="name" className="w-80" value={executive} onChange={(e) => setExecutive(e.target.value)}>
                                  <option value="undefined">Open this select menu</option>
-                                 <option value="Vamsi">Vamsi</option>
-                                 <option value="Sandeep">Sandeep</option>
-                                 <option value="Pooja">Pooja</option>
-                                 <option value="Vikram">Vikram</option>
-                                 <option value="Arun">Arun</option>
+                                 {employeesArr && employeesArr.length ? employeesArr.map((elem) => {
+                                    return <option key={elem.employee_id} value={elem.employee_id}>{elem.employee_name}</option>
+                                 }
+                                 ) : null}
                               </CSelect>
                            </CFormGroup>
                            : serviceReqDetails ? serviceReqDetails.executive : null}
@@ -221,7 +227,7 @@ export default function EditServiceRequest(props) {
                               <CInput type="date" id="sheduleDate" className="w-80"
                                  name="sheduleDate" placeholder="sheduleDate" value={date} onChange={(e) => { setDate(e.target.value) }} />
                            </CFormGroup>
-                           : serviceReqDetails ? serviceReqDetails.resolution_date : null}
+                           : serviceReqDetails && serviceReqDetails.service_request_tasks[0] ? serviceReqDetails.service_request_tasks[0].site_visit_date : null}
                      </CCol> </CRow>
                </CCol>
                <CCol xs="10" lg="4">
@@ -232,7 +238,7 @@ export default function EditServiceRequest(props) {
                            <CFormGroup >
                               <CInput type="time" id="sheduleTime" className="w-80" name="sheduleTime" placeholder="sheduleTime" value={time} onChange={(e) => { setTime(e.target.value) }} />
                            </CFormGroup>
-                           : serviceReqDetails ? serviceReqDetails.resolution_date : null}
+                           : serviceReqDetails && serviceReqDetails.service_request_tasks[0] ? serviceReqDetails.service_request_tasks[0].site_visit_date : null}
                      </CCol> </CRow>
                </CCol>
             </CRow>

@@ -28,7 +28,7 @@ async getServiceRequest(id) {
 }
 
  async updateServiceRequest(data, id) {
-    let response = await Axios.put(`${constants.apiEndPoint}serviceRequest`, data)
+    let response = await Axios.put(`${constants.apiEndPoint}serviceRequest/${id}`, data)
     return response
 }
 
