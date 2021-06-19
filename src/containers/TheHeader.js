@@ -8,7 +8,7 @@ import {
   CHeaderNavItem,
   CInput,
   CSubheader,
-  CBreadcrumbRouter,
+  CImg,
   CBreadcrumb,
   CBreadcrumbItem,
   CLink
@@ -65,7 +65,11 @@ const TheHeader = (props) => {
         onClick={toggleSidebar}
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
-        <CIcon name="logo" height="48" alt="Logo" />
+        {/* <CIcon name="logo" height="48" alt="Logo" /> */}
+        <CImg style={{height:'38px',width:'150px'}}
+            src={'avatars/logo.jpg'}
+            alt="admin@bootstrapmaster.com"
+          />
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">
