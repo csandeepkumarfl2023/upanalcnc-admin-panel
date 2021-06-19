@@ -428,6 +428,22 @@ export default function Overview() {
         Deleted Successfully!
       </CAlert>
 
+      <CRow style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', flexDirection: 'row'}}>
+      <CFormGroup>
+              <CRow>
+                <div className="mfe-2 c-subheader-nav">
+                  <CButtonGroup>
+                    <CButton color="secondary">Days</CButton>
+                    <CButton color="secondary">Weeks</CButton>
+                    <CButton color="secondary">Months</CButton>
+                  </CButtonGroup>
+                </div>
+                <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{ width: '30%', marginTop: '1.5%' }} />
+                <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{ width: '30%', marginTop: '1.5%' }} />
+              </CRow>
+            </CFormGroup>
+      </CRow>
+
       <CRow>
         {!loading ?
           <>
@@ -450,19 +466,6 @@ export default function Overview() {
             </CRow>
             </CFormGroup>
       </CSubheader> */}
-            <CFormGroup style={{ marginLeft: '60%', marginTop: '-2.5%' }}>
-              <CRow>
-                <div className="d-md-down-none mfe-2 c-subheader-nav">
-                  <CButtonGroup>
-                    <CButton color="secondary">Days</CButton>
-                    <CButton color="secondary">Weeks</CButton>
-                    <CButton color="secondary">Months</CButton>
-                  </CButtonGroup>
-                </div>
-                <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{ width: '30%', marginTop: '1.5%' }} />
-                <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{ width: '30%', marginTop: '1.5%' }} />
-              </CRow>
-            </CFormGroup>
 
             <CCol xs="4" sm="3">
               <CCard >
