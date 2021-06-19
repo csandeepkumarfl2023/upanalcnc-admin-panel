@@ -35,6 +35,8 @@ import ServiceRequestService from '../../services/serviceRequestService'
 import SalesVisitService from '../../services/salesVisitService'  
 import PmService from '../../services/pmService';
 import { Doughnut } from 'react-chartjs-2'
+import EmployeeService from '../../services/employeeService';
+import moment from 'moment'
   
 const fields = ['servicerequestId', 'company', 'priority', 'issueType', 'executive', 'status', 'contactNumber', 'email', 'createdDate']
 
@@ -53,6 +55,7 @@ const override = css`
 
 const salesvisitService = new SalesVisitService()
 const serviceRequestService = new ServiceRequestService()
+const employeeService = new EmployeeService()
 const pmservice = new PmService()
 
 const serviceReqChartData = {
@@ -188,6 +191,7 @@ export default function Overview() {
   const [alert, setAlert] = useState(false)
   const [editModal, setEditModal] = useState(false)
   
+  const [employeesArr, setEmployeesArr] = useState()
 
   const [editAlert, setEditAlert] = useState(false)
 
@@ -307,6 +311,7 @@ export default function Overview() {
     getServiceData()
     getSalesvisitData()
     getPmData()
+    getEmployees()
     setLoading(true)
     setTimeout(function () {
       setLoading(false)
@@ -354,36 +359,33 @@ export default function Overview() {
     }, 3000);
   }
 
-  const executiveHandler = () => {
+  const executiveHandler = async () => {
     if (employee === '') {
       setExecutiveInfo(executiveinfo)
     }
     else {
-      let updatedData = {}
-      updatedData.id = exeUpdateId
-      updatedData.executive = employee
-      updatedData.servicerequestId = servicerequestId
-      updatedData.status = status
-      updatedData.issueType = issueType
-      updatedData.company = company
-      updatedData.email = email
-      updatedData.createdDate = createdDate
-      updatedData.priority = priority
-      updatedData.date = scheduleDate
-      updatedData.time = scheduleTime
-      console.log('updatedData', updatedData);
-      let filteredArr = servicedata.filter(function (obj) {
-        return obj.id != exeUpdateId
-      });
-      setServiceData([...filteredArr, updatedData])
-      setLoading(true)
-      setTimeout(function () {
-        setLoading(false)
-        setEditAlert(true)
-      }, 3000);
-      setExecutiveInfo(!executiveinfo)
+      let currentData = {}
+      currentData.employee_id = employee
+      currentData.request_status = 'ASSIGNED'
+      currentData.workstep_detail = {
+        site_visit_date : moment(scheduleDate).format('YYYY-MM-DD hh:mm:ss')
+     }
+      try {
+        let res = await serviceRequestService.updateServiceRequest(currentData, exeUpdateId)
+        history.push('/servicerequest')
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
+
+  const getEmployees = async () => {
+    let res = await employeeService.getEmployees()
+    if (res.data) {
+      setEmployeesArr(res.data)
+    }
+  }
+
   const editServiceHandler =  (item) => {
     history.push({
       pathname:`/editServiceRequest/${item.service_request_id}`,
@@ -767,11 +769,10 @@ export default function Overview() {
                     <CLabel htmlFor="name">Sales/Service Executive Name</CLabel>
                     <CSelect custom size="md" name="name" id="name" value={employee} onChange={(e) => setEmployee(e.target.value)}>
                       <option value="undefined">Open this select menu</option>
-                      <option value="Vamsi">Vamsi</option>
-                      <option value="Sandeep">Sandeep</option>
-                      <option value="Pooja">Pooja</option>
-                      <option value="Vikram">Vikram</option>
-                      <option value="Arun">Arun</option>
+                      {employeesArr && employeesArr.length ? employeesArr.map((elem) => {
+                      return <option key={elem.employee_id} value={elem.employee_id}>{elem.employee_name}</option>
+                    }
+                    ) : null}
                     </CSelect>
                   </CFormGroup>
                 </CCol>

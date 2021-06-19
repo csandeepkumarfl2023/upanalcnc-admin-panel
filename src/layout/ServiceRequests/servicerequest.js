@@ -29,6 +29,8 @@ import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useHistory } from "react-router-dom";
 import ServiceRequestService from '../../services/serviceRequestService'
+import EmployeeService from '../../services/employeeService';
+import moment from 'moment'
 
 const getBadge = status => {
   switch (status) {
@@ -77,6 +79,7 @@ display: block;
 `;
 
 const serviceRequestService = new ServiceRequestService()
+const employeeService = new EmployeeService()
 export default function ServiceRequest() {
 
   const history = useHistory();
@@ -88,7 +91,6 @@ export default function ServiceRequest() {
   const [deleteAlert, setDeleteAlert] = useState(false)
   const [loading, setLoading] = useState(false)
   const [executiveinfo, setExecutiveInfo] = useState(false)
-  const [servicerequestId, setServiceRequestId] = useState("")
   const [status, setStatus] = useState("")
   const [priority, setPriority] = useState("")
   const [company, setCompany] = useState("")
@@ -100,9 +102,7 @@ export default function ServiceRequest() {
   const [scheduleTime, setSheduleTime] = useState("")
   const [exeUpdateId, setExeUpdateId] = useState()
   const [executive, setExecutive] = useState("")
-  const [contactNumber, setContactNumber] = useState("")
-  const [description, setDescription] = useState("")
-  const [reports, setReports] = useState("")
+  const [employeesArr, setEmployeesArr] = useState()
 
   const addServiceHandler = () => {
     history.push('./createServiceRequest')
@@ -129,38 +129,33 @@ export default function ServiceRequest() {
 
   ];
 
-  const executiveHandler = () => {
+  const executiveHandler = async () => {
     if (employee === '') {
       setExecutiveInfo(executiveinfo)
     }
     else {
-      let updatedData = {}
-      updatedData.id = exeUpdateId
-      updatedData.executive = employee
-      updatedData.servicerequestId = servicerequestId
-      updatedData.status = status
-      updatedData.issueType = issueType
-      updatedData.company = company
-      updatedData.description = description
-      updatedData.contactNumber = contactNumber
-      updatedData.reports = reports
-      updatedData.priority = priority
-      updatedData.date = scheduleDate
-      updatedData.time = scheduleTime
-      console.log('updatedData', updatedData);
-      let filteredArr = data.filter(function (obj) {
-        return obj.id != exeUpdateId
-      });
-      console.log('filteredArr', filteredArr);
-      setData([...filteredArr, updatedData])
-      setLoading(true)
-      setTimeout(function () {
-        setLoading(false)
-        setEditAlert(true)
-      }, 3000);
-      setExecutiveInfo(!executiveinfo)
+      let currentData = {}
+      currentData.employee_id = employee
+      currentData.request_status = 'ASSIGNED'
+      currentData.workstep_detail = {
+        site_visit_date : moment(scheduleDate).format('YYYY-MM-DD hh:mm:ss')
+     }
+      try {
+        let res = await serviceRequestService.updateServiceRequest(currentData, exeUpdateId)
+        history.push('/servicerequest')
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
+
+  const getEmployees = async () => {
+    let res = await employeeService.getEmployees()
+    if (res.data) {
+      setEmployeesArr(res.data)
+    }
+  }
+
 
   const getData = async () => {
     let res = await serviceRequestService.getAllServiceRequests()
@@ -172,6 +167,7 @@ export default function ServiceRequest() {
 
   React.useEffect(() => {
     getData()
+    getEmployees()
     setLoading(true)
     setTimeout(function () {
       setLoading(false)
@@ -230,8 +226,7 @@ export default function ServiceRequest() {
                       (item) => (
                         <td>
                           <p>  <a onClick={() => {
-                            setExeUpdateId(item.id)
-                            setServiceRequestId(item.servicerequestId)
+                            setExeUpdateId(item.service_request_id)
                             setCompany(item.company)
                             setIssueType(item.issueType)
                             setStatus(item.status)
@@ -247,7 +242,7 @@ export default function ServiceRequest() {
                       ),
                     'status':
                       (item) => (
-                        <td>{item.request_status ? 
+                        <td>{item.request_status ?
                           <button
                             style={{
                               backgroundColor: getBadge(item.request_status),
@@ -261,35 +256,35 @@ export default function ServiceRequest() {
                               outline: 'none',
                               border: 'none',
                             }}>{item.request_status}</button>
-                            : null }
+                          : null}
                         </td>
                       ),
-                      'company':
+                    'company':
                       (item) => (
                         <td>{item.company ? item.company : null}
                         </td>
                       ),
-                      'priority':
+                    'priority':
                       (item) => (
                         <td>{item.priority ? item.priority : null}
                         </td>
                       ),
-                      'issue_type':
+                    'issue_type':
                       (item) => (
                         <td>{item.issueType ? item.issueType : null}
                         </td>
                       ),
-                      'contactNumber':
+                    'contactNumber':
                       (item) => (
                         <td>{item.contactNumber ? item.contactNumber : null}
                         </td>
                       ),
-                      'email':
+                    'email':
                       (item) => (
                         <td>{item.email ? item.email : null}
                         </td>
                       ),
-                      'createdDate':
+                    'createdDate':
                       (item) => (
                         <td>{item.createdDate ? item.createdDate : null}
                         </td>
@@ -317,11 +312,10 @@ export default function ServiceRequest() {
                   <CLabel htmlFor="name">Sales/Service Executive Name</CLabel>
                   <CSelect custom size="md" name="name" id="name" value={employee} onChange={(e) => setEmployee(e.target.value)}>
                     <option value="undefined">Open this select menu</option>
-                    <option value="Vamsi">Vamsi</option>
-                    <option value="Sandeep">Sandeep</option>
-                    <option value="Pooja">Pooja</option>
-                    <option value="Vikram">Vikram</option>
-                    <option value="Arun">Arun</option>
+                    {employeesArr && employeesArr.length ? employeesArr.map((elem) => {
+                      return <option key={elem.employee_id} value={elem.employee_id}>{elem.employee_name}</option>
+                    }
+                    ) : null}
                   </CSelect>
                 </CFormGroup>
               </CCol>
