@@ -36,10 +36,10 @@ const Login = (props) => {
     }
     try {
       let res = await loginService.postLogin(data)
-      if(res) {
-      let userToken = res.data.data.access_token
-      await commonService.setToken(userToken)
-      //  props.history.push('/overview')
+      if (res) {
+        let userToken = res.data.data.access_token
+        await commonService.setToken(userToken)
+        //  props.history.push('/overview')
       }
       props.history.push('/overview')
     }
@@ -53,11 +53,7 @@ const Login = (props) => {
     <div className="c-app c-default-layout flex-row align-items-center">
 
       <CContainer>
-        <CImg style={{ height: '50%', width: '30%', marginLeft: '30%' }}
-          src={'avatars/logo.jpg'}
-          className="c-logo-img"
-          alt="admin@bootstrapmaster.com"
-        />
+
         <CRow className="justify-content-center">
           <CCol md="8">
             <CCardGroup>
@@ -94,11 +90,15 @@ const Login = (props) => {
                   </CForm>
                 </CCardBody>
               </CCard>
-              <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
+              {/* <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}> */}
+              <CCard className="d-md-down-none" style={{ width: '44%', flexDirection: 'row',alignItems: 'center' }}>
                 <CCardBody className="text-center">
                   <div>
-                    <h2>Upanal CNC Solutions</h2>
-
+                    {/* <h5>Upanal CNC Solutions</h5> */}
+                    <CImg style={{ height: '70%', width: '70%' }}
+                      src={'avatars/logo.jpg'}
+                      alt="admin@bootstrapmaster.com"
+                    />
                     {/* <Link to="/register">
                       <CButton color="primary" className="mt-3" active tabIndex={-1}>Register Now!</CButton>
                     </Link> */}

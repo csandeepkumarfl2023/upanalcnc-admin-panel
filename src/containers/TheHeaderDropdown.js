@@ -8,11 +8,14 @@ import {
   CButton
 } from '@coreui/react'
 import { useHistory } from "react-router-dom";
+import CommonService from '../services/commonService';
 
+let commonService = new CommonService()
 const TheHeaderDropdown = () => {
   const history = useHistory();
 
-  const logoutHandler = () => {
+  const logoutHandler = async() => {
+  await commonService.logout()
   history.push('/login');
   }
   const profileHandler = () => {
