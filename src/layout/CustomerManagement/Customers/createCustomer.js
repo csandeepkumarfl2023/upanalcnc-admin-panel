@@ -30,7 +30,7 @@ export default function CreateCustomer() {
 
     const submitHandler = async (value) => {
         try {
-            value.company = 'test'
+            value.company = value.customerName
             value.password = 'welcome'
             let res = await customerservice.createCustomer(value)
             history.push('./customermanagement')
