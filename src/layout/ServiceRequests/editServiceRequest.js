@@ -126,7 +126,10 @@ export default function EditServiceRequest(props) {
                   <CCardSubtitle style={{ marginTop: '1%', fontWeight: 'bold', fontSize: '1.1rem' }}>Service Request {item ? item.servicerequestId : null}</CCardSubtitle>
                </CCol>
                <CCol xs="6" md="1">
-                  <CIcon name="cil-pen" size="1xl" onClick={() => setEdit(true)} />
+                  <CIcon name="cil-pen" size="1xl" onClick={() => {
+                     setEdit(true)
+                     setExecutive(serviceReqDetails?.service_request_tasks[0]?.employee?.employee_id )
+                  }} />
                </CCol>
             </CRow>
          </CCardHeader>
@@ -210,7 +213,7 @@ export default function EditServiceRequest(props) {
                                  ) : null}
                               </CSelect>
                            </CFormGroup>
-                           : serviceReqDetails ? serviceReqDetails.executive : null}
+                           : serviceReqDetails ?.service_request_tasks[0] ?.employee ?.employee_name || null}
                      </CCol> </CRow>
                </CCol>
                <CCol xs="10" sm="4">
