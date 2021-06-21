@@ -119,7 +119,7 @@ export default function CreateServiceRequest() {
     console.log(customerId)
     let res = await machineService.getAllMachines()
     console.log(res.data)
-    let filteredMachinesArr = res.data.filter(item => item.client_id == customerId)
+    let filteredMachinesArr = res.data.filter(item => item.client.client_id == customerId)
     console.log(filteredMachinesArr)
     setMachineArr(filteredMachinesArr)
   }
