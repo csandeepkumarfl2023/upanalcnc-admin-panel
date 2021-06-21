@@ -161,7 +161,7 @@ export default function ServiceRequest() {
     let res = await serviceRequestService.getAllServiceRequests()
     let mappedRes = []
     res.data.forEach(elem => mappedRes.push(...elem.service_requests))
-    console.log(mappedRes)
+    console.log('mappedRes',mappedRes)
     setData(mappedRes)
   }
 
@@ -261,27 +261,27 @@ export default function ServiceRequest() {
                       ),
                     'company':
                       (item) => (
-                        <td>{item.company ? item.company : null}
+                        <td>{item.machine?.client.company}
                         </td>
                       ),
                     'priority':
                       (item) => (
-                        <td>{item.priority ? item.priority : null}
+                        <td>{item.request_priority ? item.request_priority : null}
                         </td>
                       ),
                     'issue_type':
                       (item) => (
-                        <td>{item.issueType ? item.issueType : null}
+                        <td>{item.issue_type ? item.issue_type : null}
                         </td>
                       ),
                     'contactNumber':
                       (item) => (
-                        <td>{item.contactNumber ? item.contactNumber : null}
+                        <td>{item.machine?.client.phone_number}
                         </td>
                       ),
                     'email':
                       (item) => (
-                        <td>{item.email ? item.email : null}
+                        <td>{item.machine?.client.email_id}
                         </td>
                       ),
                     'createdDate':
