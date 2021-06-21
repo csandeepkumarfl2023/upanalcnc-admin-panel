@@ -103,17 +103,10 @@ export default function Customer(props) {
       state: item });
   }
 
-  const showAlert = () => {
-    props.addAlert()
-  }
 
   const addCustomerHandler = (item) => {
     history.push({
-      pathname: './createCustomer',
-      state: 
-      { 
-        alert:props.addAlert()
-      }
+      pathname: './createCustomer'
     })
   }
 
