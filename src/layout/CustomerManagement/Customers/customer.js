@@ -25,7 +25,7 @@ import { useHistory } from "react-router-dom";
 
 const customerService = new CustomerService()
 
-export default function Customer() {
+export default function Customer(props) {
   const history = useHistory();
 
   const [info, setInfo] = useState(false)
@@ -41,7 +41,6 @@ export default function Customer() {
   const [country, setCountry] = useState("")
   const [email, setEmail] = useState("")
   const [gstNumber, setGstNumber] = useState("")
-  const [alert, setAlert] = useState(false)
   const [editModal, setEditModal] = useState(false)
   const [editAlert, setEditAlert] = useState(false)
 
@@ -104,11 +103,22 @@ export default function Customer() {
       state: item });
   }
 
+  const showAlert = () => {
+    props.addAlert()
+  }
+
   const addCustomerHandler = (item) => {
-    history.push('./createCustomer')
+    history.push({
+      pathname: './createCustomer',
+      state: 
+      { 
+        alert:props.addAlert()
+      }
+    })
   }
 
   React.useEffect(() => {
+    props.addAlert()
     getData()
     setLoading(true)
     setTimeout(function () {
@@ -119,9 +129,7 @@ export default function Customer() {
   return (
     <div>
 
-      <CAlert color="success" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
-        Successfully Added!
-      </CAlert>
+     
       <CAlert color="success" show={editAlert} closeButton onClick={() => setEditAlert(false)} dismissible>
         Updated Successfully!
       </CAlert>

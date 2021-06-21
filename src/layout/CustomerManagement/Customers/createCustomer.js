@@ -14,7 +14,7 @@ import { useHistory } from "react-router-dom";
 
 const customerservice = new CustomerService()
 
-export default function CreateCustomer() {
+export default function CreateCustomer(props) {
     const history = useHistory();
 
     const [data, setData] = useState({
@@ -33,6 +33,7 @@ export default function CreateCustomer() {
             value.company = value.customerName
             value.password = 'welcome'
             let res = await customerservice.createCustomer(value)
+            props.location.state.alert('success', 'Created customer successfully!')
             history.push('./customermanagement')
         } catch (err) {
             console.log('err', err)
@@ -42,6 +43,10 @@ export default function CreateCustomer() {
     const cancelHandler = () => {
 
     }
+
+    React.useEffect(() => {
+        console.log('alert>>>>>>',props.location.state);
+      }, [])
 
     return (
         <div>
