@@ -37,8 +37,8 @@ const Login = (props) => {
     try {
       let res = await loginService.postLogin(data)
       if (res) {
-        let userToken = res.data.data.access_token
-        await commonService.setToken(userToken)
+        let userToken = res.data.data
+        await commonService.setToken(JSON.stringify(userToken))
         //  props.history.push('/overview')
       }
       props.history.push('/overview')

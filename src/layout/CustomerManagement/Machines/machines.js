@@ -181,7 +181,7 @@ export default function Machines() {
                         setClickedMachine(item.machine_id)
                       }
                       }>
-                      <CIcon name="cil-user" style={{ color: 'gray' }} customClasses="c-sidebar-nav-icon" />
+                      <CIcon name="cil-qr-code" style={{ color: 'gray' }} customClasses="c-sidebar-nav-icon" />
                       </a></CLink>
                     </td>
                   )
