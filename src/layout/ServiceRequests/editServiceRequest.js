@@ -75,19 +75,14 @@ export default function EditServiceRequest(props) {
    const [machineDetails, setMachineDetails] = useState()
    const [serviceReqDetails, setServiceReqDetails] = useState()
 
-   const getCustomerDetails = async () => {
-      let res = await customerSerice.getCustomer(item.machine.client_id)
-      setCustomerDetails(res.data)
-   }
-
-   const getMachineDetails = async () => {
-      let res = await machineService.getMachine(item.machine.machine_id)
-      setMachineDetails(res.data)
-   }
 
    const getServicerequestDetails = async () => {
       let res = await serviceRequestService.getServiceRequest(item.service_request_id)
+      setCustomerDetails(res.data.machine.client)
+      setMachineDetails(res.data.machine)
       setServiceReqDetails(res.data)
+      
+      console.log('servicrereqdetails', res.data)
    }
 
    const submitHandler = async () => {
@@ -116,8 +111,8 @@ export default function EditServiceRequest(props) {
    React.useEffect(() => {
       setItem(props.location.state)
       if (props.location.state) {
-         getCustomerDetails()
-         getMachineDetails()
+         // getCustomerDetails()
+         // getMachineDetails()
          getServicerequestDetails()
          getEmployees()
       }
@@ -131,7 +126,10 @@ export default function EditServiceRequest(props) {
                   <CCardSubtitle style={{ marginTop: '1%', fontWeight: 'bold', fontSize: '1.1rem' }}>Service Request {item ? item.servicerequestId : null}</CCardSubtitle>
                </CCol>
                <CCol xs="6" md="1">
-                  <CIcon name="cil-pen" size="1xl" onClick={() => setEdit(true)} />
+                  <CIcon name="cil-pen" size="1xl" onClick={() => {
+                     setEdit(true)
+                     setExecutive(serviceReqDetails?.service_request_tasks[0]?.employee?.employee_id )
+                  }} />
                </CCol>
             </CRow>
          </CCardHeader>
@@ -149,7 +147,7 @@ export default function EditServiceRequest(props) {
                   <CRow>
                      <div style={{ fontWeight: 'bold' }}> Customer Code: </div>
                      <CCol xs="10" md="6">
-                        {customerDetails ? customerDetails.customerCode : null}  </CCol>
+                        {customerDetails ? customerDetails.client_id : null}  </CCol>
                   </CRow>
                </CCol>
                <CCol xs="10" lg="4">
@@ -175,7 +173,7 @@ export default function EditServiceRequest(props) {
                   <CRow>
                      <div style={{ fontWeight: 'bold' }}> Priority: </div>
                      <CCol xs="10" md="4">
-                        {serviceReqDetails ? serviceReqDetails.priority : null}
+                        {serviceReqDetails ? serviceReqDetails.request_priority : null}
                      </CCol> </CRow>
                </CCol>
                <CCol xs="10" lg="4">
@@ -215,7 +213,7 @@ export default function EditServiceRequest(props) {
                                  ) : null}
                               </CSelect>
                            </CFormGroup>
-                           : serviceReqDetails ? serviceReqDetails.executive : null}
+                           : serviceReqDetails ?.service_request_tasks[0] ?.employee ?.employee_name || null}
                      </CCol> </CRow>
                </CCol>
                <CCol xs="10" sm="4">
@@ -387,7 +385,7 @@ export default function EditServiceRequest(props) {
 
                   <CRow>
                      <CCol xs="6">
-                        <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/overview')}
+                        <CButton variant="outline" block color="info" className="mr-1" onClick={() => setEdit(false)}
                         >Cancel</CButton>
                      </CCol>
                      <CCol xs="6">

@@ -38,7 +38,7 @@ import { Doughnut } from 'react-chartjs-2'
 import EmployeeService from '../../services/employeeService';
 import moment from 'moment'
   
-const fields = ['servicerequestId', 'company', 'priority', 'issueType', 'executive', 'status', 'contactNumber', 'email', 'createdDate']
+const fields = ['servicerequestId', 'company', 'priority', 'issue_type', 'executive', 'status', 'contactNumber', 'email', 'createdDate']
 
 const pmfields = ['name', 'type', 'description']
 
@@ -643,35 +643,35 @@ export default function Overview() {
                           </td>
                         ),
                         'company':
-                        (item) => (
-                          <td>{item.company ? item.company : null}
-                          </td>
-                        ),
-                        'priority':
-                        (item) => (
-                          <td>{item.priority ? item.priority : null}
-                          </td>
-                        ),
-                        'issueType':
-                        (item) => (
-                          <td>{item.issueType ? item.issueType : null}
-                          </td>
-                        ),
-                        'contactNumber':
-                        (item) => (
-                          <td>{item.contactNumber ? item.contactNumber : null}
-                          </td>
-                        ),
-                        'email':
-                        (item) => (
-                          <td>{item.email ? item.email : null}
-                          </td>
-                        ),
-                        'createdDate':
-                        (item) => (
-                          <td>{item.createdDate ? item.createdDate : null}
-                          </td>
-                        ),
+                      (item) => (
+                        <td>{item.machine?.client.company}
+                        </td>
+                      ),
+                    'priority':
+                      (item) => (
+                        <td>{item.request_priority ? item.request_priority : null}
+                        </td>
+                      ),
+                    'issue_type':
+                      (item) => (
+                        <td>{item.issue_type ? item.issue_type : null}
+                        </td>
+                      ),
+                    'contactNumber':
+                      (item) => (
+                        <td>{item.machine?.client.phone_number}
+                        </td>
+                      ),
+                    'email':
+                      (item) => (
+                        <td>{item.machine?.client.email_id}
+                        </td>
+                      ),
+                    'createdDate':
+                      (item) => (
+                        <td>{item.createdDate ? item.createdDate : null}
+                        </td>
+                      ),
                     }}
 
                   />
