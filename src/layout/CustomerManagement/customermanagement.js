@@ -42,6 +42,7 @@ export default function CustomerManagement(props) {
   }
   
   React.useEffect(() => {
+    console.log(props.location.state)
     setLoading(true)
     setTimeout(function(){  
       setLoading(false)             

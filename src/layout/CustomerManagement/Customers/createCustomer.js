@@ -22,26 +22,25 @@ export default function CreateCustomer(props) {
         address: "", gst_number: "", alternate_phone_number: "", city: "", pincode: "", state: "", country: ""
     })
 
-    // const submitHandler = async (value) =>  {
-    //     let res = await customerservice.createCustomer(value)
-    //     console.log(res);
-    //     history.push('./customermanagement')
-    // }
+   
 
     const submitHandler = async (value) => {
         try {
             value.company = value.customerName
             value.password = 'welcome'
             let res = await customerservice.createCustomer(value)
-            props.location.state.alert('success', 'Created customer successfully!')
-            history.push('./customermanagement')
+            history.push({
+                pathname: './customermanagement',
+                state: 
+                { 
+                  showAlert: true,
+                  alertType: 'success',
+                  alertMessage: 'Created customer successfully!'
+                }
+              })
         } catch (err) {
-            console.log('err', err)
+            console.log('err', err.message)
         }
-    }
-
-    const cancelHandler = () => {
-
     }
 
     React.useEffect(() => {
