@@ -385,7 +385,7 @@ export default function EditServiceRequest(props) {
 
                   <CRow>
                      <CCol xs="6">
-                        <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/overview')}
+                        <CButton variant="outline" block color="info" className="mr-1" onClick={() => setEdit(false)}
                         >Cancel</CButton>
                      </CCol>
                      <CCol xs="6">
