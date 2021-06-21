@@ -178,143 +178,155 @@ export default function CreateServiceRequest() {
   return (
     <>
       <CCard style={{ borderRadius: '18px' }}>
-        <CCardSubtitle style={{ marginTop: '1%', fontWeight: 'bold', fontSize: '1.1rem' }}>Create Service Request</CCardSubtitle>
+        <CCardSubtitle className="pl-3 mt-3" style={{fontWeight: 'bold', fontSize: '1.1rem' }}>Create Service Request</CCardSubtitle>
         <CCardBody>
-          <CRow style={{ marginTop: '2%' }}>
-            <CCol xs="12" sm="12" lg="4">
-              <CRow>
-                <div style={{ fontWeight: 'bold' }}> Customer Name: </div>
-                <CFormGroup style={{ marginLeft: '3%' }}>
-                  <CSelect custom size="sm" name="name" id="name" value={customerName} onChange={customerChangeHandler}>
-                    <option value="">Open this select menu</option>
-                    {customerArr && customerArr.length ? customerArr.map((elem) => {
-                      return <option key={elem.client_id} value={elem.client_id}>{elem.company}</option>
-                    }
-                    ) : null}
-                  </CSelect>
-                </CFormGroup>
-              </CRow>
-            </CCol>
-            <CCol xs="12" sm="12" lg="4" >
-              <CRow>
-                <div style={{ fontWeight: 'bold' }}> Customer Code :</div>
-                  <span style={{marginLeft: '5px'}}>{customerCode}</span> </CRow>
-            </CCol>
-            <CCol xs="12" sm="12" lg="4" >
-              <CRow>
-                <div style={{ fontWeight: 'bold' }}>   Contact Person Name : </div>
-                <CCol xs="10" md="4">
-                 {contactName}</CCol> </CRow>
-            </CCol>
-          </CRow>
-
-          <CRow >
-            <CCol xs="12" sm="4" lg="4" >
-              <CRow>
-                <div style={{ fontWeight: 'bold' }}>Contact Number :  </div>
-                <CCol xs="10" md="4">
-                  {contactNumber}  </CCol> </CRow>
-            </CCol>
-            <CCol xs="10" lg="4" >
-              <CRow>
-                <div style={{ fontWeight: 'bold' }}>Alternate Number :  </div>
-                <CCol xs="10" md="4">
-                  {alternateNumber} </CCol> </CRow>
-            </CCol>
-            <CCol xs="10" sm="4" lg="4">
-              <CRow>
-                <div style={{ fontWeight: 'bold' }}>Email :  </div>
-                <CCol xs="10" md="6">
-                  {email}</CCol> </CRow>
-            </CCol>
-          </CRow>
-
-          <CRow><CCol xs="10" lg="10" style={{ marginTop: '2%', marginLeft: '1%' }}>
+          <div className="pt-3 pl-3">
             <CRow>
-              <div style={{ fontWeight: 'bold' }}> Customer Address : </div>
-              <CCol xs="10" md="6">
-                {customerAddress}
-              </CCol> </CRow>
-          </CCol></CRow>
-          <CCardHeader>
-            <CCardSubtitle style={{ marginTop: '2%', fontSize: '1rem', marginLeft: '-2%' }}>Machine Details</CCardSubtitle></CCardHeader>
-          <CRow style={{ marginTop: '2%' }}>
-            <CCol xs="12" lg="4">
-              <CRow style={{ marginLeft: '3%' }}>
+              <CCol xs="12" sm="12" lg="4">
                 <CRow>
-                  <div style={{ fontWeight: 'bold' }}> Select Machine : </div>
-                  <CCol xs="10" md="6">
-                    <CFormGroup style={{ marginLeft: '3%' }} >
-                      <CSelect custom size="md" name="name" id="name" value={machine} onChange={machineChangeController} style={{ width: '150%' }}>
-                        <option value="">Open this select menu</option>
-                        {machineArr && machineArr.length ? machineArr.map((elem) => {
-                          return <option key={elem.machine_id} value={elem.machine_id}>{elem.machine_model}</option>
-                        }
-                        ) : null}
-
-                      </CSelect>
-                    </CFormGroup>
-                  </CCol>
+                  <div style={{ fontWeight: 'bold' }}> Customer Name: </div>
+                  <CFormGroup className="ml-3">
+                    <CSelect custom size="sm" name="name" id="name" value={customerName} onChange={customerChangeHandler}>
+                      <option value="">Open this select menu</option>
+                      {customerArr && customerArr.length ? customerArr.map((elem) => {
+                        return <option key={elem.client_id} value={elem.client_id}>{elem.company}</option>
+                      }
+                      ) : null}
+                    </CSelect>
+                  </CFormGroup>
                 </CRow>
-              </CRow>
-            </CCol>
-            <CCol xs="10" lg="4" >
-              <CRow>
-                <div style={{ fontWeight: 'bold' }}> Machine Serial Number : </div>
-                <CCol xs="10" md="6">
-                  {machineSerialNo} </CCol> </CRow>
-            </CCol>
-            <CCol xs="10" lg="4" >
-              <CRow>
-                <div style={{ fontWeight: 'bold' }}>  Machine Type :</div>
-                <CCol xs="10" md="6">
-                  {machineType} </CCol> </CRow>
-            </CCol>
-          </CRow>
-          <CRow >
-            <CCol xs="10" lg="4" >
-              <CRow style={{ marginLeft: '0%' }}>
-                <div style={{ fontWeight: 'bold' }}>  Make: </div>
-                <CCol xs="10" md="6">
-                  {make} </CCol></CRow>
-            </CCol>
-            <CCol xs="10" lg="4" >
-              <CRow>
-                <div style={{ fontWeight: 'bold' }}>   Model: </div>
-                <CCol xs="10" md="6">
-                  {model} </CCol> </CRow>
-            </CCol>
-            <CCol xs="10" sm="4" lg="4">
-              <CRow>
-                <div style={{ fontWeight: 'bold' }}>   Machine Age:  </div>
-                <CCol xs="10" md="6">
-                  {machineAge} </CCol> </CRow>
-            </CCol>
-          </CRow>
-          <CRow style={{ marginTop: '2%' }} >
-            <CCol xs="10" sm="4" lg="4">
-              <CRow style={{ marginLeft: '1%' }}>
-                <div style={{ fontWeight: 'bold' }}>   Machine Controller: </div>
-                <CCol xs="10" md="6">
-                  {machineController} </CCol> </CRow>
-            </CCol>
-            <CCol xs="10" lg="4" >
-              <CRow >
-                <div style={{ fontWeight: 'bold' }}>  Controller Model: </div>
-                <CCol xs="10" md="6">
-                  {controllerModel} </CCol> </CRow>
-            </CCol>
-          </CRow>
+              </CCol>
+              <CCol xs="12" sm="12" lg="4" >
+                <CRow>
+                  <div style={{ fontWeight: 'bold' }}> Customer Code :</div>
+                  <span className="ml-2" >{customerCode}</span> </CRow>
+              </CCol>
+              <CCol xs="12" sm="12" lg="4" >
+                <CRow>
+                  <div style={{ fontWeight: 'bold' }}>Contact Person Name : </div>
+                  <span className="ml-2">
+                    {contactName}</span> </CRow>
+              </CCol>
+            </CRow>
 
-          <CCardHeader>
-            <CCardSubtitle style={{ marginTop: '2%', fontWeight: 'bold', fontSize: '1rem', marginLeft: '-2%' }}>Issue Details</CCardSubtitle>
-          </CCardHeader>
-          <CRow style={{ marginTop: '2%' }}>
-            <CCol xs="10" sm="4" lg="4">
-              <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
+            <CRow className="pt-2 pb-2">
+              <CCol xs="12" sm="12" lg="4" >
+                <CRow>
+                  <div style={{ fontWeight: 'bold' }}>Contact Number :  </div>
+                  <span className="ml-2">
+                    {contactNumber}</span> </CRow>
+              </CCol>
+              <CCol xs="12" sm="12" lg="4" >
+                <CRow>
+                  <div style={{ fontWeight: 'bold' }}>Alternate Number :  </div>
+                  <span className="ml-2">
+                    {alternateNumber} </span></CRow>
+              </CCol>
+              <CCol xs="10" sm="12" lg="4">
+                <CRow>
+                  <div style={{ fontWeight: 'bold' }}>Email :  </div>
+                  <span className="ml-2">
+                    {email}</span>
+                </CRow>
+              </CCol>
+            </CRow>
+
+            <CRow className="pt-4">
+              <CCol xs="12" sm="4" lg="4" >
+                <CRow>
+                  <div style={{ fontWeight: 'bold' }}> Customer Address : </div>
+                  <span className="ml-2">
+                    {customerAddress}
+                  </span> </CRow>
+              </CCol>
+            </CRow>
+
+          </div>
+
+          <CRow>
+            <CCardSubtitle className="pl-3 pt-5" style={{fontSize: '1rem' }}>Machine Details</CCardSubtitle>
+          </CRow>
+          <hr />
+
+          <div className="pt-1 pl-3">
+            <CRow>
+              <CCol xs="12" sm="12" lg="4">
+                <CRow>
+                  <div style={{ fontWeight: 'bold' }}> Select Machine: </div>
+                  <CFormGroup className="ml-3" >
+                    <CSelect custom size="sm" name="name" id="name" value={machine} onChange={machineChangeController}>
+                      <option value="">Open this select menu</option>
+                      {machineArr && machineArr.length ? machineArr.map((elem) => {
+                        return <option key={elem.machine_id} value={elem.machine_id}>{elem.machine_model}</option>
+                      }
+                      ) : null}
+
+                    </CSelect>
+                  </CFormGroup>
+                </CRow>
+              </CCol>
+              <CCol xs="12" sm="12" lg="4" >
+                <CRow>
+                  <div style={{ fontWeight: 'bold' }}> Machine Serial Number : </div>
+                  <span className="ml-2">
+                    {machineSerialNo}</span>  </CRow>
+              </CCol>
+              <CCol xs="12" sm="12" lg="4" >
+                <CRow>
+                  <div style={{ fontWeight: 'bold' }}>  Machine Type :</div>
+                  <span className="ml-2">
+                    {machineType} </span> </CRow>
+              </CCol>
+            </CRow>
+            <CRow className="pt-2 pb-2">
+              <CCol xs="12" sm="12" lg="4" >
+                <CRow>
+                  <div style={{ fontWeight: 'bold' }}>  Make: </div>
+                  <span className="ml-2">
+                    {make} </span>
+                </CRow>
+              </CCol>
+              <CCol xs="12" sm="12" lg="4" >
+                <CRow>
+                  <div style={{ fontWeight: 'bold' }}>   Model: </div>
+                  <span className="ml-2">
+                    {model} </span> </CRow>
+              </CCol>
+              <CCol xs="12" sm="12" lg="4" >
+                <CRow>
+                  <div style={{ fontWeight: 'bold' }}>   Machine Age:  </div>
+                  <span className="ml-2">
+                    {machineAge} </span> </CRow>
+              </CCol>
+            </CRow>
+            <CRow className="pt-4">
+              <CCol xs="12" sm="12" lg="4" >
+                <CRow>
+                  <div style={{ fontWeight: 'bold' }}>   Machine Controller: </div>
+                  <span className="ml-2">
+                    {machineController} </span> </CRow>
+              </CCol>
+              <CCol xs="12" sm="12" lg="4" >
+                <CRow >
+                  <div style={{ fontWeight: 'bold' }}>  Controller Model: </div>
+                  <span className="ml-2">
+                    {controllerModel} </span> </CRow>
+              </CCol>
+            </CRow>
+          </div>
+
+          <CRow>
+            <CCardSubtitle className="pl-3 pt-5" style={{fontSize: '1rem' }}>Issue Details</CCardSubtitle>
+          </CRow>
+          <hr />
+
+          <div className="pt-1 pl-3">
+          <CRow>
+            <CCol xs="12" sm="12" lg="4" >
+              <CRow style={{fontWeight: 'bold' }}>
                 Issue Type:
-                <CFormGroup style={{ marginLeft: '9%' }} value={issueType} onChange={(e) => setIssueType(e.target.value)} className="w-50">
-                  <CSelect custom size="md" name="name" id="name">
+                <CFormGroup className="ml-3" value={issueType} onChange={(e) => setIssueType(e.target.value)}>
+                  <CSelect custom size="sm" name="name" id="name">
                     <option value="undefined">Open this select menu</option>
                     {allIssueTypes && allIssueTypes.length ? allIssueTypes.map((elem) => {
                       return <option key={elem.value} value={elem.value}>{elem.value}</option>
@@ -324,11 +336,11 @@ export default function CreateServiceRequest() {
                 </CFormGroup>
               </CRow>
             </CCol>
-            <CCol xs="10" sm="4" lg="4">
-              <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
+            <CCol xs="12" sm="12" lg="4" >
+              <CRow style={{ fontWeight: 'bold' }}>
                 Priority:
-                <CFormGroup style={{ marginLeft: '15%' }} value={priority} onChange={(e) => setPriority(e.target.value)} className="w-50">
-                  <CSelect custom size="md" name="name" id="name">
+                <CFormGroup className="ml-3" value={priority} onChange={(e) => setPriority(e.target.value)}>
+                  <CSelect custom size="sm" name="name" id="name">
                     <option value="undefined">Open this select menu</option>
                     <option value="HIGH">High</option>
                     <option value="LOW">Low</option>
@@ -337,11 +349,11 @@ export default function CreateServiceRequest() {
                 </CFormGroup>
               </CRow>
             </CCol>
-            <CCol xs="10" sm="4" lg="4">
-              <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
+            <CCol xs="12" sm="12" lg="4" >
+              <CRow style={{fontWeight: 'bold' }}>
                 Executive:
-                <CFormGroup style={{ marginLeft: '3%' }} value={executive} onChange={(e) => setExecutive(e.target.value)} className="w-50">
-                  <CSelect custom size="md" name="name" id="name">
+                <CFormGroup className="ml-3" value={executive} onChange={(e) => setExecutive(e.target.value)}>
+                  <CSelect custom size="sm" name="name" id="name">
                     <option value="undefined">Open this select menu</option>
                     {employeesArr && employeesArr.length ? employeesArr.map((elem) => {
                       return <option key={elem.employee_id} value={elem.employee_id}>{elem.employee_name}</option>
@@ -352,27 +364,27 @@ export default function CreateServiceRequest() {
               </CRow>
             </CCol>
           </CRow>
-          <CRow>
-            <CCol xs="10" sm="4">
-              <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
+          <CRow className="pt-2 pb-2">
+          <CCol xs="12" sm="12" lg="4">
+              <CRow style={{fontWeight: 'bold' }}>
                 Schedule Date:
-                <CFormGroup style={{ marginLeft: '3%' }} value={date} onChange={(e) => setDate(e.target.value)} className="w-50">
-                  <CInput type="date" id="sheduleDate" name="sheduleDate" placeholder="sheduleDate" />
+                <CFormGroup className="ml-3" value={date} onChange={(e) => setDate(e.target.value)}>
+                  <CInput type="date" id="sheduleDate" name="sheduleDate" placeholder="sheduleDate" size="sm" />
                 </CFormGroup>
               </CRow>
             </CCol>
-            <CCol xs="10" sm="4">
-              <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
+            <CCol xs="12" sm="12" lg="4">
+              <CRow style={{fontWeight: 'bold' }}>
                 Schedule Time:
-                <CFormGroup style={{ marginLeft: '3%' }} value={time} onChange={(e) => setTime(e.target.value)} className="w-50">
-                  <CInput type="time" id="sheduleTime" name="sheduleTime" placeholder="sheduleTime" />
+                <CFormGroup className="ml-3" value={time} onChange={(e) => setTime(e.target.value)}>
+                  <CInput type="time" id="sheduleTime" name="sheduleTime" placeholder="sheduleTime"  size="sm"/>
                 </CFormGroup>
               </CRow>
             </CCol>
           </CRow>
           <CRow>
-            <CCol xs="12" lg="4">
-              <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
+          <CCol xs="12" sm="12" lg="4">
+              <CRow style={{fontWeight: 'bold' }}>
                 Issue Details:
                 <CTextarea
                   name="issueDetails"
@@ -387,16 +399,16 @@ export default function CreateServiceRequest() {
               </CRow>
             </CCol>
 
-            <CCol xs="7" lg="4">
-              <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
+            <CCol xs="12" sm="12" lg="4">
+              <CRow style={{fontWeight: 'bold' }}>
                 MachinePicture:
-                <CFormGroup style={{ marginLeft: '2%' }}>
+                <CFormGroup className="ml-3">
                   <CInputFile id="machinePicture" name="machinePicture" />
                 </CFormGroup>
               </CRow>
             </CCol>
           </CRow>
-
+          </div>
 
           <CRow style={{ justifyContent: 'flex-end' }}>
             <CCardFooter style={{ width: '25%' }}>

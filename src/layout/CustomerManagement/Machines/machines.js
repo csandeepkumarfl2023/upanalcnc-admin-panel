@@ -102,12 +102,12 @@ export default function Machines() {
           {/* {!loading ?   */}
           <CCardBody>
             <CRow className="mb-2">
-              <CCol xs="11" style={{ display: 'flex', alignItems: 'center' }}>
+              <CCol xs="10" style={{ display: 'flex', alignItems: 'center' }}>
                 <h5>
                   Machines
                 </h5>
               </CCol>
-              <CCol xs="1" style={{ display: 'flex', alignItems: 'center' }}>
+              <CCol xs="2"  style ={{width: '100px'}} >
                 <CButton color="info" onClick={addMachineHandler} block>New</CButton>
               </CCol>
             </CRow>
