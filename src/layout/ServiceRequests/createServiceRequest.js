@@ -177,48 +177,41 @@ export default function CreateServiceRequest() {
 
   return (
     <>
-      <CCard>
-        <CCardHeader><CCardSubtitle style={{ marginTop: '1%', fontWeight: 'bold', fontSize: '1.1rem' }}>Create Service Request</CCardSubtitle></CCardHeader>
+      <CCard style={{ borderRadius: '18px' }}>
+        <CCardSubtitle style={{ marginTop: '1%', fontWeight: 'bold', fontSize: '1.1rem' }}>Create Service Request</CCardSubtitle>
         <CCardBody>
           <CRow style={{ marginTop: '2%' }}>
-            <CCol xs="10" lg="4">
-              <CRow style={{ marginLeft: '0.1%' }}>
+            <CCol xs="12" sm="12" lg="4">
+              <CRow>
                 <div style={{ fontWeight: 'bold' }}> Customer Name: </div>
                 <CFormGroup style={{ marginLeft: '3%' }}>
-                  <CSelect custom size="md" name="name" id="name" value={customerName} onChange={customerChangeHandler}>
+                  <CSelect custom size="sm" name="name" id="name" value={customerName} onChange={customerChangeHandler}>
                     <option value="">Open this select menu</option>
                     {customerArr && customerArr.length ? customerArr.map((elem) => {
                       return <option key={elem.client_id} value={elem.client_id}>{elem.company}</option>
                     }
                     ) : null}
-
-                    {/* <option value="Vamsi">Vamsi</option>
-                 <option value="Sandeep">Sandeep</option>
-                 <option value="Pooja">Pooja</option>
-                 <option value="Vikram">Vikram</option>
-                 <option value="Arun">Arun</option> */}
                   </CSelect>
                 </CFormGroup>
               </CRow>
             </CCol>
-            <CCol xs="10" md="4" >
+            <CCol xs="12" sm="12" lg="4" >
               <CRow>
                 <div style={{ fontWeight: 'bold' }}> Customer Code :</div>
-                <CCol xs="10" md="4">
-                  {customerCode} </CCol> </CRow>
+                  <span style={{marginLeft: '5px'}}>{customerCode}</span> </CRow>
             </CCol>
-            <CCol xs="10" lg="4" >
+            <CCol xs="12" sm="12" lg="4" >
               <CRow>
                 <div style={{ fontWeight: 'bold' }}>   Contact Person Name : </div>
                 <CCol xs="10" md="4">
-                  {contactName}  </CCol> </CRow>
+                 {contactName}</CCol> </CRow>
             </CCol>
           </CRow>
 
           <CRow >
-            <CCol xs="10" lg="4" >
+            <CCol xs="12" sm="4" lg="4" >
               <CRow>
-                <div style={{ fontWeight: 'bold', marginLeft: '3%' }}>Contact Number :  </div>
+                <div style={{ fontWeight: 'bold' }}>Contact Number :  </div>
                 <CCol xs="10" md="4">
                   {contactNumber}  </CCol> </CRow>
             </CCol>
@@ -228,7 +221,7 @@ export default function CreateServiceRequest() {
                 <CCol xs="10" md="4">
                   {alternateNumber} </CCol> </CRow>
             </CCol>
-            <CCol xs="10" lg="4">
+            <CCol xs="10" sm="4" lg="4">
               <CRow>
                 <div style={{ fontWeight: 'bold' }}>Email :  </div>
                 <CCol xs="10" md="6">
@@ -291,7 +284,7 @@ export default function CreateServiceRequest() {
                 <CCol xs="10" md="6">
                   {model} </CCol> </CRow>
             </CCol>
-            <CCol xs="10" lg="4">
+            <CCol xs="10" sm="4" lg="4">
               <CRow>
                 <div style={{ fontWeight: 'bold' }}>   Machine Age:  </div>
                 <CCol xs="10" md="6">
@@ -299,7 +292,7 @@ export default function CreateServiceRequest() {
             </CCol>
           </CRow>
           <CRow style={{ marginTop: '2%' }} >
-            <CCol xs="10" lg="4">
+            <CCol xs="10" sm="4" lg="4">
               <CRow style={{ marginLeft: '1%' }}>
                 <div style={{ fontWeight: 'bold' }}>   Machine Controller: </div>
                 <CCol xs="10" md="6">
@@ -317,7 +310,7 @@ export default function CreateServiceRequest() {
             <CCardSubtitle style={{ marginTop: '2%', fontWeight: 'bold', fontSize: '1rem', marginLeft: '-2%' }}>Issue Details</CCardSubtitle>
           </CCardHeader>
           <CRow style={{ marginTop: '2%' }}>
-            <CCol xs="10" lg="4">
+            <CCol xs="10" sm="4" lg="4">
               <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
                 Issue Type:
                 <CFormGroup style={{ marginLeft: '9%' }} value={issueType} onChange={(e) => setIssueType(e.target.value)} className="w-50">
@@ -331,7 +324,7 @@ export default function CreateServiceRequest() {
                 </CFormGroup>
               </CRow>
             </CCol>
-            <CCol xs="10" lg="4">
+            <CCol xs="10" sm="4" lg="4">
               <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
                 Priority:
                 <CFormGroup style={{ marginLeft: '15%' }} value={priority} onChange={(e) => setPriority(e.target.value)} className="w-50">
@@ -344,7 +337,7 @@ export default function CreateServiceRequest() {
                 </CFormGroup>
               </CRow>
             </CCol>
-            <CCol xs="10" lg="4">
+            <CCol xs="10" sm="4" lg="4">
               <CRow style={{ marginLeft: '1%', fontWeight: 'bold' }}>
                 Executive:
                 <CFormGroup style={{ marginLeft: '3%' }} value={executive} onChange={(e) => setExecutive(e.target.value)} className="w-50">
