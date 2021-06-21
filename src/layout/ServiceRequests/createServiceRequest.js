@@ -337,8 +337,9 @@ export default function CreateServiceRequest() {
                 <CFormGroup style={{ marginLeft: '15%' }} value={priority} onChange={(e) => setPriority(e.target.value)} className="w-50">
                   <CSelect custom size="md" name="name" id="name">
                     <option value="undefined">Open this select menu</option>
-                    <option value="High">High</option>
-                    <option value="Low">Low</option>
+                    <option value="HIGH">High</option>
+                    <option value="LOW">Low</option>
+                    <option value="MEDIUM">Medium</option>
                   </CSelect>
                 </CFormGroup>
               </CRow>
