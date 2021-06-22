@@ -83,7 +83,7 @@ export default function EditServiceRequest(props) {
       setCustomerDetails(res.data.machine.client)
       setMachineDetails(res.data.machine)
       setServiceReqDetails(res.data)
-      
+
       console.log('servicrereqdetails', res.data)
    }
 
@@ -92,7 +92,7 @@ export default function EditServiceRequest(props) {
       currentData.employee_id = executive
       currentData.request_status = 'ASSIGNED'
       currentData.workstep_detail = {
-         site_visit_date : moment(date).format('YYYY-MM-DD hh:mm:ss')
+         site_visit_date: moment(date).format('YYYY-MM-DD hh:mm:ss')
       }
       console.log(currentData)
       try{
@@ -102,7 +102,7 @@ export default function EditServiceRequest(props) {
          state: 'Service Request updated'
        })
       } catch (err) {
-         console.log(err)
+         console.log(err.message || 'Error occured Please try again!')
       }
    }
 
@@ -125,293 +125,315 @@ export default function EditServiceRequest(props) {
 
    return (
       <>
-      <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
-        Error occured Please try again!
-      </CAlert>
-      <CCard>
-         <CCardHeader>
-            <CRow>
+         <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
+            Error occured Please try again!
+         </CAlert>
+         <CCard style={{ borderRadius: '18px' }}>
+
+            <CRow className="pl-3 mt-3" >
                <CCol xs="6" md="11">
-                  <CCardSubtitle style={{ marginTop: '1%', fontWeight: 'bold', fontSize: '1.1rem' }}>Service Request {item ? item.servicerequestId : null}</CCardSubtitle>
+                  <CCardSubtitle style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>Service Request {item ? item.servicerequestId : null}</CCardSubtitle>
                </CCol>
                <CCol xs="6" md="1">
-                  <CIcon name="cil-pen" size="1xl" onClick={() => {
-                     setEdit(true)
-                     setExecutive(serviceReqDetails?.service_request_tasks[0]?.employee?.employee_id )
+                  <CIcon name="cil-pen" size="lg" style={{ cursor: 'pointer' }} onClick={() => {
+                     setEdit(!edit)
+                     setExecutive(serviceReqDetails?.service_request_tasks[0]?.employee?.employee_id)
                   }} />
                </CCol>
             </CRow>
-         </CCardHeader>
-         <CCardBody >
-            <CRow style={{ marginLeft: '2%' }}>
-               <CCol xs="10" md="4">
-                  <CRow>
-                     <div style={{ fontWeight: 'bold' }}> Customer Name: </div>
-                     <CCol xs="10" md="6">
-                        {customerDetails ? customerDetails.company : null}
+
+            <CCardBody >
+               <div className="pt-1 pl-3">
+                  <CRow className="pb-2">
+                     <CCol xs="12" sm="12" lg="4">
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}> Customer Name: </div>
+                           <span className="ml-2" >
+                              {customerDetails ? customerDetails.company : null}
+                           </span>
+                        </CRow>
+                     </CCol>
+                     <CCol xs="12" sm="12" lg="4">
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}> Customer Code: </div>
+                           <span className="ml-2" >
+                              {customerDetails ? customerDetails.client_id : null}  </span>
+                        </CRow>
+                     </CCol>
+                     <CCol xs="12" sm="12" lg="4">
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}>  View Report: </div>
+                           <span className="ml-2">
+                              N/A
+                           </span>
+                        </CRow>
                      </CCol>
                   </CRow>
-               </CCol>
-               <CCol xs="10" md="4">
-                  <CRow>
-                     <div style={{ fontWeight: 'bold' }}> Customer Code: </div>
-                     <CCol xs="10" md="6">
-                        {customerDetails ? customerDetails.client_id : null}  </CCol>
-                  </CRow>
-               </CCol>
-               <CCol xs="10" lg="4">
-                  <CRow>
-                     <div style={{ fontWeight: 'bold' }}>  View Report: </div>
-                     <CCol xs="10" md="4">
-                        N/A
+
+                  <CRow className="pt-4 pb-2">
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}> Issue Type: </div>
+                           <span className="ml-2">
+                              {serviceReqDetails ? serviceReqDetails.issue_type : null}
+                           </span>
+                        </CRow>
+                     </CCol>
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}> Priority: </div>
+                           <span className="ml-2">
+                              {serviceReqDetails ? serviceReqDetails.request_priority : null}
+                           </span>
+                        </CRow>
+                     </CCol>
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}> Status: </div>
+                           <span className="ml-2">
+                              {serviceReqDetails && serviceReqDetails.request_status ?
+                                 <button
+                                    style={{
+                                       backgroundColor: getBadge(serviceReqDetails.request_status),
+                                       padding: '5px 8px',
+                                       borderRadius: '3px',
+                                       color: 'white',
+                                       fontSize: '13px',
+                                       width: '100px',
+                                       textTransform: 'capitalize',
+                                       textAlign: 'center',
+                                       outline: 'none',
+                                       border: 'none',
+                                    }}>{serviceReqDetails.request_status}</button> : null}
+                           </span>  </CRow>
                      </CCol>
                   </CRow>
-               </CCol>
-            </CRow>
 
-
-            <CRow style={{ marginTop: '2%', marginLeft: '2%' }}>
-               <CCol xs="10" lg="4">
-                  <CRow>
-                     <div style={{ fontWeight: 'bold' }}> Issue Type: </div>
-                     <CCol xs="10" md="4">
-                        {serviceReqDetails ? serviceReqDetails.issue_type : null}
-                     </CCol> </CRow>
-               </CCol>
-               <CCol xs="10" lg="4">
-                  <CRow>
-                     <div style={{ fontWeight: 'bold' }}> Priority: </div>
-                     <CCol xs="10" md="4">
-                        {serviceReqDetails ? serviceReqDetails.request_priority : null}
-                     </CCol> </CRow>
-               </CCol>
-               <CCol xs="10" lg="4">
-                  <CRow>
-                     <div style={{ fontWeight: 'bold' }}> Status: </div>
-                     <CCol xs="10" md="4">
-                        {serviceReqDetails && serviceReqDetails.request_status ?
-                           <button
-                              style={{
-                                 backgroundColor: getBadge(serviceReqDetails.request_status),
-                                 padding: '5px 8px',
-                                 borderRadius: '3px',
-                                 color: 'white',
-                                 fontSize: '13px',
-                                 width: '100px',
-                                 textTransform: 'capitalize',
-                                 textAlign: 'center',
-                                 outline: 'none',
-                                 border: 'none',
-                              }}>{serviceReqDetails.request_status}</button> : null}
-                     </CCol>  </CRow>
-               </CCol>
-            </CRow>
-
-            <CRow style={{ marginTop: '2%', marginLeft: '2%' }}>
-               <CCol xs="10" sm="4">
-                  <CRow>
-                     <div style={{ fontWeight: 'bold' }}> Executive: </div>
-                     <CCol xs="10" md="6">
-                        {edit ?
-                           <CFormGroup >
-                              <CSelect custom size="md" name="name" id="name" className="w-80" value={executive} onChange={(e) => setExecutive(e.target.value)}>
-                                 <option value="undefined">Open this select menu</option>
-                                 {employeesArr && employeesArr.length ? employeesArr.map((elem) => {
-                                    return <option key={elem.employee_id} value={elem.employee_id}>{elem.employee_name}</option>
-                                 }
-                                 ) : null}
-                              </CSelect>
-                           </CFormGroup>
-                           : serviceReqDetails ?.service_request_tasks[0] ?.employee ?.employee_name || null}
-                     </CCol> </CRow>
-               </CCol>
-               <CCol xs="10" sm="4">
-                  <CRow>
-                     <div style={{ fontWeight: 'bold' }}> Schedule Date: </div>
-                     <CCol xs="10" md="6">
-                        {edit ?
-                           <CFormGroup >
-                              <CInput type="date" id="sheduleDate" className="w-80"
-                                 name="sheduleDate" placeholder="sheduleDate" value={date} onChange={(e) => { setDate(e.target.value) }} />
-                           </CFormGroup>
-                           : serviceReqDetails && serviceReqDetails.service_request_tasks[0] ? serviceReqDetails.service_request_tasks[0].site_visit_date : null}
-                     </CCol> </CRow>
-               </CCol>
-               <CCol xs="10" lg="4">
-                  <CRow>
-                     <div style={{ fontWeight: 'bold' }}> Schedule Time: </div>
-                     <CCol xs="10" md="6">
-                        {edit ?
-                           <CFormGroup >
-                              <CInput type="time" id="sheduleTime" className="w-80" name="sheduleTime" placeholder="sheduleTime" value={time} onChange={(e) => { setTime(e.target.value) }} />
-                           </CFormGroup>
-                           : serviceReqDetails && serviceReqDetails.service_request_tasks[0] ? serviceReqDetails.service_request_tasks[0].site_visit_date : null}
-                     </CCol> </CRow>
-               </CCol>
-            </CRow>
-
-            <CRow style={{ marginTop: '2%', marginLeft: '2%', fontWeight: 'bold', }}>
-               <CCol xs="10" lg="6">
-                  Issue Details: {serviceReqDetails ? serviceReqDetails.request_detail : null}
-               </CCol>
-               <CCol xs="10" lg="6">
-                  Machine Pictures:
-               </CCol>
-            </CRow>
-         </CCardBody>
-
-         <CCardHeader>
-            <CCardSubtitle style={{ fontWeight: 'bold', fontSize: '1rem' }}> Machine Details</CCardSubtitle>
-         </CCardHeader>
-         <CRow style={{ marginLeft: '2%', marginTop: '2%', }}>
-            <CCol xs="10" lg="4">
-               <CRow>
-                  <div style={{ fontWeight: 'bold' }}>Machine ID: </div>
-                  <CCol xs="10" md="6">
-                     {machineDetails ? machineDetails.machine_id : null}
-                  </CCol> </CRow>
-            </CCol>
-            <CCol xs="10" lg="4">
-               <CRow>
-                  <div style={{ fontWeight: 'bold' }}>Machine Serial Number: </div>
-                  <CCol xs="10" md="6">
-                     {machineDetails ? machineDetails.machine_serial_number : null}
-                  </CCol> </CRow>
-            </CCol>
-            <CCol xs="10" lg="4">
-               <CRow>
-                  <div style={{ fontWeight: 'bold' }}>Machine Type: </div>
-                  <CCol xs="10" md="4">
-                     {machineDetails ? machineDetails.other_machine_type ? machineDetails.other_machine_type : machineDetails.machine_type : null}
-                  </CCol> </CRow>
-            </CCol>
-         </CRow>
-
-         <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
-            <CCol xs="10" lg="4">
-               <CRow>
-                  <div style={{ fontWeight: 'bold' }}>Make: </div>
-                  <CCol xs="10" md="6">
-                     {machineDetails ? machineDetails.machine_make : null}
-                  </CCol> </CRow>
-            </CCol>
-            <CCol xs="10" lg="4">
-               <CRow>
-                  <div style={{ fontWeight: 'bold' }}>Model: </div>
-                  <CCol xs="10" md="6">
-                     {machineDetails ? machineDetails.machine_model : null}
-                  </CCol> </CRow>
-            </CCol>
-            <CCol xs="10" lg="4">
-               <CRow>
-                  <div style={{ fontWeight: 'bold' }}> Machine Age: </div>
-                  <CCol xs="10" md="4">
-                     {machineDetails ? machineDetails.machine_age_as_on_installation : null}
-                  </CCol> </CRow>
-            </CCol>
-         </CRow>
-
-         <CRow style={{ marginLeft: '2%', marginTop: '2%', }}>
-            <CCol xs="10" lg="4">
-               <CRow>
-                  <div style={{ fontWeight: 'bold' }}>  Machine Controller: </div>
-                  <CCol xs="10" md="4">
-                     {machineDetails ? machineDetails.other_machine_controller ? machineDetails.other_machine_controller : machineDetails.machine_controller : null}
-                  </CCol> </CRow>
-            </CCol>
-            <CCol xs="10" lg="4">
-               <CRow>
-                  <div style={{ fontWeight: 'bold' }}> Controller Model: </div>
-                  <CCol xs="10" md="4">
-                     {machineDetails ? machineDetails.machine_controller_model : null}
-                  </CCol></CRow>
-            </CCol>
-         </CRow>
-
-         <CCardHeader>
-            <CCardSubtitle style={{ marginTop: '2%', fontWeight: 'bold', fontSize: '1rem' }}>Customer Contact Details</CCardSubtitle>
-         </CCardHeader>
-         <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
-            <CCol xs="10" lg="4">
-               <CRow>
-                  <div style={{ fontWeight: 'bold' }}>  Contact Person Name: </div>
-                  <CCol xs="10" md="3">
-                     {customerDetails ? customerDetails.contact_person : null}
-                  </CCol>
-               </CRow>
-            </CCol>
-            <CCol xs="10" lg="4">
-               <CRow>
-                  <div style={{ fontWeight: 'bold' }}>  Contact Number: </div>
-                  <CCol xs="10" md="6">
-                     {customerDetails ? customerDetails.phone_number : null}
-                  </CCol>
-               </CRow>
-            </CCol>
-            <CCol xs="10" lg="4">
-               <CRow>
-                  <div style={{ fontWeight: 'bold' }}>  Alternate Number: </div>
-                  <CCol xs="10" md="6">
-                     {customerDetails ? customerDetails.alternate_phone_number : null}
-
-                  </CCol></CRow>
-            </CCol>
-         </CRow>
-
-         <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
-            <CCol xs="10" lg="6">
-               <CRow>
-                  <div style={{ fontWeight: 'bold' }}>   Customer Address: </div>
-                  <CCol xs="10" md="4">
-                     {customerDetails ? customerDetails.address : null}
-                  </CCol>
-               </CRow>
-            </CCol>
-            <CCol xs="10" lg="6">
-               <CRow>
-                  <div style={{ fontWeight: 'bold' }}>  Email: </div>
-                  <CCol xs="10" md="6">
-                     {customerDetails ? customerDetails.email_id : null}
-                  </CCol>
-               </CRow>
-            </CCol>
-         </CRow>
-         {/* <CRow>
-            <CCardFooter style={{ width: '15%', marginLeft: '70%' }}>
-               {edit ?
-                  <CRow>
-                     <CButton block color="info" className="mr-1" onClick={submitHandler}
-                     >Submit</CButton>
-                     <CButton block color="info" className="mr-1" onClick={cancelHandler}
-                     >Cancel</CButton>
+                  <CRow className="pt-3 pb-2">
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}> Executive: </div>
+                           <span className="ml-2">
+                              {edit ?
+                                 <CFormGroup >
+                                    <CSelect custom size="sm" name="name" id="name" value={executive} onChange={(e) => setExecutive(e.target.value)}>
+                                       <option value="undefined">Select executive</option>
+                                       {employeesArr && employeesArr.length ? employeesArr.map((elem) => {
+                                          return <option key={elem.employee_id} value={elem.employee_id}>{elem.employee_name}</option>
+                                       }
+                                       ) : null}
+                                    </CSelect>
+                                 </CFormGroup>
+                                 : serviceReqDetails?.service_request_tasks[0]?.employee?.employee_name || null}
+                           </span>
+                        </CRow>
+                     </CCol>
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}> Schedule Date: </div>
+                           <span className="ml-2">
+                              {edit ?
+                                 <CFormGroup >
+                                    <CInput type="date" id="sheduleDate"
+                                       size="sm"
+                                       name="sheduleDate" placeholder="sheduleDate" value={date} onChange={(e) => { setDate(e.target.value) }} />
+                                 </CFormGroup>
+                                 : serviceReqDetails && serviceReqDetails.service_request_tasks[0] ? serviceReqDetails.service_request_tasks[0].site_visit_date : null}
+                           </span> </CRow>
+                     </CCol>
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}> Schedule Time: </div>
+                           <span className="ml-2">
+                              {edit ?
+                                 <CFormGroup >
+                                    <CInput type="time" id="sheduleTime" size="sm" name="sheduleTime" placeholder="sheduleTime" value={time} onChange={(e) => { setTime(e.target.value) }} />
+                                 </CFormGroup>
+                                 : serviceReqDetails && serviceReqDetails.service_request_tasks[0] ? serviceReqDetails.service_request_tasks[0].site_visit_date : null}
+                           </span>
+                        </CRow>
+                     </CCol>
                   </CRow>
-                  : <CButton block color="info" className="mr-1" onClick={closeHandler}>Close</CButton>}
-            </CCardFooter>
-         </CRow> */}
-         <CRow style={{ justifyContent: 'flex-end', marginRight: '2%' }}>
-            {edit ?
-               <CCardFooter style={{ width: '25%' }}>
 
-                  <CRow>
-                     <CCol xs="6">
-                        <CButton variant="outline" block color="info" className="mr-1" onClick={() => setEdit(false)}
+                  <CRow className="pt-3 pb-2" >
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}>
+                              Issue Details:
+                           </div>
+                           <span className="ml-2">
+                              {serviceReqDetails ? serviceReqDetails.request_detail : null}
+                           </span>
+                        </CRow>
+                     </CCol>
+
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}>
+                              Machine Pictures:
+                           </div>
+                           <span className="ml-2"></span>
+                        </CRow>
+                     </CCol>
+                  </CRow>
+               </div>
+
+
+               <CRow>
+                  <CCardSubtitle className="pl-3 pt-5" style={{ fontSize: '1rem' }}>Machine Details</CCardSubtitle>
+               </CRow>
+               <hr />
+
+               <div className="pt-1 pl-3">
+                  <CRow className="mb-3">
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}>Machine ID: </div>
+                           <span className="ml-2">
+                              {machineDetails ? machineDetails.machine_id : null}
+                           </span>
+                        </CRow>
+                     </CCol>
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}>Machine Serial Number: </div>
+                           <span className="ml-2">
+                              {machineDetails ? machineDetails.machine_serial_number : null}
+                           </span> </CRow>
+                     </CCol>
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}>Machine Type: </div>
+                           <span className="ml-2">
+                              {machineDetails ? machineDetails.other_machine_type ? machineDetails.other_machine_type : machineDetails.machine_type : null}
+                           </span> </CRow>
+                     </CCol>
+                  </CRow>
+
+                  <CRow className="pt-2 pb-2">
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}>Make: </div>
+                           <span className="ml-2">
+                              {machineDetails ? machineDetails.machine_make : null}
+                           </span> </CRow>
+                     </CCol>
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}>Model: </div>
+                           <span className="ml-2">
+                              {machineDetails ? machineDetails.machine_model : null}
+                           </span> </CRow>
+                     </CCol>
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}> Machine Age: </div>
+                           <span className="ml-2">
+                              {machineDetails ? machineDetails.machine_age_as_on_installation : null}
+                           </span>
+                        </CRow>
+                     </CCol>
+                  </CRow>
+
+                  <CRow className="pt-3 pb-2">
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}>  Machine Controller: </div>
+                           <CCol xs="10" md="4">
+                              {machineDetails ? machineDetails.other_machine_controller ? machineDetails.other_machine_controller : machineDetails.machine_controller : null}
+                           </CCol> </CRow>
+                     </CCol>
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}> Controller Model: </div>
+                           <CCol xs="10" md="4">
+                              {machineDetails ? machineDetails.machine_controller_model : null}
+                           </CCol></CRow>
+                     </CCol>
+                  </CRow>
+               </div>
+
+
+               <CRow>
+                  <CCardSubtitle className="pl-3 pt-5" style={{ fontSize: '1rem' }}>Customer Contact Details</CCardSubtitle>
+               </CRow>
+               <hr />
+
+               <div className="pt-1 pl-3 pb-3">
+                  <CRow className="pb-3">
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}>  Contact Person Name: </div>
+                           <span className="ml-2">
+                              {customerDetails ? customerDetails.contact_person : null}
+                           </span>
+                        </CRow>
+                     </CCol>
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}>  Contact Number: </div>
+                           <span className="ml-2">
+                              {customerDetails ? customerDetails.phone_number : null}
+                           </span>
+                        </CRow>
+                     </CCol>
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}>  Alternate Number: </div>
+                           <span className="ml-2">
+                              {customerDetails ? customerDetails.alternate_phone_number : null}
+                           </span>
+                        </CRow>
+                     </CCol>
+                  </CRow>
+
+                  <CRow className="pt-3 pb-2">
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}>   Customer Address: </div>
+                           <span className="ml-2">
+                              {customerDetails ? customerDetails.address : null}
+                           </span>
+                        </CRow>
+                     </CCol>
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}>  Email: </div>
+                           <span className="ml-2">
+                              {customerDetails ? customerDetails.email_id : null}
+                           </span>
+                        </CRow>
+                     </CCol>
+                  </CRow>
+
+               </div>
+
+               <CRow className="mt-2" style={{ justifyContent: 'center' }}>
+                  {edit ?
+                     <CCardFooter style={{ width: '25%' }}>
+
+                        <CRow>
+                           <CCol xs="6">
+                              <CButton variant="outline" block color="info" className="mr-1" onClick={() => setEdit(false)}
+                              >Cancel</CButton>
+                           </CCol>
+                           <CCol xs="6">
+                              <CButton block color="info" className="mr-1" onClick={submitHandler}
+                              >Submit</CButton>
+                           </CCol>
+                        </CRow>
+
+                     </CCardFooter>
+                     :
+                     <CCardFooter style={{ width: '13%' }}>
+                        <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/serviceRequest')}
                         >Cancel</CButton>
-                     </CCol>
-                     <CCol xs="6">
-                        <CButton block color="info" className="mr-1" onClick={submitHandler}
-                        >Submit</CButton>
-                     </CCol>
-                  </CRow>
+                     </CCardFooter>
+                  }
+               </CRow>
 
-               </CCardFooter>
-               :
-               <CCardFooter style={{ width: '13%' }}>
-                  <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/overview')}
-                  >Cancel</CButton>
-               </CCardFooter>
-            }
-         </CRow>
-      </CCard>
-           </>
+            </CCardBody>
+         </CCard>
+      </>
    )
 }
