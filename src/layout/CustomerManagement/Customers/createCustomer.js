@@ -7,7 +7,9 @@ import {
     CFormGroup,
     CInput,
     CCardFooter,
-    CAlert
+    CAlert,
+    CCardSubtitle,
+    CCardBody
 } from '@coreui/react'
 import { Formik } from "formik"
 import CustomerService from '../../../services/customerService';
@@ -33,7 +35,7 @@ export default function CreateCustomer(props) {
             history.push({
                 pathname: './customermanagement',
                 state: 'Customer added'
-              })
+            })
         } catch (err) {
             console.log('err', err.message)
             setAlert(true)
@@ -41,14 +43,14 @@ export default function CreateCustomer(props) {
     }
 
     React.useEffect(() => {
-        console.log('alert>>>>>>',props.location.state);
-      }, [])
+        console.log('alert>>>>>>', props.location.state);
+    }, [])
 
     return (
         <div>
-        <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
-        Error occured Please try again!
-      </CAlert>
+            <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
+                Error occured Please try again!
+            </CAlert>
             <Formik
                 initialValues={data}
                 onSubmit={async (values) => {
@@ -56,88 +58,155 @@ export default function CreateCustomer(props) {
                 }}>
                 {({ handleSubmit, handleChange, values, errors, touched, resetForm }) => (
 
-                    <div >
-                        <CCard style={{ padding: '40px', borderColor: 'lightgray' }}>
-                            <CRow style={{marginTop: '2%'}}> 
-                                <CCol xs="10" sm="3">
-                                    <b>Customer Name:</b>
-                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="customerName" className="w-55" name="customerName" placeholder="Customer Name" onChange={handleChange} />
-                                    </CFormGroup>
-                                </CCol>
 
-                                <CCol xs="10" sm="3">
-                                    <b>Contact Person:</b>
-                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="contact_person" className="w-55" name="contact_person" placeholder="Contact Person" onChange={handleChange} />
-                                    </CFormGroup>
-                                </CCol>
-                                <CCol xs="10" sm="3">
-                                    <b>Mobile No:</b>
-                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="phone_number" className="w-55" name="phone_number" placeholder="Mobile No" onChange={handleChange} />
-                                    </CFormGroup>
-                                </CCol>
-                            </CRow>
+                    <CCard style={{ borderRadius: '18px' }}>
+                        <CCardSubtitle className="pl-3 mt-3" style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>Create Customer</CCardSubtitle>
+                        {/* <hr /> */}
+                        <CCardBody>
+                            <div className="pt-3 pl-3">
+                                <CRow className="mb-2">
+                                    <CCol xs="12" sm="12" lg="6">
+                                        <CRow>
+                                            <b>Customer Name:</b>
+                                            <CCol>
+                                                <CFormGroup>
+                                                    <CInput type="text"
+                                                        style={{ width: '85%' }}
+                                                        id="customerName" name="customerName" placeholder="Customer Name" onChange={handleChange} />
+                                                </CFormGroup>
+                                            </CCol>
+                                        </CRow>
+                                    </CCol>
 
-                            <CRow style={{marginTop: '2%'}}> 
-                                <CCol xs="10" sm="3">
-                                    <b>Email:</b>
-                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="email_id" className="w-55" name="email_id" placeholder="Email" onChange={handleChange} />
-                                    </CFormGroup>
-                                </CCol>
-                                <CCol xs="10" sm="3">
-                                    <b>Address:</b>
-                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="address" className="w-55" name="address" placeholder="Address" onChange={handleChange} />
-                                    </CFormGroup>
-                                </CCol>
-                                <CCol xs="10" sm="3">
-                                    <b>Gst Number:</b>
-                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="gst_number" className="w-55" name="gst_number" placeholder="Gst Number" onChange={handleChange} />
-                                    </CFormGroup>
-                                </CCol>
-                                <CCol xs="10" sm="3">
-                                    <b>Alternate No:</b>
-                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="alternate_phone_number" className="w-55" name="alternate_phone_number" placeholder="Alternate No" onChange={handleChange} />
-                                    </CFormGroup>
-                                </CCol>
-                            </CRow>
+                                    <CCol xs="12" sm="12" lg="6">
+                                        <CRow>
+                                            <b>Contact Person:</b>
+                                            <CCol>
+                                                <CFormGroup>
+                                                    <CInput type="text"
+                                                        style={{ width: '85%' }} id="contact_person" name="contact_person" placeholder="Contact Person" onChange={handleChange} />
+                                                </CFormGroup>
+                                            </CCol>
+                                        </CRow>
+                                    </CCol>
+                                </CRow>
+
+                                <CRow className="pt-3 pb-2">
+                                    <CCol xs="12" sm="12" lg="6">
+                                        <CRow>
+                                            <b>Mobile No:</b>
+                                            <CCol>
+                                                <CFormGroup>
+                                                    <CInput type="text"
+                                                        style={{ width: '85%' }} id="phone_number" name="phone_number" placeholder="Mobile No" onChange={handleChange} />
+                                                </CFormGroup>
+                                            </CCol>
+                                        </CRow>
+                                    </CCol>
+                                    <CCol xs="12" sm="12" lg="6">
+                                        <CRow>
+                                            <b>Alternate No:</b>
+                                            <CCol>
+                                                <CFormGroup>
+                                                    <CInput type="text"
+                                                        style={{ width: '85%' }} id="alternate_phone_number" name="alternate_phone_number" placeholder="Alternate No" onChange={handleChange} />
+                                                </CFormGroup>
+                                            </CCol>
+                                        </CRow>
+                                    </CCol>
+                                </CRow>
+
+                                <CRow className="pt-3 pb-2">
+
+                                    <CCol xs="12" sm="12" lg="4">
+                                        <CRow>
+                                            <b>Address:</b>
+                                            <CCol>
+                                                <CFormGroup>
+                                                    <CInput style={{ width: '85%' }} type="text" id="address" name="address" placeholder="Address" onChange={handleChange} />
+                                                </CFormGroup>
+                                            </CCol>
+                                        </CRow>
+                                    </CCol>
+
+                                    <CCol xs="12" sm="12" lg="4">
+                                        <CRow>
+                                            <b>City:</b>
+                                            <CCol>
+                                                <CFormGroup>
+                                                    <CInput style={{ width: '85%' }} type="text" id="city" name="city" placeholder="City" onChange={handleChange} />
+                                                </CFormGroup>
+                                            </CCol>
+                                        </CRow>
+                                    </CCol>
+
+                                    <CCol xs="12" sm="12" lg="4">
+                                        <CRow>
+                                            <b>Zip:</b>
+                                            <CCol>
+                                                <CFormGroup>
+                                                    <CInput style={{ width: '85%' }} type="text" id="pincode" name="pincode" placeholder="Zip" onChange={handleChange} />
+                                                </CFormGroup>
+                                            </CCol>
+                                        </CRow>
+                                    </CCol>
+
+                                </CRow>
 
 
-                            <CRow style={{marginTop: '2%'}}> 
-                                <CCol xs="10" sm="3">
-                                    <b>City:</b>
-                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="city" className="w-55" name="city" placeholder="City" onChange={handleChange} />
-                                    </CFormGroup>
-                                </CCol>
-                                <CCol xs="10" sm="3">
-                                    <b>Zip:</b>
-                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="pincode" className="w-55" name="pincode" placeholder="Zip" onChange={handleChange} />
-                                    </CFormGroup>
-                                </CCol>
-                                <CCol xs="10" sm="3">
-                                    <b>State:</b>
-                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="state" className="w-55" name="state" placeholder="State" onChange={handleChange} />
-                                    </CFormGroup>
-                                </CCol>
-                                <CCol xs="10" sm="3">
-                                    <b>Country:</b>
-                                    <CFormGroup onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-                                        <CInput type="text" id="country" className="w-55" name="country" placeholder="Country" onChange={handleChange} />
-                                    </CFormGroup>
-                                </CCol>
-                            </CRow>
-                            <CRow style={{ justifyContent: 'flex-end', marginTop: '1%' }}>
+                                <CRow className="pt-3 pb-2">
+                                    <CCol xs="12" sm="12" lg="6">
+                                        <CRow>
+                                            <b>State:</b>
+                                            <CCol>
+                                                <CFormGroup>
+                                                    <CInput style={{ width: '85%' }} type="text" id="state" name="state" placeholder="State" onChange={handleChange} />
+                                                </CFormGroup>
+                                            </CCol>
+                                        </CRow>
+                                    </CCol>
+
+                                    <CCol xs="12" sm="12" lg="6">
+                                        <CRow>
+                                            <b>Country:</b>
+                                            <CCol>
+                                                <CFormGroup>
+                                                    <CInput style={{ width: '85%' }} type="text" id="country" name="country" placeholder="Country" onChange={handleChange} />
+                                                </CFormGroup>
+                                            </CCol>
+                                        </CRow>
+                                    </CCol>
+
+                                </CRow>
+
+                                <CRow className="pt-3 pb-2">
+
+                                    <CCol xs="12" sm="12" lg="6">
+                                        <CRow>
+                                            <b>Email:</b>
+                                            <CCol>
+                                            <CFormGroup>
+                                                <CInput style={{ width: '85%' }} type="text" id="email_id" name="email_id" placeholder="Email" onChange={handleChange} />
+                                            </CFormGroup>
+                                            </CCol>
+                                        </CRow>
+                                    </CCol>
+                                    <CCol xs="12" sm="12" lg="6">
+                                        <CRow>
+                                            <b>Gst Number:</b>
+                                            <CCol>
+                                                <CFormGroup>
+                                                    <CInput style={{ width: '85%' }} type="text" id="gst_number" name="gst_number" placeholder="Gst Number" onChange={handleChange} />
+                                                </CFormGroup>
+                                            </CCol>
+                                        </CRow>
+                                    </CCol>
+                                </CRow>
+                            </div>
+                            <CRow className="mt-2" style={{ justifyContent: 'center' }}>
                                 <CCardFooter style={{ width: '25%' }}>
 
-                                    <CRow style={{marginTop: '2%'}}> 
+                                    <CRow>
                                         <CCol xs="6">
                                             <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/customermanagement')}
                                             >Cancel</CButton>
@@ -150,8 +219,9 @@ export default function CreateCustomer(props) {
 
                                 </CCardFooter>
                             </CRow>
-                        </CCard>
-                    </div>
+                        </CCardBody>
+                    </CCard>
+
                 )}
             </Formik>
 
