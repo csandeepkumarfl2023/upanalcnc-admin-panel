@@ -9,7 +9,8 @@ import {
     CCardFooter,
     CAlert,
     CCardSubtitle,
-    CCardBody
+    CCardBody,
+    CTextarea
 } from '@coreui/react'
 import { Formik } from "formik"
 import CustomerService from '../../../services/customerService';
@@ -117,18 +118,18 @@ export default function CreateCustomer(props) {
 
                                 <CRow className="pt-3 pb-2">
 
-                                    <CCol xs="12" sm="12" lg="4">
+                                    <CCol xs="12" sm="12" lg="6">
                                         <CRow>
                                             <b>Address:</b>
                                             <CCol>
                                                 <CFormGroup>
-                                                    <CInput style={{ width: '85%' }} type="text" id="address" name="address" placeholder="Address" onChange={handleChange} />
+                                                    <CTextarea style={{ width: '85%' }} type="text" id="address" name="address" placeholder="Address" onChange={handleChange} />
                                                 </CFormGroup>
                                             </CCol>
                                         </CRow>
                                     </CCol>
 
-                                    <CCol xs="12" sm="12" lg="4">
+                                    <CCol xs="12" sm="12" lg="6">
                                         <CRow>
                                             <b>City:</b>
                                             <CCol>
@@ -138,8 +139,12 @@ export default function CreateCustomer(props) {
                                             </CCol>
                                         </CRow>
                                     </CCol>
+                                </CRow>
 
-                                    <CCol xs="12" sm="12" lg="4">
+                                
+                                <CRow className="pt-3 pb-2">
+
+                                    <CCol xs="12" sm="12" lg="6">
                                         <CRow>
                                             <b>Zip:</b>
                                             <CCol>
@@ -150,10 +155,6 @@ export default function CreateCustomer(props) {
                                         </CRow>
                                     </CCol>
 
-                                </CRow>
-
-
-                                <CRow className="pt-3 pb-2">
                                     <CCol xs="12" sm="12" lg="6">
                                         <CRow>
                                             <b>State:</b>
@@ -164,6 +165,10 @@ export default function CreateCustomer(props) {
                                             </CCol>
                                         </CRow>
                                     </CCol>
+                                </CRow>
+
+
+                                <CRow className="pt-3 pb-2">
 
                                     <CCol xs="12" sm="12" lg="6">
                                         <CRow>
@@ -176,10 +181,6 @@ export default function CreateCustomer(props) {
                                         </CRow>
                                     </CCol>
 
-                                </CRow>
-
-                                <CRow className="pt-3 pb-2">
-
                                     <CCol xs="12" sm="12" lg="6">
                                         <CRow>
                                             <b>Email:</b>
@@ -190,6 +191,10 @@ export default function CreateCustomer(props) {
                                             </CCol>
                                         </CRow>
                                     </CCol>
+                                </CRow>
+
+                                <CRow className="pt-3 pb-2">
+
                                     <CCol xs="12" sm="12" lg="6">
                                         <CRow>
                                             <b>Gst Number:</b>
