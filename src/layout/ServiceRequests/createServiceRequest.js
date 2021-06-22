@@ -189,7 +189,7 @@ export default function CreateServiceRequest() {
    <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
         Error occured Please try again!
       </CAlert>
-      <CCard style={{ borderRadius: '18px' }}>
+      <CCard>
         <CCardSubtitle className="pl-3 mt-3" style={{fontWeight: 'bold', fontSize: '1.1rem' }}>Create Service Request</CCardSubtitle>
         <CCardBody>
           <div className="pt-3 pl-3">

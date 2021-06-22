@@ -59,7 +59,7 @@ export default function CreateCustomer(props) {
                 {({ handleSubmit, handleChange, values, errors, touched, resetForm }) => (
 
 
-                    <CCard style={{ borderRadius: '18px' }}>
+                    <CCard>
                         <CCardSubtitle className="pl-3 mt-3" style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>Create Customer</CCardSubtitle>
                         {/* <hr /> */}
                         <CCardBody>

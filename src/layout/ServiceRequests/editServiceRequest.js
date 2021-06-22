@@ -128,7 +128,7 @@ export default function EditServiceRequest(props) {
          <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
             Error occured Please try again!
          </CAlert>
-         <CCard style={{ borderRadius: '18px' }}>
+         <CCard>
 
             <CRow className="pl-3 mt-3" >
                <CCol xs="6" md="11">
