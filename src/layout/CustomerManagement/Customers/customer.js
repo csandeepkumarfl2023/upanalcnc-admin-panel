@@ -1,23 +1,12 @@
 import React, { useState } from 'react'
 
 import {
-  CBadge,
-  CCard,
   CCardBody,
-  CModal,
-  CModalBody,
-  CModalFooter,
-  CModalHeader,
-  CModalTitle,
   CAlert,
   CCol,
   CDataTable,
   CRow,
   CButton,
-  CFormGroup,
-  CLabel,
-  CInput,
-  CSelect,
   CLink
 } from '@coreui/react'
 import CustomerService from '../../../services/customerService'
@@ -25,7 +14,7 @@ import { useHistory } from "react-router-dom";
 
 const customerService = new CustomerService()
 
-export default function Customer() {
+export default function Customer(props) {
   const history = useHistory();
 
   const [info, setInfo] = useState(false)
@@ -41,7 +30,6 @@ export default function Customer() {
   const [country, setCountry] = useState("")
   const [email, setEmail] = useState("")
   const [gstNumber, setGstNumber] = useState("")
-  const [alert, setAlert] = useState(false)
   const [editModal, setEditModal] = useState(false)
   const [editAlert, setEditAlert] = useState(false)
 
@@ -54,8 +42,10 @@ export default function Customer() {
   const fields = ['customerName', 'customerCode', 'contact_person', 'phone_number', 'email_id', 'address', 'gst_number']
 
   const getData = async () => {
+    setLoading(true)
     let res = await customerService.getAllCustomers()
     setData(res.data)
+    setLoading(false)
   }
 
   const conditionalRowStyles = [
@@ -104,24 +94,26 @@ export default function Customer() {
       state: item });
   }
 
+
   const addCustomerHandler = (item) => {
-    history.push('./createCustomer')
+    history.push({
+      pathname: './createCustomer',
+
+
+    })
   }
 
   React.useEffect(() => {
     getData()
-    setLoading(true)
-    setTimeout(function () {
-      setLoading(false)
-    }, 2000);
+    // setLoading(true)
+    // setTimeout(function () {
+    //   setLoading(false)
+    // }, 2000);
   }, [])
 
   return (
     <div>
 
-      <CAlert color="success" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
-        Successfully Added!
-      </CAlert>
       <CAlert color="success" show={editAlert} closeButton onClick={() => setEditAlert(false)} dismissible>
         Updated Successfully!
       </CAlert>
@@ -147,7 +139,7 @@ export default function Customer() {
               items={data}
               fields={fields}
               conditionalRowStyles={conditionalRowStyles}
-              itemsPerPage={5}
+              itemsPerPage={10}
               pagination
               scopedSlots={{
                 'customerName':

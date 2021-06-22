@@ -5,13 +5,12 @@ import {
   CNav,
   CNavItem,
   CNavLink,
-  CRow,
   CTabContent,
   CTabPane,
   CCard,
   CCardBody,
   CTabs,
-  CCardHeader
+  CAlert
 } from '@coreui/react'
 import Customer from './Customers/customer'
 import Machines from './Machines/machines'
@@ -30,11 +29,24 @@ const override = css`
 `;
 
 
-export default function CustomerManagement() {
+export default function CustomerManagement(props) {
 
   const  [loading,setLoading] = useState(false)
+  const [alert, setAlert] = useState(false)
 
+  const showAlert = () => {
+    if(props.location.state === 'Customer added')
+    setAlert(true)
+    if(props.location.state === 'Customer updated')
+    setAlert(true)
+    if(props.location.state === 'Machine added')
+    setAlert(true)
+    if(props.location.state === 'Machine updated')
+    setAlert(true)
+  }
+  
   React.useEffect(() => {
+    showAlert()
     setLoading(true)
     setTimeout(function(){  
       setLoading(false)             
@@ -46,6 +58,9 @@ export default function CustomerManagement() {
      <div className="sweet-loading">
       <ClipLoader  loading={loading}  css={override} size={50} color='#2f4f4f'/>
      </div> 
+     <CAlert color="success" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
+        {props.location.state} Successfully!
+      </CAlert>
        <CCol xs="6" md="12" className="mb-4">
          { !loading ?
         <CCard>
@@ -65,7 +80,7 @@ export default function CustomerManagement() {
               </CNav>
               <CTabContent>
                 <CTabPane data-tab="customers">
-                 <Customer/>
+                 <Customer addAlert={() => showAlert()} />
                 </CTabPane>
                 <CTabPane data-tab="machines">  
                  <Machines />

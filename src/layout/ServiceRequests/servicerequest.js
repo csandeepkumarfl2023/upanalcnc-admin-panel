@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 import {
-  CBadge,
   CCard,
   CCardBody,
   CModal,
@@ -19,9 +18,6 @@ import {
   CLabel,
   CInput,
   CLink,
-  CNav,
-  CNavItem,
-  CNavLink
 
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
@@ -80,7 +76,7 @@ display: block;
 
 const serviceRequestService = new ServiceRequestService()
 const employeeService = new EmployeeService()
-export default function ServiceRequest() {
+export default function ServiceRequest(props) {
 
   const history = useHistory();
 
@@ -165,9 +161,17 @@ export default function ServiceRequest() {
     setData(mappedRes)
   }
 
+  const showAlert = () => {
+    if(props.location.state === 'Service Request added')
+    setAlert(true)
+    if(props.location.state === 'Service Request updated')
+    setAlert(true)
+  }
+
   React.useEffect(() => {
     getData()
     getEmployees()
+    showAlert()
     setLoading(true)
     setTimeout(function () {
       setLoading(false)
@@ -180,7 +184,7 @@ export default function ServiceRequest() {
         <ClipLoader loading={loading} css={override} size={50} color='#2f4f4f' />
       </div>
       <CAlert color="success" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
-        Successfully Added!
+      {props.location.state} Successfully!
       </CAlert>
       <CAlert color="success" show={editAlert} closeButton onClick={() => setEditAlert(false)} dismissible>
         Updated Successfully!
@@ -208,7 +212,7 @@ export default function ServiceRequest() {
                   items={data}
                   fields={fields}
                   conditionalRowStyles={conditionalRowStyles}
-                  itemsPerPage={5}
+                  itemsPerPage={10}
                   pagination
                   scopedSlots={{
                     'servicerequestId':

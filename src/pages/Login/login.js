@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  CButton,
   CCard,
   CCardBody,
   CCardGroup,
@@ -17,7 +16,6 @@ import {
 import CIcon from '@coreui/icons-react'
 import AdminService from '../../../src/services/adminService'
 import CommonService from '../../services/commonService'
-import axios from 'axios'
 
 const loginService = new AdminService()
 const commonService = new CommonService()

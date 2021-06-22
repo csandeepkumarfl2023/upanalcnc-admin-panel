@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 import {
-  CBadge,
   CCard,
   CCardBody,
   CCardHeader,
@@ -18,17 +17,12 @@ import {
   CFormGroup,
   CLabel,
   CInput,
-  CImg,
-  CSubheader,
-  CBreadcrumbRouter,
   CButtonGroup,
   CSelect,
   CLink
 } from '@coreui/react'
-import { CChartDoughnut } from '@coreui/react-chartjs'
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
-import routes from '../../routes'
 import CIcon from '@coreui/icons-react'
 import { useHistory } from "react-router-dom";
 import ServiceRequestService from '../../services/serviceRequestService'
@@ -579,12 +573,12 @@ export default function Overview() {
               <CCard>
                 <CCardBody>
                   <CRow className="mb-2">
-                    <CCol xs="11" style={{ display: 'flex', alignItems: 'center' }}>
+                    <CCol xs="10" style={{ display: 'flex', alignItems: 'center' }}>
                       <h5>
                         ServiceRequest
                       </h5>
                     </CCol>
-                    <CCol xs="1" style={{ display: 'flex', alignItems: 'center' }}>
+                    <CCol xs="2" style ={{width: '80px'}}>
                       <CButton block color="info" onClick={addServiceHandler}>New</CButton>
                     </CCol>
                   </CRow>
@@ -807,12 +801,12 @@ export default function Overview() {
             </CCardHeader> */}
                 <CCardBody>
                   <CRow className="mb-2">
-                    <CCol xs="11" style={{ display: 'flex', alignItems: 'center' }}>
+                    <CCol xs="10" style={{ display: 'flex', alignItems: 'center' }}>
                       <h5>
                         Sales Visit
                       </h5>
                     </CCol>
-                    <CCol xs="1" style={{ display: 'flex', alignItems: 'center' }}>
+                    <CCol xs="2" style ={{width: '80px'}}>
                       <CButton block color="info" onClick={() => setInfo(!info)}>New</CButton>
                     </CCol>
                   </CRow>
@@ -1044,10 +1038,10 @@ export default function Overview() {
               <CCard>
                 <CCardBody>
                   <CRow className="mb-2">
-                    <CCol xs="11" style={{ display: 'flex', alignItems: 'center' }}>
+                    <CCol xs="10" style={{ display: 'flex', alignItems: 'center' }}>
                       <h5>PM</h5>
                     </CCol>
-                    <CCol xs="1" style={{ display: 'flex', alignItems: 'center' }}>
+                    <CCol xs="2" style ={{width: '80px'}}>
                       <CButton color="info" onClick={() => setPmAddModal(!pmAddModal)} style={{ height: '100%', width: '100%' }}>New</CButton>
                     </CCol>
                   </CRow>

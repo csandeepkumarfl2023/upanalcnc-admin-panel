@@ -6,7 +6,8 @@ import {
     CButton,
     CFormGroup,
     CInput,
-    CCardFooter
+    CCardFooter,
+    CAlert
 } from '@coreui/react'
 import { Formik } from "formik"
 import CustomerService from '../../../services/customerService';
@@ -14,7 +15,7 @@ import { useHistory } from "react-router-dom";
 
 const customerservice = new CustomerService()
 
-export default function CreateCustomer() {
+export default function CreateCustomer(props) {
     const history = useHistory();
 
     const [data, setData] = useState({
@@ -22,29 +23,32 @@ export default function CreateCustomer() {
         address: "", gst_number: "", alternate_phone_number: "", city: "", pincode: "", state: "", country: ""
     })
 
-    // const submitHandler = async (value) =>  {
-    //     let res = await customerservice.createCustomer(value)
-    //     console.log(res);
-    //     history.push('./customermanagement')
-    // }
+    const [alert, setAlert] = useState(false)
 
     const submitHandler = async (value) => {
         try {
             value.company = value.customerName
             value.password = 'welcome'
             let res = await customerservice.createCustomer(value)
-            history.push('./customermanagement')
+            history.push({
+                pathname: './customermanagement',
+                state: 'Customer added'
+              })
         } catch (err) {
-            console.log('err', err)
+            console.log('err', err.message)
+            setAlert(true)
         }
     }
 
-    const cancelHandler = () => {
-
-    }
+    React.useEffect(() => {
+        console.log('alert>>>>>>',props.location.state);
+      }, [])
 
     return (
         <div>
+        <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
+        Error occured Please try again!
+      </CAlert>
             <Formik
                 initialValues={data}
                 onSubmit={async (values) => {

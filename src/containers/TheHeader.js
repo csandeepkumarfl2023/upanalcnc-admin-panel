@@ -13,17 +13,12 @@ import {
   CBreadcrumbItem,
   CLink
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import routes from '../routes'
 import {
-  useLocation
+  useLocation 
 } from "react-router-dom";
 
 import {
   TheHeaderDropdown,
-  TheHeaderDropdownMssg,
-  TheHeaderDropdownNotif,
-  TheHeaderDropdownTasks
 } from './index'
 
 const TheHeader = (props) => {

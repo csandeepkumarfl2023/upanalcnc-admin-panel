@@ -4,21 +4,18 @@ import {
     CCardHeader,
     CCardBody,
     CCol,
-    CSelect,
     CRow,
     CButton,
     CFormGroup,
     CInput,
     CCardSubtitle,
     CCardFooter,
+    CAlert
 } from '@coreui/react'
 
-import CIcon from '@coreui/icons-react'
 import { useHistory } from "react-router-dom";
 
 import MachineService from '../../../services/machineService'
-import moment from 'moment'
-
 
 const machineService = new MachineService()
 
@@ -38,6 +35,8 @@ export default function EditMachine(props) {
     const [controller, setController] = useState("")
     const [controllerModel, setControllerModel] = useState("")
     const [generateQRCode, setGenerateQRCode] = useState("")
+
+    const [alert, setAlert] = useState(false)
 
     const cancelHandler = () => {
         history.push('/customermanagement');
@@ -59,6 +58,7 @@ export default function EditMachine(props) {
     }
 
     const submitHandler = async () => {
+        try {
         let currentData = { ...item }
         currentData.machine_type = machineType
         currentData.customerCode = customerCode
@@ -72,7 +72,14 @@ export default function EditMachine(props) {
 
         console.log(currentData);
         let res = await machineService.updateMachine(currentData)
-        history.push('/customermanagement');
+        history.push({
+            pathname: '/customermanagement',
+            state: 'Machine updated'
+          })
+        } catch (err) {
+            console.log('err', err.message)
+            setAlert(true)
+        }
     }
 
     React.useEffect(() => {
@@ -84,6 +91,10 @@ export default function EditMachine(props) {
     }, [])
 
     return (
+        <>
+        <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
+        Error occured Please try again!
+      </CAlert>
         <CCard>
             <CCardHeader>
                 <CRow>
@@ -187,5 +198,6 @@ export default function EditMachine(props) {
             </CRow>
         </CCardBody>
         </CCard>
+        </>
     )
 }
