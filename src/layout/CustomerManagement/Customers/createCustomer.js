@@ -37,8 +37,7 @@ export default function CreateCustomer(props) {
                 state: 'Customer added'
             })
         } catch (err) {
-            console.log('err', err.message)
-            setAlert(true)
+            setAlert(err.message || 'Error occured Please try again!')
         }
     }
 
@@ -48,9 +47,9 @@ export default function CreateCustomer(props) {
 
     return (
         <div>
-            <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
-                Error occured Please try again!
-            </CAlert>
+        <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
+       {alert}
+      </CAlert>
             <Formik
                 initialValues={data}
                 onSubmit={async (values) => {

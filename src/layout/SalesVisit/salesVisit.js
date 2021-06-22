@@ -90,8 +90,10 @@ export default function SalesVisit() {
 
 
     const getData = async () => {
+      setLoading(true)
       let res = await salesvisitService.getAllSalesVisits()
       setData(res)
+      setLoading(false)
     }
 
 
@@ -193,10 +195,10 @@ export default function SalesVisit() {
 
 React.useEffect(() => {
   getData()
-  setLoading(true)
-  setTimeout(function(){  
-    setLoading(false)
-  }, 2000);
+  // setLoading(true)
+  // setTimeout(function(){  
+  //   setLoading(false)
+  // }, 2000);
 },[])
 
   return (
@@ -232,6 +234,10 @@ React.useEffect(() => {
             <CDataTable
              items={data}
               fields={fields}
+              hover
+              striped
+              bordered
+              size="sm"
               conditionalRowStyles={conditionalRowStyles}
               itemsPerPage={10}
               pagination

@@ -10,14 +10,20 @@ import {
     CInput,
     CCardSubtitle,
     CCardFooter,
-    CAlert
+    CAlert,
+    CSelect,
+    CLabel
 } from '@coreui/react'
 
 import { useHistory } from "react-router-dom";
 
 import MachineService from '../../../services/machineService'
+import CustomerService from '../../../services/customerService';
+import CommonService from '../../../services/commonService'
 
 const machineService = new MachineService()
+const customerservice = new CustomerService()
+const commonService = new CommonService()
 
 export default function EditMachine(props) {
 
@@ -35,6 +41,11 @@ export default function EditMachine(props) {
     const [controller, setController] = useState("")
     const [controllerModel, setControllerModel] = useState("")
     const [generateQRCode, setGenerateQRCode] = useState("")
+    const [customerseArr, setCustomersArr] = useState()
+    const [machinetypesArr, setMachineTypesArr] = useState()
+    const [typeOthers, setTypeOthers] = useState(false)
+    const [controllersArr, setControllersArr] = useState()
+    const [others, setOthers] = useState(false)
 
     const [alert, setAlert] = useState(false)
 
@@ -77,12 +88,40 @@ export default function EditMachine(props) {
             state: 'Machine updated'
           })
         } catch (err) {
-            console.log('err', err.message)
-            setAlert(true)
+            setAlert(err.message || 'Error occured Please try again!')
         }
     }
 
+    const getCustomer = async () => {
+        let res = await customerservice.getAllCustomers()
+        console.log(res)
+        setCustomersArr(res.data)
+    }
+
+    const getEnum = async () => {
+        let res = await commonService.getenum()
+        let machineControllers = []
+        for (const key in res.data.MACHINE_CONTROLLER) {
+            let obj = {}
+            obj.key = key
+            obj.value = res.data.MACHINE_CONTROLLER[key]
+            machineControllers.push(obj)
+        }
+        let machineTypes = []
+        for (const key in res.data.MACHINE_TYPE) {
+            let obj = {}
+            obj.key = key
+            obj.value = res.data.MACHINE_TYPE[key]
+            machineTypes.push(obj)
+        }
+
+        setControllersArr(machineControllers)
+        setMachineTypesArr(machineTypes)
+    }
+
     React.useEffect(() => {
+        getCustomer()
+        getEnum()
         setItem(props.location.state)
         if (props.location.state) {
             getMachineDetails()
@@ -93,7 +132,7 @@ export default function EditMachine(props) {
     return (
         <>
         <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
-        Error occured Please try again!
+       {alert}
       </CAlert>
         <CCard>
             <CCardHeader>
@@ -110,19 +149,46 @@ export default function EditMachine(props) {
                     <CCol xs="12" md="6">
                         <b>Customer Code:</b>
                         <CFormGroup style={{ marginTop: '10px' }}>
-                            <CInput type="text" id="customerCode" className="w-52"
-                                name="customerCode" placeholder="customerCode" value={customerCode} onChange={(e) => { setCustomerCode(e.target.value) }} />
+                            {/* <CInput type="text" id="customerCode" className="w-52"
+                                name="customerCode" placeholder="customerCode" value={customerCode} onChange={(e) => { setCustomerCode(e.target.value) }} /> */}
+                                <CSelect custom size="md" name="customerCode" id="customerCode"
+                                            onChange={(e) => setCustomerCode(e.target.value)}
+                                            value={customerCode}>
+                                            <option value="0">Open this select menu</option>
+                                            {customerseArr && customerseArr.length ? customerseArr.map((elem) => {
+                                                return <option key={elem.client_id} value={elem.client_id} style={{ textTransform: 'capitalize' }}>{elem.client_id}</option>
+                                            }
+                                            ) : null}
+                                        </CSelect>
                         </CFormGroup>
                     </CCol>
                     <CCol xs="12" lg="6">
                         <b>Machine Type:</b>
                         <CFormGroup style={{ marginTop: '10px' }} >
-                            <CInput type="text" id="machineType" className="w-52"
-                                name="machineType" placeholder="machineType" value={machineType} onChange={(e) => { setMachineType(e.target.value) }} />
+                                 <CSelect custom size="md" name="machine_type" id="machine_type"
+                                            value={machineType}
+                                            onChange={(e) => {
+                                                setMachineType(e.target.value)
+                                                e.target.value == 'OTHERS' ? setTypeOthers(true) : setTypeOthers(false)
+                                            }}>
+                                            <option value="0">Open this select menu</option>
+                                            {machinetypesArr && machinetypesArr.length ? machinetypesArr.map((elem) => {
+                                                return <option key={elem.key} value={elem.value} style={{ textTransform: 'capitalize' }}>{elem.value}</option>
+                                            }
+                                            ) : null}
+                                        </CSelect>
                         </CFormGroup>
                     </CCol>
+                   </CRow>
 
-                </CRow>
+                                 {typeOthers ?
+                                <CRow style={{ marginLeft: '2%'}}>
+                                    <CCol xs="10" sm="4">
+                                        <CLabel htmlFor="machine_type" style={{ fontWeight: 'bold' }}>Enter Your Option:</CLabel>
+                                        <CInput type="text" id="OTHERS" name="other_machine_type" placeholder="Machine Type" onChange={(e) => {setMachineType(e.target.value)}} />
+                                    </CCol>
+                                </CRow>
+                                : null}
 
                 <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
 
@@ -165,8 +231,17 @@ export default function EditMachine(props) {
                     <CCol xs="12" lg="4">
                         <b>Controller:</b>
                         <CFormGroup style={{ marginTop: '10px' }}>
-                            <CInput type="text" id="controller" className="w-52"
-                                name="controller" placeholder="controller" value={controller} onChange={(e) => { setController(e.target.value) }} />
+                                 <CSelect custom size="md" name="machine_controller" id="machine_controller" value={controller}
+                                            onChange={(e) => {
+                                                setController(e.target.value)
+                                                e.target.value == 'others' ? setOthers(true) : setOthers(false)
+                                            }}>
+                                            <option value="0">Open this select menu</option>
+                                            {controllersArr && controllersArr.length ? controllersArr.map((elem) => {
+                                                return <option key={elem.key} value={elem.value} style={{ textTransform: 'capitalize' }}>{elem.value}</option>
+                                            }
+                                            ) : null}
+                                        </CSelect>
                         </CFormGroup>
                     </CCol>
 
@@ -178,7 +253,15 @@ export default function EditMachine(props) {
                         </CFormGroup>
                     </CCol>
                 </CRow>
-
+                      
+                {others ?
+                                 <CRow style={{ marginTop: '2%',marginLeft:'2%' }}>
+                                 <CCol xs="10" sm="4">
+                                    <CLabel htmlFor="machine_controller" style={{fontWeight: 'bold'}}>Enter Your Option</CLabel>
+                                    <CInput type="text" id="others" name="other_machine_controller" placeholder="Machine controller" onChange={(e) => {setController(e.target.value)}} />
+                                </CCol>
+                                </CRow>
+                                : null}
 
             <CRow style={{ justifyContent: 'flex-end' }}>
                 <CCardFooter style={{ width: '25%' }}>

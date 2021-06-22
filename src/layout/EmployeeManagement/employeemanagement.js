@@ -109,8 +109,10 @@ export default function EmployeeManagements() {
   }
 
   const getData = async () => {
+    setLoading(true)
     let res = await employeeManagementsservice.getAllEmployeeManagements()
     setData(res)
+    setLoading(false)
   }
 
   const addBtnHandler = async() => {
@@ -122,10 +124,10 @@ export default function EmployeeManagements() {
 
   React.useEffect(() => {
     getData()
-    setLoading(true)
-    setTimeout(function () {
-      setLoading(false)
-    }, 2000);
+    // setLoading(true)
+    // setTimeout(function () {
+    //   setLoading(false)
+    // }, 2000);
   }, [])
 
   return (
@@ -162,6 +164,10 @@ export default function EmployeeManagements() {
                 <CDataTable
                   items={data}
                   fields={fields}
+                  hover
+                  striped
+                  bordered
+                  size="sm"
                   conditionalRowStyles={conditionalRowStyles}
                   itemsPerPage={10}
                   pagination
