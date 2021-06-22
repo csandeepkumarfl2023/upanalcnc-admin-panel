@@ -140,7 +140,7 @@ export default function CreateMachine() {
                                                         <option value="0">Open this select menu</option>
                                                         {machinetypesArr && machinetypesArr.length ? machinetypesArr.map((elem) => {
                                                             return <option key={elem.key} value={elem.value} style={{ textTransform: 'capitalize' }}>{elem.value}</option>
-                                                        }
+                                                            }
                                                         ) : null}
                                                     </CSelect>
                                                 </CFormGroup>
@@ -151,7 +151,7 @@ export default function CreateMachine() {
 
 
                                 {typeOthers ?
-                                    <CRow className="mb-2">
+                                    <CRow className="pt-3 pb-2">
                                         <CCol xs="12" sm="12" lg="6">
                                             <CRow>
                                                 <b>Enter Your Option:</b>
@@ -166,7 +166,7 @@ export default function CreateMachine() {
                                     </CRow>
                                     : null}
 
-                                <CRow className="mb-2">
+                                <CRow className="pt-3 pb-2">
                                     <CCol xs="12" sm="12" lg="6">
                                         <CRow>
                                         <b>Make:</b>
@@ -195,7 +195,7 @@ export default function CreateMachine() {
                                     </CCol>
                                 </CRow>
 
-                                <CRow className="mb-2">
+                                <CRow className="pt-3 pb-2">
                                     <CCol xs="12" sm="12" lg="6">
                                         <CRow>
                                         <b>MachineSerialNo:</b>
@@ -259,7 +259,7 @@ export default function CreateMachine() {
                                 </CRow>
 
                                 {others ?
-                                    <CRow className="mb-2">
+                                    <CRow className="pt-3 pb-4">
                                         <CCol xs="12" sm="12" lg="6">
                                             <CRow>
                                             <b>Enter Your Option:</b>
