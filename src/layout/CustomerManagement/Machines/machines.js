@@ -52,6 +52,7 @@ export default function Machines() {
   const [editAlert, setEditAlert] = useState(false)
   const [loading, setLoading] = useState(false)
   const [clickedMachine, setClickedMachine] = useState()
+  const [qrValue, setQrValue] = useState()
 
   const [deleteAlert, setDeleteAlert] = useState(false)
   const [data, setData] = useState([])
@@ -71,6 +72,12 @@ export default function Machines() {
       pathname: `/editMachine/${item.machine_id}`,
       state: item
     });
+  }
+
+  const getQrCode = async() => {
+    let res = await machineService.generateQRCode(clickedMachine)
+    console.log('res qrCode', res.data)
+    setQrValue(res.data)
   }
 
 
@@ -210,6 +217,7 @@ export default function Machines() {
                 <CButton color="secondary" onClick={() => setConfirmPopup(false)}>No</CButton>
                 <CButton color="info" onClick={() => {
                   setConfirmPopup(false)
+                  getQrCode()
                   setQrPopup(true)
                 }}>Yes</CButton>{' '}
               </CModalFooter>
@@ -224,7 +232,7 @@ export default function Machines() {
                 <CModalTitle>QRCode for MachineID: {clickedMachine}</CModalTitle>
               </CModalHeader>
               <CModalBody style={{display: 'flex', justifyContent: 'center'}}>
-                {clickedMachine ?
+                {qrValue ?
               <QRCode value={clickedMachine} size="150" />
               : null }
               </CModalBody>

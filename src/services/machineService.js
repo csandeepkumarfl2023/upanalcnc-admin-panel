@@ -42,5 +42,11 @@ async getMachine(id) {
     machineData = machineData.filter(item => item.id !== id);
     return machineData
 }
+
+async generateQRCode(id){
+    let response = await Axios.get(`${constants.apiEndPoint}machine/generate/qr/${id}`)
+    return response
+}
+
 }
 
