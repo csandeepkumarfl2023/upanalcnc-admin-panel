@@ -49,8 +49,7 @@ export default function CreateMachine() {
             state: 'Machine added'
           })
         } catch (err) {
-            console.log('err', err.message)
-            setAlert(true)
+            setAlert(err.message || 'Error occured Please try again!')
         }
     }
 
@@ -89,7 +88,7 @@ export default function CreateMachine() {
     return (
         <div>
          <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
-        Error occured Please try again!
+       {alert}
       </CAlert>
             <Formik
                 initialValues={data}

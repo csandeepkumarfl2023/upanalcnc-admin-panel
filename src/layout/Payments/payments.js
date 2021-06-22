@@ -109,8 +109,10 @@ export default function Payments() {
   }
 
   const getData = async () => {
+    setLoading(true)
     let res = await paymentsservice.getAllPayments()
     setData(res)
+    setLoading(false)
   }
 
   const addBtnHandler = async() => {
@@ -122,10 +124,10 @@ export default function Payments() {
 
   React.useEffect(() => {
     getData()
-    setLoading(true)
-    setTimeout(function () {
-      setLoading(false)
-    }, 2000);
+    // setLoading(true)
+    // setTimeout(function () {
+    //   setLoading(false)
+    // }, 2000);
   }, [])
 
   return (

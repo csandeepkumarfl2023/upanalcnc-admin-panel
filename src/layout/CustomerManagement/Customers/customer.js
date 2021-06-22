@@ -11,7 +11,18 @@ import {
 } from '@coreui/react'
 import CustomerService from '../../../services/customerService'
 import { useHistory } from "react-router-dom";
-
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
+const override = css`
+  width: 5em;
+  height: 5em;
+  display: block;
+  position: absolute;
+  top: 50%;
+  margin-top: -4.05em;
+  left: 60%;
+  margin-left: -5em;
+`;
 const customerService = new CustomerService()
 
 export default function Customer(props) {
@@ -114,7 +125,9 @@ export default function Customer(props) {
   return (
     <div style={{position: 'relative'}}>
       <div style={{position: 'absolute', top: '45%', left: '50%'}}>
-        abc
+      <div className="sweet-loading">
+      <ClipLoader  loading={loading}  size={60} color='#2f4f4f'/>
+     </div> 
       </div>
       <CAlert color="success" show={editAlert} closeButton onClick={() => setEditAlert(false)} dismissible>
         Updated Successfully!

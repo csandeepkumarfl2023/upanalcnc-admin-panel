@@ -79,8 +79,7 @@ export default function EditCustomer(props) {
             state: 'Customer updated'
           })
       } catch (err) {
-         console.log(err.message)
-         setAlert(true)
+         setAlert(err.message || 'Error occured Please try again!')
       }
    }
 
@@ -95,7 +94,7 @@ export default function EditCustomer(props) {
    return (
       <>
       <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
-      Error occured Please try again!
+      {alert}
     </CAlert>
       <CCard>
          <CCardHeader>

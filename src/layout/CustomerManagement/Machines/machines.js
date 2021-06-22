@@ -19,6 +19,7 @@ import { css } from "@emotion/react";
 import MachineService from '../../../services/machineService';
 import { useHistory } from "react-router-dom";
 import QRCode from 'qrcode.react';
+import ClipLoader from "react-spinners/ClipLoader";
 
 const machineService = new MachineService()
 
@@ -56,8 +57,10 @@ export default function Machines() {
   const [data, setData] = useState([])
 
   const getData = async () => {
+    setLoading(true)
     let res = await machineService.getAllMachines()
     setData(res.data)
+    setLoading(false)
   }
 
   const addMachineHandler = () => {
@@ -74,14 +77,19 @@ export default function Machines() {
 
   React.useEffect(() => {
     getData()
-    setLoading(true)
-    setTimeout(function () {
-      setLoading(false)
-    }, 2000);
+    // setLoading(true)
+    // setTimeout(function () {
+    //   setLoading(false)
+    // }, 2000);
   }, [])
 
   return (
-    <div>
+      <div style={{position: 'relative'}}>
+      <div style={{position: 'absolute', top: '45%', left: '50%'}}>
+      <div className="sweet-loading">
+      <ClipLoader  loading={loading}  size={60} color='#2f4f4f'/>
+     </div> 
+      </div>
       <CAlert color="success" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
         Successfully Added!
       </CAlert>

@@ -108,8 +108,10 @@ export default function Pms() {
   }
 
   const getData = async () => {
+    setLoading(true)
     let res = await pmservice.getAllPms()
     setData(res)
+    setLoading(false)
   }
 
   const addBtnHandler = async() => {
@@ -121,10 +123,10 @@ export default function Pms() {
 
   React.useEffect(() => {
     getData()
-    setLoading(true)
-    setTimeout(function () {
-      setLoading(false)
-    }, 2000);
+    // setLoading(true)
+    // setTimeout(function () {
+    //   setLoading(false)
+    // }, 2000);
   }, [])
 
   return (
