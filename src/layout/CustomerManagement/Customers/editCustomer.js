@@ -75,7 +75,7 @@ export default function EditCustomer(props) {
       try {
          let res = await customerSerice.updateCustomer(currentData)
          history.push({
-            pathname: './customermanagement',
+            pathname: '/customermanagement',
             state: 'Customer updated'
           })
       } catch (err) {

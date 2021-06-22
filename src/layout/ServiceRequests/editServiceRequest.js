@@ -98,7 +98,7 @@ export default function EditServiceRequest(props) {
       try{
       let res = await serviceRequestService.updateServiceRequest(currentData, item.service_request_id)
       history.push({
-         pathname: './servicerequest',
+         pathname: '/servicerequest',
          state: 'Service Request updated'
        })
       } catch (err) {

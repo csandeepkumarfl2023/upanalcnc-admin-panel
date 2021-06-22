@@ -154,11 +154,13 @@ export default function ServiceRequest(props) {
 
 
   const getData = async () => {
+    setLoading(true)
     let res = await serviceRequestService.getAllServiceRequests()
     let mappedRes = []
     res.data.forEach(elem => mappedRes.push(...elem.service_requests))
     console.log('mappedRes',mappedRes)
     setData(mappedRes)
+    setLoading(false)
   }
 
   const showAlert = () => {
@@ -172,10 +174,6 @@ export default function ServiceRequest(props) {
     getData()
     getEmployees()
     showAlert()
-    setLoading(true)
-    setTimeout(function () {
-      setLoading(false)
-    }, 2000);
   }, [])
 
   return (
