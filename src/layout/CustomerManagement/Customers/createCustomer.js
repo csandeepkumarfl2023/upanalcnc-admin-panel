@@ -6,7 +6,8 @@ import {
     CButton,
     CFormGroup,
     CInput,
-    CCardFooter
+    CCardFooter,
+    CAlert
 } from '@coreui/react'
 import { Formik } from "formik"
 import CustomerService from '../../../services/customerService';
@@ -22,7 +23,7 @@ export default function CreateCustomer(props) {
         address: "", gst_number: "", alternate_phone_number: "", city: "", pincode: "", state: "", country: ""
     })
 
-   
+    const [alert, setAlert] = useState(false)
 
     const submitHandler = async (value) => {
         try {
@@ -31,15 +32,11 @@ export default function CreateCustomer(props) {
             let res = await customerservice.createCustomer(value)
             history.push({
                 pathname: './customermanagement',
-                state: 
-                { 
-                  showAlert: true,
-                  alertType: 'success',
-                  alertMessage: 'Created customer successfully!'
-                }
+                state: 'Customer added'
               })
         } catch (err) {
             console.log('err', err.message)
+            setAlert(true)
         }
     }
 
@@ -49,6 +46,9 @@ export default function CreateCustomer(props) {
 
     return (
         <div>
+        <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
+        Error occured Please try again!
+      </CAlert>
             <Formik
                 initialValues={data}
                 onSubmit={async (values) => {

@@ -11,6 +11,7 @@ import {
    CInput,
    CCardSubtitle,
    CCardFooter,
+   CAlert
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
@@ -75,6 +76,7 @@ export default function EditServiceRequest(props) {
    const [machineDetails, setMachineDetails] = useState()
    const [serviceReqDetails, setServiceReqDetails] = useState()
 
+   const [alert, setAlert] = useState(false)
 
    const getServicerequestDetails = async () => {
       let res = await serviceRequestService.getServiceRequest(item.service_request_id)
@@ -95,7 +97,10 @@ export default function EditServiceRequest(props) {
       console.log(currentData)
       try{
       let res = await serviceRequestService.updateServiceRequest(currentData, item.service_request_id)
-      history.push('/servicerequest')
+      history.push({
+         pathname: './servicerequest',
+         state: 'Service Request updated'
+       })
       } catch (err) {
          console.log(err)
       }
@@ -119,6 +124,10 @@ export default function EditServiceRequest(props) {
    }, [])
 
    return (
+      <>
+      <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
+        Error occured Please try again!
+      </CAlert>
       <CCard>
          <CCardHeader>
             <CRow>
@@ -403,6 +412,6 @@ export default function EditServiceRequest(props) {
             }
          </CRow>
       </CCard>
-
+           </>
    )
 }

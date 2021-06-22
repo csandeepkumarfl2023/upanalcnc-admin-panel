@@ -106,12 +106,13 @@ export default function Customer(props) {
 
   const addCustomerHandler = (item) => {
     history.push({
-      pathname: './createCustomer'
+      pathname: './createCustomer',
+
+
     })
   }
 
   React.useEffect(() => {
-    props.addAlert()
     getData()
     setLoading(true)
     setTimeout(function () {

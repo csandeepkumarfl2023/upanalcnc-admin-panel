@@ -37,12 +37,18 @@ export default function CustomerManagement(props) {
   const [alert, setAlert] = useState(false)
 
   const showAlert = () => {
-    console.log('from cutomer management');
+    if(props.location.state === 'Customer added')
+    setAlert(true)
+    if(props.location.state === 'Customer updated')
+    setAlert(true)
+    if(props.location.state === 'Machine added')
+    setAlert(true)
+    if(props.location.state === 'Machine updated')
     setAlert(true)
   }
   
   React.useEffect(() => {
-    console.log(props.location.state)
+    showAlert()
     setLoading(true)
     setTimeout(function(){  
       setLoading(false)             
@@ -55,7 +61,7 @@ export default function CustomerManagement(props) {
       <ClipLoader  loading={loading}  css={override} size={50} color='#2f4f4f'/>
      </div> 
      <CAlert color="success" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
-        Successfully Added!
+        {props.location.state} Successfully!
       </CAlert>
        <CCol xs="6" md="12" className="mb-4">
          { !loading ?

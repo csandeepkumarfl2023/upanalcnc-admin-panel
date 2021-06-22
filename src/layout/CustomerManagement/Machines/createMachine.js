@@ -8,7 +8,8 @@ import {
     CFormGroup,
     CInput,
     CLabel,
-    CCardFooter
+    CCardFooter,
+    CAlert
 } from '@coreui/react'
 import { Formik } from "formik"
 import MachineService from '../../../services/machineService';
@@ -32,16 +33,25 @@ export default function CreateMachine() {
     const [controllersArr, setControllersArr] = useState()
     const [machinetypesArr, setMachineTypesArr] = useState()
     const [customerseArr, setCustomersArr] = useState()
+    const [alert, setAlert] = useState(false)
 
     const submitHandler = async (value) => {
+        try {
         value.client_id = value.customerCode
         console.log(value)
         value.machine_manufactured_date = "2020-03-03 03:03:03"
         value.machine_installation_date = "2020-03-03 03:03:03"
         value.machine_manufacturer = "test"
-        let res = await machineservice.createMachine(value)
-        console.log(res);
-        history.push('/customermanagement')
+       let res = await machineservice.createMachine(value)
+       console.log(res);
+        history.push({
+            pathname: '/customermanagement',
+            state: 'Machine added'
+          })
+        } catch (err) {
+            console.log('err', err.message)
+            setAlert(true)
+        }
     }
 
     const getCustomer = async () => {
@@ -78,6 +88,9 @@ export default function CreateMachine() {
 
     return (
         <div>
+         <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
+        Error occured Please try again!
+      </CAlert>
             <Formik
                 initialValues={data}
                 onSubmit={(values) => {

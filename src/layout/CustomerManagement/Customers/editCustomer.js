@@ -11,6 +11,7 @@ import {
    CInput,
    CCardSubtitle,
    CCardFooter,
+   CAlert
 } from '@coreui/react'
 import { useHistory } from "react-router-dom";
 import CustomerService from '../../../services/customerService'
@@ -35,6 +36,7 @@ export default function EditCustomer(props) {
    const [state, setState] = useState("")
    const [country, setCountry] = useState("")
 
+   const [alert, setAlert] = useState(false)
 
    const cancelHandler = () => {
       setEdit(false)
@@ -74,9 +76,13 @@ export default function EditCustomer(props) {
       console.log(currentData);
       try {
          let res = await customerSerice.updateCustomer(currentData)
-         history.push('/customermanagement')
+         history.push({
+            pathname: './customermanagement',
+            state: 'Customer updated'
+          })
       } catch (err) {
          console.log(err.message)
+         setAlert(true)
       }
    }
 
@@ -89,6 +95,10 @@ export default function EditCustomer(props) {
    }, [])
 
    return (
+      <>
+      <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
+      Error occured Please try again!
+    </CAlert>
       <CCard>
          <CCardHeader>
             <CRow>
@@ -225,6 +235,7 @@ export default function EditCustomer(props) {
             </CRow>
          </CCardBody>
       </CCard>
+      </>
 
    )
 }

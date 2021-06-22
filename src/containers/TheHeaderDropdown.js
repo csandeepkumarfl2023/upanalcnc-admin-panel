@@ -13,7 +13,7 @@ import CommonService from '../services/commonService';
 
 let commonService = new CommonService()
 const TheHeaderDropdown = () => {
-  const history = useHistory();
+  const history = useHistory(); 
 const [displayName, setDisplayName] = React.useState()
 
   const logoutHandler = async () => {
@@ -28,7 +28,9 @@ const [displayName, setDisplayName] = React.useState()
   const getToken = async() => {
     let tokendata = await commonService.getToken()
     console.log(tokendata)
+    if(tokendata && JSON.parse(tokendata).display_name ){
     setDisplayName(JSON.parse(tokendata).display_name)
+    }
   }
 
   React.useEffect(() => {

@@ -61,6 +61,7 @@ export default function CreateServiceRequest() {
   const [date, setDate] = useState("")
   const [time, setTime] = useState("")
   const [issueDetails, setIssueDetails] = useState("")
+  const [alert, setAlert] = useState(false)
 
   const cancelHandler = () => {
     history.push('./overview')
@@ -98,8 +99,16 @@ export default function CreateServiceRequest() {
     // currentData.ISSUE_TYPE= { 0: "ELECTRICAL", 1: "MECHANICAL" }
     currentData.createdDate = moment().format('MMMM Do YYYY, h:mm:ss a')
     console.log(currentData)
+    try {
     let res = await serviceRequestService.createServiceReq(currentData)
-    history.push('./servicerequest')
+    history.push({
+      pathname: './servicerequest',
+      state: 'Service Request added'
+    })
+  } catch (err) {
+    console.log('err', err.message)
+    setAlert(true)
+}
   }
 
   const customerChangeHandler = async (e) => {
@@ -177,6 +186,9 @@ export default function CreateServiceRequest() {
 
   return (
     <>
+   <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
+        Error occured Please try again!
+      </CAlert>
       <CCard>
         <CCardHeader><CCardSubtitle style={{ marginTop: '1%', fontWeight: 'bold', fontSize: '1.1rem' }}>Create Service Request</CCardSubtitle></CCardHeader>
         <CCardBody>
