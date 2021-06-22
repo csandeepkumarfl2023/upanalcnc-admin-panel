@@ -427,7 +427,7 @@ export default function EditServiceRequest(props) {
                      :
                      <CCardFooter style={{ width: '13%' }}>
                         <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/serviceRequest')}
-                        >Cancel</CButton>
+                        >Close</CButton>
                      </CCardFooter>
                   }
                </CRow>

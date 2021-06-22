@@ -439,7 +439,7 @@ export default function CreateServiceRequest() {
 
               <CRow>
                 <CCol xs="6">
-                  <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/overview')}
+                  <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/serviceRequest')}
                   >Cancel</CButton>
                 </CCol>
                 <CCol xs="6">
