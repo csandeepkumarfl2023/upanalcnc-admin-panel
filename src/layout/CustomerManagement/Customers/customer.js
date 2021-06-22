@@ -112,8 +112,10 @@ export default function Customer(props) {
   }, [])
 
   return (
-    <div>
-
+    <div style={{position: 'relative'}}>
+      <div style={{position: 'absolute', top: '45%', left: '50%'}}>
+        abc
+      </div>
       <CAlert color="success" show={editAlert} closeButton onClick={() => setEditAlert(false)} dismissible>
         Updated Successfully!
       </CAlert>
