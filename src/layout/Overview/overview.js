@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 import {
-  CBadge,
   CCard,
   CCardBody,
   CCardHeader,
@@ -18,17 +17,12 @@ import {
   CFormGroup,
   CLabel,
   CInput,
-  CImg,
-  CSubheader,
-  CBreadcrumbRouter,
   CButtonGroup,
   CSelect,
   CLink
 } from '@coreui/react'
-import { CChartDoughnut } from '@coreui/react-chartjs'
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
-import routes from '../../routes'
 import CIcon from '@coreui/icons-react'
 import { useHistory } from "react-router-dom";
 import ServiceRequestService from '../../services/serviceRequestService'
