@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 import {
-  CSelect,
   CCardBody,
   CModal,
   CModalBody,
@@ -13,11 +12,7 @@ import {
   CDataTable,
   CRow,
   CButton,
-  CFormGroup,
-  CLabel,
-  CInput,
   CLink,
-  CCard
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { css } from "@emotion/react";

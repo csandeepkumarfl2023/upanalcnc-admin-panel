@@ -4,7 +4,6 @@ import {
    CCardHeader,
    CCardBody,
    CCol,
-   CSelect,
    CRow,
    CButton,
    CFormGroup,
@@ -15,7 +14,6 @@ import {
 } from '@coreui/react'
 import { useHistory } from "react-router-dom";
 import CustomerService from '../../../services/customerService'
-import moment from 'moment'
 
 const customerSerice = new CustomerService()
 

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 import {
-  CBadge,
   CCard,
   CCardBody,
   CModal,
@@ -19,9 +18,6 @@ import {
   CLabel,
   CInput,
   CLink,
-  CNav,
-  CNavItem,
-  CNavLink
 
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'

@@ -5,13 +5,11 @@ import {
   CNav,
   CNavItem,
   CNavLink,
-  CRow,
   CTabContent,
   CTabPane,
   CCard,
   CCardBody,
   CTabs,
-  CCardHeader,
   CAlert
 } from '@coreui/react'
 import Customer from './Customers/customer'

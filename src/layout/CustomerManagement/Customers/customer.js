@@ -1,23 +1,12 @@
 import React, { useState } from 'react'
 
 import {
-  CBadge,
-  CCard,
   CCardBody,
-  CModal,
-  CModalBody,
-  CModalFooter,
-  CModalHeader,
-  CModalTitle,
   CAlert,
   CCol,
   CDataTable,
   CRow,
   CButton,
-  CFormGroup,
-  CLabel,
-  CInput,
-  CSelect,
   CLink
 } from '@coreui/react'
 import CustomerService from '../../../services/customerService'

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 import {
-  CBadge,
   CCard,
   CCardBody,
   CModal,
@@ -18,7 +17,6 @@ import {
   CLabel,
   CSelect,
   CInput,
-  CCardHeader,
   CLink
 } from '@coreui/react'
 

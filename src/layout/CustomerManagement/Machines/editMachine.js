@@ -4,7 +4,6 @@ import {
     CCardHeader,
     CCardBody,
     CCol,
-    CSelect,
     CRow,
     CButton,
     CFormGroup,
@@ -14,12 +13,9 @@ import {
     CAlert
 } from '@coreui/react'
 
-import CIcon from '@coreui/icons-react'
 import { useHistory } from "react-router-dom";
 
 import MachineService from '../../../services/machineService'
-import moment from 'moment'
-
 
 const machineService = new MachineService()
 
