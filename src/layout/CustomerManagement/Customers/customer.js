@@ -158,7 +158,7 @@ export default function Customer(props) {
               bordered
               size="sm"
               conditionalRowStyles={conditionalRowStyles}
-              itemsPerPage={15}
+              itemsPerPage={20}
               pagination
               scopedSlots={{
                 'customerName':

@@ -214,7 +214,7 @@ export default function ServiceRequest(props) {
                   bordered
                   size="sm"
                   conditionalRowStyles={conditionalRowStyles}
-                  itemsPerPage={10}
+                  itemsPerPage={20}
                   pagination
                   scopedSlots={{
                     'servicerequestId':

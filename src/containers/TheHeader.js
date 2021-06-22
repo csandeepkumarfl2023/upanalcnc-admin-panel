@@ -39,6 +39,7 @@ const TheHeader = (props) => {
   }
 
   React.useEffect(() => {
+    console.log('breadc', location.pathname.slice(1))
     let childRouteCheck = location.pathname.split('').slice(1).findIndex((elem => elem == '/'))
     if (childRouteCheck) {
       setChildRouteNameIndex(childRouteCheck)
@@ -85,11 +86,13 @@ const TheHeader = (props) => {
         <TheHeaderDropdownMssg/> */}
         <TheHeaderDropdown />
       </CHeaderNav>
+        {!location.pathname.slice(1) == 'overview' ?
       <CSubheader className="px-3 justify-content-between">
         {/* <CBreadcrumbRouter 
           className="border-0 c-subheader-nav m-0 px-0 px-md-3" 
           routes={routes} 
         /> */}
+
 
         <CBreadcrumb style={{ border: 'none', padding: 0, margin: '12px' }}>
           <CBreadcrumbItem>
@@ -113,6 +116,7 @@ const TheHeader = (props) => {
         </CBreadcrumb>
       </CSubheader>
 
+        : null }
     </CHeader>
   )
 }

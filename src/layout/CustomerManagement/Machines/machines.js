@@ -122,7 +122,7 @@ export default function Machines() {
               bordered
               size="sm"
               conditionalRowStyles={conditionalRowStyles}
-              itemsPerPage={10}
+              itemsPerPage={20}
               pagination
               scopedSlots={{
                 'machine_id':
