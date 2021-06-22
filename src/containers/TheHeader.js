@@ -86,37 +86,8 @@ const TheHeader = (props) => {
         <TheHeaderDropdownMssg/> */}
         <TheHeaderDropdown />
       </CHeaderNav>
-        {!location.pathname.slice(1) == 'overview' ?
-      <CSubheader className="px-3 justify-content-between">
-        {/* <CBreadcrumbRouter 
-          className="border-0 c-subheader-nav m-0 px-0 px-md-3" 
-          routes={routes} 
-        /> */}
+        
 
-
-        <CBreadcrumb style={{ border: 'none', padding: 0, margin: '12px' }}>
-          <CBreadcrumbItem>
-            <CLink to="/overview">Home</CLink>
-          </CBreadcrumbItem>
-          {childRouteNameIndex <= 0 ?
-            <CBreadcrumbItem>
-              <a style={{ textTransform: 'capitalize' }}>{location.pathname.slice(1)}</a>
-            </CBreadcrumbItem>
-
-            :
-            <>
-              <CBreadcrumbItem>
-                <CLink to={location.pathname.includes('editCustomer') ? '/customermanagement' : location.pathname.includes('editServiceReques') ? '/servicerequest' : '/'}  style={{ textTransform: 'capitalize' }}>{location.pathname.slice(1, childRouteNameIndex + 1)}</CLink>
-              </CBreadcrumbItem>
-              <CBreadcrumbItem>
-                <a style={{ textTransform: 'capitalize' }}>{location.pathname.slice(childRouteNameIndex + 2)}</a>
-              </CBreadcrumbItem>
-            </>
-          }
-        </CBreadcrumb>
-      </CSubheader>
-
-        : null }
     </CHeader>
   )
 }

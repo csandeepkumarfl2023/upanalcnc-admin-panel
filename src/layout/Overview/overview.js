@@ -31,7 +31,11 @@ import PmService from '../../services/pmService';
 import { Doughnut } from 'react-chartjs-2'
 import EmployeeService from '../../services/employeeService';
 import moment from 'moment'
-  
+import PmChart from '../Charts/PmChart';
+import SalesvisitChart from '../Charts/SalesvisitChart';
+import PaymentChart from '../Charts/PaymentChart';
+import ServiceChart from '../Charts/ServiceChart';
+
 const fields = ['servicerequestId', 'company', 'priority', 'issue_type', 'executive', 'status', 'contactNumber', 'email', 'createdDate']
 
 const pmfields = ['name', 'type', 'description']
@@ -52,82 +56,92 @@ const serviceRequestService = new ServiceRequestService()
 const employeeService = new EmployeeService()
 const pmservice = new PmService()
 
-const serviceReqChartData = {
-  // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-  datasets: [
-    {
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2],
-      backgroundColor: [
-        '#50D2C2',
-        '#FF3366',
-        '#FCAB53',
-        '#D667CD',
-        '#8C88FF'
-      ],
-      borderWidth: 1,
-    },
-  ],
+
+
+// const serviceReqChartData = {
+//   // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+//   datasets: [
+//     {
+//       label: '# of Votes',
+//       data: [12, 19, 3, 5, 2],
+//       backgroundColor: [
+//         '#50D2C2',
+//         '#FF3366',
+//         '#FCAB53',
+//         '#D667CD',
+//         '#8C88FF'
+//       ],
+//       borderWidth: 1,
+//     },
+//   ],
   
-};
+// };
 
-const salesVisitChartData = {
-  // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-  datasets: [
-    {
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2],
-      backgroundColor: [
-        '#50D2C2',
-        '#FF3366',
-        '#FCAB53',
-        '#D667CD',
-        '#8C88FF'
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
+// const salesVisitChartData = {
+//   // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+//   datasets: [
+//     {
+//       label: '# of Votes',
+//       data: [12, 19, 3, 5, 2],
+//       backgroundColor: [
+//         '#50D2C2',
+//         '#FF3366',
+//         '#FCAB53',
+//         '#D667CD',
+//         '#8C88FF'
+//       ],
+//       borderWidth: 1,
+//     },
+//   ],
+// };
 
-const paymentsChartData = {
-  // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-  datasets: [
-    {
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2],
-      backgroundColor: [
-        '#50D2C2',
-        '#FF3366',
-        '#FCAB53',
-        '#D667CD',
-        '#8C88FF'
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
+// const paymentsChartData = {
+//   // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+//   datasets: [
+//     {
+//       label: '# of Votes',
+//       data: [12, 19, 3, 5, 2],
+//       backgroundColor: [
+//         '#50D2C2',
+//         '#FF3366',
+//         '#FCAB53',
+//         '#D667CD',
+//         '#8C88FF'
+//       ],
+//       borderWidth: 1,
+//     },
+//   ],
+// };
 
-const pmChartData = {
-  // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-  datasets: [
-    {
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2],
-      backgroundColor: [
-        '#50D2C2',
-        '#FF3366',
-        '#FCAB53',
-        '#D667CD',
-        '#8C88FF'
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
+// const pmChartData = {
+//   // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+//   datasets: [
+//     {
+//       label: '# of Votes',
+//       data: [12, 19, 3, 5, 2],
+//       backgroundColor: [
+//         '#50D2C2',
+//         '#FF3366',
+//         '#FCAB53',
+//         '#D667CD',
+//         '#8C88FF'
+//       ],
+//       borderWidth: 1,
+//     },
+//   ],
+// };
 
 export default function Overview() {
 
   const history = useHistory();
+
+  const [pmChartData, setPmChartData] = React.useState([{ label: 'ASSIGNED', value: 10 }, { label: 'INPROGRESS', value: 20 }, { label: 'REQUESTED', value: 20 }])
+
+  const [paymentsChartData, setPaymentsChartData] = React.useState([{ label: 'ASSIGNED', value: 10 }, { label: 'INPROGRESS', value: 20 }, { label: 'REQUESTED', value: 20 }])
+
+  const [salesVisitChartData, setSalesVisitChartData] = React.useState([{ label: 'ASSIGNED', value: 10 }, { label: 'INPROGRESS', value: 20 }, { label: 'REQUESTED', value: 20 }])
+
+  const [serviceReqChartData, setServiceChartdata] = React.useState([{ label: 'ASSIGNED', value: 10 }, { label: 'INPROGRESS', value: 20 }, { label: 'REQUESTED', value: 20 }])
 
   const [data, setData] = useState([])
 
@@ -283,8 +297,21 @@ export default function Overview() {
 
   }
 
+
+
   const getServiceData = async () => {
     let res = await serviceRequestService.getAllServiceRequests()
+    let chartArr = []
+    res.data.forEach((elem) => {
+      const serviceItem = {
+        label: `${elem.request_status}: ${elem.service_requests.length}`,
+        value: elem.service_requests.length
+      }
+      chartArr.push(serviceItem)
+    })
+    setServiceChartdata(chartArr)
+
+
     let mappedRes = []
     res.data.forEach(elem => mappedRes.push(...elem.service_requests))
     
@@ -486,7 +513,8 @@ export default function Overview() {
                 </CCardHeader>
 
                 <CCardBody>
-             <Doughnut data={serviceReqChartData}/>
+             {/* <Doughnut data={serviceReqChartData}/> */}
+             <ServiceChart data={serviceReqChartData} innerRadius="50" outerRadius="90" />
                 </CCardBody>
               </CCard>
             </CCol>
@@ -506,7 +534,8 @@ export default function Overview() {
                   </CRow>
                 </CCardHeader>
                 <CCardBody>
-                <Doughnut data={salesVisitChartData} />
+                {/* <Doughnut data={salesVisitChartData} /> */}
+                <SalesvisitChart data={salesVisitChartData} innerRadius="50" outerRadius="90" />
                 </CCardBody>
               </CCard>
             </CCol>
@@ -526,7 +555,8 @@ export default function Overview() {
                   </CRow>
                 </CCardHeader>
                 <CCardBody>
-                <Doughnut data={paymentsChartData} />
+                {/* <Doughnut data={paymentsChartData} /> */}
+                <PaymentChart data={paymentsChartData} innerRadius="50" outerRadius="90" />
                 </CCardBody>
               </CCard>
             </CCol>
@@ -545,7 +575,8 @@ export default function Overview() {
                   </CRow>
                 </CCardHeader>
                 <CCardBody>
-                  <Doughnut data={pmChartData} />
+                  {/* <Doughnut data={pmChartData} /> */}
+                  <PmChart data={pmChartData} innerRadius="50" outerRadius="90" />
                   {/* <CChartDoughnut
                     datasets={[
                       {
