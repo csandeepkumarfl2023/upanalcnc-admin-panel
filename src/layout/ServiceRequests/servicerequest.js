@@ -215,8 +215,11 @@ export default function ServiceRequest(props) {
                 <CDataTable
                   items={data}
                   fields={fields}
+                  striped
+                  bordered
+                  size="sm"
                   conditionalRowStyles={conditionalRowStyles}
-                  itemsPerPage={5}
+                  itemsPerPage={10}
                   pagination
                   scopedSlots={{
                     'servicerequestId':

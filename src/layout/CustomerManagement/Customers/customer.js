@@ -53,8 +53,10 @@ export default function Customer(props) {
   const fields = ['customerName', 'customerCode', 'contact_person', 'phone_number', 'email_id', 'address', 'gst_number']
 
   const getData = async () => {
+    setLoading(true)
     let res = await customerService.getAllCustomers()
     setData(res.data)
+    setLoading(false)
   }
 
   const conditionalRowStyles = [
@@ -114,16 +116,15 @@ export default function Customer(props) {
 
   React.useEffect(() => {
     getData()
-    setLoading(true)
-    setTimeout(function () {
-      setLoading(false)
-    }, 2000);
+    // setLoading(true)
+    // setTimeout(function () {
+    //   setLoading(false)
+    // }, 2000);
   }, [])
 
   return (
     <div>
 
-     
       <CAlert color="success" show={editAlert} closeButton onClick={() => setEditAlert(false)} dismissible>
         Updated Successfully!
       </CAlert>
@@ -149,7 +150,7 @@ export default function Customer(props) {
               items={data}
               fields={fields}
               conditionalRowStyles={conditionalRowStyles}
-              itemsPerPage={5}
+              itemsPerPage={10}
               pagination
               scopedSlots={{
                 'customerName':

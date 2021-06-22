@@ -115,7 +115,7 @@ export default function Machines() {
               items={data}
               fields={fields}
               conditionalRowStyles={conditionalRowStyles}
-              itemsPerPage={5}
+              itemsPerPage={10}
               pagination
               scopedSlots={{
                 'machine_id':

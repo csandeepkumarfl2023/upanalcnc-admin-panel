@@ -149,12 +149,12 @@ export default function Pms() {
             <CCard>
               <CCardBody>
               <CRow className="mb-2">
-                    <CCol xs="11" style={{display: 'flex', alignItems: 'center'}}>
+                    <CCol xs="10" style={{display: 'flex', alignItems: 'center'}}>
                       <h5>
                     Pm
                     </h5>
                   </CCol>
-                  <CCol xs="1" style={{display: 'flex', alignItems: 'center'}}>
+                  <CCol xs="2" style ={{width: '80px'}}>
                     <CButton color="info" onClick={addBtnHandler} block>New</CButton>
                   </CCol>
                 </CRow>
@@ -162,7 +162,7 @@ export default function Pms() {
                   items={data}
                   fields={fields}
                   conditionalRowStyles={conditionalRowStyles}
-                  itemsPerPage={2}
+                  itemsPerPage={10}
                   pagination
                   scopedSlots={{
                     'name':

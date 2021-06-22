@@ -58,6 +58,7 @@ export default function CreateServiceRequest() {
   const [issueType, setIssueType] = useState("")
   const [priority, setPriority] = useState("")
   const [executive, setExecutive] = useState("")
+  const [serviceRequestType,setServiceRequestType] = useState("")
   const [date, setDate] = useState("")
   const [time, setTime] = useState("")
   const [issueDetails, setIssueDetails] = useState("")
@@ -363,6 +364,20 @@ export default function CreateServiceRequest() {
             </CCol>
             <CCol xs="12" sm="12" lg="4" >
               <CRow style={{fontWeight: 'bold' }}>
+               ServiceRequest Type :
+                <CFormGroup className="ml-3" value={serviceRequestType} onChange={(e) => setServiceRequestType(e.target.value)}>
+                  <CSelect custom size="sm" name="name" id="name"  className="w-100">
+                  <option value="undefined">Open this select</option>
+                  <option value="AMC">AMC</option>
+                    <option value="Breakdown">Breakdown</option>
+                  </CSelect>
+                </CFormGroup>
+              </CRow>
+            </CCol>
+          </CRow>
+          <CRow className="pt-2 pb-2">
+          <CCol xs="12" sm="12" lg="4" >
+              <CRow style={{fontWeight: 'bold' }}>
                 Executive:
                 <CFormGroup className="ml-3" value={executive} onChange={(e) => setExecutive(e.target.value)}>
                   <CSelect custom size="sm" name="name" id="name">
@@ -375,8 +390,6 @@ export default function CreateServiceRequest() {
                 </CFormGroup>
               </CRow>
             </CCol>
-          </CRow>
-          <CRow className="pt-2 pb-2">
           <CCol xs="12" sm="12" lg="4">
               <CRow style={{fontWeight: 'bold' }}>
                 Schedule Date:
