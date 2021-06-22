@@ -46,6 +46,17 @@ const Login = (props) => {
     }
   }
 
+  React.useEffect(() => {
+    document.querySelectorAll('.input').forEach(item => {
+      item.addEventListener('keyup', event => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          document.getElementById("loginBtn").click();
+         }
+      })
+    })
+  },[])
+
   return (
 
     <div className="c-app c-default-layout flex-row align-items-center">
@@ -66,7 +77,7 @@ const Login = (props) => {
                           <CIcon name="cil-user" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="text" placeholder="Username" autoComplete="username" />
+                      <CInput type="text" placeholder="Username" autoComplete="username" className="input" />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
@@ -74,12 +85,12 @@ const Login = (props) => {
                           <CIcon name="cil-lock-locked" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="password" placeholder="Password" autoComplete="current-password" />
+                      <CInput type="password" placeholder="Password" autoComplete="current-password" className="input"/>
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6" className="text-center">
                         {/* <CButton color="primary" className="px-4" onClick={loginHandler} style={{ marginLeft: "120px" }}>Login</CButton> */}
-                        <button type="button" style={{ backgroundColor: '#321FDB', outline: 'none', border: 'none', borderRadius: '4px', color: 'white' }} className="px-4 py-2" onClick={(e) => loginHandler(e)}>Login</button>
+                        <button id="loginBtn" type="button" style={{ backgroundColor: '#321FDB', outline: 'none', border: 'none', borderRadius: '4px', color: 'white' }} className="px-4 py-2" onClick={(e) => loginHandler(e)}>Login</button>
                       </CCol>
                       <CCol xs="6" className="text-right">
                         {/* <CButton color="link" className="px-0">Forgot password?</CButton> */}
