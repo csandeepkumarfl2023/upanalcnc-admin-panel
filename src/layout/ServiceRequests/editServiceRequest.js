@@ -92,7 +92,7 @@ export default function EditServiceRequest(props) {
       currentData.employee_id = executive
       currentData.request_status = 'ASSIGNED'
       currentData.workstep_detail = {
-         site_visit_date: moment(date).format('YYYY-MM-DD hh:mm:ss')
+         site_visit_date: moment(new Date(date + ' ' + time)).format('YYYY-MM-DD HH:mm:ss')
       }
       console.log(currentData)
       try{
@@ -138,6 +138,8 @@ export default function EditServiceRequest(props) {
                   <CIcon name="cil-pen" size="lg" style={{ cursor: 'pointer' }} onClick={() => {
                      setEdit(!edit)
                      setExecutive(serviceReqDetails?.service_request_tasks[0]?.employee?.employee_id)
+                     setDate(serviceReqDetails && serviceReqDetails.service_request_tasks[0] ? moment(serviceReqDetails.service_request_tasks[0].site_visit_date).format('YYYY-MM-DD') : '')
+                     setTime(serviceReqDetails && serviceReqDetails.service_request_tasks[0] ? moment(serviceReqDetails.service_request_tasks[0].site_visit_date).format('HH:mm') : '')
                   }} />
                </CCol>
             </CRow>
@@ -238,7 +240,7 @@ export default function EditServiceRequest(props) {
                                        size="sm"
                                        name="sheduleDate" placeholder="sheduleDate" value={date} onChange={(e) => { setDate(e.target.value) }} />
                                  </CFormGroup>
-                                 : serviceReqDetails && serviceReqDetails.service_request_tasks[0] ? serviceReqDetails.service_request_tasks[0].site_visit_date : null}
+                                 : serviceReqDetails && serviceReqDetails.service_request_tasks[0] ? moment(serviceReqDetails.service_request_tasks[0].site_visit_date).format('YYYY-MM-DD') : null}
                            </span> </CRow>
                      </CCol>
                      <CCol xs="12" sm="12" lg="4" >
@@ -249,7 +251,7 @@ export default function EditServiceRequest(props) {
                                  <CFormGroup >
                                     <CInput type="time" id="sheduleTime" size="sm" name="sheduleTime" placeholder="sheduleTime" value={time} onChange={(e) => { setTime(e.target.value) }} />
                                  </CFormGroup>
-                                 : serviceReqDetails && serviceReqDetails.service_request_tasks[0] ? serviceReqDetails.service_request_tasks[0].site_visit_date : null}
+                                 : serviceReqDetails && serviceReqDetails.service_request_tasks[0] ? moment(serviceReqDetails.service_request_tasks[0].site_visit_date).format('HH:mm') : null}
                            </span>
                         </CRow>
                      </CCol>

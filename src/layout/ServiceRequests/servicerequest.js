@@ -87,12 +87,6 @@ export default function ServiceRequest(props) {
   const [deleteAlert, setDeleteAlert] = useState(false)
   const [loading, setLoading] = useState(false)
   const [executiveinfo, setExecutiveInfo] = useState(false)
-  const [status, setStatus] = useState("")
-  const [priority, setPriority] = useState("")
-  const [company, setCompany] = useState("")
-  const [createdDate, setCreatedDate] = useState("")
-  const [email, setEmail] = useState("")
-  const [issueType, setIssueType] = useState("")
   const [employee, setEmployee] = useState("")
   const [scheduleDate, setSheduleDate] = useState("")
   const [scheduleTime, setSheduleTime] = useState("")
@@ -130,15 +124,19 @@ export default function ServiceRequest(props) {
       setExecutiveInfo(executiveinfo)
     }
     else {
+      console.log('time', scheduleTime)
       let currentData = {}
       currentData.employee_id = employee
       currentData.request_status = 'ASSIGNED'
       currentData.workstep_detail = {
-        site_visit_date : moment(scheduleDate).format('YYYY-MM-DD hh:mm:ss')
-     }
+        site_visit_date: moment(new Date(scheduleDate + ' ' + scheduleTime)).format('YYYY-MM-DD HH:mm:ss')
+      }  
+      console.log(currentData)
       try {
         let res = await serviceRequestService.updateServiceRequest(currentData, exeUpdateId)
-        history.push('/servicerequest')
+        getData()
+        setExecutiveInfo(false)
+        setEditAlert(true)
       } catch (err) {
         console.log(err)
       }
@@ -158,16 +156,22 @@ export default function ServiceRequest(props) {
     let res = await serviceRequestService.getAllServiceRequests()
     let mappedRes = []
     res.data.forEach(elem => mappedRes.push(...elem.service_requests))
-    console.log('mappedRes',mappedRes)
+
+
+    for (let item of mappedRes) {
+      let reqDetail = await serviceRequestService.getServiceRequest(item.service_request_id)
+      item.service_request_tasks = reqDetail.data.service_request_tasks
+    }
+    console.log('mappedRes', mappedRes)
     setData(mappedRes)
     setLoading(false)
   }
 
   const showAlert = () => {
-    if(props.location.state === 'Service Request added')
-    setAlert(true)
-    if(props.location.state === 'Service Request updated')
-    setAlert(true)
+    if (props.location.state === 'Service Request added')
+      setAlert(true)
+    if (props.location.state === 'Service Request updated')
+      setAlert(true)
   }
 
   React.useEffect(() => {
@@ -182,7 +186,7 @@ export default function ServiceRequest(props) {
         <ClipLoader loading={loading} css={override} size={50} color='#2f4f4f' />
       </div>
       <CAlert color="success" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
-      {props.location.state} Successfully!
+        {props.location.state} Successfully!
       </CAlert>
       <CAlert color="success" show={editAlert} closeButton onClick={() => setEditAlert(false)} dismissible>
         Updated Successfully!
@@ -201,7 +205,7 @@ export default function ServiceRequest(props) {
                     <h5>
                       ServiceRequest</h5>
                   </CCol>
-                  <CCol xs="2" style ={{width: '80px'}} >
+                  <CCol xs="2" style={{ width: '80px' }} >
                     <CButton block color="info" onClick={addServiceHandler}>New</CButton>
                   </CCol>
                 </CRow>
@@ -231,19 +235,15 @@ export default function ServiceRequest(props) {
                     'executive':
                       (item) => (
                         <td>
-                          <p>  <a onClick={() => {
+                          <p>  <a style={{ cursor: 'pointer' }} onClick={() => {
+                            setEmployee(item.service_request_tasks[0] ? item.service_request_tasks[0].employee.employee_id : '')
+                            setSheduleDate(item.service_request_tasks[0] ? moment(item.service_request_tasks[0].site_visit_date).format('YYYY-MM-DD') : '')
+                            setSheduleTime(item.service_request_tasks[0] ? moment(item.service_request_tasks[0].site_visit_date).format('HH:mm') : '')
                             setExeUpdateId(item.service_request_id)
-                            setCompany(item.company)
-                            setIssueType(item.issueType)
-                            setStatus(item.status)
-                            setExecutive(item.executive)
-                            setPriority(item.priority)
-                            setCreatedDate(item.createdDate)
-                            setEmail(item.email)
                             setExecutiveInfo(!executiveinfo)
                           }
-                          }>{item.executive}
-                            {<CIcon name="cil-pen" size="1xl" />}</a></p>
+                          }>{item.service_request_tasks[0] ? item.service_request_tasks[0].employee.employee_name : null}
+                            {<CIcon className="ml-2" name="cil-pen" size="1xl" />}</a></p>
                         </td>
                       ),
                     'status':

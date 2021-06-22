@@ -287,7 +287,11 @@ export default function Overview() {
     let res = await serviceRequestService.getAllServiceRequests()
     let mappedRes = []
     res.data.forEach(elem => mappedRes.push(...elem.service_requests))
-    console.log(mappedRes)
+    
+    for (let item of mappedRes) {
+      let reqDetail = await serviceRequestService.getServiceRequest(item.service_request_id)
+      item.service_request_tasks = reqDetail.data.service_request_tasks
+    }
     setServiceData(mappedRes.slice(0, 3))
   }
 
@@ -362,11 +366,13 @@ export default function Overview() {
       currentData.employee_id = employee
       currentData.request_status = 'ASSIGNED'
       currentData.workstep_detail = {
-        site_visit_date : moment(scheduleDate).format('YYYY-MM-DD hh:mm:ss')
-     }
+        site_visit_date: moment(new Date(scheduleDate + ' ' + scheduleTime)).format('YYYY-MM-DD HH:mm:ss')
+      }
       try {
         let res = await serviceRequestService.updateServiceRequest(currentData, exeUpdateId)
-        history.push('/servicerequest')
+        getServiceData()
+        setExecutiveInfo(false)
+        setEditAlert(true)
       } catch (err) {
         console.log(err)
       }
@@ -606,20 +612,15 @@ export default function Overview() {
                         (item) => (
                           <td>
                             <p>  <a onClick={() => {
-                              setExeUpdateId(item.id)
-                              setServiceRequestId(item.servicerequestId)
-                              setCompany(item.company)
-                              setIssueType(item.issueType)
-                              setStatus(item.status)
-                              setExecutive(item.executive)
-                              setPriority(item.priority)
-                              setCreatedDate(item.createdDate)
-                              setEmail(item.email)
+                              setEmployee(item.service_request_tasks[0] ? item.service_request_tasks[0].employee.employee_id : '')
+                              setScheduleDate(item.service_request_tasks[0] ? moment(item.service_request_tasks[0].site_visit_date).format('YYYY-MM-DD') : '')
+                              setScheduleTime(item.service_request_tasks[0] ? moment(item.service_request_tasks[0].site_visit_date).format('HH:mm') : '')
+                              setExeUpdateId(item.service_request_id)
                               setExecutiveInfo(!executiveinfo)
                             }
-                            }>{item.executive}
-                              {<CIcon name="cil-pen" size="1xl" />}</a></p>
-                          </td>
+                            }>{item.service_request_tasks[0] ? item.service_request_tasks[0].employee.employee_name : null}
+                            {<CIcon className="ml-2" name="cil-pen" size="1xl" />}</a></p>
+                        </td>
                         ),
                       'status':
                         (item) => (

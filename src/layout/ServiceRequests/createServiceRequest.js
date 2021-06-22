@@ -93,7 +93,9 @@ export default function CreateServiceRequest() {
     currentData.issue_type = issueType
     currentData.request_priority = priority
     currentData.employee_id = executive
-    currentData.expected_resolution_date = moment(date).format('YYYY-MM-DD hh: mm: ss')
+    currentData.expected_resolution_date = moment(new Date(date + ' ' + time)).format('YYYY-MM-DD HH:mm:ss')
+    currentData.site_visit_date = moment(new Date(date + ' ' + time)).format('YYYY-MM-DD HH:mm:ss')
+
     currentData.time = time
     currentData.request_detail = issueDetails
     // currentData.ISSUE_TYPE= { 0: "ELECTRICAL", 1: "MECHANICAL" }
