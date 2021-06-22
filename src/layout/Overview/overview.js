@@ -585,6 +585,10 @@ export default function Overview() {
                   <CDataTable
                     items={servicedata}
                     fields={fields}
+                    hover
+                    striped
+                    bordered
+                    size="sm"
                     conditionalRowStyles={conditionalRowStyles}
                     scopedSlots={{
                       'servicerequestId':
@@ -813,6 +817,10 @@ export default function Overview() {
                   <CDataTable
                     items={data}
                     fields={fields}
+                    hover
+                    striped
+                    bordered
+                    size="sm"
                     conditionalRowStyles={conditionalRowStyles}
                     // itemsPerPage={2}
                     // pagination
@@ -1048,6 +1056,10 @@ export default function Overview() {
                   <CDataTable
                     items={pmData}
                     fields={pmfields}
+                    hover
+                    striped
+                    bordered
+                    size="sm"
                     conditionalRowStyles={conditionalRowStyles}
                     // itemsPerPage={2}
                     // pagination

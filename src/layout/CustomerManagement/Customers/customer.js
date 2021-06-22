@@ -153,6 +153,10 @@ export default function Customer(props) {
             <CDataTable
               items={data}
               fields={fields}
+              hover
+              striped
+              bordered
+              size="sm"
               conditionalRowStyles={conditionalRowStyles}
               itemsPerPage={10}
               pagination

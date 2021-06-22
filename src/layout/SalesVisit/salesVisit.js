@@ -234,6 +234,10 @@ React.useEffect(() => {
             <CDataTable
              items={data}
               fields={fields}
+              hover
+              striped
+              bordered
+              size="sm"
               conditionalRowStyles={conditionalRowStyles}
               itemsPerPage={10}
               pagination

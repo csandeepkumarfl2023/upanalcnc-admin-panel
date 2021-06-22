@@ -185,7 +185,7 @@ export default function EditMachine(props) {
                                 <CRow style={{ marginLeft: '2%'}}>
                                     <CCol xs="10" sm="4">
                                         <CLabel htmlFor="machine_type" style={{ fontWeight: 'bold' }}>Enter Your Option:</CLabel>
-                                        <CInput type="text" id="others" name="other_machine_type" placeholder="Machine Type" onChange={(e) => {setMachineType(e.target.value)}} />
+                                        <CInput type="text" id="OTHERS" name="other_machine_type" placeholder="Machine Type" onChange={(e) => {setMachineType(e.target.value)}} />
                                     </CCol>
                                 </CRow>
                                 : null}
