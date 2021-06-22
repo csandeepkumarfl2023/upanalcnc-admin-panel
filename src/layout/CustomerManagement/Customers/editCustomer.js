@@ -10,7 +10,8 @@ import {
    CInput,
    CCardSubtitle,
    CCardFooter,
-   CAlert
+   CAlert,
+   CTextarea
 } from '@coreui/react'
 import { useHistory } from "react-router-dom";
 import CustomerService from '../../../services/customerService'
@@ -102,7 +103,7 @@ export default function EditCustomer(props) {
             <CCardBody>
                <div className="pt-1 pl-3">
                   <CRow className="mb-2">
-                     <CCol xs="12" sm="12" lg="4">
+                     <CCol xs="12" sm="12" lg="6">
                         <CRow>
                            <b>Customer Name:</b>
                            <CCol>
@@ -114,7 +115,7 @@ export default function EditCustomer(props) {
                         </CRow>
                      </CCol>
 
-                     <CCol xs="12" sm="12" lg="4">
+                     <CCol xs="12" sm="12" lg="6">
                         <CRow>
                            <b>Customer Code: </b>
                            <CCol>
@@ -126,7 +127,11 @@ export default function EditCustomer(props) {
                         </CRow>
                      </CCol>
 
-                     <CCol xs="12" sm="12" lg="4">
+                  </CRow>
+
+                  <CRow className="pt-3 pb-2">
+                     
+                  <CCol xs="12" sm="12" lg="6">
                         <CRow>
                            <b>Contact Person: </b>
                            <CCol>
@@ -137,9 +142,6 @@ export default function EditCustomer(props) {
                            </CCol>
                         </CRow>
                      </CCol>
-                  </CRow>
-
-                  <CRow className="pt-3 pb-2">
                      <CCol xs="12" sm="12" lg="6">
                         <CRow>
                            <b>Contact Number: </b>
@@ -151,6 +153,9 @@ export default function EditCustomer(props) {
                            </CCol>
                         </CRow>
                      </CCol>
+                  </CRow>
+
+                  <CRow className="pt-3 pb-2">
 
                      <CCol xs="12" sm="12" lg="6">
                         <CRow>
@@ -164,20 +169,20 @@ export default function EditCustomer(props) {
                         </CRow>
                      </CCol>
           
-                  </CRow>
-
-                  <CRow className="pt-3 pb-2">
                      <CCol xs="12" sm="12" lg="6">
                         <CRow>
                            <b>Customer Address: </b>
                            <CCol>
                               <CFormGroup >
-                                 <CInput style={{ width: '85%' }} type="text" id="address"
+                                 <CTextarea style={{ width: '85%' }} type="text" id="address"
                                     name="address" placeholder="address" value={address} onChange={(e) => { setAddress(e.target.value) }} />
                               </CFormGroup>
                            </CCol>
                         </CRow>
                      </CCol>
+                  </CRow>
+
+                  <CRow className="pt-3 pb-2">
                  
                      <CCol xs="12" sm="12" lg="6">
                         <CRow>
@@ -191,12 +196,7 @@ export default function EditCustomer(props) {
                         </CRow>
                      </CCol>
                 
-                  </CRow>
-
-          
-
-               <CRow className="pt-3 pb-2">
-                  <CCol xs="12" sm="12" lg="4">
+                  <CCol xs="12" sm="12" lg="6">
                      <CRow>
                         <b>Zip:</b>
                         <CCol>
@@ -207,8 +207,13 @@ export default function EditCustomer(props) {
                         </CCol>
                         </CRow>
                      </CCol>
+                  </CRow>
+
+          
+
+               <CRow className="pt-3 pb-2">
            
-                     <CCol xs="12" sm="12" lg="4">
+                     <CCol xs="12" sm="12" lg="6">
                         <CRow>
                         <b>State:</b>
                         <CCol>
@@ -219,7 +224,7 @@ export default function EditCustomer(props) {
                         </CCol>
                         </CRow>
                      </CCol>
-                     <CCol xs="12" sm="12" lg="4">
+                     <CCol xs="12" sm="12" lg="6">
                         <CRow>
                         <b>Country: </b>
                         <CCol>
