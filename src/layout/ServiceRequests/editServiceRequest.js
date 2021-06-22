@@ -102,7 +102,7 @@ export default function EditServiceRequest(props) {
             state: 'Service Request updated'
          })
       } catch (err) {
-         console.log(err)
+         console.log(err.message || 'Error occured Please try again!')
       }
    }
 
