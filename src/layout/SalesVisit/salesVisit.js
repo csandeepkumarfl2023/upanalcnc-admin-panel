@@ -235,7 +235,7 @@ React.useEffect(() => {
              items={data}
               fields={fields}
               hover
-              striped
+              
               bordered
               size="sm"
               conditionalRowStyles={conditionalRowStyles}

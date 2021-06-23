@@ -528,7 +528,7 @@ export default function Overview() {
                     items={servicedata}
                     fields={fields}
                     hover
-                    striped
+                    
                     bordered
                     size="sm"
                     conditionalRowStyles={conditionalRowStyles}
@@ -755,7 +755,7 @@ export default function Overview() {
                     items={data}
                     fields={fields}
                     hover
-                    striped
+                    
                     bordered
                     size="sm"
                     conditionalRowStyles={conditionalRowStyles}
@@ -994,7 +994,7 @@ export default function Overview() {
                     items={pmData}
                     fields={pmfields}
                     hover
-                    striped
+                    
                     bordered
                     size="sm"
                     conditionalRowStyles={conditionalRowStyles}

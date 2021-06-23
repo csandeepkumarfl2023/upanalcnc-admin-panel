@@ -163,7 +163,7 @@ export default function Pms() {
                   items={data}
                   fields={fields}
                   hover
-                  striped
+                  
                   bordered
                   size="sm"
                   conditionalRowStyles={conditionalRowStyles}
