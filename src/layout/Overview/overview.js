@@ -26,7 +26,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import CIcon from '@coreui/icons-react'
 import { useHistory } from "react-router-dom";
 import ServiceRequestService from '../../services/serviceRequestService'
-import SalesVisitService from '../../services/salesVisitService'  
+import SalesVisitService from '../../services/salesVisitService'
 import PmService from '../../services/pmService';
 import { Doughnut } from 'react-chartjs-2'
 import EmployeeService from '../../services/employeeService';
@@ -67,7 +67,21 @@ export default function Overview() {
 
   const [salesVisitChartData, setSalesVisitChartData] = React.useState([{ label: 'ASSIGNED', value: 10 }, { label: 'INPROGRESS', value: 20 }, { label: 'REQUESTED', value: 20 }])
 
-  const [serviceReqChartData, setServiceChartdata] = React.useState([{ label: 'ASSIGNED', value: 10 }, { label: 'INPROGRESS', value: 20 }, { label: 'REQUESTED', value: 20 }])
+  const [serviceReqChartSeries, setServiceChartSeries] = React.useState()
+  const [serviceReqChartLabels, setServiceChartLabels] = React.useState()
+  const [serviceReqChartColors, setServiceReqChartColors] = React.useState()
+
+  const [pmChartSeries, setPmChartSeries] = React.useState([1, 2])
+  const [pmChartLabels, setPmChartLabels] = React.useState(['COMPLETED', 'ACCEPTED'])
+  const [pmChartColors, setPmChartColors] = React.useState(['#50D2C2', '#8C88FF'])
+
+  const [paymentChartSeries, setPaymentChartSeries] = React.useState([1, 2])
+  const [paymentChartLabels, setPaymentChartLabels] = React.useState(['COMPLETED', 'ACCEPTED'])
+  const [paymentChartColors, setPaymentChartColors] = React.useState(['#50D2C2', '#8C88FF'])
+
+  const [salesVisitChartSeries, setSalesVisitChartSeries] = React.useState([1, 2])
+  const [salesVisitChartLabels, setSalesVisitChartLabels] = React.useState(['COMPLETED', 'ACCEPTED'])
+  const [salesVisitChartColors, setSalesVisitChartColors] = React.useState(['#50D2C2', '#8C88FF'])
 
   const [data, setData] = useState([])
 
@@ -124,7 +138,7 @@ export default function Overview() {
   const [email, setEmail] = useState("")
   const [alert, setAlert] = useState(false)
   const [editModal, setEditModal] = useState(false)
-  
+
   const [employeesArr, setEmployeesArr] = useState()
 
   const [editAlert, setEditAlert] = useState(false)
@@ -227,24 +241,22 @@ export default function Overview() {
 
   const getServiceData = async () => {
     let res = await serviceRequestService.getAllServiceRequests()
-    let chartArr = []
-    res.data.forEach((elem) => {
-      const serviceItem = {
-        label: `${elem.request_status}: ${elem.service_requests.length}`,
-        value: elem.service_requests.length
-      }
-      chartArr.push(serviceItem)
-    })
-    setServiceChartdata(chartArr)
 
+    let labelArr = []
+    let seriesArr = []
+    let colorsArr = []
+    res.data.forEach((elem) => {
+      labelArr.push(elem.request_status)
+      seriesArr.push(elem.service_requests.length)
+      colorsArr.push(getBadge(elem.request_status))
+    })
+    // setServiceChartdata(chartArr)
+    setServiceChartLabels(labelArr)
+    setServiceChartSeries(seriesArr)
+    setServiceReqChartColors(colorsArr)
 
     let mappedRes = []
     res.data.forEach(elem => mappedRes.push(...elem.service_requests))
-    
-    // for (let item of mappedRes) {
-    //   let reqDetail = await serviceRequestService.getServiceRequest(item.service_request_id)
-    //   item.service_request_tasks = reqDetail.data.service_request_tasks
-    // }
     setServiceData(mappedRes.slice(0, 3))
   }
 
@@ -339,10 +351,11 @@ export default function Overview() {
     }
   }
 
-  const editServiceHandler =  (item) => {
+  const editServiceHandler = (item) => {
     history.push({
-      pathname:`/editServiceRequest/${item.service_request_id}`,
-      state: item });
+      pathname: `/editServiceRequest/${item.service_request_id}`,
+      state: item
+    });
   }
   const addServiceHandler = () => {
     history.push('./createServiceRequest')
@@ -383,44 +396,25 @@ export default function Overview() {
         Deleted Successfully!
       </CAlert>
 
-      <CRow style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', flexDirection: 'row'}}>
-      <CFormGroup>
-              <CRow>
-                <div className="mfe-2 c-subheader-nav">
-                  <CButtonGroup>
-                    <CButton color="secondary">Days</CButton>
-                    <CButton color="secondary">Weeks</CButton>
-                    <CButton color="secondary">Months</CButton>
-                  </CButtonGroup>
-                </div>
-                <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{ width: '30%', marginTop: '1.5%' }} />
-                <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{ width: '30%', marginTop: '1.5%' }} />
-              </CRow>
-            </CFormGroup>
+      <CRow style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', flexDirection: 'row' }}>
+        <CFormGroup>
+          <CRow>
+            <div className="mfe-2 c-subheader-nav">
+              <CButtonGroup>
+                <CButton color="secondary">Days</CButton>
+                <CButton color="secondary">Weeks</CButton>
+                <CButton color="secondary">Months</CButton>
+              </CButtonGroup>
+            </div>
+            <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{ width: '30%', marginTop: '1.5%' }} />
+            <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{ width: '30%', marginTop: '1.5%' }} />
+          </CRow>
+        </CFormGroup>
       </CRow>
 
       <CRow>
         {!loading ?
           <>
-            {/* <CSubheader className="px-3 justify-content-between" style={{ marginTop:'1px'}}>
-        <CBreadcrumbRouter 
-          className="border-0 c-subheader-nav m-0 px-0 px-md-3" 
-          routes={routes} 
-        />
-           <CFormGroup row>
-             <CRow>
-          <div className="d-md-down-none mfe-2 c-subheader-nav">
-          <CButtonGroup>
-              <CButton color="secondary">Days</CButton>
-              <CButton color="secondary">Weeks</CButton>
-              <CButton color="secondary">Months</CButton>
-            </CButtonGroup>
-          </div>
-            <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{width:'30%',marginTop:'1.5%'}} />
-            <CInput type="date" id="date-input" name="date-input" placeholder="date" style={{width:'30%',marginTop:'1.5%'}} />
-            </CRow>
-            </CFormGroup>
-      </CSubheader> */}
 
             <CCol xs="4" sm="3">
               <CCard >
@@ -428,7 +422,7 @@ export default function Overview() {
 
                   <CRow>
                     <CCol sm="3">
-                    <CIcon name="cib-aurelia" style={{ color:'gray' }} />
+                      <CIcon name="cib-aurelia" style={{ color: 'gray' }} />
 
                     </CCol>
                     <CCol>
@@ -438,19 +432,21 @@ export default function Overview() {
                   </CRow>
                 </CCardHeader>
 
-                <CCardBody>
-             {/* <Doughnut data={serviceReqChartData}/> */}
-             <ServiceChart data={serviceReqChartData} innerRadius="50" outerRadius="90" />
-                </CCardBody>
+                <CRow>
+                  <CCol>
+                    <ServiceChart series={serviceReqChartSeries} labels={serviceReqChartLabels} colors={serviceReqChartColors} />
+                  </CCol>
+                </CRow>
               </CCard>
             </CCol>
+
             <CCol xs="4" sm="3">
               <CCard>
                 <CCardHeader>
 
                   <CRow>
                     <CCol sm="3">
-                    <CIcon name="cil-briefcase" style={{ color:'gray' }} />
+                      <CIcon name="cil-briefcase" style={{ color: 'gray' }} />
 
                     </CCol>
                     <CCol>
@@ -459,10 +455,13 @@ export default function Overview() {
 
                   </CRow>
                 </CCardHeader>
-                <CCardBody>
+
                 {/* <Doughnut data={salesVisitChartData} /> */}
-                <SalesvisitChart data={salesVisitChartData} innerRadius="50" outerRadius="90" />
-                </CCardBody>
+                <CRow>
+                  <CCol>
+                    <SalesvisitChart series={salesVisitChartSeries} labels={salesVisitChartLabels} colors={salesVisitChartColors} />
+                  </CCol>
+                </CRow>
               </CCard>
             </CCol>
             <CCol xs="4" sm="3">
@@ -471,7 +470,7 @@ export default function Overview() {
 
                   <CRow>
                     <CCol sm="3">
-                    <CIcon name="cib-cc-amazon-pay" style={{ color:'gray' }} />
+                      <CIcon name="cib-cc-amazon-pay" style={{ color: 'gray' }} />
 
                     </CCol>
                     <CCol>
@@ -480,10 +479,11 @@ export default function Overview() {
 
                   </CRow>
                 </CCardHeader>
-                <CCardBody>
-                {/* <Doughnut data={paymentsChartData} /> */}
-                <PaymentChart data={paymentsChartData} innerRadius="50" outerRadius="90" />
-                </CCardBody>
+
+                <CCol>
+                  <PaymentChart series={paymentChartSeries} labels={paymentChartLabels} colors={paymentChartColors} />
+                </CCol>
+
               </CCard>
             </CCol>
             <CCol xs="4" sm="3">
@@ -492,7 +492,7 @@ export default function Overview() {
 
                   <CRow>
                     <CCol sm="3">
-                    <CIcon name="cib-semaphoreci" style={{ color:'gray' }} />
+                      <CIcon name="cib-semaphoreci" style={{ color: 'gray' }} />
                     </CCol>
                     <CCol>
                       PM
@@ -500,30 +500,9 @@ export default function Overview() {
 
                   </CRow>
                 </CCardHeader>
-                <CCardBody>
-                  {/* <Doughnut data={pmChartData} /> */}
-                  <PmChart data={pmChartData} innerRadius="50" outerRadius="90" />
-                  {/* <CChartDoughnut
-                    datasets={[
-                      {
-                        backgroundColor: [
-                          '#50D2C2',
-                          '#FF3366',
-                          '#FCAB53',
-                          '#D667CD',
-                          '#8C88FF'
-                        ],
-                        data: [10, 10, 10, 10, 10]
-                      }
-                    ]}
-                    //  labels={['Completed', 'Overdue', 'Pending', 'Assigned','Accepted']}
-                    options={{
-                      tooltips: {
-                        enabled: true
-                      }
-                    }}
-                  /> */}
-                </CCardBody>
+                <CCol>
+                  <PmChart series={pmChartSeries} labels={pmChartLabels} colors={pmChartColors} />
+                </CCol>
               </CCard>
             </CCol>
           </>
@@ -541,7 +520,7 @@ export default function Overview() {
                         ServiceRequest
                       </h5>
                     </CCol>
-                    <CCol xs="2" style ={{width: '80px'}}>
+                    <CCol xs="2" style={{ width: '80px' }}>
                       <CButton block color="info" onClick={addServiceHandler}>New</CButton>
                     </CCol>
                   </CRow>
@@ -576,12 +555,12 @@ export default function Overview() {
                               setExecutiveInfo(!executiveinfo)
                             }
                             }>{item.service_request_tasks[0] ? item.service_request_tasks[0].employee.employee_name : null}
-                            {<CIcon className="ml-2" name="cil-pen" size="1xl" />}</a></p>
-                        </td>
+                              {<CIcon className="ml-2" name="cil-pen" size="1xl" />}</a></p>
+                          </td>
                         ),
                       'status':
                         (item) => (
-                          <td>{item.request_status ? 
+                          <td>{item.request_status ?
                             <button
                               style={{
                                 backgroundColor: getBadge(item.request_status),
@@ -595,39 +574,39 @@ export default function Overview() {
                                 outline: 'none',
                                 border: 'none',
                               }}>{item.request_status}</button>
-                              : null }
+                            : null}
                           </td>
                         ),
-                        'company':
-                      (item) => (
-                        <td>{item.machine?.client.company}
-                        </td>
-                      ),
-                    'priority':
-                      (item) => (
-                        <td>{item.request_priority ? item.request_priority : null}
-                        </td>
-                      ),
-                    'issue_type':
-                      (item) => (
-                        <td>{item.issue_type ? item.issue_type : null}
-                        </td>
-                      ),
-                    'contactNumber':
-                      (item) => (
-                        <td>{item.machine?.client.phone_number}
-                        </td>
-                      ),
-                    'email':
-                      (item) => (
-                        <td>{item.machine?.client.email_id}
-                        </td>
-                      ),
-                    'createdDate':
-                      (item) => (
-                        <td>{item.createdDate ? item.createdDate : null}
-                        </td>
-                      ),
+                      'company':
+                        (item) => (
+                          <td>{item.machine?.client.company}
+                          </td>
+                        ),
+                      'priority':
+                        (item) => (
+                          <td>{item.request_priority ? item.request_priority : null}
+                          </td>
+                        ),
+                      'issue_type':
+                        (item) => (
+                          <td>{item.issue_type ? item.issue_type : null}
+                          </td>
+                        ),
+                      'contactNumber':
+                        (item) => (
+                          <td>{item.machine?.client.phone_number}
+                          </td>
+                        ),
+                      'email':
+                        (item) => (
+                          <td>{item.machine?.client.email_id}
+                          </td>
+                        ),
+                      'createdDate':
+                        (item) => (
+                          <td>{item.createdDate ? item.createdDate : null}
+                          </td>
+                        ),
                     }}
 
                   />
@@ -726,9 +705,9 @@ export default function Overview() {
                     <CSelect custom size="md" name="name" id="name" value={employee} onChange={(e) => setEmployee(e.target.value)}>
                       <option value="undefined">Open this select menu</option>
                       {employeesArr && employeesArr.length ? employeesArr.map((elem) => {
-                      return <option key={elem.employee_id} value={elem.employee_id}>{elem.employee_name}</option>
-                    }
-                    ) : null}
+                        return <option key={elem.employee_id} value={elem.employee_id}>{elem.employee_name}</option>
+                      }
+                      ) : null}
                     </CSelect>
                   </CFormGroup>
                 </CCol>
@@ -768,7 +747,7 @@ export default function Overview() {
                         Sales Visit
                       </h5>
                     </CCol>
-                    <CCol xs="2" style ={{width: '80px'}}>
+                    <CCol xs="2" style={{ width: '80px' }}>
                       <CButton block color="info" onClick={() => setInfo(!info)}>New</CButton>
                     </CCol>
                   </CRow>
@@ -820,36 +799,36 @@ export default function Overview() {
                               }}>{item.status}</button>
                           </td>
                         ),
-                        'executive':
+                      'executive':
                         (item) => (
                           <td>{item.executive ? item.executive : null}</td>
                         ),
-                        'company':
+                      'company':
                         (item) => (
                           <td>{item.company ? item.company : null}
                           </td>
                         ),
-                        'priority':
+                      'priority':
                         (item) => (
                           <td>{item.priority ? item.priority : null}
                           </td>
                         ),
-                        'issueType':
+                      'issueType':
                         (item) => (
                           <td>{item.issueType ? item.issueType : null}
                           </td>
                         ),
-                        'contactNumber':
+                      'contactNumber':
                         (item) => (
                           <td>{item.contactNumber ? item.contactNumber : null}
                           </td>
                         ),
-                        'email':
+                      'email':
                         (item) => (
                           <td>{item.email ? item.email : null}
                           </td>
                         ),
-                        'createdDate':
+                      'createdDate':
                         (item) => (
                           <td>{item.createdDate ? item.createdDate : null}
                           </td>
@@ -1007,7 +986,7 @@ export default function Overview() {
                     <CCol xs="10" style={{ display: 'flex', alignItems: 'center' }}>
                       <h5>PM</h5>
                     </CCol>
-                    <CCol xs="2" style ={{width: '80px'}}>
+                    <CCol xs="2" style={{ width: '80px' }}>
                       <CButton color="info" onClick={() => setPmAddModal(!pmAddModal)} style={{ height: '100%', width: '100%' }}>New</CButton>
                     </CCol>
                   </CRow>
