@@ -23,7 +23,7 @@ export default function CreateEmployee(props) {
     
     const [data, setData] = useState({
         active: "", phone_number: "", email_id: "",
-        address: "",  employee_name: "", designation: "", employee_id: "",rawPassword: "", 
+        address: "",  employee_name: "", designation: "", employee_id: "",security_pin: "", 
     })
 
     const [alert, setAlert] = useState(false)
@@ -133,7 +133,7 @@ export default function CreateEmployee(props) {
                             <b>Raw Password:</b>
                                         <CFormGroup>
                                             <CInput type="text"
-                                                style={{ width: '85%' }} id="rawPassword" name="rawPassword" placeholder="rawPassword" onChange={handleChange} />
+                                                style={{ width: '85%' }} id="security_pin" name="security_pin" placeholder="security_pin" onChange={handleChange} />
                                         </CFormGroup>
                             </CCol>
 
