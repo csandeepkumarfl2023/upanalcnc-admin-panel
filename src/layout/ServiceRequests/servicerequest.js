@@ -158,10 +158,10 @@ export default function ServiceRequest(props) {
     res.data.forEach(elem => mappedRes.push(...elem.service_requests))
 
 
-    for (let item of mappedRes) {
-      let reqDetail = await serviceRequestService.getServiceRequest(item.service_request_id)
-      item.service_request_tasks = reqDetail.data.service_request_tasks
-    }
+    // for (let item of mappedRes) {
+    //   let reqDetail = await serviceRequestService.getServiceRequest(item.service_request_id)
+    //   item.service_request_tasks = reqDetail.data.service_request_tasks
+    // }
     console.log('mappedRes', mappedRes)
     setData(mappedRes)
     setLoading(false)
