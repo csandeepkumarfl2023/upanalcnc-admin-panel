@@ -22,6 +22,8 @@ import {
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 import EmployeeManagementsService from '../../services/employeeManagementService';
+import EmployeeService from '../../services/employeeService'
+const employeeService = new EmployeeService()
 
 const employeeManagementsservice = new EmployeeManagementsService()
 export default function EmployeeManagements() {
@@ -39,7 +41,7 @@ export default function EmployeeManagements() {
   const [updateId, setUpdateId] = useState()
   const [loading, setLoading] = useState(false)
 
-  const fields = ['name', 'type', 'description',]
+  const fields = ['employee_id', 'employee_name', 'email_id', 'phone_number', 'designation', 'address', 'active']
   const override = css`
     width: 5em;
     height: 5em;
@@ -110,9 +112,13 @@ export default function EmployeeManagements() {
 
   const getData = async () => {
     setLoading(true)
-    let res = await employeeManagementsservice.getAllEmployeeManagements()
-    setData(res)
+    let res = await employeeService.getEmployees();
+    console.log(res.data);
+    setData(res.data)
     setLoading(false)
+
+    // let allEmployeesRes = await employeeService.getEmployees();
+    // console.log(allEmployeesRes);
   }
 
   const addBtnHandler = async() => {
@@ -172,21 +178,41 @@ export default function EmployeeManagements() {
                   itemsPerPage={10}
                   pagination
                   scopedSlots={{
-                    'name':
+                      'employee_id':
                       (item) => (
-                        <td>
-                         <CLink> <a onClick={() => {
-                            setUpdateId(item.id)
-                            setName(item.name)
-                            setDescription(item.description)
-                            setType(item.type)
-
-                            setEditModal(!editModal)
-                          }
-                          }
-                          >{item.name}</a></CLink>
+                        <td>{item.employee_id}
                         </td>
-                      )
+                      ),
+                      'employee_name':
+                      (item) => (
+                        <td>{item.employee_name}
+                        </td>
+                      ),
+                      'email_id':
+                      (item) => (
+                        <td>{item.email_id}
+                        </td>
+                      ),
+                      'phone_number':
+                      (item) => (
+                        <td>{item.phone_number}
+                        </td>
+                      ),
+                      'designation':
+                      (item) => (
+                        <td>{item.designation}
+                        </td>
+                      ),
+                      'address':
+                      (item) => (
+                        <td>{item.address}
+                        </td>
+                      ),
+                      'active':
+                      (item) => (
+                        <td>{item.active}
+                        </td>
+                      ),
                   }}
 
                 />
