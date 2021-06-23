@@ -11,9 +11,11 @@ class PaymentChart extends React.Component {
       options: {
         labels: this.props.labels,
         colors:this.props.colors,
+        legend: {
+          show: false
+        },
         chart: {
-          type: 'donut',
-          height: 400
+          type: 'donut'
         },
       },
 
@@ -29,7 +31,7 @@ class PaymentChart extends React.Component {
 
       <div id="PaymentChart">
         {this.state.series ? 
-        <ReactApexChart options={this.state.options} series={this.state.series} type="donut" height="150"/>
+        <ReactApexChart options={this.state.options} series={this.state.series} type="donut"/>
         : <p style={{textAlign: 'center'}} className="p-5">No data available</p> }
       </div>
     );

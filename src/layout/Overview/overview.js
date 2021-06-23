@@ -61,27 +61,21 @@ export default function Overview() {
 
   const history = useHistory();
 
-  const [pmChartData, setPmChartData] = React.useState([{ label: 'ASSIGNED', value: 10 }, { label: 'INPROGRESS', value: 20 }, { label: 'REQUESTED', value: 20 }])
-
-  const [paymentsChartData, setPaymentsChartData] = React.useState([{ label: 'ASSIGNED', value: 10 }, { label: 'INPROGRESS', value: 20 }, { label: 'REQUESTED', value: 20 }])
-
-  const [salesVisitChartData, setSalesVisitChartData] = React.useState([{ label: 'ASSIGNED', value: 10 }, { label: 'INPROGRESS', value: 20 }, { label: 'REQUESTED', value: 20 }])
-
   const [serviceReqChartSeries, setServiceChartSeries] = React.useState()
   const [serviceReqChartLabels, setServiceChartLabels] = React.useState()
   const [serviceReqChartColors, setServiceReqChartColors] = React.useState()
 
   const [pmChartSeries, setPmChartSeries] = React.useState([1, 2])
-  const [pmChartLabels, setPmChartLabels] = React.useState(['COMPLETED', 'ACCEPTED'])
-  const [pmChartColors, setPmChartColors] = React.useState(['#50D2C2', '#8C88FF'])
+  const [pmChartLabels, setPmChartLabels] = React.useState(['ACCEPTED', 'OPEN'])
+  const [pmChartColors, setPmChartColors] = React.useState(['#8C88FF', '#00B9FF'])
 
-  const [paymentChartSeries, setPaymentChartSeries] = React.useState([1, 2])
-  const [paymentChartLabels, setPaymentChartLabels] = React.useState(['COMPLETED', 'ACCEPTED'])
-  const [paymentChartColors, setPaymentChartColors] = React.useState(['#50D2C2', '#8C88FF'])
+  const [paymentChartSeries, setPaymentChartSeries] = React.useState([3, 2, 3])
+  const [paymentChartLabels, setPaymentChartLabels] = React.useState(['NEW', 'ASSIGNED', 'OVERDUE'])
+  const [paymentChartColors, setPaymentChartColors] = React.useState(['#00B9FF', '#D667CD','#FF3366'])
 
   const [salesVisitChartSeries, setSalesVisitChartSeries] = React.useState([1, 2])
-  const [salesVisitChartLabels, setSalesVisitChartLabels] = React.useState(['COMPLETED', 'ACCEPTED'])
-  const [salesVisitChartColors, setSalesVisitChartColors] = React.useState(['#50D2C2', '#8C88FF'])
+  const [salesVisitChartLabels, setSalesVisitChartLabels] = React.useState(['PENDING', 'INPROGRESS'])
+  const [salesVisitChartColors, setSalesVisitChartColors] = React.useState(['#FCAB53', '#50D2C2'])
 
   const [data, setData] = useState([])
 
@@ -416,7 +410,7 @@ export default function Overview() {
         {!loading ?
           <>
 
-            <CCol xs="4" sm="3">
+            <CCol>
               <CCard >
                 <CCardHeader>
 
@@ -440,8 +434,8 @@ export default function Overview() {
               </CCard>
             </CCol>
 
-            <CCol xs="4" sm="3">
-              <CCard>
+            <CCol>
+            <CCard >
                 <CCardHeader>
 
                   <CRow>
@@ -455,17 +449,17 @@ export default function Overview() {
 
                   </CRow>
                 </CCardHeader>
-
-                {/* <Doughnut data={salesVisitChartData} /> */}
                 <CRow>
                   <CCol>
                     <SalesvisitChart series={salesVisitChartSeries} labels={salesVisitChartLabels} colors={salesVisitChartColors} />
+                    
                   </CCol>
                 </CRow>
               </CCard>
             </CCol>
-            <CCol xs="4" sm="3">
-              <CCard>
+
+            <CCol>
+            <CCard >
                 <CCardHeader>
 
                   <CRow>
@@ -479,17 +473,13 @@ export default function Overview() {
 
                   </CRow>
                 </CCardHeader>
-
-                <CCol>
                   <PaymentChart series={paymentChartSeries} labels={paymentChartLabels} colors={paymentChartColors} />
-                </CCol>
-
               </CCard>
             </CCol>
-            <CCol xs="4" sm="3">
-              <CCard>
-                <CCardHeader>
 
+            <CCol xs="4" sm="3">
+            <CCard>
+                <CCardHeader>
                   <CRow>
                     <CCol sm="3">
                       <CIcon name="cib-semaphoreci" style={{ color: 'gray' }} />
@@ -500,9 +490,7 @@ export default function Overview() {
 
                   </CRow>
                 </CCardHeader>
-                <CCol>
                   <PmChart series={pmChartSeries} labels={pmChartLabels} colors={pmChartColors} />
-                </CCol>
               </CCard>
             </CCol>
           </>

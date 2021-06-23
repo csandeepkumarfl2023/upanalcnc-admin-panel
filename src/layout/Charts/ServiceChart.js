@@ -10,9 +10,11 @@ class ServiceChart extends React.Component {
       series: this.props.series,
       options: {
         labels: this.props.labels,
+        legend: {
+          show: false
+        },
         chart: {
-          type: 'donut',
-          height: '100'
+          type: 'donut'
         },
         colors:this.props.colors,
       },
@@ -29,7 +31,7 @@ class ServiceChart extends React.Component {
 
       <div id="ServiceChart">
         {this.state.series ? 
-        <ReactApexChart options={this.state.options} series={this.state.series} type="donut" height="150" />
+        <ReactApexChart options={this.state.options} series={this.state.series} type="donut"/>
         : <p style={{textAlign: 'center'}} className="p-5">No data available</p> }
       </div>
     );
