@@ -1,83 +1,42 @@
-import React, { useEffect } from 'react';
-import * as d3 from 'd3';
+import React, { Component } from "react";
+import ReactApexChart from "react-apexcharts";
 
-function SalesvisitChart(props) {
-  const {
-    data,
-    outerRadius,
-    innerRadius,
-  } = props;
 
-  const margin = {
-    top: 50, right: 50, bottom: 50, left: 50,
-  };
+class SalesvisitChart extends React.Component {
+  constructor(props) {
+    super(props);
 
-  const width = 2 * outerRadius + margin.left + margin.right;
-  const height = 2 * outerRadius + margin.top + margin.bottom;
+    this.state = {
+      series: this.props.series,
+      
+      options: {
+        labels: this.props.labels,
+        colors:this.props.colors,
+        chart: {
+          type: 'donut',
+          height: 400
+        }
+      },
 
-  const colorScale = d3     
-    .scaleSequential()      
-    .interpolator(d3.interpolateCool)      
-    .domain([0, data.length]);
 
-  useEffect(() => {
-      console.log('d3', d3)
-    drawChart();
-  }, [data]);
+    };
+  }
 
-  function drawChart() {
-    // Remove the old svg
-    d3.select('#salesvisitchart-container')
-      .select('svg')
-      .remove();
 
-    // Create new svg
-    const svg = d3
-      .select('#salesvisitchart-container')
-      .append('svg')
-      .attr('width', width)
-      .attr('height', height)
-      .append('g')
-      .attr('transform', `translate(${width / 2}, ${height / 2})`);
 
-    const arcGenerator = d3
-      .arc()
-      .innerRadius(innerRadius)
-      .outerRadius(outerRadius);
+  render() {
+    return (
 
-    const pieGenerator = d3
-      .pie()
-      .padAngle(0)
-      .value((d) => d.value);
 
-    const arc = svg
-      .selectAll()
-      .data(pieGenerator(data))
-      .enter();
-
-    // Append arcs
-    arc
-      .append('path')
-      .attr('d', arcGenerator)
-      .style('fill', (_, i) => colorScale(i))
-      .style('stroke', '#ffffff')
-      .style('stroke-width', 0);
-
-    // Append text labels
-    arc
-      .append('text')
-      .attr('text-anchor', 'middle')
-      .attr('alignment-baseline', 'middle')
-      .text((d) => d.data.label)
-      // .style('fill', (_, i) => colorScale(data.length - i))
-      .style('fill', 'black')
-      .attr('transform', (d) => {
-        const [x, y] = arcGenerator.centroid(d);
-        return `translate(${x}, ${y})`;
-      });
-  }    
-
-  return <div id="salesvisitchart-container" />;
+      <div id="SalesvisitChart">
+        {this.state.series ? 
+        <ReactApexChart options={this.state.options} series={this.state.series} type="donut" height="150" />
+        : <p style={{textAlign: 'center'}} className="p-5">No data available</p> }
+      </div>
+    );
+  }
 }
 
+// const domContainer = document.querySelector('#app');
+// ReactDOM.render(React.createElement(ApexChart), domContainer);
 export default SalesvisitChart;
