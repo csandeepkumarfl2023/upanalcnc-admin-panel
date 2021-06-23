@@ -134,7 +134,7 @@ export default function EditMachine(props) {
         <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
        {alert}
       </CAlert>
-        <CCard>
+        <CCard className="mt-2">
             <CCardHeader>
                 <CRow>
                     <CCol xs="6" md="11">
@@ -263,7 +263,7 @@ export default function EditMachine(props) {
                                 </CRow>
                                 : null}
 
-            <CRow style={{ justifyContent: 'flex-end' }}>
+            <CRow style={{ justifyContent: 'center' }}>
                 <CCardFooter style={{ width: '25%' }}>
 
                     <CRow>

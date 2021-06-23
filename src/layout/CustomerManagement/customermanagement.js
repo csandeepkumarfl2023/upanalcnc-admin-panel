@@ -40,7 +40,7 @@ export default function CustomerManagement(props) {
         {props.location.state} Successfully!
       </CAlert>
        <CCol xs="6" md="12" className="mb-4">
-        <CCard>
+        <CCard  className="mt-2">
           <CCardBody>   
             <CTabs activeTab="customers">
               <CNav variant="tabs">
