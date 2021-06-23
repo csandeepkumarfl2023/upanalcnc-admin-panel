@@ -198,7 +198,7 @@ export default function ServiceRequest(props) {
       <CRow>
         <CCol xs="12" lg="12">
           {!loading ?
-            <CCard>
+            <CCard  className="mt-2">
               <CCardBody>
                 <CRow className="mb-2">
                   <CCol xs="10" style={{ display: 'flex', alignItems: 'center' }}>

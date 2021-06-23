@@ -191,8 +191,9 @@ export default function CreateServiceRequest() {
    <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
         Error occured Please try again!
       </CAlert>
-      <CCard>
+      <CCard  className="mt-2">
         <CCardSubtitle className="pl-3 mt-3" style={{fontWeight: 'bold', fontSize: '1.1rem' }}>Create Service Request</CCardSubtitle>
+        <hr />
         <CCardBody>
           <div className="pt-3 pl-3">
             <CRow>
@@ -258,7 +259,7 @@ export default function CreateServiceRequest() {
           </div>
 
           <CRow>
-            <CCardSubtitle className="pl-3 pt-5" style={{fontSize: '1rem' }}>Machine Details</CCardSubtitle>
+            <CCardSubtitle className="pl-3 pt-5" style={{fontSize: '1rem', fontWeight: 'bold' }}>Machine Details</CCardSubtitle>
           </CRow>
           <hr />
 
@@ -330,7 +331,7 @@ export default function CreateServiceRequest() {
           </div>
 
           <CRow>
-            <CCardSubtitle className="pl-3 pt-5" style={{fontSize: '1rem' }}>Issue Details</CCardSubtitle>
+            <CCardSubtitle className="pl-3 pt-5" style={{fontSize: '1rem', fontWeight: 'bold' }}>Issue Details</CCardSubtitle>
           </CRow>
           <hr />
 
@@ -436,7 +437,7 @@ export default function CreateServiceRequest() {
           </CRow>
           </div>
 
-          <CRow style={{ justifyContent: 'flex-end' }}>
+          <CRow style={{ justifyContent: 'center' }}>
             <CCardFooter style={{ width: '25%' }}>
 
               <CRow>
