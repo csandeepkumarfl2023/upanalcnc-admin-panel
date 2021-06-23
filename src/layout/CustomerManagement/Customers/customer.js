@@ -123,7 +123,7 @@ export default function Customer(props) {
   }, [])
 
   return (
-    <div style={{position: 'relative'}}>
+    <div style={{position: 'relative'}} >
       <div style={{position: 'absolute', top: '45%', left: '50%'}}>
       <div className="sweet-loading">
       <ClipLoader  loading={loading}  size={60} color='#2f4f4f'/>
@@ -136,7 +136,7 @@ export default function Customer(props) {
       <CAlert color="danger" show={deleteAlert} closeButton onClick={() => setDeleteAlert(false)} dismissible>
         Deleted Successfully!
       </CAlert>
-      <CRow>
+      <CRow  >
         <CCol xs="12" lg="12">
           {/* {!loading ? */}
           <CCardBody>

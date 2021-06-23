@@ -66,78 +66,54 @@ export default function CreateCustomer(props) {
                             <div className="pt-3 pl-3">
                                 <CRow className="mb-2">
                                     <CCol xs="12" sm="12" lg="6">
-                                        <CRow>
-                                            <b>Customer Name:</b>
-                                            <CCol>
-                                                <CFormGroup>
-                                                    <CInput type="text"
-                                                        style={{ width: '85%' }}
-                                                        id="customerName" name="customerName" placeholder="Customer Name" onChange={handleChange} />
-                                                </CFormGroup>
-                                            </CCol>
-                                        </CRow>
+                                    <b>Customer Name:</b>
+                                    <CFormGroup>
+                                        <CInput type="text"
+                                            style={{ width: '85%' }}
+                                            id="customerName" name="customerName" placeholder="Customer Name" onChange={handleChange} />
+                                    </CFormGroup>
                                     </CCol>
 
                                     <CCol xs="12" sm="12" lg="6">
-                                        <CRow>
-                                            <b>Contact Person:</b>
-                                            <CCol>
-                                                <CFormGroup>
-                                                    <CInput type="text"
-                                                        style={{ width: '85%' }} id="contact_person" name="contact_person" placeholder="Contact Person" onChange={handleChange} />
-                                                </CFormGroup>
-                                            </CCol>
-                                        </CRow>
+                                        <b>Contact Person:</b>
+                                        <CFormGroup>
+                                            <CInput type="text"
+                                                style={{ width: '85%' }} id="contact_person" name="contact_person" placeholder="Contact Person" onChange={handleChange} />
+                                        </CFormGroup>
                                     </CCol>
                                 </CRow>
 
                                 <CRow className="pt-3 pb-2">
                                     <CCol xs="12" sm="12" lg="6">
-                                        <CRow>
-                                            <b>Mobile No:</b>
-                                            <CCol>
+                                    <b>Mobile No:</b>
                                                 <CFormGroup>
                                                     <CInput type="text"
                                                         style={{ width: '85%' }} id="phone_number" name="phone_number" placeholder="Mobile No" onChange={handleChange} />
                                                 </CFormGroup>
-                                            </CCol>
-                                        </CRow>
                                     </CCol>
                                     <CCol xs="12" sm="12" lg="6">
-                                        <CRow>
-                                            <b>Alternate No:</b>
-                                            <CCol>
+                                    <b>Alternate No:</b>
                                                 <CFormGroup>
                                                     <CInput type="text"
                                                         style={{ width: '85%' }} id="alternate_phone_number" name="alternate_phone_number" placeholder="Alternate No" onChange={handleChange} />
                                                 </CFormGroup>
-                                            </CCol>
-                                        </CRow>
                                     </CCol>
                                 </CRow>
 
                                 <CRow className="pt-3 pb-2">
 
                                     <CCol xs="12" sm="12" lg="6">
-                                        <CRow>
-                                            <b>Address:</b>
-                                            <CCol>
-                                                <CFormGroup>
+                                    <b>Address:</b>
+                                            <CFormGroup>
                                                     <CTextarea style={{ width: '85%' }} type="text" id="address" name="address" placeholder="Address" onChange={handleChange} />
                                                 </CFormGroup>
-                                            </CCol>
-                                        </CRow>
                                     </CCol>
 
                                     <CCol xs="12" sm="12" lg="6">
-                                        <CRow>
-                                            <b>City:</b>
-                                            <CCol>
+                                    <b>City:</b>
                                                 <CFormGroup>
                                                     <CInput style={{ width: '85%' }} type="text" id="city" name="city" placeholder="City" onChange={handleChange} />
                                                 </CFormGroup>
-                                            </CCol>
-                                        </CRow>
                                     </CCol>
                                 </CRow>
 
@@ -145,25 +121,17 @@ export default function CreateCustomer(props) {
                                 <CRow className="pt-3 pb-2">
 
                                     <CCol xs="12" sm="12" lg="6">
-                                        <CRow>
-                                            <b>Zip:</b>
-                                            <CCol>
-                                                <CFormGroup>
+                                    <b>Zip:</b>
+                                            <CFormGroup>
                                                     <CInput style={{ width: '85%' }} type="text" id="pincode" name="pincode" placeholder="Zip" onChange={handleChange} />
                                                 </CFormGroup>
-                                            </CCol>
-                                        </CRow>
                                     </CCol>
 
                                     <CCol xs="12" sm="12" lg="6">
-                                        <CRow>
-                                            <b>State:</b>
-                                            <CCol>
+                                    <b>State:</b>
                                                 <CFormGroup>
                                                     <CInput style={{ width: '85%' }} type="text" id="state" name="state" placeholder="State" onChange={handleChange} />
                                                 </CFormGroup>
-                                            </CCol>
-                                        </CRow>
                                     </CCol>
                                 </CRow>
 
@@ -171,39 +139,27 @@ export default function CreateCustomer(props) {
                                 <CRow className="pt-3 pb-2">
 
                                     <CCol xs="12" sm="12" lg="6">
-                                        <CRow>
-                                            <b>Country:</b>
-                                            <CCol>
+                                    <b>Country:</b>
                                                 <CFormGroup>
                                                     <CInput style={{ width: '85%' }} type="text" id="country" name="country" placeholder="Country" onChange={handleChange} />
                                                 </CFormGroup>
-                                            </CCol>
-                                        </CRow>
                                     </CCol>
 
                                     <CCol xs="12" sm="12" lg="6">
-                                        <CRow>
-                                            <b>Email:</b>
-                                            <CCol>
+                                    <b>Email:</b>
                                             <CFormGroup>
                                                 <CInput style={{ width: '85%' }} type="text" id="email_id" name="email_id" placeholder="Email" onChange={handleChange} />
                                             </CFormGroup>
-                                            </CCol>
-                                        </CRow>
                                     </CCol>
                                 </CRow>
 
                                 <CRow className="pt-3 pb-2">
 
                                     <CCol xs="12" sm="12" lg="6">
-                                        <CRow>
-                                            <b>Gst Number:</b>
-                                            <CCol>
+                                    <b>Gst Number:</b>
                                                 <CFormGroup>
                                                     <CInput style={{ width: '85%' }} type="text" id="gst_number" name="gst_number" placeholder="Gst Number" onChange={handleChange} />
                                                 </CFormGroup>
-                                            </CCol>
-                                        </CRow>
                                     </CCol>
                                 </CRow>
                             </div>
