@@ -68,6 +68,7 @@ export default function EditServiceRequest(props) {
    const [item, setItem] = useState(props.location.state)
    const [edit, setEdit] = React.useState(false)
    const [executive, setExecutive] = useState("")
+   const [issueDetails, setIssueDetails] = useState()
    const [date, setDate] = useState("")
    const [time, setTime] = useState("")
    const [employeesArr, setEmployeesArr] = useState()
@@ -91,6 +92,7 @@ export default function EditServiceRequest(props) {
       let currentData = {}
       currentData.employee_id = executive
       currentData.request_status = 'ASSIGNED'
+      currentData.request_detail = issueDetails
       currentData.workstep_detail = {
          site_visit_date: moment(new Date(date + ' ' + time)).format('YYYY-MM-DD HH:mm:ss')
       }
@@ -138,6 +140,7 @@ export default function EditServiceRequest(props) {
                   <CIcon name="cil-pen" size="lg" style={{ cursor: 'pointer' }} onClick={() => {
                      setEdit(!edit)
                      setExecutive(serviceReqDetails?.service_request_tasks[0]?.employee?.employee_id)
+                     setIssueDetails(serviceReqDetails ? serviceReqDetails.request_detail : null)
                      setDate(serviceReqDetails && serviceReqDetails.service_request_tasks[0] ? moment(serviceReqDetails.service_request_tasks[0].site_visit_date).format('YYYY-MM-DD') : '')
                      setTime(serviceReqDetails && serviceReqDetails.service_request_tasks[0] ? moment(serviceReqDetails.service_request_tasks[0].site_visit_date).format('HH:mm') : '')
                   }} />
@@ -264,7 +267,12 @@ export default function EditServiceRequest(props) {
                               Issue Details:
                            </div>
                            <span className="ml-2">
-                              {serviceReqDetails ? serviceReqDetails.request_detail : null}
+                           {edit ?
+                                 <CFormGroup >
+                                    <CInput type="text"  name="issueDetails" placeholder="issueDetails" value={issueDetails} onChange={(e) => { setIssueDetails(e.target.value) }} />
+                                 </CFormGroup>
+                                 :
+                              serviceReqDetails ? serviceReqDetails.request_detail : null}
                            </span>
                         </CRow>
                      </CCol>
