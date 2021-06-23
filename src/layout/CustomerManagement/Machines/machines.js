@@ -125,7 +125,7 @@ export default function Machines() {
               items={data}
               fields={fields}
               hover
-              striped
+              
               bordered
               size="sm"
               conditionalRowStyles={conditionalRowStyles}

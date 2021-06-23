@@ -164,7 +164,7 @@ export default function Payments() {
                   items={data}
                   fields={fields}
                   hover
-                  striped
+                  
                   bordered
                   size="sm"
                   conditionalRowStyles={conditionalRowStyles}

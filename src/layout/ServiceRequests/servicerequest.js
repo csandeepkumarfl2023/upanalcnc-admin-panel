@@ -214,7 +214,7 @@ export default function ServiceRequest(props) {
                   items={data}
                   fields={fields}
                   hover
-                  striped
+                  
                   bordered
                   size="sm"
                   conditionalRowStyles={conditionalRowStyles}
