@@ -57,80 +57,6 @@ const employeeService = new EmployeeService()
 const pmservice = new PmService()
 
 
-
-// const serviceReqChartData = {
-//   // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-//   datasets: [
-//     {
-//       label: '# of Votes',
-//       data: [12, 19, 3, 5, 2],
-//       backgroundColor: [
-//         '#50D2C2',
-//         '#FF3366',
-//         '#FCAB53',
-//         '#D667CD',
-//         '#8C88FF'
-//       ],
-//       borderWidth: 1,
-//     },
-//   ],
-  
-// };
-
-// const salesVisitChartData = {
-//   // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-//   datasets: [
-//     {
-//       label: '# of Votes',
-//       data: [12, 19, 3, 5, 2],
-//       backgroundColor: [
-//         '#50D2C2',
-//         '#FF3366',
-//         '#FCAB53',
-//         '#D667CD',
-//         '#8C88FF'
-//       ],
-//       borderWidth: 1,
-//     },
-//   ],
-// };
-
-// const paymentsChartData = {
-//   // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-//   datasets: [
-//     {
-//       label: '# of Votes',
-//       data: [12, 19, 3, 5, 2],
-//       backgroundColor: [
-//         '#50D2C2',
-//         '#FF3366',
-//         '#FCAB53',
-//         '#D667CD',
-//         '#8C88FF'
-//       ],
-//       borderWidth: 1,
-//     },
-//   ],
-// };
-
-// const pmChartData = {
-//   // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-//   datasets: [
-//     {
-//       label: '# of Votes',
-//       data: [12, 19, 3, 5, 2],
-//       backgroundColor: [
-//         '#50D2C2',
-//         '#FF3366',
-//         '#FCAB53',
-//         '#D667CD',
-//         '#8C88FF'
-//       ],
-//       borderWidth: 1,
-//     },
-//   ],
-// };
-
 export default function Overview() {
 
   const history = useHistory();
@@ -315,10 +241,10 @@ export default function Overview() {
     let mappedRes = []
     res.data.forEach(elem => mappedRes.push(...elem.service_requests))
     
-    for (let item of mappedRes) {
-      let reqDetail = await serviceRequestService.getServiceRequest(item.service_request_id)
-      item.service_request_tasks = reqDetail.data.service_request_tasks
-    }
+    // for (let item of mappedRes) {
+    //   let reqDetail = await serviceRequestService.getServiceRequest(item.service_request_id)
+    //   item.service_request_tasks = reqDetail.data.service_request_tasks
+    // }
     setServiceData(mappedRes.slice(0, 3))
   }
 
