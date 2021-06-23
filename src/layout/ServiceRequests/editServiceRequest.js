@@ -243,7 +243,7 @@ export default function EditServiceRequest(props) {
                                        size="sm"
                                        name="sheduleDate" placeholder="sheduleDate" value={date} onChange={(e) => { setDate(e.target.value) }} />
                                  </CFormGroup>
-                                 : serviceReqDetails && serviceReqDetails.service_request_tasks[0] ? moment(serviceReqDetails.service_request_tasks[0].site_visit_date).format('YYYY-MM-DD') : null}
+                                 : serviceReqDetails && serviceReqDetails.service_request_tasks[0] && serviceReqDetails.service_request_tasks[0].site_visit_date  ? moment(serviceReqDetails.service_request_tasks[0].site_visit_date).format('YYYY-MM-DD') : null}
                            </span> </CRow>
                      </CCol>
                      <CCol xs="12" sm="12" lg="4" >
@@ -254,7 +254,7 @@ export default function EditServiceRequest(props) {
                                  <CFormGroup >
                                     <CInput type="time" id="sheduleTime" size="sm" name="sheduleTime" placeholder="sheduleTime" value={time} onChange={(e) => { setTime(e.target.value) }} />
                                  </CFormGroup>
-                                 : serviceReqDetails && serviceReqDetails.service_request_tasks[0] ? moment(serviceReqDetails.service_request_tasks[0].site_visit_date).format('HH:mm') : null}
+                                 : serviceReqDetails && serviceReqDetails.service_request_tasks[0] && serviceReqDetails.service_request_tasks[0].site_visit_date? moment(serviceReqDetails.service_request_tasks[0].site_visit_date).format('HH:mm') : null}
                            </span>
                         </CRow>
                      </CCol>
