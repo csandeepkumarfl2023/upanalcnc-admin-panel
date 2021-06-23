@@ -11,8 +11,25 @@ async postWorksteps(data) {
     let response = await Axios.post(`${constants.apiEndPoint}serviceRequestTask/workstep`, data)
      return response
 }
+async createEmployee(data) {
+    try{
+   let response = await Axios.post(`${constants.apiEndPoint}employee`, data)
+   return response
+    } catch (err) {
+        console.log(err)
+    }
+};
 async getEmployees() {
     let response = await Axios.get(`${constants.apiEndPoint}employee`)
+    return response
+}
+async getEmployee(id) {
+    let response = await Axios.get(`${constants.apiEndPoint}employee/${id}`)
+    return response
+}
+
+ async updateEmployee(data) {
+    let response = await Axios.put(`${constants.apiEndPoint}employee`, data)
     return response
 }
 }

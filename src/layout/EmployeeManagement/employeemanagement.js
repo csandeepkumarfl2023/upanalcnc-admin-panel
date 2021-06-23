@@ -23,10 +23,15 @@ import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 import EmployeeManagementsService from '../../services/employeeManagementService';
 import EmployeeService from '../../services/employeeService'
+import { useHistory } from "react-router-dom";
+
 const employeeService = new EmployeeService()
 
 const employeeManagementsservice = new EmployeeManagementsService()
 export default function EmployeeManagements() {
+
+  const history = useHistory();
+
   const [info, setInfo] = useState(false)
   const [data, setData] = useState([])
 
@@ -53,7 +58,16 @@ export default function EmployeeManagements() {
     margin-left: -5em;
   `;
 
+  const addMachineHandler = () => {
+    history.push('./createEmployee')
+  }
 
+  const editEmployeeHandler = (item) => {
+    history.push({
+      pathname: `/editEmployee/${item.employee_id}`,
+      state: item
+    });
+  }
   const submitHandler = async () => {
     let currentData = {}
     currentData.id = Math.round(Math.random() * 10000000)
@@ -163,7 +177,7 @@ export default function EmployeeManagements() {
                     </h5>
                   </CCol>
                   <CCol xs="2" style ={{width: '80px'}}>
-                    <CButton color="info" block onClick={addBtnHandler}>New</CButton>
+                    <CButton color="info" block onClick={addMachineHandler}>New</CButton>
                     
                   </CCol>
                 </CRow>
@@ -180,8 +194,13 @@ export default function EmployeeManagements() {
                   scopedSlots={{
                       'employee_id':
                       (item) => (
-                        <td>{item.employee_id}
-                        </td>
+                        <td>
+                        <CLink> <a onClick={() => {
+                          editEmployeeHandler(item)
+                        }
+                        }
+                        >{item.employee_id}</a></CLink>
+                      </td>
                       ),
                       'employee_name':
                       (item) => (
