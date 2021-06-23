@@ -95,6 +95,7 @@ export default function CreateServiceRequest() {
     currentData.employee_id = executive
     currentData.expected_resolution_date = moment(new Date(date + ' ' + time)).format('YYYY-MM-DD HH:mm:ss')
     currentData.site_visit_date = moment(new Date(date + ' ' + time)).format('YYYY-MM-DD HH:mm:ss')
+    currentData.service_request_type = serviceRequestType
 
     currentData.time = time
     currentData.request_detail = issueDetails
@@ -371,7 +372,7 @@ export default function CreateServiceRequest() {
                   <CSelect custom size="sm" name="name" id="name"  className="w-100">
                   <option value="undefined">Open this select</option>
                   <option value="AMC">AMC</option>
-                    <option value="Breakdown">Breakdown</option>
+                    <option value="BREAKDOWN">Breakdown</option>
                   </CSelect>
                 </CFormGroup>
               </CRow>

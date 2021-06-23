@@ -257,7 +257,7 @@ export default function EditServiceRequest(props) {
                      </CCol>
                   </CRow>
 
-                  <CRow className="pt-3 pb-2" >
+                  <CRow className="pt-4 pb-2" >
                      <CCol xs="12" sm="12" lg="4" >
                         <CRow>
                            <div style={{ fontWeight: 'bold' }}>
@@ -265,6 +265,17 @@ export default function EditServiceRequest(props) {
                            </div>
                            <span className="ml-2">
                               {serviceReqDetails ? serviceReqDetails.request_detail : null}
+                           </span>
+                        </CRow>
+                     </CCol>
+
+                     <CCol xs="12" sm="12" lg="4" >
+                        <CRow>
+                           <div style={{ fontWeight: 'bold' }}>
+                              Servive Request Type:
+                           </div>
+                           <span className="ml-2">
+                              {serviceReqDetails ? serviceReqDetails.service_request_type : null}
                            </span>
                         </CRow>
                      </CCol>
