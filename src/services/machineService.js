@@ -44,7 +44,7 @@ async getMachine(id) {
 }
 
 async generateQRCode(id){
-    let response = await Axios.get(`${constants.apiEndPoint}machine/generate/qr/${id}`)
+    let response = await Axios.get(`${constants.apiEndPoint}machine/generate/qr/encodeString/${id}`)
     return response
 }
 

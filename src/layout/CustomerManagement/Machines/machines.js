@@ -77,7 +77,7 @@ export default function Machines() {
   const getQrCode = async() => {
     let res = await machineService.generateQRCode(clickedMachine)
     console.log('res qrCode', res.data)
-    setQrValue(res.data)
+    setQrValue(atob(res.data.encode_string))
   }
 
 
@@ -233,7 +233,7 @@ export default function Machines() {
               </CModalHeader>
               <CModalBody style={{display: 'flex', justifyContent: 'center'}}>
                 {qrValue ?
-              <QRCode value={clickedMachine} size="150" />
+              <QRCode value={qrValue} size="150" />
               : null }
               </CModalBody>
               <CModalFooter>
