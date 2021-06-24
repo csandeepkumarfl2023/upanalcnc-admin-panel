@@ -136,6 +136,8 @@ export default function Overview() {
   const [employeesArr, setEmployeesArr] = useState()
 
   const [editAlert, setEditAlert] = useState(false)
+  const [errAlertText, setErrorAlertText] = useState()
+  const [errAlert, setErrAlert] = useState(false)
 
   const [deleteAlert, setDeleteAlert] = useState(false)
   const [updateId, setUpdateId] = useState()
@@ -333,7 +335,9 @@ export default function Overview() {
         setExecutiveInfo(false)
         setEditAlert(true)
       } catch (err) {
-        console.log(err)
+        setExecutiveInfo(false)
+        setErrorAlertText(err.message || 'Error occured Please try again!')
+        setErrAlert(true)
       }
     }
   }
@@ -383,11 +387,11 @@ export default function Overview() {
         Successfully Added!
       </CAlert>
       <CAlert color="success" show={editAlert} closeButton onClick={() => setEditAlert(false)} dismissible>
-        Updated Successfully!
+        Executive updated Successfully!
       </CAlert>
 
-      <CAlert color="danger" show={deleteAlert} closeButton onClick={() => setDeleteAlert(false)} dismissible>
-        Deleted Successfully!
+      <CAlert color="danger" show={errAlert} closeButton onClick={() => setErrAlert(false)} dismissible>
+        {errAlertText}
       </CAlert>
 
       <CRow style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', flexDirection: 'row' }}>

@@ -39,6 +39,7 @@ export default function EditEmployee(props) {
    const [rawPassword, setRawPassword] = useState("")
 
    const [alert, setAlert] = useState(false)
+   const [alertText, setAlertText] = useState(false)
 
    const cancelHandler = () => {
       setEdit(false)
@@ -70,10 +71,11 @@ export default function EditEmployee(props) {
          let res = await employeeSerice.updateEmployee(currentData)
          history.push({
             pathname: '/employeemanagement',
-            state: 'Employee updated'
+            state: 'Employee updated successfully!'
          })
       } catch (err) {
-         setAlert(err.message || 'Error occured Please try again!')
+         setAlertText(err.message || 'Error occured Please try again!')
+         setAlert(true)
       }
    }
 
@@ -88,7 +90,7 @@ export default function EditEmployee(props) {
    return (
       <>
         <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
-      {alert}
+      {alertText}
     </CAlert>
          <CCard>
             <CCardSubtitle className="pl-3 mt-3" style={{ fontSize: '1rem' }}><b>Employee:</b> {item ? item.employee_name : null}</CCardSubtitle>

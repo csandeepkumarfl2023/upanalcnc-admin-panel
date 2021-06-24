@@ -28,7 +28,7 @@ import { useHistory } from "react-router-dom";
 const employeeService = new EmployeeService()
 
 const employeeManagementsservice = new EmployeeManagementsService()
-export default function EmployeeManagements() {
+export default function EmployeeManagements(props) {
 
   const history = useHistory();
 
@@ -38,7 +38,8 @@ export default function EmployeeManagements() {
   const [description, setDescription] = useState("")
   const [type, setType] = useState("")
   const [name, setName] = useState("")
-  const [alert, setAlert] = useState(false)
+  const [successAlert, setSuccessAlert] = useState(false)
+  const [successAlertText, setSuccessAlertText] = useState(false)
   const [editModal, setEditModal] = useState(false)
   const [editAlert, setEditAlert] = useState(false)
 
@@ -69,6 +70,7 @@ export default function EmployeeManagements() {
     });
   }
   const submitHandler = async () => {
+    setLoading(true)
     let currentData = {}
     currentData.id = Math.round(Math.random() * 10000000)
     currentData.description = description
@@ -80,13 +82,10 @@ export default function EmployeeManagements() {
     setType('')
     getData()
     setInfo(!info)
-    setLoading(true)
-    setTimeout(function () {
-      setLoading(false)
-      setAlert(true)
-    }, 3000);
+    setLoading(false)
   }
   const editBtnHandler = async() => {
+    setLoading(true)
     let updatedData = {}
     updatedData.id = updateId
     updatedData.description = description
@@ -94,12 +93,8 @@ export default function EmployeeManagements() {
     updatedData.name = name
     let res = await employeeManagementsservice.putEmployeeManagements(updatedData, updateId)
     getData()
+    setLoading(false)
     setEditModal(false)
-    setLoading(true)
-    setTimeout(function () {
-      setLoading(false)
-      setEditAlert(true)
-    }, 3000);
   }
   const conditionalRowStyles = [
     {
@@ -135,6 +130,13 @@ export default function EmployeeManagements() {
     // console.log(allEmployeesRes);
   }
 
+  const showAlert = () => {
+    if(props.location.state === 'Employee added successfully!' || props.location.state === 'Employee updated successfully!')   { 
+    setSuccessAlertText(props.location.state)
+    setSuccessAlert(true)
+    }
+  }
+
   const addBtnHandler = async() => {
     setType("")
     setName("")
@@ -144,6 +146,7 @@ export default function EmployeeManagements() {
 
   React.useEffect(() => {
     getData()
+    showAlert()
     // setLoading(true)
     // setTimeout(function () {
     //   setLoading(false)
@@ -155,16 +158,11 @@ export default function EmployeeManagements() {
       <div className="sweet-loading">
         <ClipLoader loading={loading} css={override} size={50} color='#2f4f4f' />
       </div>
-      <CAlert color="success" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
-        Successfully Added!
-      </CAlert>
-      <CAlert color="success" show={editAlert} closeButton onClick={() => setEditAlert(false)} dismissible>
-        Updated Successfully!
-      </CAlert>
 
-      <CAlert color="danger" show={deleteAlert} closeButton onClick={() => setDeleteAlert(false)} dismissible>
-        Deleted Successfully!
+      <CAlert color="success" show={successAlert} closeButton onClick={() => setSuccessAlert(false)} dismissible>
+        {successAlertText}
       </CAlert>
+    
       <CRow>
         <CCol xs="12" lg="12">
           {!loading ?

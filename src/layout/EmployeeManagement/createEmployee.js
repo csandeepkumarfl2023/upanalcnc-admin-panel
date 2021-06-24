@@ -28,6 +28,7 @@ export default function CreateEmployee(props) {
     })
 
     const [alert, setAlert] = useState(false)
+    const [alertText, setAlertText] = useState(false)
 
 
 
@@ -38,10 +39,11 @@ export default function CreateEmployee(props) {
             let res = await employeeservice.createEmployee(value)
             history.push({
                 pathname: './employeemanagement',
-                state: 'Employee added'
+                state: 'Employee added successfully!'
             })
         } catch (err) {
-            setAlert(err.message || 'Error occured Please try again!')
+            setAlertText(err.message || 'Error occured Please try again!')
+            setAlert(true)
         }
     }
 
@@ -52,7 +54,7 @@ export default function CreateEmployee(props) {
     return (
         <div>
         <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
-       {alert}
+       {alertText}
       </CAlert>
             <Formik
                 initialValues={data}
