@@ -15,6 +15,7 @@ import {
 import { Formik } from "formik"
 import EmployeeService from '../../services/employeeService';
 import { useHistory } from "react-router-dom";
+import CIcon from '@coreui/icons-react'
 
 const employeeservice = new EmployeeService()
 
@@ -69,13 +70,13 @@ export default function CreateEmployee(props) {
                                 <CRow className="pt-3 pb-2">
                                 
                                     <CCol xs="12" sm="12" lg="6">
-                                    <b>Employee Id:</b>
+                                    <CIcon name="cib-adobe-indesign" className='m-1'/> <b>Employee Id:</b>
                                             <CFormGroup>
                                                     <CInput style={{ width: '85%' }} type="text" id="employee_id" name="employee_id" placeholder="employee_id" onChange={handleChange} />
                                                 </CFormGroup>
                                     </CCol>
                                     <CCol xs="12" sm="12" lg="6">
-                                    <b>Employee Name:</b>
+                                    <CIcon name="cil-user" className='m-1'/> <b>Employee Name:</b>
                                                 <CFormGroup>
                                                     <CInput type="text"
                                                         style={{ width: '85%' }} id="employee_name" name="employee_name" placeholder="employee_name" onChange={handleChange} />
@@ -86,7 +87,7 @@ export default function CreateEmployee(props) {
                                 <CRow className="pt-3 pb-2">
 
                                     <CCol xs="12" sm="12" lg="6">
-                                    <b>Address:</b>
+                                    <CIcon name="cil-location-pin" className='m-1'/><b>Address:</b>
                                             <CFormGroup>
                                                     <CTextarea style={{ width: '85%' }} type="text" id="address" name="address" placeholder="Address" onChange={handleChange} />
                                                 </CFormGroup>
@@ -114,7 +115,7 @@ export default function CreateEmployee(props) {
                                     </CCol>
 
                                     <CCol xs="12" sm="12" lg="6">
-                                    <b>Email:</b>
+                                    <CIcon name="cil-envelope-closed" className='m-1'/> <b>Email:</b>
                                             <CFormGroup>
                                                 <CInput style={{ width: '85%' }} type="text" id="email_id" name="email_id" placeholder="Email" onChange={handleChange} />
                                             </CFormGroup>
@@ -123,14 +124,14 @@ export default function CreateEmployee(props) {
                                 <CRow className="pt-3 pb-2">
 
                         <CCol xs="12" sm="12" lg="6">
-                            <b>Phone Number:</b>
+                        <CIcon name="cil-mobile" className='m-1'/> <b>Phone Number:</b>
                                         <CFormGroup>
                                             <CInput type="text"
                                                 style={{ width: '85%' }} id="phone_number" name="phone_number" placeholder="phone_number" onChange={handleChange} />
                                         </CFormGroup>
                             </CCol>
                             <CCol xs="12" sm="12" lg="6">
-                            <b>Raw Password:</b>
+                            <CIcon name="cil-pin" className='m-1'/><b>Security Pin:</b>
                                         <CFormGroup>
                                             <CInput type="text"
                                                 style={{ width: '85%' }} id="security_pin" name="security_pin" placeholder="security_pin" onChange={handleChange} />

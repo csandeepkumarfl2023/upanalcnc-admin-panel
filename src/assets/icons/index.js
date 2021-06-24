@@ -34,7 +34,8 @@ import {
   cibStripe,
   cibPaypal,
   cibGooglePay,
-  cibCcAmex
+  cibCcAmex,
+  cibAdobeIndesign
 } from '@coreui/icons'
 import {
   cifUs,
@@ -140,7 +141,25 @@ import {
   cilUserUnfollow,
   cilX,
   cilXCircle,
-  cilWarning
+  cilWarning,
+  cilFlagAlt,
+  cilChevronCircleRightAlt,
+  cilAsteriskCircle,
+  cilClock,
+  cilCog,
+  cilContact,
+  cilScreenSmartphone,
+  cilPin,
+  cilAudio,
+  cilBank,
+  cilPenNib,
+  cilArrowThickRight,
+  cilAperture,
+  cilCameraControl,
+  cilBadge,
+  cilTv,
+  cilMobile,
+  cilCamera
 } from '@coreui/icons'
 
 export const icons = Object.assign({}, {
@@ -243,7 +262,25 @@ export const icons = Object.assign({}, {
   cilUserUnfollow,
   cilX,
   cilXCircle,
-  cilWarning
+  cilWarning,
+  cilFlagAlt,
+  cilChevronCircleRightAlt,
+  cilAsteriskCircle,
+  cilClock,
+  cilCog,
+  cilContact,
+  cilScreenSmartphone,
+  cilPin,
+  cilAudio,
+  cilBank,
+  cilPenNib,
+  cilArrowThickRight,
+  cilAperture,
+  cilCameraControl,
+  cilBadge,
+  cilTv,
+  cilMobile,
+  cilCamera
 }, {
   cifUs,
   cifBr,
@@ -282,5 +319,6 @@ export const icons = Object.assign({}, {
   cibPaypal,
   cibCcAmazonPay,
   cibGooglePay,
-  cibCcAmex
+  cibCcAmex,
+  cibAdobeIndesign
 })

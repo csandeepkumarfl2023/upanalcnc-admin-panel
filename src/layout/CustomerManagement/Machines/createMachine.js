@@ -18,6 +18,7 @@ import MachineService from '../../../services/machineService';
 import CustomerService from '../../../services/customerService';
 import CommonService from '../../../services/commonService'
 import { useHistory } from "react-router-dom";
+import CIcon from '@coreui/icons-react'
 
 const customerservice = new CustomerService()
 const machineservice = new MachineService()
@@ -109,7 +110,7 @@ export default function CreateMachine() {
                                 <CRow className="mb-2">
                                     <CCol xs="12" sm="12" lg="6">
                                         <CRow>
-                                            <b>Customer code:</b>
+                                        <CIcon name="cil-check-circle" className='m-1'/><b>Customer code:</b>
                                             <CCol>
                                                 <CFormGroup>
                                                     <CSelect style={{ width: '85%' }} custom size="md" style={{ width: '85%' }} name="customerCode" id="customerCode"
@@ -128,7 +129,7 @@ export default function CreateMachine() {
 
                                     <CCol xs="12" sm="12" lg="6">
                                         <CRow>
-                                            <b>Machine Type:</b>
+                                        <CIcon name="cil-cog" className='m-1'/>  <b>Machine Type:</b>
                                             <CCol>
                                                 <CFormGroup>
                                                     <CSelect style={{ width: '85%' }} custom size="md" name="machine_type" id="machine_type"
@@ -169,7 +170,7 @@ export default function CreateMachine() {
                                 <CRow className="pt-3 pb-2">
                                     <CCol xs="12" sm="12" lg="6">
                                         <CRow>
-                                        <b>Make:</b>
+                                        <CIcon name="cil-arrow-thick-right" className='m-1'/>  <b>Make:</b>
                                         <CCol>
                                         <CFormGroup>
                                             <CInput type="text" id="machine_make" name="machine_make" 
@@ -182,7 +183,7 @@ export default function CreateMachine() {
                                     </CCol>
                                     <CCol xs="12" sm="12" lg="6">
                                         <CRow>
-                                        <b>Model:</b>
+                                        <CIcon name="cil-pen-nib" className='m-1'/><b>Model:</b>
                                         <CCol>
                                         <CFormGroup>
                                             <CInput type="text" id="machine_model" name="machine_model" 
@@ -198,7 +199,7 @@ export default function CreateMachine() {
                                 <CRow className="pt-3 pb-2">
                                     <CCol xs="12" sm="12" lg="6">
                                         <CRow>
-                                        <b>MachineSerialNo:</b>
+                                        <CIcon name="cil-aperture" className='m-1'/>  <b>MachineSerialNo:</b>
                                         <CCol>
                                         <CFormGroup>
                                             <CInput style={{width: '85%'}}
@@ -209,7 +210,7 @@ export default function CreateMachine() {
                                     </CCol>
                                     <CCol xs="12" sm="12" lg="6">
                                         <CRow>
-                                        <b>Machine Age:</b>
+                                        <CIcon name="cil-tv" className='m-1'/><b>Machine Age:</b>
                                         <CCol>
                                         <CFormGroup>
                                             <CInput style={{width: '85%'}}
@@ -224,7 +225,7 @@ export default function CreateMachine() {
                                <CRow className="pt-3 pb-2">
                                 <CCol xs="12" sm="12" lg="6">
                                     <CRow>
-                                        <b>Machine Controller:</b>
+                                    <CIcon name="cil-camera-control" className='m-1'/>  <b>Machine Controller:</b>
                                         <CCol>
                                         <CFormGroup>
                                             <CSelect style={{ width: '85%' }} custom size="md" name="machine_controller" id="machine_controller" value={values.machine_controller}
@@ -245,7 +246,7 @@ export default function CreateMachine() {
 
                                     <CCol xs="12" sm="12" lg="6">
                                         <CRow>
-                                        <b>Controller Model:</b>
+                                        <CIcon name="cil-badge" className='m-1'/> <b>Controller Model:</b>
                                         <CCol>
                                         <CFormGroup>
                                             <CInput type="text" 

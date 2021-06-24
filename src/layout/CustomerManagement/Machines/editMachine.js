@@ -20,6 +20,7 @@ import { useHistory } from "react-router-dom";
 import MachineService from '../../../services/machineService'
 import CustomerService from '../../../services/customerService';
 import CommonService from '../../../services/commonService'
+import CIcon from '@coreui/icons-react'
 
 const machineService = new MachineService()
 const customerservice = new CustomerService()
@@ -147,7 +148,7 @@ export default function EditMachine(props) {
             <CCardBody>
                 <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
                     <CCol xs="12" md="6">
-                        <b>Customer Code:</b>
+                    <CIcon name="cil-check-circle" className='m-1'/> <b>Customer Code:</b>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             {/* <CInput type="text" id="customerCode" className="w-52"
                                 name="customerCode" placeholder="customerCode" value={customerCode} onChange={(e) => { setCustomerCode(e.target.value) }} /> */}
@@ -163,7 +164,7 @@ export default function EditMachine(props) {
                         </CFormGroup>
                     </CCol>
                     <CCol xs="12" lg="6">
-                        <b>Machine Type:</b>
+                    <CIcon name="cil-cog" className='m-1'/>  <b>Machine Type:</b>
                         <CFormGroup style={{ marginTop: '10px' }} >
                                  <CSelect custom size="md" name="machine_type" id="machine_type"
                                             value={machineType}
@@ -194,7 +195,7 @@ export default function EditMachine(props) {
 
 
                     <CCol xs="12" lg="4">
-                        <b>Make:</b>
+                    <CIcon name="cil-arrow-thick-right" className='m-1'/>  <b>Make:</b>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="make" className="w-52"
                                 name="make" placeholder="make" value={make} onChange={(e) => { setMake(e.target.value) }} />
@@ -203,7 +204,7 @@ export default function EditMachine(props) {
                     </CCol>
 
                     <CCol xs="12" lg="4">
-                        <b>Model:</b>
+                    <CIcon name="cil-pen-nib" className='m-1'/> <b>Model:</b>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="model" className="w-52"
                                 name="model" placeholder="model" value={model} onChange={(e) => { setModel(e.target.value) }} />
@@ -211,7 +212,7 @@ export default function EditMachine(props) {
                     </CCol>
 
                     <CCol xs="12" lg="4">
-                        <b>Machine SerialNo:</b>
+                    <CIcon name="cil-aperture" className='m-1'/>   <b>Machine SerialNo:</b>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="machineSerialNo" className="w-52"
                                 name="machineSerialNo" placeholder="machineSerialNo" value={machineSerialNo} onChange={(e) => { setMachineSerialNo(e.target.value) }} />
@@ -221,7 +222,7 @@ export default function EditMachine(props) {
 
                 <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
                     <CCol xs="12" lg="4">
-                        <b>MachineAge:</b>
+                    <CIcon name="cil-tv" className='m-1'/> <b>MachineAge:</b>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="machineAge" className="w-52"
                                 name="machineAge" placeholder="machineAge" value={machineAge} onChange={(e) => { setMachineAge(e.target.value) }} />
@@ -229,7 +230,7 @@ export default function EditMachine(props) {
                     </CCol>
                     
                     <CCol xs="12" lg="4">
-                        <b>Controller:</b>
+                    <CIcon name="cil-camera-control" className='m-1'/> <b>Controller:</b>
                         <CFormGroup style={{ marginTop: '10px' }}>
                                  <CSelect custom size="md" name="machine_controller" id="machine_controller" value={controller}
                                             onChange={(e) => {
@@ -246,7 +247,7 @@ export default function EditMachine(props) {
                     </CCol>
 
                     <CCol xs="12" lg="4">
-                        <b>ControllerModel:</b>
+                    <CIcon name="cil-badge" className='m-1'/>   <b>ControllerModel:</b>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="controllerModel" className="w-52"
                                 name="controllerModel" placeholder="controllerModel" value={controllerModel} onChange={(e) => { setControllerModel(e.target.value) }} />

@@ -15,6 +15,7 @@ import {
 } from '@coreui/react'
 import { useHistory } from "react-router-dom";
 import CustomerService from '../../../services/customerService'
+import CIcon from '@coreui/icons-react'
 
 const customerSerice = new CustomerService()
 
@@ -104,7 +105,7 @@ export default function EditCustomer(props) {
                <div className="pt-1 pl-3">
                   <CRow className="mb-2">
                      <CCol xs="12" sm="12" lg="6">
-                           <b>Customer Name:</b>
+                     <CIcon name="cil-user" className='m-1'/><b>Customer Name:</b>
                            <CFormGroup >
                               <CInput style={{ width: '85%' }} type="text" id="customerName"
                                  name="customerName" placeholder="customerName" value={customerName} onChange={(e) => { setCustomerName(e.target.value) }} />
@@ -112,7 +113,7 @@ export default function EditCustomer(props) {
                      </CCol>
 
                      <CCol xs="12" sm="12" lg="6">
-                           <b>Customer Code: </b>
+                     <CIcon name="cil-asterisk-circle" /> <b>Customer Code: </b>
                            <CFormGroup >
                               <CInput style={{ width: '85%' }} type="text" id="customerCode"
                                  name="customerCode" placeholder="customerCode" value={customerCode} readOnly />
@@ -124,16 +125,16 @@ export default function EditCustomer(props) {
                   <CRow className="pt-3 pb-2">
                      
                   <CCol xs="12" sm="12" lg="6">
-                              <b>Contact Person: </b> 
+                  <CIcon name="cil-contact" className='m-1'/>  <b>Contact Person: </b> 
                               <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="contactPerson"
                                     name="contactPerson" placeholder="contactPerson" value={contactPerson} onChange={(e) => { setContactPerson(e.target.value) }} />
                               </CFormGroup>
                      </CCol>
                      <CCol xs="12" sm="12" lg="6">
-                           <b>Contact Number: </b>
+                     <CIcon name="cil-screen-smartphone" /> <b>Contact Number: </b>
                               <CFormGroup >
-                                 <CInput style={{ width: '85%' }} type="text" id="mobileNo"
+                             <CInput style={{ width: '85%' }} type="text" id="mobileNo"
                                     name="mobileNo" placeholder="mobileNo" value={mobileNo} onChange={(e) => { setMobileNo(e.target.value) }} />
                               </CFormGroup>
                      </CCol>
@@ -142,7 +143,7 @@ export default function EditCustomer(props) {
                   <CRow className="pt-3 pb-2">
 
                      <CCol xs="12" sm="12" lg="6">
-                           <b>Alternate Number: </b>
+                     <CIcon name="cil-screen-smartphone" />  <b>Alternate Number: </b>
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="alternateNo"
                                     name="alternateNo" placeholder="alternateNo" value={alternateNo} onChange={(e) => { setAlternateNo(e.target.value) }} />
@@ -150,7 +151,7 @@ export default function EditCustomer(props) {
                      </CCol>
           
                      <CCol xs="12" sm="12" lg="6">
-                     <b>Customer Address: </b>
+                     <CIcon name="cil-location-pin" className='m-1'/> <b>Customer Address: </b>
                            <CFormGroup >
                                  <CTextarea style={{ width: '85%' }} type="text" id="address"
                                     name="address" placeholder="address" value={address} onChange={(e) => { setAddress(e.target.value) }} />
@@ -161,7 +162,7 @@ export default function EditCustomer(props) {
                   <CRow className="pt-3 pb-2">
                  
                      <CCol xs="12" sm="12" lg="6">
-                           <b>City:</b>
+                     <CIcon name="cil-audio" className='m-1'/><b>City:</b>
                            <CFormGroup >
                               <CInput style={{ width: '85%' }} type="text" id="city"
                                  name="city" placeholder="city" value={city} onChange={(e) => { setCity(e.target.value) }} />
@@ -169,7 +170,7 @@ export default function EditCustomer(props) {
                      </CCol>
                 
                   <CCol xs="12" sm="12" lg="6">
-                        <b>Zip:</b>
+                  <CIcon name="cil-pin" className='m-1'/> <b>Zip:</b>
                         <CFormGroup >
                            <CInput style={{ width: '85%' }} type="text" id="zip"
                               name="zip" placeholder="zip" value={zip} onChange={(e) => { setZip(e.target.value) }} />
@@ -182,14 +183,14 @@ export default function EditCustomer(props) {
                <CRow className="pt-3 pb-2">
            
                      <CCol xs="12" sm="12" lg="6">
-                        <b>State:</b>
+                     <CIcon name="cil-bank" className='m-1'/><b>State:</b>
                         <CFormGroup >
                            <CInput style={{ width: '85%' }} type="text" id="state"
                               name="state" placeholder="state" value={state} onChange={(e) => { setState(e.target.value) }} />
                         </CFormGroup>
                      </CCol>
                      <CCol xs="12" sm="12" lg="6">
-                     <b>Country: </b>
+                     <CIcon name="cil-flag-alt" className='m-1'/> <b>Country: </b>
                         <CFormGroup >
                            <CInput style={{ width: '85%' }} type="text" id="country"
                               name="country" placeholder="country" value={country} onChange={(e) => { setCountry(e.target.value) }} />
@@ -199,14 +200,14 @@ export default function EditCustomer(props) {
 
                   <CRow className="pt-3 pb-2">
                      <CCol xs="12" sm="12" lg="6">
-                     <b>Email:</b>
+                     <CIcon name="cil-envelope-closed" className='m-1'/><b>Email:</b>
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="email"
                                     name="email" placeholder="email" value={email} onChange={(e) => { setEmail(e.target.value) }} />
                               </CFormGroup>
                      </CCol>
                   <CCol xs="12" sm="12" lg="6">
-                  <b>GstNumber: </b>
+                  <CIcon name="cil-notes" className='m-1'/><b>GstNumber: </b>
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="gstNumber"
                                     name="gstNumber" placeholder="gstNumber" value={gstNumber} onChange={(e) => { setGstNumber(e.target.value) }} />

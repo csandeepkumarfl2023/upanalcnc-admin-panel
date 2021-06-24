@@ -11,7 +11,12 @@ import {
    CInput,
    CCardSubtitle,
    CCardFooter,
-   CAlert
+   CAlert,
+   CModal,
+   CModalBody,
+   CModalFooter,
+   CModalHeader,
+   CModalTitle,
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
@@ -78,6 +83,7 @@ export default function EditServiceRequest(props) {
    const [serviceReqDetails, setServiceReqDetails] = useState()
 
    const [alert, setAlert] = useState(false)
+   const [confirmation,setConfirmation] = useState(false)
 
    const getServicerequestDetails = async () => {
       let res = await serviceRequestService.getServiceRequest(item.service_request_id)
@@ -134,7 +140,7 @@ export default function EditServiceRequest(props) {
 
             <CRow className="pl-3 mt-3" >
                <CCol xs="6" md="11">
-                  <CCardSubtitle style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>Service Request {item ? item.servicerequestId : null}</CCardSubtitle>
+                  <CCardSubtitle style={{fontSize: '1.1rem' }}>Service Request {item ? item.service_request_id : null}</CCardSubtitle>
                </CCol>
                <CCol xs="6" md="1">
                   <CIcon name="cil-pen" size="lg" style={{ cursor: 'pointer' }} onClick={() => {
@@ -148,8 +154,8 @@ export default function EditServiceRequest(props) {
             </CRow>
 
             <CCardBody >
-               <div className="pt-1 pl-3">
-                  <CRow className="pb-2">
+               <div className="pl-3">
+                  <CRow >
                      <CCol xs="12" sm="12" lg="4">
                         <CRow>
                            <div style={{ fontWeight: 'bold' }}> Customer Name: </div>
@@ -174,11 +180,11 @@ export default function EditServiceRequest(props) {
                         </CRow>
                      </CCol>
                   </CRow>
-
-                  <CRow className="pt-4 pb-2">
+                  <hr></hr>
+                  <CRow >
                      <CCol xs="12" sm="12" lg="4" >
                         <CRow>
-                           <div style={{ fontWeight: 'bold' }}> Issue Type: </div>
+                           <div style={{ fontWeight: 'bold' }}> <CIcon name="cil-chevron-circle-right-alt" /> Issue Type: </div>
                            <span className="ml-2">
                               {serviceReqDetails ? serviceReqDetails.issue_type : null}
                            </span>
@@ -186,7 +192,7 @@ export default function EditServiceRequest(props) {
                      </CCol>
                      <CCol xs="12" sm="12" lg="4" >
                         <CRow>
-                           <div style={{ fontWeight: 'bold' }}> Priority: </div>
+                           <div style={{ fontWeight: 'bold' }}><CIcon name="cil-asterisk-circle" /> Priority: </div>
                            <span className="ml-2">
                               {serviceReqDetails ? serviceReqDetails.request_priority : null}
                            </span>
@@ -194,7 +200,7 @@ export default function EditServiceRequest(props) {
                      </CCol>
                      <CCol xs="12" sm="12" lg="4" >
                         <CRow>
-                           <div style={{ fontWeight: 'bold' }}> Status: </div>
+                           <div style={{ fontWeight: 'bold' }}>  <CIcon name="cil-flag-alt" /> Status: </div>
                            <span className="ml-2">
                               {serviceReqDetails && serviceReqDetails.request_status ?
                                  <button
@@ -217,7 +223,7 @@ export default function EditServiceRequest(props) {
                   <CRow className="pt-3 pb-2">
                      <CCol xs="12" sm="12" lg="4" >
                         <CRow>
-                           <div style={{ fontWeight: 'bold' }}> Executive: </div>
+                           <div style={{ fontWeight: 'bold' }}> <CIcon name="cil-user" />  Executive: </div>
                            <span className="ml-2">
                               {edit ?
                                  <CFormGroup >
@@ -235,7 +241,7 @@ export default function EditServiceRequest(props) {
                      </CCol>
                      <CCol xs="12" sm="12" lg="4" >
                         <CRow>
-                           <div style={{ fontWeight: 'bold' }}> Schedule Date: </div>
+                           <div style={{ fontWeight: 'bold' }}><CIcon name="cil-calendar" />  Schedule Date: </div>
                            <span className="ml-2">
                               {edit ?
                                  <CFormGroup >
@@ -248,7 +254,7 @@ export default function EditServiceRequest(props) {
                      </CCol>
                      <CCol xs="12" sm="12" lg="4" >
                         <CRow>
-                           <div style={{ fontWeight: 'bold' }}> Schedule Time: </div>
+                           <div style={{ fontWeight: 'bold' }}> <CIcon name="cil-clock" /> Schedule Time: </div>
                            <span className="ml-2">
                               {edit ?
                                  <CFormGroup >
@@ -264,7 +270,7 @@ export default function EditServiceRequest(props) {
                      <CCol xs="12" sm="12" lg="4" >
                         <CRow>
                            <div style={{ fontWeight: 'bold' }}>
-                              Issue Details:
+                           <CIcon name="cil-color-border" /> Issue Details:
                            </div>
                            <span className="ml-2">
                            {edit ?
@@ -280,7 +286,7 @@ export default function EditServiceRequest(props) {
                      <CCol xs="12" sm="12" lg="4" >
                         <CRow>
                            <div style={{ fontWeight: 'bold' }}>
-                              Servive Request Type:
+                           <CIcon name="cil-tags" /> Servive Request Type:
                            </div>
                            <span className="ml-2">
                               {serviceReqDetails ? serviceReqDetails.service_request_type : null}
@@ -291,7 +297,7 @@ export default function EditServiceRequest(props) {
                      <CCol xs="12" sm="12" lg="4" >
                         <CRow>
                            <div style={{ fontWeight: 'bold' }}>
-                              Machine Pictures:
+                           <CIcon name="cil-camera" />  Machine Pictures:
                            </div>
                            <span className="ml-2"></span>
                         </CRow>
@@ -384,7 +390,7 @@ export default function EditServiceRequest(props) {
                   <CRow className="pb-3">
                      <CCol xs="12" sm="12" lg="4" >
                         <CRow>
-                           <div style={{ fontWeight: 'bold' }}>  Contact Person Name: </div>
+                           <div style={{ fontWeight: 'bold' }}><CIcon name="cil-contact" />   Contact Person Name: </div>
                            <span className="ml-2">
                               {customerDetails ? customerDetails.contact_person : null}
                            </span>
@@ -392,7 +398,7 @@ export default function EditServiceRequest(props) {
                      </CCol>
                      <CCol xs="12" sm="12" lg="4" >
                         <CRow>
-                           <div style={{ fontWeight: 'bold' }}>  Contact Number: </div>
+                           <div style={{ fontWeight: 'bold' }}><CIcon name="cil-mobile" /> Contact Number: </div>
                            <span className="ml-2">
                               {customerDetails ? customerDetails.phone_number : null}
                            </span>
@@ -400,7 +406,7 @@ export default function EditServiceRequest(props) {
                      </CCol>
                      <CCol xs="12" sm="12" lg="4" >
                         <CRow>
-                           <div style={{ fontWeight: 'bold' }}>  Alternate Number: </div>
+                           <div style={{ fontWeight: 'bold' }}> <CIcon name="cil-mobile" /> Alternate Number: </div>
                            <span className="ml-2">
                               {customerDetails ? customerDetails.alternate_phone_number : null}
                            </span>
@@ -411,7 +417,7 @@ export default function EditServiceRequest(props) {
                   <CRow className="pt-3 pb-2">
                      <CCol xs="12" sm="12" lg="4" >
                         <CRow>
-                           <div style={{ fontWeight: 'bold' }}>   Customer Address: </div>
+                           <div style={{ fontWeight: 'bold' }}><CIcon name="cil-location-pin" />  Customer Address: </div>
                            <span className="ml-2">
                               {customerDetails ? customerDetails.address : null}
                            </span>
@@ -419,7 +425,7 @@ export default function EditServiceRequest(props) {
                      </CCol>
                      <CCol xs="12" sm="12" lg="4" >
                         <CRow>
-                           <div style={{ fontWeight: 'bold' }}>  Email: </div>
+                           <div style={{ fontWeight: 'bold' }}> <CIcon name="cil-envelope-closed" /> Email: </div>
                            <span className="ml-2">
                               {customerDetails ? customerDetails.email_id : null}
                            </span>
@@ -439,7 +445,7 @@ export default function EditServiceRequest(props) {
                               >Cancel</CButton>
                            </CCol>
                            <CCol xs="6">
-                              <CButton block color="info" className="mr-1" onClick={submitHandler}
+                              <CButton block color="info" className="mr-1" onClick={()=> setConfirmation(!confirmation)}
                               >Submit</CButton>
                            </CCol>
                         </CRow>
@@ -455,6 +461,22 @@ export default function EditServiceRequest(props) {
 
             </CCardBody>
          </CCard>
+         <CModal centered="true" 
+              show={confirmation} 
+              onClose={() => setConfirmation(!confirmation)}
+              size="md"
+            >
+              <CModalHeader closeButton>
+                <CModalTitle>Confirmation?</CModalTitle>
+              </CModalHeader>
+              <CModalBody>
+               Are you sure you want to make changes to the service request {item ? item.service_request_id : null}?
+              </CModalBody>
+              <CModalFooter>
+                <CButton color="info" onClick={() => setConfirmation(!confirmation)}>NO</CButton>{' '}
+                <CButton color="info" onClick={submitHandler}>Yes</CButton>
+              </CModalFooter>
+            </CModal>
       </>
    )
 }

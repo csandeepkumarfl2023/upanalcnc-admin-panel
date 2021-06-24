@@ -315,7 +315,7 @@ export default function ServiceRequest(props) {
 
               <CCol xs="8" style={{ marginLeft: '1%' }}>
                 <CFormGroup >
-                  <CLabel htmlFor="name">Sales/Service Executive Name</CLabel>
+                  <CLabel htmlFor="name"><CIcon name="cil-user" className='m-1'/> Sales/Service Executive Name</CLabel>
                   <CSelect custom size="md" name="name" id="name" value={employee} onChange={(e) => setEmployee(e.target.value)}>
                     <option value="undefined">Open this select menu</option>
                     {employeesArr && employeesArr.length ? employeesArr.map((elem) => {
@@ -328,13 +328,13 @@ export default function ServiceRequest(props) {
             </CRow>
             <CCol xs="8">
               <CFormGroup >
-                <CLabel htmlFor="scheduleDate">Shedule Date</CLabel>
+                <CLabel htmlFor="scheduleDate"><CIcon name="cil-calendar" />  Shedule Date</CLabel>
                 <CInput type="date" id="scheduleDate" name="scheduleDate" placeholder="scheduleDate" value={scheduleDate} onChange={(e) => setSheduleDate(e.target.value)} />
               </CFormGroup>
             </CCol>
             <CCol xs="8" >
               <CFormGroup >
-                <CLabel htmlFor="scheduleTime">Shedule Time</CLabel>
+                <CLabel htmlFor="scheduleTime"><CIcon name="cil-clock" /> Shedule Time</CLabel>
                 <CInput type="time" id="scheduleTime" name="scheduleTime" placeholder="scheduleTime" value={scheduleTime} onChange={(e) => setSheduleTime(e.target.value)} />
               </CFormGroup>
             </CCol>
