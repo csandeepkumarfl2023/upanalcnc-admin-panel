@@ -423,8 +423,8 @@ export default function Overview() {
                       <CIcon name="cib-aurelia" style={{ color: 'gray' }} />
 
                     </CCol>
-                    <CCol>
-                      Service Requests
+                    <CCol style={{ alignItems: 'flex-start'}}>
+                      <b>Service Requests</b>
                     </CCol>
 
                   </CRow>
@@ -447,8 +447,8 @@ export default function Overview() {
                       <CIcon name="cil-briefcase" style={{ color: 'gray' }} />
 
                     </CCol>
-                    <CCol>
-                      Sales Visit
+                    <CCol style={{ alignItems: 'flex-start'}}>
+                    <b>Sales Visits</b>
                     </CCol>
 
                   </CRow>
@@ -471,8 +471,8 @@ export default function Overview() {
                       <CIcon name="cib-cc-amazon-pay" style={{ color: 'gray' }} />
 
                     </CCol>
-                    <CCol>
-                      Payments
+                    <CCol style={{ alignItems: 'flex-start'}}>
+                    <b>Payments</b>
                     </CCol>
 
                   </CRow>
@@ -488,8 +488,8 @@ export default function Overview() {
                     <CCol sm="3">
                       <CIcon name="cib-semaphoreci" style={{ color: 'gray' }} />
                     </CCol>
-                    <CCol>
-                      PM
+                    <CCol style={{ alignItems: 'flex-start'}}>
+                    <b> PM </b>
                     </CCol>
 
                   </CRow>
@@ -509,7 +509,7 @@ export default function Overview() {
                   <CRow className="mb-2">
                     <CCol xs="10" style={{ display: 'flex', alignItems: 'center' }}>
                       <h5>
-                        ServiceRequest
+                        Service Requests 
                       </h5>
                     </CCol>
                     <CCol xs="2" style={{ width: '80px' }}>
@@ -611,7 +611,7 @@ export default function Overview() {
                     color="info"
                   >
                     <CModalHeader closeButton>
-                      <CModalTitle>Add New ServiceRequest</CModalTitle>
+                      <CModalTitle>Add New Service Request</CModalTitle>
                     </CModalHeader>
                     <CModalBody>
                       <CRow>
@@ -736,7 +736,7 @@ export default function Overview() {
                   <CRow className="mb-2">
                     <CCol xs="10" style={{ display: 'flex', alignItems: 'center' }}>
                       <h5>
-                        Sales Visit
+                        Sales Visits
                       </h5>
                     </CCol>
                     <CCol xs="2" style={{ width: '80px' }}>

@@ -224,7 +224,7 @@ React.useEffect(() => {
             <CRow className="mb-2">
                     <CCol xs="10" style={{display: 'flex', alignItems: 'center'}}>
                       <h5>              
-                  Sales Visit
+                  Sales Visits
                 </h5>
               </CCol>
               <CCol xs="2" style ={{width: '80px'}}>

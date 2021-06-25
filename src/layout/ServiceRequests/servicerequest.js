@@ -203,7 +203,7 @@ export default function ServiceRequest(props) {
                 <CRow className="mb-2">
                   <CCol xs="10" style={{ display: 'flex', alignItems: 'center' }}>
                     <h5>
-                      ServiceRequest</h5>
+                      Service Request</h5>
                   </CCol>
                   <CCol xs="2" style={{ width: '80px' }} >
                     <CButton block color="info" onClick={addServiceHandler}>New</CButton>

@@ -368,7 +368,7 @@ export default function CreateServiceRequest() {
             </CCol>
             <CCol xs="12" sm="12" lg="4" >
               <CRow style={{fontWeight: 'bold' }}>
-              <CIcon name="cil-tags" className='m-1'/> ServiceRequest Type :
+              <CIcon name="cil-tags" className='m-1'/> Service Request Type :
                 <CFormGroup className="ml-3" value={serviceRequestType} onChange={(e) => setServiceRequestType(e.target.value)}>
                   <CSelect custom size="sm" name="name" id="name"  className="w-100">
                   <option value="undefined">Open this select</option>

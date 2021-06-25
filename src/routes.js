@@ -26,7 +26,7 @@ const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/login', exact: true, name: 'login' },
   { path: '/overview', name: 'Overview', component: Overview },
-  { path: '/servicerequest', name: 'ServiceRequest', component: ServiceRequest },
+  { path: '/servicerequest', name: 'Service Requests', component: ServiceRequest },
   { path: '/salesvisit', name: 'SaleVisit', component: SalesVisit },
   { path: '/customermanagement', name: 'Customermanagement', component: Customermanagement },
   { path: '/employeemanagement', name: 'Employeemanagement', component: Employeemanagement },

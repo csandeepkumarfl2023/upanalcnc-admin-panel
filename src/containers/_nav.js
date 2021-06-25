@@ -10,7 +10,7 @@ const _nav =  [
   },
   {
    _tag: 'CSidebarNavItem',
-    name: 'ServiceRequest',
+    name: 'Service Requests',
     to: '/servicerequest',
     icon:    <CIcon name="cib-aurelia" style={{ color:'gray' }} customClasses="c-sidebar-nav-icon"/>
 
@@ -20,7 +20,7 @@ const _nav =  [
     },
     {
       _tag: 'CSidebarNavItem',
-      name: 'Sales Visit',
+      name: 'Sales Visits',
       to: '/salesvisit',
       icon:    <CIcon name="cil-briefcase" style={{ color:'gray' }} customClasses="c-sidebar-nav-icon"/>
     },
