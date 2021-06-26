@@ -61,7 +61,7 @@ const getBadge = status => {
     default: return 'gray'
   }
 }
-const fields = ['servicerequestId', 'company', 'priority', 'issue_type', 'executive', 'status', 'contactNumber', 'email', 'createdDate']
+const fields = ['servicerequestId', 'company', 'priority', 'issue_type', 'executive', 'status', 'contactNumber', 'email', 'created_date']
 
 const override = css`
 width: 5em;
@@ -290,9 +290,9 @@ export default function ServiceRequest(props) {
                         <td>{item.machine?.client.email_id}
                         </td>
                       ),
-                    'createdDate':
+                    'created_date':
                       (item) => (
-                        <td>{item.createdDate ? item.createdDate : null}
+                        <td>{item.request_date? item.request_date : null}
                         </td>
                       ),
                   }}

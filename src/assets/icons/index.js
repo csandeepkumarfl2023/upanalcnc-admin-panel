@@ -159,7 +159,10 @@ import {
   cilBadge,
   cilTv,
   cilMobile,
-  cilCamera
+  cilCamera,
+  cilVoiceOverRecord,
+  cilCalendarCheck,
+  cilPenAlt
 } from '@coreui/icons'
 
 export const icons = Object.assign({}, {
@@ -280,7 +283,10 @@ export const icons = Object.assign({}, {
   cilBadge,
   cilTv,
   cilMobile,
-  cilCamera
+  cilCamera,
+  cilVoiceOverRecord,
+  cilCalendarCheck,
+  cilPenAlt
 }, {
   cifUs,
   cifBr,

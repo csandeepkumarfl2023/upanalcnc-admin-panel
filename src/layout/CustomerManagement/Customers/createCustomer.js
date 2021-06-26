@@ -67,7 +67,7 @@ export default function CreateCustomer(props) {
                             <div className="pt-3 pl-3">
                                 <CRow className="mb-2">
                                     <CCol xs="12" sm="12" lg="6">
-                                    <CIcon name="cil-user" className='m-1'/><b>Customer Name:</b>
+                                    <CIcon name="cil-user" className='m-2'/><b>Customer Name:</b>
                                     <CFormGroup>
                                         <CInput type="text"
                                             style={{ width: '85%' }}
@@ -76,7 +76,7 @@ export default function CreateCustomer(props) {
                                     </CCol>
 
                                     <CCol xs="12" sm="12" lg="6">
-                                    <CIcon name="cil-contact" className='m-1'/><b>Contact Person:</b>
+                                    <CIcon name="cil-contact" className='m-2'/><b>Contact Person:</b>
                                         <CFormGroup>
                                             <CInput type="text"
                                                 style={{ width: '85%' }} id="contact_person" name="contact_person" placeholder="Contact Person" onChange={handleChange} />
@@ -86,14 +86,14 @@ export default function CreateCustomer(props) {
 
                                 <CRow className="pt-3 pb-2">
                                     <CCol xs="12" sm="12" lg="6">
-                                    <CIcon name="cil-mobile" /> <b>Mobile No:</b>
+                                    <CIcon name="cil-mobile" className='m-2'/> <b>Mobile No:</b>
                                                 <CFormGroup>
                                                     <CInput type="text"
                                                         style={{ width: '85%' }} id="phone_number" name="phone_number" placeholder="Mobile No" onChange={handleChange} />
                                                 </CFormGroup>
                                     </CCol>
                                     <CCol xs="12" sm="12" lg="6">
-                                    <CIcon name="cil-mobile" /> <b>Alternate No:</b>
+                                    <CIcon name="cil-mobile" className='m-2'/> <b>Alternate No:</b>
                                                 <CFormGroup>
                                                     <CInput type="text"
                                                         style={{ width: '85%' }} id="alternate_phone_number" name="alternate_phone_number" placeholder="Alternate No" onChange={handleChange} />
@@ -104,14 +104,14 @@ export default function CreateCustomer(props) {
                                 <CRow className="pt-3 pb-2">
 
                                     <CCol xs="12" sm="12" lg="6">
-                                    <CIcon name="cil-location-pin" className='m-1'/><b>Address:</b>
+                                    <CIcon name="cil-location-pin" className='m-2'/><b>Address:</b>
                                             <CFormGroup>
                                                     <CTextarea style={{ width: '85%' }} type="text" id="address" name="address" placeholder="Address" onChange={handleChange} />
                                                 </CFormGroup>
                                     </CCol>
 
                                     <CCol xs="12" sm="12" lg="6">
-                                    <CIcon name="cil-audio" className='m-1'/> <b>City:</b>
+                                    <CIcon name="cil-audio" className='m-2'/> <b>City:</b>
                                                 <CFormGroup>
                                                     <CInput style={{ width: '85%' }} type="text" id="city" name="city" placeholder="City" onChange={handleChange} />
                                                 </CFormGroup>
@@ -122,14 +122,14 @@ export default function CreateCustomer(props) {
                                 <CRow className="pt-3 pb-2">
 
                                     <CCol xs="12" sm="12" lg="6">
-                                    <CIcon name="cil-pin" className='m-1'/> <b>Zip:</b>
+                                    <CIcon name="cil-pin" className='m-2'/> <b>Zip:</b>
                                             <CFormGroup>
                                                     <CInput style={{ width: '85%' }} type="text" id="pincode" name="pincode" placeholder="Zip" onChange={handleChange} />
                                                 </CFormGroup>
                                     </CCol>
 
                                     <CCol xs="12" sm="12" lg="6">
-                                    <CIcon name="cil-bank" className='m-1'/> <b>State:</b>
+                                    <CIcon name="cil-bank" className='m-2'/> <b>State:</b>
                                                 <CFormGroup>
                                                     <CInput style={{ width: '85%' }} type="text" id="state" name="state" placeholder="State" onChange={handleChange} />
                                                 </CFormGroup>
@@ -140,14 +140,14 @@ export default function CreateCustomer(props) {
                                 <CRow className="pt-3 pb-2">
 
                                     <CCol xs="12" sm="12" lg="6">
-                                    <CIcon name="cil-flag-alt" className='m-1'/> <b>Country:</b>
+                                    <CIcon name="cil-flag-alt" className='m-2'/> <b>Country:</b>
                                                 <CFormGroup>
                                                     <CInput style={{ width: '85%' }} type="text" id="country" name="country" placeholder="Country" onChange={handleChange} />
                                                 </CFormGroup>
                                     </CCol>
 
                                     <CCol xs="12" sm="12" lg="6">
-                                    <CIcon name="cil-envelope-closed" className='m-1'/><b>Email:</b>
+                                    <CIcon name="cil-envelope-closed" className="mb-2 m-2"/><b>Email:</b>
                                             <CFormGroup>
                                                 <CInput style={{ width: '85%' }} type="text" id="email_id" name="email_id" placeholder="Email" onChange={handleChange} />
                                             </CFormGroup>
@@ -157,7 +157,7 @@ export default function CreateCustomer(props) {
                                 <CRow className="pt-3 pb-2">
 
                                     <CCol xs="12" sm="12" lg="6">
-                                    <CIcon name="cil-notes" className='m-1'/> <b>Gst Number:</b>
+                                    <CIcon name="cil-notes" className='m-2'/> <b>Gst Number:</b>
                                                 <CFormGroup>
                                                     <CInput style={{ width: '85%' }} type="text" id="gst_number" name="gst_number" placeholder="Gst Number" onChange={handleChange} />
                                                 </CFormGroup>

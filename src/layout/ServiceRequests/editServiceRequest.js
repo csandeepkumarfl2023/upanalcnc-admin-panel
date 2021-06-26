@@ -473,7 +473,7 @@ export default function EditServiceRequest(props) {
                Are you sure you want to make changes to the service request {item ? item.service_request_id : null}?
               </CModalBody>
               <CModalFooter>
-                <CButton color="info" onClick={() => setConfirmation(!confirmation)}>NO</CButton>{' '}
+                <CButton color="info" onClick={() => setConfirmation(!confirmation)}>No</CButton>{' '}
                 <CButton color="info" onClick={submitHandler}>Yes</CButton>
               </CModalFooter>
             </CModal>

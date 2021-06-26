@@ -34,12 +34,13 @@ const Login = (props) => {
     }
     try {
       let res = await loginService.postLogin(data)
+     console.log('resss',res);
       if (res) {
         let userToken = res.data.data
         await commonService.setToken(JSON.stringify(userToken))
         //  props.history.push('/overview')
       }
-      props.history.push('/overview')
+     // props.history.push('/overview')
     }
     catch (err) {
       console.log(err.message);

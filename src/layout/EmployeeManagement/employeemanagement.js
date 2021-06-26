@@ -16,7 +16,9 @@ import {
   CFormGroup,
   CLabel,
   CInput,
-  CLink
+  CLink,
+  CSwitch,
+  CBadge
 } from '@coreui/react'
 
 import { css } from "@emotion/react";
@@ -47,7 +49,7 @@ export default function EmployeeManagements(props) {
   const [updateId, setUpdateId] = useState()
   const [loading, setLoading] = useState(false)
 
-  const fields = ['employee_id', 'employee_name', 'email_id', 'phone_number', 'designation', 'address', 'active']
+  const fields = ['employee_id', 'employee_name', 'email_id', 'phone_number', 'designation', 'address', 'active','department','date_of_joining','date_of_leaving','employee_type']
   const override = css`
     width: 5em;
     height: 5em;
@@ -227,7 +229,17 @@ export default function EmployeeManagements(props) {
                       ),
                       'active':
                       (item) => (
-                        <td>{item.active}
+                        <td> { item.active ? 
+                        <CBadge
+                          className="mr-1"
+                          color="success"
+                        > Active </CBadge>
+                         : 
+                         <CBadge
+                          className="mr-1"
+                          color="secondary"
+                        > Inactive </CBadge>
+                         }
                         </td>
                       ),
                   }}

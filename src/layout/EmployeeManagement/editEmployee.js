@@ -30,12 +30,16 @@ export default function EditEmployee(props) {
    const [item, setItem] = useState(props.location.state)
    const [edit, setEdit] = React.useState(false)
    const [employee_name, setEmployeeName] = useState("")
+   const [department,setDepartment] = useState("")
    const [employee_id, setEmployeeId] = useState("")
    const [phone_number, setPhoneNumber] = useState("")
    const [email_id, setEmailId] = useState("")
    const [address, setAddress] = useState("")
    const [designation, setDesignation] = useState("")
    const [active, setActive] = useState("")
+   const [date_of_joining,setDate_of_joining] = useState("")
+   const [date_of_leaving,setDate_of_leaving] = useState("")
+   const [employee_type,setEmployee_type] = useState("")
    const [rawPassword, setRawPassword] = useState("")
 
    const [alert, setAlert] = useState(false)
@@ -49,6 +53,10 @@ export default function EditEmployee(props) {
       const res = await employeeSerice.getEmployee(item.employee_id)
       console.log(res);
       setEmployeeName(res.data.employee_name)
+      setDepartment(res.data.department)
+      setDate_of_joining(res.data.date_of_joining)
+      setDate_of_leaving(res.data.date_of_leaving)
+      setEmployee_type(res.data.employee_type)
       setEmployeeId(res.data.employee_id)
       setPhoneNumber(res.data.phone_number)
       setEmailId(res.data.email_id)
@@ -60,12 +68,16 @@ export default function EditEmployee(props) {
    const submitHandler = async () => {
       let currentData = { ...item }
       currentData.employee_name = employee_name
+      currentData.department = department
       currentData.employee_id = employee_id
       currentData.phone_number = phone_number
       currentData.email_id = email_id
       currentData.address = address
       currentData.designation = designation
       currentData.active = active
+      currentData.date_of_joining = date_of_joining
+      currentData.date_of_leaving = date_of_leaving
+      currentData.employee_type = employee_type
       console.log(currentData);
       try {
          let res = await employeeSerice.updateEmployee(currentData)
@@ -105,7 +117,13 @@ export default function EditEmployee(props) {
                                  name="employee_name" placeholder="employee_name" value={employee_name} onChange={(e) => { setEmployeeName(e.target.value) }} />
                            </CFormGroup>
                      </CCol>
-
+                     <CCol xs="12" sm="12" lg="6">
+                           <b>Department:</b>
+                           <CFormGroup >
+                              <CInput style={{ width: '85%' }} type="text" id="department"
+                                 name="department" placeholder="department" value={department} onChange={(e) => { setDepartment(e.target.value) }} />
+                           </CFormGroup>
+                     </CCol>
 
                   </CRow>
 
@@ -161,6 +179,33 @@ export default function EditEmployee(props) {
                                     name="designation" placeholder="designation" value={designation} onChange={(e) => { setDesignation(e.target.value) }} />
                               </CFormGroup>
                      </CCol>
+                  </CRow>
+
+                  <CRow className="pt-3 pb-2">
+                     <CCol xs="12" sm="12" lg="6">
+                     <b>Date Of Joining:</b>
+                           <CFormGroup >
+                                 <CInput style={{ width: '85%' }} type="text" id="date_of_joining"
+                                    name="date_of_joining" placeholder="date_of_joining" value={date_of_joining} onChange={(e) => { setDate_of_joining(e.target.value) }} />
+                              </CFormGroup>
+                     </CCol>
+                  <CCol xs="12" sm="12" lg="6">
+                  <b>Date Of Leaving: </b>
+                           <CFormGroup >
+                                 <CInput style={{ width: '85%' }} type="text" id="date_of_leaving"
+                                    name="date_of_leaving" placeholder="date_of_leaving" value={date_of_leaving} onChange={(e) => { setDate_of_leaving(e.target.value) }} />
+                              </CFormGroup>
+                     </CCol>
+                  </CRow>
+                  <CRow className="pt-3 pb-2">
+                     <CCol xs="12" sm="12" lg="6">
+                     <b>Employee Type:</b>
+                           <CFormGroup >
+                                 <CInput style={{ width: '85%' }} type="text" id="employee_type"
+                                    name="employee_type" placeholder="employee_type" value={employee_type} onChange={(e) => { setEmployee_type(e.target.value) }} />
+                              </CFormGroup>
+                     </CCol>
+                  
                   </CRow>
                </div>
                <CRow className="mt-2" style={{ justifyContent: 'center' }}>

@@ -596,7 +596,7 @@ export default function Overview() {
                         ),
                       'createdDate':
                         (item) => (
-                          <td>{item.createdDate ? item.createdDate : null}
+                          <td>{item.request_date ? item.request_date : null}
                           </td>
                         ),
                     }}
