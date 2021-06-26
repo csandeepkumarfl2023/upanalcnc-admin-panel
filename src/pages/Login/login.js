@@ -40,7 +40,7 @@ const Login = (props) => {
         await commonService.setToken(JSON.stringify(userToken))
         //  props.history.push('/overview')
       }
-     // props.history.push('/overview')
+      props.history.push('/overview')
     }
     catch (err) {
       console.log(err.message);
