@@ -188,6 +188,10 @@ export default function CreateServiceRequest() {
     getEmployees()
   }, [])
 
+  var curr = new Date();
+  curr.setDate(curr.getDate());
+  var todayDate = curr.toISOString().substr(0,10);
+
   return (
     <>
    <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
@@ -397,8 +401,8 @@ export default function CreateServiceRequest() {
           <CCol xs="12" sm="12" lg="4">
               <CRow style={{fontWeight: 'bold' }}>
               <CIcon name="cil-calendar" className='m-1'/> Schedule Date:
-                <CFormGroup className="ml-3" value={date} onChange={(e) => setDate(e.target.value)}>
-                  <CInput type="date" id="sheduleDate" name="sheduleDate" placeholder="sheduleDate" size="sm" />
+                <CFormGroup className="ml-3" value={date} onChange={(e) => setDate(e.target.value)} >
+                  <CInput type="date" id="sheduleDate" name="sheduleDate" placeholder="sheduleDate" size="sm" defaultValue={todayDate}/>
                 </CFormGroup>
               </CRow>
             </CCol>

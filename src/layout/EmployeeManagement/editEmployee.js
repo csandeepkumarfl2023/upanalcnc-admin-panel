@@ -11,10 +11,13 @@ import {
    CCardSubtitle,
    CCardFooter,
    CAlert,
-   CTextarea
+   CTextarea,
+   CSwitch,
 } from '@coreui/react'
+import CIcon from '@coreui/icons-react'
 import { useHistory } from "react-router-dom";
 import EmployeeService from '../../services/employeeService'
+import moment from 'moment'
 
 const employeeSerice = new EmployeeService()
 // active: true
@@ -24,7 +27,7 @@ const employeeSerice = new EmployeeService()
 // employee_id: "1"
 // employee_name: "ADMIN"
 // phone_number: "893138113"
-
+ 
 export default function EditEmployee(props) {
    const history = useHistory();
    const [item, setItem] = useState(props.location.state)
@@ -37,9 +40,9 @@ export default function EditEmployee(props) {
    const [address, setAddress] = useState("")
    const [designation, setDesignation] = useState("")
    const [active, setActive] = useState("")
-   const [date_of_joining,setDate_of_joining] = useState("")
-   const [date_of_leaving,setDate_of_leaving] = useState("")
-   const [employee_type,setEmployee_type] = useState("")
+   const [date_of_joining,setDateOfJoining] = useState("")
+   const [date_of_leaving,setDateOfLeaving] = useState("")
+   const [employee_type,setEmployeeType] = useState("")
    const [rawPassword, setRawPassword] = useState("")
 
    const [alert, setAlert] = useState(false)
@@ -54,9 +57,9 @@ export default function EditEmployee(props) {
       console.log(res);
       setEmployeeName(res.data.employee_name)
       setDepartment(res.data.department)
-      setDate_of_joining(res.data.date_of_joining)
-      setDate_of_leaving(res.data.date_of_leaving)
-      setEmployee_type(res.data.employee_type)
+      setDateOfJoining(res.data.date_of_joining)
+      setDateOfLeaving(res.data.date_of_leaving)
+      setEmployeeType(res.data.employee_type)
       setEmployeeId(res.data.employee_id)
       setPhoneNumber(res.data.phone_number)
       setEmailId(res.data.email_id)
@@ -75,8 +78,8 @@ export default function EditEmployee(props) {
       currentData.address = address
       currentData.designation = designation
       currentData.active = active
-      currentData.date_of_joining = date_of_joining
-      currentData.date_of_leaving = date_of_leaving
+      currentData.date_of_joining = moment(new Date(date_of_joining)).format('YYYY-MM-DD HH:mm:ss') 
+      currentData.date_of_leaving = moment(new Date(date_of_leaving)).format('YYYY-MM-DD HH:mm:ss')
       currentData.employee_type = employee_type
       console.log(currentData);
       try {
@@ -92,13 +95,14 @@ export default function EditEmployee(props) {
    }
 
    React.useEffect(() => {
+      console.log('props',props.location.state);
       setItem(props.location.state)
       if (props.location.state) {
          getEmployeeDetails()
 
       }
    }, [])
-
+    
    return (
       <>
         <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
@@ -111,16 +115,16 @@ export default function EditEmployee(props) {
                <div className="pt-1 pl-3">
                   <CRow className="mb-2">
                      <CCol xs="12" sm="12" lg="6">
-                           <b>Employee Name:</b>
+                     <CIcon name="cil-user" className='m-2'/>  <b>Employee Name:</b>
                            <CFormGroup >
                               <CInput style={{ width: '85%' }} type="text" id="employee_name"
                                  name="employee_name" placeholder="employee_name" value={employee_name} onChange={(e) => { setEmployeeName(e.target.value) }} />
                            </CFormGroup>
                      </CCol>
                      <CCol xs="12" sm="12" lg="6">
-                           <b>Department:</b>
+                     <CIcon name="cil-briefcase" className='m-2'/> <b>Department:</b>
                            <CFormGroup >
-                              <CInput style={{ width: '85%' }} type="text" id="department"
+                              <CInput style={{ width: '85%' }} type="department" id="department"
                                  name="department" placeholder="department" value={department} onChange={(e) => { setDepartment(e.target.value) }} />
                            </CFormGroup>
                      </CCol>
@@ -130,14 +134,14 @@ export default function EditEmployee(props) {
                   <CRow className="pt-3 pb-2">
                      
                   <CCol xs="12" sm="12" lg="6">
-                              <b>Employee Id: </b> 
+                  <CIcon name="cib-adobe-indesign" className='m-2'/> <b>Employee Id: </b> 
                               <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="employee_id"
                                     name="employee_id" placeholder="employee_id" value={employee_id} onChange={(e) => { setEmployeeId(e.target.value) }} readOnly/>
                               </CFormGroup>
                      </CCol>
                      <CCol xs="12" sm="12" lg="6">
-                           <b>Phone Number: </b>
+                     <CIcon name="cil-mobile" className='m-2'/>  <b>Phone Number: </b>
                               <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="phone_number"
                                     name="phone_number" placeholder="phone_number" value={phone_number} onChange={(e) => { setPhoneNumber(e.target.value) }} />
@@ -146,67 +150,77 @@ export default function EditEmployee(props) {
                   </CRow>
 
                   <CRow className="pt-3 pb-2">
-
                      <CCol xs="12" sm="12" lg="6">
-                           <b>Active: </b>
-                           <CFormGroup >
-                                 <CInput style={{ width: '85%' }} type="text" id="active"
-                                    name="active" placeholder="active" value={active} onChange={(e) => { setActive(e.target.value) }} />
-                           </CFormGroup>
-                     </CCol>
-          
-                     <CCol xs="12" sm="12" lg="6">
-                     <b>Employee Address: </b>
+                     <CIcon name="cil-location-pin" className='m-2'/><b>Employee Address: </b>
                            <CFormGroup >
                                  <CTextarea style={{ width: '85%' }} type="text" id="address"
                                     name="address" placeholder="address" value={address} onChange={(e) => { setAddress(e.target.value) }} />
                               </CFormGroup>
                      </CCol>
-                  </CRow>
-
-                  <CRow className="pt-3 pb-2">
                      <CCol xs="12" sm="12" lg="6">
-                     <b>EmailId:</b>
+                     <CIcon name="cil-envelope-closed" className='m-2'/> <b>EmailId:</b>
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="email_id"
                                     name="email_id" placeholder="email_id" value={email_id} onChange={(e) => { setEmailId(e.target.value) }} />
                               </CFormGroup>
                      </CCol>
+                  </CRow>
+
+                  <CRow className="pt-3 pb-2">
+                    
                   <CCol xs="12" sm="12" lg="6">
-                  <b>Designation: </b>
+                  <CIcon name="cil-pen-alt" className='m-2'/> <b>Designation: </b>
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="designation"
                                     name="designation" placeholder="designation" value={designation} onChange={(e) => { setDesignation(e.target.value) }} />
+                              </CFormGroup>
+                     </CCol>
+                     <CCol xs="12" sm="12" lg="6">
+                     <CIcon name="cil-voice-over-record" className='m-2'/> <b>Employee Type:</b>
+                           <CFormGroup >
+                                 <CInput style={{ width: '85%' }} type="text" id="employee_type"
+                                    name="employee_type" placeholder="employee_type" value={employee_type} onChange={(e) => { setEmployeeType(e.target.value) }} />
                               </CFormGroup>
                      </CCol>
                   </CRow>
 
                   <CRow className="pt-3 pb-2">
                      <CCol xs="12" sm="12" lg="6">
-                     <b>Date Of Joining:</b>
+                     <CIcon name="cil-calendar" className='m-2'/> <b>Date Of Joining:</b>
                            <CFormGroup >
-                                 <CInput style={{ width: '85%' }} type="text" id="date_of_joining"
-                                    name="date_of_joining" placeholder="date_of_joining" value={date_of_joining} onChange={(e) => { setDate_of_joining(e.target.value) }} />
+                                 <CInput style={{ width: '85%' }} type="date" id="date_of_joining"
+                                    name="date_of_joining" placeholder="date_of_joining" value={date_of_joining} onChange={(e) => { setDateOfJoining(e.target.value) }} />
                               </CFormGroup>
                      </CCol>
                   <CCol xs="12" sm="12" lg="6">
-                  <b>Date Of Leaving: </b>
+                  <CIcon name="cil-calendar" className='m-2'/> <b>Date Of Leaving: </b>
                            <CFormGroup >
-                                 <CInput style={{ width: '85%' }} type="text" id="date_of_leaving"
-                                    name="date_of_leaving" placeholder="date_of_leaving" value={date_of_leaving} onChange={(e) => { setDate_of_leaving(e.target.value) }} />
+                                 <CInput style={{ width: '85%' }} type="date" id="date_of_leaving"
+                                    name="date_of_leaving" placeholder="date_of_leaving" value={date_of_leaving} onChange={(e) => { setDateOfLeaving(e.target.value) }} />
                               </CFormGroup>
                      </CCol>
                   </CRow>
                   <CRow className="pt-3 pb-2">
-                     <CCol xs="12" sm="12" lg="6">
-                     <b>Employee Type:</b>
-                           <CFormGroup >
-                                 <CInput style={{ width: '85%' }} type="text" id="employee_type"
-                                    name="employee_type" placeholder="employee_type" value={employee_type} onChange={(e) => { setEmployee_type(e.target.value) }} />
-                              </CFormGroup>
-                     </CCol>
+                   
                   
                   </CRow>
+                  <CRow className="pt-3 pb-2">
+                  <CCol xs="12" sm="12" lg="6">
+                     <CRow>
+                                    <CIcon name="cil-calendar-check" className='m-2'/><b>Active:</b>
+                                                <CFormGroup>
+                                                <CCol sm="9">
+                                                <CSwitch
+                                                className="mr-1"
+                                                color="primary"
+                                                defaultChecked
+                                                />                            
+                                      </CCol>
+                                      </CFormGroup>
+                                      </CRow>
+                                    </CCol>
+                                    </CRow>
+          
                </div>
                <CRow className="mt-2" style={{ justifyContent: 'center' }}>
                      <CCardFooter style={{ width: '25%' }}>

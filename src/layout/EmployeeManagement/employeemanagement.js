@@ -26,6 +26,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import EmployeeManagementsService from '../../services/employeeManagementService';
 import EmployeeService from '../../services/employeeService'
 import { useHistory } from "react-router-dom";
+import moment from 'moment'
 
 const employeeService = new EmployeeService()
 
@@ -240,6 +241,21 @@ export default function EmployeeManagements(props) {
                           color="secondary"
                         > Inactive </CBadge>
                          }
+                        </td>
+                      ),
+                      'department':
+                      (item) => (
+                        <td>{item.department}
+                        </td>
+                      ),
+                      'date_of_joining':
+                      (item) => (
+                        <td>{moment(item.date_of_joining).format('MM/DD/YYYY')}
+                        </td>
+                      ),
+                      'date_of_leaving':
+                      (item) => (
+                        <td>{moment(item.date_of_leaving).format('MM/DD/YYYY')}
                         </td>
                       ),
                   }}
