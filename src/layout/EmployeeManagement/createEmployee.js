@@ -10,7 +10,8 @@ import {
     CCardSubtitle,
     CCardBody,
     CTextarea,
-    CSwitch
+    CSwitch,
+    CInput
 } from '@coreui/react'
 import { Formik } from "formik"
 import EmployeeService from '../../services/employeeService';
@@ -106,15 +107,15 @@ var date = curr.toISOString().substr(0,10);
                 {({ handleSubmit, handleChange, values, errors, touched, resetForm }) => (
 
 
-                    <CCard>
+                    <CCard >
                         <CCardSubtitle className="pl-3 mt-3" style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>Create Employee</CCardSubtitle>
                         {/* <hr /> */}
                         <CCardBody>
                             <div className="pt-3 pl-3">        
-                                <CRow className="pt-3 pb-2">
+                                <CRow className="pt-3 pb-2" >
                                     <CCol xs="12" sm="12" lg="6">  
                                     <CIcon name="cib-adobe-indesign" className='m-2'/>   <b>Employee Id:</b>
-                                                    <input style={{ width: '85%' }} type="text" id="employee_id" name="employee_id" placeholder="employee_id" 
+                                                    <CInput style={{ width: '85%' }} type="text" id="employee_id" name="employee_id" placeholder="employee_id" 
                                                     onChange={handleChange}  className={errors.employee_id && touched.employee_id && "error"}/>
                                                
                                                 {errors.employee_id && touched.employee_id && 
@@ -125,7 +126,7 @@ var date = curr.toISOString().substr(0,10);
                                     <CCol xs="12" sm="12" lg="6">
                                     <CIcon name="cil-user" className='m-2'/> <b>Employee Name:</b>
                                                 <CFormGroup>
-                                                    <input type="text"
+                                                    <CInput type="text"
                                                         style={{ width: '85%' }} id="employee_name" name="employee_name" placeholder="employee_name" 
                                                         onChange={handleChange} className={errors.employee_name && touched.employee_name && "error"}/>
                                                 </CFormGroup>
@@ -149,7 +150,7 @@ var date = curr.toISOString().substr(0,10);
                                     <CCol xs="12" sm="12" lg="6">
                                     <CIcon name="cil-pen-alt" className='m-2'/><b>Designation:</b>
                                                 <CFormGroup>
-                                                    <input style={{ width: '85%' }} type="text" id="designation" name="designation" placeholder="Designation" 
+                                                    <CInput style={{ width: '85%' }} type="text" id="designation" name="designation" placeholder="Designation" 
                                                     onChange={handleChange} className={errors.designation && touched.designation && "error"}/>
                                                 </CFormGroup>
                                                 {errors.designation && touched.designation && 
@@ -161,7 +162,7 @@ var date = curr.toISOString().substr(0,10);
                                     <CCol xs="12" sm="12" lg="6">
                                     <CIcon name="cil-envelope-closed" className='m-2'/> <b>Email:</b>
                                             <CFormGroup>
-                                                <input style={{ width: '85%' }} type="text" id="email_id" name="email_id" placeholder="Email"
+                                                <CInput style={{ width: '85%' }} type="text" id="email_id" name="email_id" placeholder="Email"
                                                  onChange={handleChange} className={errors.email_id && touched.email_id && "error"}/>
                                             </CFormGroup>
                                             {errors.email_id && touched.email_id && 
@@ -170,7 +171,7 @@ var date = curr.toISOString().substr(0,10);
                                     <CCol xs="12" sm="12" lg="6">
                                <CIcon name="cil-mobile" className='m-2'/> <b>Phone Number:</b>
                                         <CFormGroup>
-                                            <input type="text"
+                                            <CInput type="text"
                                                 style={{ width: '85%' }} id="phone_number" name="phone_number" placeholder="phone_number" 
                                                 onChange={handleChange} className={errors.phone_number && touched.phone_number && "error"}/>
                                         </CFormGroup>
@@ -184,7 +185,7 @@ var date = curr.toISOString().substr(0,10);
                             <CCol xs="12" sm="12" lg="6">
                             <CIcon name="cil-pin" className='m-2'/><b>Security Pin:</b>
                                         <CFormGroup>
-                                            <input type="text"
+                                            <CInput type="text"
                                                 style={{ width: '85%' }} id="security_pin" name="security_pin" placeholder="security_pin" 
                                                 onChange={handleChange} className={errors.security_pin && touched.security_pin && "error"}/>
                                         </CFormGroup>
@@ -194,7 +195,7 @@ var date = curr.toISOString().substr(0,10);
                             <CCol xs="12" sm="12" lg="6">
                         <CIcon name="cil-briefcase" className='m-2'/> <b>Department:</b>
                                         <CFormGroup>
-                                            <input type="text"
+                                            <CInput type="text"
                                                 style={{ width: '85%' }} id="department" name="department" placeholder="department" 
                                                 onChange={handleChange} className={errors.department && touched.department && "error"}/>
                                         </CFormGroup>
@@ -207,7 +208,7 @@ var date = curr.toISOString().substr(0,10);
                         <CCol xs="12" sm="12" lg="6">
                         <CIcon name="cil-calendar" className='m-2'/> <b>Date Of Joining:</b>
                            <CFormGroup >
-                                    <input style={{ width: '85%' }} type="date" id="date_of_joining"
+                                    <CInput style={{ width: '85%' }} type="date" id="date_of_joining"
                                        size="sm"
                                        name="date_of_joining" placeholder="date_of_joining" 
                                        onChange={handleChange} defaultValue={date} className={errors.date_of_joining && touched.date_of_joining && "error"}/>
@@ -218,7 +219,7 @@ var date = curr.toISOString().substr(0,10);
                             <CCol xs="12" sm="12" lg="6">
                             <CIcon name="cil-calendar" className='m-2'/><b>Date Of Leaving:</b>
                                         <CFormGroup>
-                                        <input style={{ width: '85%' }} type="date" id="date_of_leaving"
+                                        <CInput style={{ width: '85%' }} type="date" id="date_of_leaving"
                                        size="sm"
                                        name="date_of_leaving" placeholder="date_of_leaving" 
                                        onChange={handleChange} className={errors.date_of_leaving && touched.date_of_leaving && "error"}/>
@@ -232,7 +233,7 @@ var date = curr.toISOString().substr(0,10);
                         <CCol xs="12" sm="12" lg="6">
                         <CIcon name="cil-voice-over-record" className='m-2'/><b>Employee Type:</b>
                                     <CFormGroup>
-                                        <input type="text"
+                                        <CInput type="text"
                                             style={{ width: '85%' }} id="employee_type" name="employee_type" placeholder="employee_type" 
                                             onChange={handleChange} className={errors.employee_type && touched.employee_type && "error"}/>
                                     </CFormGroup>
