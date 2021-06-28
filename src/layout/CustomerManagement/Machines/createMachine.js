@@ -19,6 +19,7 @@ import CustomerService from '../../../services/customerService';
 import CommonService from '../../../services/commonService'
 import { useHistory } from "react-router-dom";
 import CIcon from '@coreui/icons-react'
+import '../../styles.css'
 
 const customerservice = new CustomerService()
 const machineservice = new MachineService()
@@ -45,8 +46,8 @@ export default function CreateMachine() {
             value.machine_manufactured_date = "2020-03-03 03:03:03"
             value.machine_installation_date = "2020-03-03 03:03:03"
             value.machine_manufacturer = "test"
-            let res = await machineservice.createMachine(value)
-            console.log(res);
+           let res = await machineservice.createMachine(value)
+           console.log(res);
             history.push({
                 pathname: '/customermanagement',
                 state: 'Machine added'
@@ -94,12 +95,41 @@ export default function CreateMachine() {
                 {alert}
             </CAlert>
             <Formik
+             validate={values => {
+                let errors = {};
+                if (!values.customerCode) {
+                  errors.customerCode = "Customer Code is required";
+                }
+                if (!values.machine_make) {
+                    errors.machine_make = "Make is required";
+                  }
+                  if (!values.machine_model) {
+                    errors.machine_model = "Machine Model is required";
+                  }
+                  if (!values.machine_serial_number) {
+                    errors.machine_serial_number = "Machine Serial Number is required";
+                  }
+                  if (!values.machineAge) {
+                    errors.machineAge = "Machine Age is required";
+                  }
+                  if (!values.machine_controller_model) {
+                    errors.machine_controller_model = "Controller Model is required";
+                  }
+                  if (!values.machine_type) {
+                    errors.machine_type = "Machine Type is required";
+                  }
+                  if (!values.machine_controller) {
+                    errors.machine_controller = "Machine Controller is required";
+                  }
+                
+                return errors;
+              }}
                 initialValues={data}
                 onSubmit={(values) => {
                     submitHandler(values)
                     console.log(values)
                 }}>
-                {({ handleSubmit, handleChange, values, setFieldValue }) => (
+                {({ handleSubmit, handleChange, values,errors, touched, setFieldValue }) => (
 
 
                     <CCard>
@@ -114,7 +144,7 @@ export default function CreateMachine() {
                                                 <CFormGroup>
                                                     <CSelect style={{ width: '85%' }} custom size="md" style={{ width: '85%' }} name="customerCode" id="customerCode"
                                                         onChange={(e) => setFieldValue('customerCode', e.target.value)}
-                                                        value={values.customerCode}>
+                                                        value={values.customerCode} className={errors.customerCode && touched.customerCode && "error"}>
                                                         <option value="0">Open this select menu</option>
                                                         {customerseArr && customerseArr.length ? customerseArr.map((elem) => {
                                                             return <option key={elem.client_id} value={elem.client_id} style={{ textTransform: 'capitalize' }}>{elem.client_id}</option>
@@ -122,6 +152,8 @@ export default function CreateMachine() {
                                                         ) : null}
                                                     </CSelect>
                                                 </CFormGroup>
+                                        {errors.customerCode && touched.customerCode && 
+                                       <div className="input-feedback">{errors.customerCode}</div>}
                                             </CCol>
                                     </CCol>
 
@@ -142,6 +174,8 @@ export default function CreateMachine() {
                                                         ) : null}
                                                     </CSelect>
                                                 </CFormGroup>
+                                                {errors.machine_type && touched.machine_type && 
+                                       <div className="input-feedback">{errors.machine_type}</div>}
                                             </CCol>
                                     </CCol>
                                 </CRow>
@@ -155,7 +189,8 @@ export default function CreateMachine() {
                                                 <CCol>
                                                     <CFormGroup>
                                                         <CInput type="text"
-                                                            style={{ width: '85%' }} id="others" name="other_machine_type" placeholder="Machine Type" onChange={handleChange} />
+                                                            style={{ width: '85%' }} id="others" name="other_machine_type" placeholder="Machine Type" 
+                                                            onChange={handleChange} />
                                                     </CFormGroup>
                                                 </CCol>
                                             </CRow>
@@ -171,8 +206,10 @@ export default function CreateMachine() {
                                             <CInput type="text" id="machine_make" name="machine_make" 
                                             style={{width: '85%'}}
                                             placeholder="Make" onChange=
-                                            {handleChange} />
+                                            {handleChange}  className={errors.machine_make && touched.machine_make && "error"}/>
                                         </CFormGroup>
+                                        {errors.machine_make && touched.machine_make && 
+                                       <div className="input-feedback">{errors.machine_make}</div>}
                                         </CCol>
                                     </CCol>
                                     <CCol xs="12" sm="12" lg="6">
@@ -182,8 +219,10 @@ export default function CreateMachine() {
                                             <CInput type="text" id="machine_model" name="machine_model" 
                                             style={{width: '85%'}}
                                             placeholder="Model" onChange=
-                                            {handleChange} />
+                                            {handleChange}  className={errors.machine_model && touched.machine_model && "error"}/>
                                         </CFormGroup>
+                                        {errors.machine_model && touched.machine_model && 
+                                       <div className="input-feedback">{errors.machine_model}</div>}
                                         </CCol>
                                     </CCol>
                                 </CRow>
@@ -194,8 +233,11 @@ export default function CreateMachine() {
                                         <CCol>
                                         <CFormGroup>
                                             <CInput style={{width: '85%'}}
-                                             type="text" id="machine_serial_number" name="machine_serial_number" placeholder="Machine SerialNo" onChange={handleChange} />
+                                             type="text" id="machine_serial_number" name="machine_serial_number" placeholder="Machine SerialNo" 
+                                             onChange={handleChange} className={errors.machine_serial_number && touched.machine_serial_number && "error"}/>
                                         </CFormGroup>
+                                        {errors.machine_serial_number && touched.machine_serial_number && 
+                                       <div className="input-feedback">{errors.machine_serial_number}</div>}
                                         </CCol>
                                     </CCol>
                                     <CCol xs="12" sm="12" lg="6">
@@ -203,8 +245,11 @@ export default function CreateMachine() {
                                         <CCol>
                                         <CFormGroup>
                                             <CInput style={{width: '85%'}}
-                                             type="text" id="machineAge" name="machineAge" placeholder="Machine Age" onChange={handleChange} />
+                                             type="text" id="machineAge" name="machineAge" placeholder="Machine Age"
+                                              onChange={handleChange} className={errors.machineAge && touched.machineAge && "error"}/>
                                         </CFormGroup>
+                                        {errors.machineAge && touched.machineAge && 
+                                       <div className="input-feedback">{errors.machineAge}</div>}
                                         </CCol>
                                     </CCol>
 
@@ -227,6 +272,8 @@ export default function CreateMachine() {
                                                 ) : null}
                                             </CSelect>
                                         </CFormGroup>
+                                        {errors.machine_controller && touched.machine_controller && 
+                                       <div className="input-feedback">{errors.machine_controller}</div>}
                                         </CCol>
                                     </CCol>
 
@@ -236,8 +283,11 @@ export default function CreateMachine() {
                                         <CFormGroup>
                                             <CInput type="text" 
                                             style={{width: '85%'}}
-                                            id="machine_controller_model" name="machine_controller_model" placeholder="Controller Model" onChange={handleChange} />
+                                            id="machine_controller_model" name="machine_controller_model" placeholder="Controller Model" 
+                                            onChange={handleChange}  className={errors.machine_controller_model && touched.machine_controller_model && "error"}/>
                                         </CFormGroup>
+                                        {errors.machine_controller_model && touched.machine_controller_model && 
+                                       <div className="input-feedback">{errors.machine_controller_model}</div>}
                                         </CCol>
                                     </CCol>
                                

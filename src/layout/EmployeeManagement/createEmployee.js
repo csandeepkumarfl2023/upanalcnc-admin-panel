@@ -17,25 +17,11 @@ import EmployeeService from '../../services/employeeService';
 import { useHistory } from "react-router-dom";
 import CIcon from '@coreui/icons-react'
 import * as Yup from "yup"
-import './styles.css'
+import '../styles.css'
 
 const employeeservice = new EmployeeService()
 
 export default function CreateEmployee(props) {
-
-    const validationSchema = Yup.object({
-        employee_id: Yup.string().required("Employee id is required"),
-        employee_name:  Yup.string().required("Employee name is required"),
-        phone_number: Yup.string().required("Phone Number is required"),
-        address: Yup.string().required("Address is required"), 
-        designation: Yup.string().required("Designation is required"), 
-        security_pin: Yup.string().required("Security Pin is required"), 
-        date_of_joining: Yup.string().required("Date Of Joining is required"), 
-        date_of_leaving: Yup.string().required("Date Of Leaving is required"), 
-        employee_type: Yup.string().required("Employee Type is required"), 
-        email_id:  Yup.string().required("Email is required"), 
-        department: Yup.string().required("Department is required"),
-      })
 
     const history = useHistory();
     
@@ -90,7 +76,7 @@ var date = curr.toISOString().substr(0,10);
                     errors.designation = "Designation is required";
                   }
                   if (!values.email_id) {
-                    errors.email_id = "Designation is required";
+                    errors.email_id = "Email is required";
                   }
                   if (!values.phone_number) {
                     errors.phone_number = "Phone Number is required";
@@ -114,7 +100,6 @@ var date = curr.toISOString().substr(0,10);
               }}
               
                 initialValues={data}
-                validationSchema={validationSchema}
                 onSubmit={async (values) => {
                     submitHandler(values)
                 }}>
@@ -149,7 +134,7 @@ var date = curr.toISOString().substr(0,10);
                                     </CCol>
                                 </CRow>
 
-                                <CRow className="pt-3 pb-2">
+                                <CRow className="pt-3 pb-2 pl-10">
 
                                     <CCol xs="12" sm="12" lg="6">
                                     <CIcon name="cil-location-pin" className='m-2'/><b>Address:</b>

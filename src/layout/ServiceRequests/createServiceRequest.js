@@ -104,7 +104,7 @@ export default function CreateServiceRequest() {
     currentData.createdDate = moment().format('MMMM Do YYYY, h:mm:ss a')
     console.log(currentData)
     try {
-    let res = await serviceRequestService.createServiceReq(currentData)
+   let res = await serviceRequestService.createServiceReq(currentData)
     history.push({
       pathname: './servicerequest',
       state: 'Service Request added'
@@ -434,7 +434,7 @@ export default function CreateServiceRequest() {
 
             <CCol xs="12" sm="12" lg="4">
               <CRow style={{fontWeight: 'bold' }}>
-              <CIcon name="cil-cog" className='m-1'/>  MachinePicture:
+              <CIcon name="cil-camera" className='m-1'/>  MachinePicture:
                 <CFormGroup className="ml-3">
                   <CInputFile id="machinePicture" name="machinePicture" />
                 </CFormGroup>
