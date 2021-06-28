@@ -13,6 +13,7 @@ export default class CommonService {
       async logout(){
         // let result = await localStorage.clear()
         let result = await localStorage.removeItem("userData")
+        await localStorage.removeItem("userToken")
         return result
       }
 
