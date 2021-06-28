@@ -15,10 +15,8 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import AdminService from '../../../src/services/adminService'
-import CommonService from '../../services/commonService'
 
 const loginService = new AdminService()
-const commonService = new CommonService()
 
 const Login = (props) => {
 
@@ -37,8 +35,8 @@ const Login = (props) => {
      console.log('resss',res);
       if (res) {
         let userToken = res.data.data
-        await commonService.setToken(JSON.stringify(userToken))
-        //  props.history.push('/overview')
+        localStorage.setItem('userData',JSON.stringify(userToken))
+        localStorage.setItem('userToken',userToken.access_token)
       }
       props.history.push('/overview')
     }

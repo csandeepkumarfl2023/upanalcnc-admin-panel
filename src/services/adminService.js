@@ -1,12 +1,12 @@
 import { constants } from '../constants';
-// import axios from 'axios'
+import axios from 'axios'
 import Axios from '../helper/axios.helper';
 import apiServices from './apiService'
 
 export default class AdminService{
 
  async postLogin(data) {
-    let response = await Axios.post(`${constants.apiEndPoint}login`, data)
+    let response = await axios.post(`${constants.apiEndPoint}login`, data)
      return response
 }
  async getCharts  ()  {
