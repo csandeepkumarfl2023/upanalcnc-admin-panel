@@ -419,7 +419,7 @@ export default function Overview() {
                 <CCardHeader>
 
                   <CRow>
-                    <CCol sm="3">
+                    <CCol sm="2">
                       <CIcon name="cib-aurelia" style={{ color: 'gray' }} />
 
                     </CCol>
@@ -443,7 +443,7 @@ export default function Overview() {
                 <CCardHeader>
 
                   <CRow>
-                    <CCol sm="3">
+                    <CCol sm="2">
                       <CIcon name="cil-briefcase" style={{ color: 'gray' }} />
 
                     </CCol>
@@ -467,7 +467,7 @@ export default function Overview() {
                 <CCardHeader>
 
                   <CRow>
-                    <CCol sm="3">
+                    <CCol sm="2">
                       <CIcon name="cib-cc-amazon-pay" style={{ color: 'gray' }} />
 
                     </CCol>
@@ -481,11 +481,11 @@ export default function Overview() {
               </CCard>
             </CCol>
 
-            <CCol xs="4" sm="3">
+            <CCol xs="2" sm="2">
             <CCard>
                 <CCardHeader>
                   <CRow>
-                    <CCol sm="3">
+                    <CCol sm="2">
                       <CIcon name="cib-semaphoreci" style={{ color: 'gray' }} />
                     </CCol>
                     <CCol style={{ alignItems: 'flex-start'}}>
@@ -496,6 +496,8 @@ export default function Overview() {
                 </CCardHeader>
                   <PmChart series={pmChartSeries} labels={pmChartLabels} colors={pmChartColors} />
               </CCard>
+            </CCol>
+            <CCol xs="4">
             </CCol>
           </>
           : null}
