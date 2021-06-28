@@ -77,6 +77,7 @@ export default function CreateServiceRequest() {
   }
 
   const submitHandler = async () => {
+    console.log('sub,it function>>>>>>>>')
     (!customerName) ? setCustomerNameRequired(true) : setCustomerNameRequired(false)
   (!machine) ? setMachineNameRequired(true) : setMachineNameRequired(false)
     let currentData = {}
@@ -212,9 +213,6 @@ export default function CreateServiceRequest() {
       <Formik
       validate={values => {
                 let errors = {};
-                if (!values.customerName) {
-                  errors.customerName = "Customer Name is required";
-                }
                 if (!values.machine_model) {
                   errors.machine_model = "Machine is required";
                 } 
@@ -241,6 +239,8 @@ export default function CreateServiceRequest() {
               
                 initialValues={data}
                 onSubmit={async (values) => {
+                  console.log(values)
+                  console.log(customerName, machine)
                   (!customerName) ? setCustomerNameRequired(true) : setCustomerNameRequired(false)
                   (!machine) ? setMachineNameRequired(true) : setMachineNameRequired(false)
                     submitHandler(values)
