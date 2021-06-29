@@ -39,7 +39,25 @@ export default function Pms() {
   const [updateId, setUpdateId] = useState()
   const [loading, setLoading] = useState(false)
 
-  const fields = ['name', 'type', 'description',]
+  const [details, setDetails] = useState([])
+
+  const toggleDetails = (index) => {
+    const position = details.indexOf(index)
+    let newDetails = details.slice()
+    if (position !== -1) {
+      newDetails.splice(position, 1)
+    } else {
+      newDetails = [...details, index]
+    }
+    setDetails(newDetails)
+  }
+
+  const fields = [
+    { key: 'name', _style: { width: '40%'} },
+    { key: 'type', _style: { width: '20%'} },
+    { key: 'description', _style: { width: '20%'} },
+  ]
+
   const override = css`
   width: 5em;
   height: 5em;
@@ -163,7 +181,7 @@ export default function Pms() {
                   items={data}
                   fields={fields}
                   hover
-                  
+                  columnFilter
                   bordered
                   size="sm"
                   conditionalRowStyles={conditionalRowStyles}

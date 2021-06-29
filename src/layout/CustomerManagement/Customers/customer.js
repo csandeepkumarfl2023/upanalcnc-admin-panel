@@ -50,8 +50,15 @@ export default function Customer(props) {
 
   const [data, setData] = useState([])
 
-  const fields = ['customerName', 'customerCode', 'contact_person', 'phone_number', 'email_id', 'address', 'gst_number']
-
+  const fields = [
+    { key: 'company', _style: { width: '40%'} },
+    { key: 'client_id', _style: { width: '20%'} },
+    { key: 'contact_person', _style: { width: '20%'} },
+    { key: 'email_id', _style: { width: '20%'} },
+    { key: 'address', _style: { width: '20%'} },
+    { key: 'gst_number', _style: { width: '20%'} },
+    { key: 'phone_number', _style: { width: '20%'} },
+  ]
   const getData = async () => {
     setLoading(true)
     let res = await customerService.getAllCustomers()
@@ -154,7 +161,8 @@ export default function Customer(props) {
               items={data}
               fields={fields}
               hover
-              
+              columnFilter
+              sorter
               bordered
               size="sm"
               conditionalRowStyles={conditionalRowStyles}

@@ -256,7 +256,7 @@ export default function CreateServiceRequest() {
             <CRow>
               <CCol xs="12" sm="12" lg="4">
                 <CRow>
-                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-user" />  Customer Name: </div>
+                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-user" className="m-2"/>  Customer Name: </div>
                   <CFormGroup className="ml-3">
                     <CSelect custom size="sm" name="name" id="name" value={customerName} 
                     onChange={customerChangeHandler} className={errors.customerName && touched.customerName && "error"}>
@@ -273,12 +273,12 @@ export default function CreateServiceRequest() {
               </CCol>
               <CCol xs="12" sm="12" lg="4" >
                 <CRow>
-                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-asterisk-circle" /> Customer Code :</div>
+                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-asterisk-circle" className="m-2"/> Customer Code :</div>
                   <span className="ml-2" >{customerCode}</span> </CRow>
               </CCol>
               <CCol xs="12" sm="12" lg="4" >
                 <CRow>
-                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-contact" /> Contact Person Name : </div>
+                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-contact" className="m-2"/> Contact Person Name : </div>
                   <span className="ml-2">
                     {contactName}</span> </CRow>
               </CCol>
@@ -287,19 +287,19 @@ export default function CreateServiceRequest() {
             <CRow className="pt-2 pb-2">
               <CCol xs="12" sm="12" lg="4" >
                 <CRow>
-                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-mobile" /> Contact Number :  </div>
+                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-mobile" className="m-2"/> Contact Number :  </div>
                   <span className="ml-2">
                     {contactNumber}</span> </CRow>
               </CCol>
               <CCol xs="12" sm="12" lg="4" >
                 <CRow>
-                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-mobile" /> Alternate Number :  </div>
+                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-mobile" className="m-2"/> Alternate Number :  </div>
                   <span className="ml-2">
                     {alternateNumber} </span></CRow>
               </CCol>
               <CCol xs="10" sm="12" lg="4">
                 <CRow>
-                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-envelope-closed" /> Email :  </div>
+                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-envelope-closed" className="m-2"/> Email :  </div>
                   <span className="ml-2">
                     {email}</span>
                 </CRow>
@@ -309,7 +309,7 @@ export default function CreateServiceRequest() {
             <CRow className="pt-4">
               <CCol xs="12" sm="4" lg="4" >
                 <CRow>
-                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-location-pin" />  Customer Address : </div>
+                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-location-pin" className="m-2"/>  Customer Address : </div>
                   <span className="ml-2">
                     {customerAddress}
                   </span> </CRow>
@@ -401,7 +401,7 @@ export default function CreateServiceRequest() {
           <CRow>
             <CCol xs="12" sm="12" lg="4" >
               <CRow style={{fontWeight: 'bold' }}>
-              <CIcon name="cil-chevron-circle-right-alt" className='m-1'/> Issue Type:
+              <CIcon name="cil-chevron-circle-right-alt" className='m-1 mr-2'/> Issue Type:
                 <CFormGroup className="ml-3">
                   <CSelect custom size="sm" name="issueType" id="issueType" 
                    onChange={handleChange} 
@@ -419,7 +419,7 @@ export default function CreateServiceRequest() {
             </CCol>
             <CCol xs="12" sm="12" lg="4" >
               <CRow style={{ fontWeight: 'bold' }}>
-              <CIcon name="cil-asterisk-circle" className='m-1'/> Priority:
+              <CIcon name="cil-asterisk-circle" className=' mr-2 m-1'/> Priority:
                 <CFormGroup className="ml-3" >
                   <CSelect custom size="sm" name="priority" id="priority" 
                  onChange={handleChange} className={errors.priority && touched.priority && "error"}>
@@ -435,7 +435,7 @@ export default function CreateServiceRequest() {
             </CCol>
             <CCol xs="12" sm="12" lg="4" >
               <CRow style={{fontWeight: 'bold' }}>
-              <CIcon name="cil-tags" className='m-1'/> Service Request Type :
+              <CIcon name="cil-tags" className=' mr-2 m-1'/> Service Request Type :
                 <CFormGroup className="ml-3" >
                   <CSelect custom size="sm" name="serviceRequestType" id="serviceRequestType"
                    onChange={handleChange}
@@ -453,7 +453,7 @@ export default function CreateServiceRequest() {
           <CRow className="pt-2 pb-2">
           <CCol xs="12" sm="12" lg="4" >
               <CRow style={{fontWeight: 'bold' }}>
-              <CIcon name="cil-user" className='m-1'/>   Executive:
+              <CIcon name="cil-user" className='m-1  mr-2'/>   Executive:
                 <CFormGroup className="ml-3" >
                   <CSelect custom size="sm" name="executive" id="executive" 
                   onChange={handleChange}  className={errors.executive && touched.executive && "error"}>
@@ -470,7 +470,7 @@ export default function CreateServiceRequest() {
             </CCol>
           <CCol xs="12" sm="12" lg="4">
               <CRow style={{fontWeight: 'bold' }}>
-              <CIcon name="cil-calendar" className='m-1'/> Schedule Date:
+              <CIcon name="cil-calendar" className='m-1  mr-2'/> Schedule Date:
                 <CFormGroup className="ml-3" >
                   <input type="date" id="sheduleDate" name="sheduleDate" placeholder="sheduleDate" 
                    style={{borderColor:'lightgray'}}  onChange={handleChange}
@@ -482,7 +482,7 @@ export default function CreateServiceRequest() {
             </CCol>
             <CCol xs="12" sm="12" lg="4">
               <CRow style={{fontWeight: 'bold' }}>
-              <CIcon name="cil-clock" className='m-1'/> Schedule Time:
+              <CIcon name="cil-clock" className='m-1  mr-2'/> Schedule Time:
                 <CFormGroup className="ml-3 w-50" >
                   <input type="time" id="sheduleTime" name="sheduleTime" placeholder="sheduleTime" style={{borderColor:'lightgray'}}
                  onChange={handleChange} className={errors.sheduleTime && touched.sheduleTime && "error"}/>
@@ -494,8 +494,8 @@ export default function CreateServiceRequest() {
           </CRow>
           <CRow>
           <CCol xs="12" sm="12" lg="4">
-              <CRow style={{fontWeight: 'bold' }}>
-              <CIcon name="cil-color-border" />  Issue Details:
+              <CRow style={{fontWeight: 'bold' }} className="pt-3">
+              <CIcon name="cil-color-border" className="m-1  mr-2"/>  Issue Details:
                 <CTextarea
                   name="issueDetails"
                   id="issueDetails"
@@ -511,7 +511,7 @@ export default function CreateServiceRequest() {
 
             <CCol xs="12" sm="12" lg="4">
               <CRow style={{fontWeight: 'bold' }}>
-              <CIcon name="cil-camera" className='m-1'/>  MachinePicture:
+              <CIcon name="cil-camera" className='m-1  mr-2'/>  MachinePicture:
                 <CFormGroup className="ml-3">
                   <CInputFile id="machinePicture" name="machinePicture"  style={{borderColor:'lightgray'}}/>
                 </CFormGroup>

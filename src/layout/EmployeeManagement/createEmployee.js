@@ -38,10 +38,13 @@ export default function CreateEmployee(props) {
         try {
             console.log(value);
            let res = await employeeservice.createEmployee(value)
+           if(res)
+           {
             history.push({
                 pathname: './employeemanagement',
                 state: 'Employee added successfully!'
             })
+          }
         } catch (err) {
             setAlertText(err.message || 'Error occured Please try again!')
             setAlert(true)

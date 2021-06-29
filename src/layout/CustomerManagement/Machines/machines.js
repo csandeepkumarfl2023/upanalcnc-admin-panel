@@ -23,7 +23,18 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 const machineService = new MachineService()
 
-const fields = ['machine_id', 'customerCode', 'machine_type', 'make', 'model', 'machineSerialNo', 'machineAge', 'controller', 'controllerModel', 'generateQRCode']
+const fields = [
+  { key: 'machine_id', _style: { width: '40%'} },
+  { key: 'customerCode', _style: { width: '20%'} },
+  { key: 'machine_type', _style: { width: '20%'} },
+  { key: 'machine_make', _style: { width: '20%'} },
+  { key: 'machine_model', _style: { width: '20%'} },
+  { key: 'machine_serial_number', _style: { width: '20%'} },
+  { key: 'machine_age_as_on_installation', _style: { width: '20%'} },
+  { key: 'machine_controller', _style: { width: '20%'} },
+  { key: 'machine_controller_model', _style: { width: '20%'} },
+  { key: 'generateQRCode', _style: { width: '20%'} },
+]
 const override = css`
 display: block;
 margin: 0 auto;
@@ -125,7 +136,8 @@ export default function Machines() {
               items={data}
               fields={fields}
               hover
-              
+              columnFilter
+              sorter
               bordered
               size="sm"
               conditionalRowStyles={conditionalRowStyles}

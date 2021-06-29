@@ -61,8 +61,17 @@ const getBadge = status => {
     default: return 'gray'
   }
 }
-const fields = ['servicerequestId', 'company', 'priority', 'issue_type', 'executive', 'status', 'contactNumber', 'email', 'created_date']
-
+const fields = [
+  { key: 'service_request_id', _style: { width: '40%'} },
+  { key: 'company', _style: { width: '20%'} },
+  { key: 'request_priority', _style: { width: '20%'} },
+  { key: 'issue_type', _style: { width: '20%'} },
+  { key: 'executive', _style: { width: '20%'} },
+  { key: 'request_status', _style: { width: '20%'} },
+  { key: 'phone_number', _style: { width: '20%'} },
+  { key: 'email_id', _style: { width: '20%'} },
+  { key: 'request_date', _style: { width: '20%'} },
+]
 const override = css`
 width: 5em;
 height: 5em;
@@ -152,12 +161,25 @@ export default function ServiceRequest(props) {
 
 
   const getData = async () => {
-    setLoading(true)
+   // setLoading(true)
     let res = await serviceRequestService.getAllServiceRequests()
     let mappedRes = []
     res.data.forEach(elem => mappedRes.push(...elem.service_requests))
 
+    for (let item of mappedRes) { 
+      let company 
+      item.company =  item.machine?.client.company
+    }
 
+    for (let item of mappedRes) { 
+      item.executive =  item.machine?.client.executive
+    }
+    for (let item of mappedRes) { 
+      item.phone_number =  item.machine?.client.phone_number
+    }
+    for (let item of mappedRes) { 
+      item.email_id =  item.machine?.client.email_id
+    }
     // for (let item of mappedRes) {
     //   let reqDetail = await serviceRequestService.getServiceRequest(item.service_request_id)
     //   item.service_request_tasks = reqDetail.data.service_request_tasks
@@ -214,7 +236,8 @@ export default function ServiceRequest(props) {
                   items={data}
                   fields={fields}
                   hover
-                  
+                  columnFilter
+                  sorter
                   bordered
                   size="sm"
                   conditionalRowStyles={conditionalRowStyles}
@@ -267,7 +290,7 @@ export default function ServiceRequest(props) {
                       ),
                     'company':
                       (item) => (
-                        <td>{item.machine?.client.company}
+                        <td>{item.company ? item.company : null}
                         </td>
                       ),
                     'priority':
@@ -280,14 +303,14 @@ export default function ServiceRequest(props) {
                         <td>{item.issue_type ? item.issue_type : null}
                         </td>
                       ),
-                    'contactNumber':
+                    'phone_number':
                       (item) => (
-                        <td>{item.machine?.client.phone_number}
+                        <td>{item.phone_number ? item.phone_number : null}
                         </td>
                       ),
                     'email':
                       (item) => (
-                        <td>{item.machine?.client.email_id}
+                        <td>{item.email_id ? item.email_id : null}
                         </td>
                       ),
                     'created_date':

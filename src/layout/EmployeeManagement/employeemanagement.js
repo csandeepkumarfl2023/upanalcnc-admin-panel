@@ -50,7 +50,20 @@ export default function EmployeeManagements(props) {
   const [updateId, setUpdateId] = useState()
   const [loading, setLoading] = useState(false)
 
-  const fields = ['employee_id', 'employee_name', 'email_id', 'phone_number', 'designation', 'address', 'active','department','date_of_joining','date_of_leaving','employee_type']
+  const fields = [
+    { key: 'employee_id', _style: { width: '40%'} },
+    { key: 'employee_name', _style: { width: '20%'} },
+    { key: 'email_id', _style: { width: '20%'} },
+    { key: 'designation', _style: { width: '20%'} },
+    { key: 'address', _style: { width: '20%'} },
+    { key: 'active', _style: { width: '20%'} },
+    { key: 'phone_number', _style: { width: '20%'} },
+    { key: 'department', _style: { width: '20%'} },
+    { key: 'date_of_joining', _style: { width: '20%'} } ,
+    { key: 'date_of_leaving', _style: { width: '20%'} },
+    { key: 'employee_type', _style: { width: '20%'} },
+  ]
+
   const override = css`
     width: 5em;
     height: 5em;
@@ -186,7 +199,8 @@ export default function EmployeeManagements(props) {
                   items={data}
                   fields={fields}
                   hover
-                  
+                  columnFilter
+                  sorter
                   bordered
                   size="sm"
                   conditionalRowStyles={conditionalRowStyles}
