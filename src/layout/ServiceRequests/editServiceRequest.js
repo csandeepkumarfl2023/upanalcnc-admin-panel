@@ -26,6 +26,8 @@ import CustomerService from '../../services/customerService'
 import MachineService from '../../services/machineService'
 import EmployeeService from '../../services/employeeService';
 import moment from 'moment'
+import { Formik } from "formik"
+import '../styles.css'
 
 const serviceRequestService = new ServiceRequestService()
 const customerSerice = new CustomerService()
@@ -95,6 +97,7 @@ export default function EditServiceRequest(props) {
    }
 
    const submitHandler = async () => {
+      setConfirmation(false)
       let currentData = {}
       currentData.employee_id = executive
       currentData.request_status = 'ASSIGNED'
@@ -136,6 +139,12 @@ export default function EditServiceRequest(props) {
          <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
             Error occured Please try again!
          </CAlert>
+         <Formik
+                initialValues={item}
+                onSubmit={async (values) => {
+                    submitHandler(values)
+                }}>
+                {({ handleSubmit, handleChange, values, errors, touched }) => (
          <CCard  className="mt-2">
 
             <CRow className="pl-3 mt-3" >
@@ -227,13 +236,16 @@ export default function EditServiceRequest(props) {
                            <span className="ml-2">
                               {edit ?
                                  <CFormGroup >
-                                    <CSelect custom size="sm" name="name" id="name" value={executive} onChange={(e) => setExecutive(e.target.value)}>
+                                    <CSelect custom size="sm" name="name" id="name" value={executive} 
+                                    onChange={(e) => setExecutive(e.target.value)} className={!executive && "error"}>
                                        <option value="undefined">Select executive</option>
                                        {employeesArr && employeesArr.length ? employeesArr.map((elem) => {
                                           return <option key={elem.employee_id} value={elem.employee_id}>{elem.employee_name}</option>
                                        }
                                        ) : null}
                                     </CSelect>
+                                    {!executive && 
+                              <div className="input-feedback mt-1">Executive is required</div>}
                                  </CFormGroup>
                                  : serviceReqDetails?.service_request_tasks[0]?.employee?.employee_name || null}
                            </span>
@@ -247,7 +259,10 @@ export default function EditServiceRequest(props) {
                                  <CFormGroup >
                                     <CInput type="date" id="sheduleDate"
                                        size="sm"
-                                       name="sheduleDate" placeholder="sheduleDate" value={date} onChange={(e) => { setDate(e.target.value) }} />
+                                       name="sheduleDate" placeholder="sheduleDate" value={date} 
+                                       onChange={(e) => { setDate(e.target.value) }} className={!date && "error"}/>
+                                        {!date && 
+                              <div className="input-feedback">Date is required</div>}
                                  </CFormGroup>
                                  : serviceReqDetails && serviceReqDetails.service_request_tasks[0] && serviceReqDetails.service_request_tasks[0].site_visit_date  ? moment(serviceReqDetails.service_request_tasks[0].site_visit_date).format('YYYY-MM-DD') : null}
                            </span> </CRow>
@@ -258,7 +273,10 @@ export default function EditServiceRequest(props) {
                            <span className="ml-2">
                               {edit ?
                                  <CFormGroup >
-                                    <CInput type="time" id="sheduleTime" size="sm" name="sheduleTime" placeholder="sheduleTime" value={time} onChange={(e) => { setTime(e.target.value) }} />
+                                    <CInput type="time" id="sheduleTime" size="sm" name="sheduleTime" placeholder="sheduleTime" value={time} 
+                                    onChange={(e) => { setTime(e.target.value) }} className={!time && "error"}/>
+                                    {!time && 
+                              <div className="input-feedback">Time is required</div>}
                                  </CFormGroup>
                                  : serviceReqDetails && serviceReqDetails.service_request_tasks[0] && serviceReqDetails.service_request_tasks[0].site_visit_date? moment(serviceReqDetails.service_request_tasks[0].site_visit_date).format('HH:mm') : null}
                            </span>
@@ -275,8 +293,12 @@ export default function EditServiceRequest(props) {
                            <span className="ml-2">
                            {edit ?
                                  <CFormGroup >
-                                    <CInput type="text"  name="issueDetails" placeholder="issueDetails" value={issueDetails} onChange={(e) => { setIssueDetails(e.target.value) }} />
+                                    <CInput type="text"  name="issueDetails" placeholder="issueDetails" value={issueDetails} 
+                                    onChange={(e) => { setIssueDetails(e.target.value) }} className={!issueDetails && "error"}/>
+                                    {!issueDetails && 
+                              <div className="input-feedback">Issue Details is required</div>} 
                                  </CFormGroup>
+                                 
                                  :
                               serviceReqDetails ? serviceReqDetails.request_detail : null}
                            </span>
@@ -459,8 +481,8 @@ export default function EditServiceRequest(props) {
                   }
                </CRow>
 
-            </CCardBody>
-         </CCard>
+       
+
          <CModal centered="true" 
               show={confirmation} 
               onClose={() => setConfirmation(!confirmation)}
@@ -474,9 +496,13 @@ export default function EditServiceRequest(props) {
               </CModalBody>
               <CModalFooter>
                 <CButton color="info" onClick={() => setConfirmation(!confirmation)}>No</CButton>{' '}
-                <CButton color="info" onClick={submitHandler}>Yes</CButton>
+                <CButton color="info" onClick={handleSubmit}>Yes</CButton>
               </CModalFooter>
             </CModal>
+            </CCardBody>
+         </CCard>
+           )}
+          </Formik>
       </>
    )
 }
