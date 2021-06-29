@@ -205,6 +205,10 @@ export default function CreateServiceRequest() {
   curr.setDate(curr.getDate());
   var todayDate = curr.toISOString().substr(0,10);
 
+  var Time = new Date();
+  Time.setTime(Time.getTime())
+  var presentTime = Time.toTimeString().substr(0,10)
+ console.log('time',presentTime);
   return (
     <>
    <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
@@ -223,7 +227,7 @@ export default function CreateServiceRequest() {
                   errors.priority = "Priority is required";
                 }
                 if (!values.serviceRequestType) {
-                  errors.serviceRequestType = "Service Request Type is required";
+                  errors.serviceRequestType = "RequestType is required";
                 }
                 if (!values.executive) {
                   errors.executive = "Executive is required";
@@ -243,9 +247,9 @@ export default function CreateServiceRequest() {
                   console.log(customerName, machine)
                   (!customerName) ? setCustomerNameRequired(true) : setCustomerNameRequired(false)
                   (!machine) ? setMachineNameRequired(true) : setMachineNameRequired(false)
-                    submitHandler(values)
+                   // submitHandler(values)
                 }}>
-                {({ handleSubmit, handleChange, values, errors, touched, resetForm }) => (
+                {({ handleSubmit, handleChange, values, errors, touched }) => (
 
 
       <CCard  className="mt-0">
@@ -259,15 +263,14 @@ export default function CreateServiceRequest() {
                   <div style={{ fontWeight: 'bold' }}><CIcon name="cil-user" className="m-2"/>  Customer Name: </div>
                   <CFormGroup className="ml-3">
                     <CSelect custom size="sm" name="name" id="name" value={customerName} 
-                    onChange={customerChangeHandler} className={errors.customerName && touched.customerName && "error"}>
+                    onChange={customerChangeHandler} >
                       <option value="">Open this select menu</option>
                       {customerArr && customerArr.length ? customerArr.map((elem) => {
                         return <option key={elem.client_id} value={elem.client_id}>{elem.company}</option>
                       }
                       ) : null}
                     </CSelect>
-                  {customerNameRequired && 
-                <div className="input-feedback">Required</div>}
+                 
                   </CFormGroup>
                 </CRow>
               </CCol>
@@ -337,8 +340,7 @@ export default function CreateServiceRequest() {
                       ) : null}
 
                     </CSelect>
-                    {machineNameRequired && 
-                <div className="input-feedback">Required</div>}
+                    
                   </CFormGroup>
                 </CRow>
               </CCol>
@@ -400,8 +402,8 @@ export default function CreateServiceRequest() {
           <div className="pt-1 pl-3">
           <CRow>
             <CCol xs="12" sm="12" lg="4" >
-              <CRow style={{fontWeight: 'bold' }}>
-              <CIcon name="cil-chevron-circle-right-alt" className='m-1 mr-2'/> Issue Type:
+              <CRow>
+              <CIcon name="cil-chevron-circle-right-alt" className='m-1 mr-2'/> <b>Issue Type:</b>
                 <CFormGroup className="ml-3">
                   <CSelect custom size="sm" name="issueType" id="issueType" 
                    onChange={handleChange} 
@@ -412,14 +414,16 @@ export default function CreateServiceRequest() {
                     }
                     ) : null}
                   </CSelect>
+                  {errors.issueType && touched.issueType && 
+                <div className="input-feedback mt-1 mt-1"  >{errors.issueType}</div>}
                 </CFormGroup>
               </CRow>
-              {errors.issueType && touched.issueType && 
-                <div className="input-feedback">{errors.issueType}</div>}
+            
+              
             </CCol>
             <CCol xs="12" sm="12" lg="4" >
-              <CRow style={{ fontWeight: 'bold' }}>
-              <CIcon name="cil-asterisk-circle" className=' mr-2 m-1'/> Priority:
+              <CRow>
+              <CIcon name="cil-asterisk-circle" className=' mr-2 m-1'/><b> Priority:</b>
                 <CFormGroup className="ml-3" >
                   <CSelect custom size="sm" name="priority" id="priority" 
                  onChange={handleChange} className={errors.priority && touched.priority && "error"}>
@@ -428,14 +432,15 @@ export default function CreateServiceRequest() {
                     <option value="LOW">Low</option>
                     <option value="MEDIUM">Medium</option>
                   </CSelect>
+                  {errors.priority && touched.priority && 
+                <div className="input-feedback mt-1">{errors.priority}</div>}
                 </CFormGroup>   
               </CRow>
-              {errors.priority && touched.priority && 
-                <div className="input-feedback">{errors.priority}</div>}
+
             </CCol>
             <CCol xs="12" sm="12" lg="4" >
-              <CRow style={{fontWeight: 'bold' }}>
-              <CIcon name="cil-tags" className=' mr-2 m-1'/> Service Request Type :
+              <CRow>
+              <CIcon name="cil-tags" className=' mr-2 m-1'/> <b>Service Request Type :</b>
                 <CFormGroup className="ml-3" >
                   <CSelect custom size="sm" name="serviceRequestType" id="serviceRequestType"
                    onChange={handleChange}
@@ -444,18 +449,18 @@ export default function CreateServiceRequest() {
                   <option value="AMC">AMC</option>
                     <option value="BREAKDOWN">Breakdown</option>
                   </CSelect>
-                </CFormGroup>
+                  {errors.serviceRequestType && touched.serviceRequestType && 
+                <div className="input-feedback mt-1">{errors.serviceRequestType}</div>}
+                </CFormGroup>           
               </CRow>
-              {errors.serviceRequestType && touched.serviceRequestType && 
-                <div className="input-feedback">{errors.serviceRequestType}</div>}
             </CCol>
           </CRow>
           <CRow className="pt-2 pb-2">
           <CCol xs="12" sm="12" lg="4" >
-              <CRow style={{fontWeight: 'bold' }}>
-              <CIcon name="cil-user" className='m-1  mr-2'/>   Executive:
+              <CRow >
+              <CIcon name="cil-user" className='m-1  mr-2'/> <b>Executive:</b>
                 <CFormGroup className="ml-3" >
-                  <CSelect custom size="sm" name="executive" id="executive" 
+                  <CSelect custom size="sm" name="executive" id="executive"
                   onChange={handleChange}  className={errors.executive && touched.executive && "error"}>
                     <option value="undefined">Open this select menu</option>
                     {employeesArr && employeesArr.length ? employeesArr.map((elem) => {
@@ -463,33 +468,34 @@ export default function CreateServiceRequest() {
                     }
                     ) : null}
                   </CSelect>
-                </CFormGroup>
+                  {errors.executive && touched.executive && 
+                <div className="input-feedback mt-1">{errors.executive}</div>}
+                </CFormGroup>  
               </CRow>
-              {errors.executive && touched.executive && 
-                <div className="input-feedback">{errors.executive}</div>}
+            
             </CCol>
           <CCol xs="12" sm="12" lg="4">
-              <CRow style={{fontWeight: 'bold' }}>
-              <CIcon name="cil-calendar" className='m-1  mr-2'/> Schedule Date:
+              <CRow >
+              <CIcon name="cil-calendar" className='m-1  mr-2'/> <b>Schedule Date:</b>
                 <CFormGroup className="ml-3" >
-                  <input type="date" id="sheduleDate" name="sheduleDate" placeholder="sheduleDate" 
+                  <CInput type="date" id="sheduleDate" name="sheduleDate" placeholder="sheduleDate" 
                    style={{borderColor:'lightgray'}}  onChange={handleChange}
-                   defaultValue={todayDate} className={errors.sheduleDate && touched.sheduleDate && "error"}/>
+                   defaultValue={todayDate} />
                 </CFormGroup>
               </CRow>
-              {errors.sheduleDate && touched.sheduleDate && 
-                <div className="input-feedback">{errors.sheduleDate}</div>}
+             
             </CCol>
             <CCol xs="12" sm="12" lg="4">
-              <CRow style={{fontWeight: 'bold' }}>
-              <CIcon name="cil-clock" className='m-1  mr-2'/> Schedule Time:
+              <CRow >
+              <CIcon name="cil-clock" className='m-1  mr-2'/> <b>Schedule Time:</b>
                 <CFormGroup className="ml-3 w-50" >
-                  <input type="time" id="sheduleTime" name="sheduleTime" placeholder="sheduleTime" style={{borderColor:'lightgray'}}
-                 onChange={handleChange} className={errors.sheduleTime && touched.sheduleTime && "error"}/>
+                  <CInput type="time" id="sheduleTime" name="sheduleTime" placeholder="sheduleTime" 
+                  style={{borderColor:'lightgray'}} onChange={handleChange} 
+                  defaultValue={presentTime} />
                 </CFormGroup>
+              
               </CRow>
-              {errors.sheduleTime && touched.sheduleTime && 
-                <div className="input-feedback">{errors.sheduleTime}</div>}
+            
             </CCol>
           </CRow>
           <CRow>
@@ -529,7 +535,7 @@ export default function CreateServiceRequest() {
                   >Cancel</CButton>
                 </CCol>
                 <CCol xs="6">
-                  <CButton block color="info" className="mr-1" onClick={handleSubmit}
+                  <CButton block color="info"  className="mr-1" onClick={handleSubmit}
                   >Submit</CButton>
                 </CCol>
               </CRow>

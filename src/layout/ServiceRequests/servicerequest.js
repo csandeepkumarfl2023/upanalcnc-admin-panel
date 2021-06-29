@@ -161,7 +161,7 @@ export default function ServiceRequest(props) {
 
 
   const getData = async () => {
-   // setLoading(true)
+    setLoading(true)
     let res = await serviceRequestService.getAllServiceRequests()
     let mappedRes = []
     res.data.forEach(elem => mappedRes.push(...elem.service_requests))

@@ -60,10 +60,10 @@ export default function Customer(props) {
     { key: 'phone_number', _style: { width: '20%'} },
   ]
   const getData = async () => {
-    setLoading(true)
+  //  setLoading(true)
     let res = await customerService.getAllCustomers()
     setData(res.data)
-    setLoading(false)
+  //  setLoading(false)
   }
 
   const conditionalRowStyles = [
@@ -131,11 +131,11 @@ export default function Customer(props) {
 
   return (
     <div style={{position: 'relative'}} >
-      <div style={{position: 'absolute', top: '45%', left: '50%'}}>
-      <div className="sweet-loading">
+      {/* <div style={{position: 'absolute', top: '45%', left: '50%'}}> */}
+      {/* <div className="sweet-loading">
       <ClipLoader  loading={loading}  size={60} color='#2f4f4f'/>
-     </div> 
-      </div>
+     </div>  */}
+      {/* </div> */}
       <CAlert color="success" show={editAlert} closeButton onClick={() => setEditAlert(false)} dismissible>
         Updated Successfully!
       </CAlert>

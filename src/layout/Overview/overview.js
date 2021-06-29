@@ -155,6 +155,10 @@ export default function Overview() {
   const [scheduleDate, setScheduleDate] = useState("")
   const [scheduleTime, setScheduleTime] = useState("")
 
+  const [serviceReqLength,setServiceReqLength] = useState("")
+  const [salesVisitLength,setSalesVisitLength] = useState("")
+  const [pmLength,setPmLength] = useState("")
+
   const submitHandler = async () => {
     let currentData = {}
     currentData.id = Math.round(Math.random() * 10000000)
@@ -250,19 +254,22 @@ export default function Overview() {
     setServiceChartLabels(labelArr)
     setServiceChartSeries(seriesArr)
     setServiceReqChartColors(colorsArr)
-
     let mappedRes = []
     res.data.forEach(elem => mappedRes.push(...elem.service_requests))
+     setServiceReqLength(mappedRes.length)
     setServiceData(mappedRes.slice(0, 3))
+
   }
 
   const getSalesvisitData = async () => {
     let res = await salesvisitService.getAllSalesVisits()
-    setData(res.slice(0, 3))
+    setSalesVisitLength(res.length)
+    setData(res.slice(0, 3)) 
   }
 
   const getPmData = async () => {
     let res = await pmservice.getAllPms()
+    setPmLength(res.length)
     setPmData(res.slice(0, 3))
   }
 
@@ -511,7 +518,7 @@ export default function Overview() {
                   <CRow className="mb-2">
                     <CCol xs="10" style={{ display: 'flex', alignItems: 'center' }}>
                       <h5>
-                        Service Requests {servicedata.length}
+                        Service Requests {serviceReqLength}
                       </h5>
                     </CCol>
                     <CCol xs="2" style={{ width: '80px' }}>
@@ -738,7 +745,7 @@ export default function Overview() {
                   <CRow className="mb-2">
                     <CCol xs="10" style={{ display: 'flex', alignItems: 'center' }}>
                       <h5>
-                        Sales Visits
+                        Sales Visits {salesVisitLength}
                       </h5>
                     </CCol>
                     <CCol xs="2" style={{ width: '80px' }}>
@@ -978,7 +985,7 @@ export default function Overview() {
                 <CCardBody>
                   <CRow className="mb-2">
                     <CCol xs="10" style={{ display: 'flex', alignItems: 'center' }}>
-                      <h5>PM</h5>
+                      <h5>PM {pmLength}</h5>
                     </CCol>
                     <CCol xs="2" style={{ width: '80px' }}>
                       <CButton color="info" onClick={() => setPmAddModal(!pmAddModal)} style={{ height: '100%', width: '100%' }}>New</CButton>

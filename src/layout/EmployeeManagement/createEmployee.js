@@ -92,9 +92,7 @@ var date = curr.toISOString().substr(0,10);
                   if (!values.department) {
                     errors.department = "Department is required";
                   }
-                  if (!values.date_of_joining) {
-                    errors.date_of_joining = "Date of joining is required";
-                  }
+                 
                   if (!values.date_of_leaving) {
                     errors.date_of_leaving = "Date of leaving is required";
                   }
@@ -218,10 +216,9 @@ var date = curr.toISOString().substr(0,10);
                                     <CInput style={{ width: '85%' }} type="date" id="date_of_joining"
                                        size="sm"
                                        name="date_of_joining" placeholder="date_of_joining" 
-                                       onChange={handleChange} defaultValue={date} className={errors.date_of_joining && touched.date_of_joining && "error"}/>
+                                       onChange={handleChange} defaultValue={date} />
                                  </CFormGroup>
-                                 {errors.date_of_joining && touched.date_of_joining && 
-                                      <div className="input-feedback">{errors.date_of_joining}</div>}
+                                
                             </CCol>
                             <CCol xs="12" sm="12" lg="6">
                             <CIcon name="cil-calendar" className='m-2'/><b>Date Of Leaving:</b>

@@ -103,11 +103,11 @@ export default function Machines() {
 
   return (
       <div style={{position: 'relative'}}>
-      <div style={{position: 'absolute', top: '45%', left: '50%'}}>
+      {/* <div style={{position: 'absolute', top: '45%', left: '50%'}}>
       <div className="sweet-loading">
       <ClipLoader  loading={loading}  size={60} color='#2f4f4f'/>
      </div> 
-      </div>
+      </div> */}
       <CAlert color="success" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
         Successfully Added!
       </CAlert>
