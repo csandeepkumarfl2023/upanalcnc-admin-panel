@@ -16,6 +16,8 @@ import {
 import { useHistory } from "react-router-dom";
 import CustomerService from '../../../services/customerService'
 import CIcon from '@coreui/icons-react'
+import { Formik } from "formik"
+import '../../styles.css'
 
 const customerSerice = new CustomerService()
 
@@ -98,6 +100,13 @@ export default function EditCustomer(props) {
         <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
       {alert}
     </CAlert>
+    <Formik
+                initialValues={item}
+                onSubmit={async (values) => {
+                    submitHandler(values)
+                }}>
+                {({ handleSubmit, handleChange, values, errors, touched, resetForm }) => (
+
          <CCard>
             <CCardSubtitle className="pl-3 mt-3" style={{ fontSize: '1rem' }}><b>Customer:</b> {item ? item.company : null}</CCardSubtitle>
             <hr />
@@ -107,17 +116,21 @@ export default function EditCustomer(props) {
                      <CCol xs="12" sm="12" lg="6">
                      <CIcon name="cil-user" className='m-1'/><b>Customer Name:</b>
                            <CFormGroup >
-                              <CInput style={{ width: '85%' }} type="text" id="customerName"
-                                 name="customerName" placeholder="customerName" value={customerName} onChange={(e) => { setCustomerName(e.target.value) }} />
-                           </CFormGroup>
-                     </CCol>
+                           <CInput type="text"
+                                            style={{ width: '85%' }}
+                                            id="customerName" name="customerName" placeholder="Customer Name" value = {customerName} onChange={(e) => setCustomerName(e.target.value)} 
+                                             className={!customerName && "error"}/>
+                                    </CFormGroup>
+                                    {!customerName && 
+                                       <div className="input-feedback">Customer Name required</div>}
+                                    </CCol>
 
                      <CCol xs="12" sm="12" lg="6">
                      <CIcon name="cil-asterisk-circle" /> <b>Customer Code: </b>
                            <CFormGroup >
                               <CInput style={{ width: '85%' }} type="text" id="customerCode"
                                  name="customerCode" placeholder="customerCode" value={customerCode} readOnly />
-                           </CFormGroup>
+                           </CFormGroup>                   
                      </CCol>
 
                   </CRow>
@@ -128,15 +141,21 @@ export default function EditCustomer(props) {
                   <CIcon name="cil-contact" className='m-1'/>  <b>Contact Person: </b> 
                               <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="contactPerson"
-                                    name="contactPerson" placeholder="contactPerson" value={contactPerson} onChange={(e) => { setContactPerson(e.target.value) }} />
+                                    name="contactPerson" placeholder="contactPerson" value={contactPerson} 
+                                    onChange={(e) => { setContactPerson(e.target.value) }} className={!contactPerson && "error"}/>
                               </CFormGroup>
+                              {!contactPerson && 
+                                       <div className="input-feedback" >Contact Person is required</div>}  
                      </CCol>
                      <CCol xs="12" sm="12" lg="6">
                      <CIcon name="cil-screen-smartphone" /> <b>Contact Number: </b>
                               <CFormGroup >
                              <CInput style={{ width: '85%' }} type="text" id="mobileNo"
-                                    name="mobileNo" placeholder="mobileNo" value={mobileNo} onChange={(e) => { setMobileNo(e.target.value) }} />
+                                    name="mobileNo" placeholder="mobileNo" value={mobileNo} 
+                                    onChange={(e) => { setMobileNo(e.target.value) }} className={!mobileNo && "error"}/>
                               </CFormGroup>
+                              {!mobileNo && 
+                             <div className="input-feedback">Mobile No is required</div>}  
                      </CCol>
                   </CRow>
 
@@ -146,16 +165,22 @@ export default function EditCustomer(props) {
                      <CIcon name="cil-screen-smartphone" />  <b>Alternate Number: </b>
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="alternateNo"
-                                    name="alternateNo" placeholder="alternateNo" value={alternateNo} onChange={(e) => { setAlternateNo(e.target.value) }} />
+                                    name="alternateNo" placeholder="alternateNo" value={alternateNo} 
+                                    onChange={(e) => { setAlternateNo(e.target.value) }} className={!alternateNo && "error"}/>
                            </CFormGroup>
+                           {!alternateNo && 
+                                       <div className="input-feedback" >Alternate No is required</div>}  
                      </CCol>
           
                      <CCol xs="12" sm="12" lg="6">
                      <CIcon name="cil-location-pin" className='m-1'/> <b>Customer Address: </b>
                            <CFormGroup >
                                  <CTextarea style={{ width: '85%' }} type="text" id="address"
-                                    name="address" placeholder="address" value={address} onChange={(e) => { setAddress(e.target.value) }} />
+                                    name="address" placeholder="address" value={address} 
+                                    onChange={(e) => { setAddress(e.target.value) }} className={!address && "error"}/>
                               </CFormGroup>
+                              {!address && 
+                                       <div className="input-feedback" style={{color:'red'}}>Address is required</div>} 
                      </CCol>
                   </CRow>
 
@@ -165,16 +190,22 @@ export default function EditCustomer(props) {
                      <CIcon name="cil-audio" className='m-1'/><b>City:</b>
                            <CFormGroup >
                               <CInput style={{ width: '85%' }} type="text" id="city"
-                                 name="city" placeholder="city" value={city} onChange={(e) => { setCity(e.target.value) }} />
+                                 name="city" placeholder="city" value={city} 
+                                 onChange={(e) => {setCity(e.target.value) }} className={!city && "error"}/>
                            </CFormGroup>
+                           {!city && 
+                                       <div className="input-feedback" style={{color:'red'}}>City is required</div>} 
                      </CCol>
                 
                   <CCol xs="12" sm="12" lg="6">
                   <CIcon name="cil-pin" className='m-1'/> <b>Zip:</b>
                         <CFormGroup >
                            <CInput style={{ width: '85%' }} type="text" id="zip"
-                              name="zip" placeholder="zip" value={zip} onChange={(e) => { setZip(e.target.value) }} />
+                              name="zip" placeholder="zip" value={zip} 
+                              onChange={(e) => {setZip(e.target.value) }} className={!zip && "error"}/>
                         </CFormGroup>
+                        {!zip && 
+                         <div className="input-feedback" style={{color:'red'}}>Zip is required</div>} 
                      </CCol>
                   </CRow>
 
@@ -186,15 +217,21 @@ export default function EditCustomer(props) {
                      <CIcon name="cil-bank" className='m-1'/><b>State:</b>
                         <CFormGroup >
                            <CInput style={{ width: '85%' }} type="text" id="state"
-                              name="state" placeholder="state" value={state} onChange={(e) => { setState(e.target.value) }} />
+                              name="state" placeholder="state" value={state} 
+                              onChange={(e) => { setState(e.target.value) }} className={!state && "error"}/>
                         </CFormGroup>
+                        {!state && 
+                         <div className="input-feedback" >State is required</div>} 
                      </CCol>
                      <CCol xs="12" sm="12" lg="6">
                      <CIcon name="cil-flag-alt" className='m-1'/> <b>Country: </b>
                         <CFormGroup >
                            <CInput style={{ width: '85%' }} type="text" id="country"
-                              name="country" placeholder="country" value={country} onChange={(e) => { setCountry(e.target.value) }} />
+                              name="country" placeholder="country" value={country}
+                               onChange={(e) => {setCountry(e.target.value) }} className={!country && "error"}/>
                         </CFormGroup>
+                        {!country && 
+                        <div className="input-feedback">Country is required</div>} 
                      </CCol>
                   </CRow>
 
@@ -203,15 +240,21 @@ export default function EditCustomer(props) {
                      <CIcon name="cil-envelope-closed" className='m-1'/><b>Email:</b>
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="email"
-                                    name="email" placeholder="email" value={email} onChange={(e) => { setEmail(e.target.value) }} />
+                                    name="email" placeholder="email" value={email} 
+                                    onChange={(e) => { setEmail(e.target.value) }} className={!email && "error"}/>
                               </CFormGroup>
+                              {!email && 
+                               <div className="input-feedback" >Email is required</div>} 
                      </CCol>
                   <CCol xs="12" sm="12" lg="6">
                   <CIcon name="cil-notes" className='m-1'/><b>GstNumber: </b>
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="gstNumber"
-                                    name="gstNumber" placeholder="gstNumber" value={gstNumber} onChange={(e) => { setGstNumber(e.target.value) }} />
+                                    name="gstNumber" placeholder="gstNumber" value={gstNumber} 
+                                    onChange={(e) => { setGstNumber(e.target.value) }} className={!gstNumber && "error"}/>
                               </CFormGroup>
+                              {!gstNumber && 
+                              <div className="input-feedback">Gst Number is required</div>} 
                      </CCol>
                   </CRow>
                </div>
@@ -233,6 +276,9 @@ export default function EditCustomer(props) {
                   </CRow>
             </CCardBody>
          </CCard>
+         
+         )}
+         </Formik>
       </>
 
    )

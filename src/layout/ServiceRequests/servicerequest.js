@@ -244,7 +244,7 @@ export default function ServiceRequest(props) {
                   itemsPerPage={20}
                   pagination
                   scopedSlots={{
-                    'servicerequestId':
+                    'service_request_id':
                       (item) => (
                         <td>
                           <CLink> <a onClick={() => {
@@ -269,7 +269,7 @@ export default function ServiceRequest(props) {
                             {<CIcon className="ml-2" name="cil-pen" size="1xl" />}</a></p>
                         </td>
                       ),
-                    'status':
+                    'request_status':
                       (item) => (
                         <td>{item.request_status ?
                           <button

@@ -18,6 +18,8 @@ import CIcon from '@coreui/icons-react'
 import { useHistory } from "react-router-dom";
 import EmployeeService from '../../services/employeeService'
 import moment from 'moment'
+import { Formik } from "formik"
+import '../styles.css'
 
 const employeeSerice = new EmployeeService()
 // active: true
@@ -108,6 +110,13 @@ export default function EditEmployee(props) {
         <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
       {alertText}
     </CAlert>
+    <Formik
+                initialValues={item}
+                onSubmit={async (values) => {
+                    submitHandler(values)
+                }}>
+                {({ handleSubmit, handleChange, values, errors, touched }) => (
+
          <CCard>
             <CCardSubtitle className="pl-3 mt-3" style={{ fontSize: '1rem' }}><b>Employee:</b> {item ? item.employee_name : null}</CCardSubtitle>
             <hr />
@@ -118,15 +127,21 @@ export default function EditEmployee(props) {
                      <CIcon name="cil-user" className='m-2'/>  <b>Employee Name:</b>
                            <CFormGroup >
                               <CInput style={{ width: '85%' }} type="text" id="employee_name"
-                                 name="employee_name" placeholder="employee_name" value={employee_name} onChange={(e) => { setEmployeeName(e.target.value) }} />
+                                 name="employee_name" placeholder="employee_name" value={employee_name} 
+                                 onChange={(e) => { setEmployeeName(e.target.value) }} className={!employee_name && "error"}/>
                            </CFormGroup>
+                           {!employee_name && 
+                              <div className="input-feedback" >Employee Name is required</div>}  
                      </CCol>
                      <CCol xs="12" sm="12" lg="6">
                      <CIcon name="cil-briefcase" className='m-2'/> <b>Department:</b>
                            <CFormGroup >
                               <CInput style={{ width: '85%' }} type="department" id="department"
-                                 name="department" placeholder="department" value={department} onChange={(e) => { setDepartment(e.target.value) }} />
+                                 name="department" placeholder="department" value={department} 
+                                 onChange={(e) => { setDepartment(e.target.value) }}  className={!department && "error"}/>
                            </CFormGroup>
+                           {!department && 
+                              <div className="input-feedback">Department is required</div>} 
                      </CCol>
 
                   </CRow>
@@ -144,8 +159,11 @@ export default function EditEmployee(props) {
                      <CIcon name="cil-mobile" className='m-2'/>  <b>Phone Number: </b>
                               <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="phone_number"
-                                    name="phone_number" placeholder="phone_number" value={phone_number} onChange={(e) => { setPhoneNumber(e.target.value) }} />
+                                    name="phone_number" placeholder="phone_number" value={phone_number}
+                                     onChange={(e) => { setPhoneNumber(e.target.value) }} className={!phone_number && "error"}/>
                               </CFormGroup>
+                              {!phone_number && 
+                              <div className="input-feedback">Phone Number is required</div>} 
                      </CCol>
                   </CRow>
 
@@ -154,15 +172,21 @@ export default function EditEmployee(props) {
                      <CIcon name="cil-location-pin" className='m-2'/><b>Employee Address: </b>
                            <CFormGroup >
                                  <CTextarea style={{ width: '85%' }} type="text" id="address"
-                                    name="address" placeholder="address" value={address} onChange={(e) => { setAddress(e.target.value) }} />
+                                    name="address" placeholder="address" value={address} 
+                                    onChange={(e) => { setAddress(e.target.value) }} className={!address && "error"}/>
                               </CFormGroup>
+                              {!address && 
+                              <div className="input-feedback">Address is required</div>} 
                      </CCol>
                      <CCol xs="12" sm="12" lg="6">
                      <CIcon name="cil-envelope-closed" className='m-2'/> <b>EmailId:</b>
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="email_id"
-                                    name="email_id" placeholder="email_id" value={email_id} onChange={(e) => { setEmailId(e.target.value) }} />
+                                    name="email_id" placeholder="email_id" value={email_id} 
+                                    onChange={(e) => { setEmailId(e.target.value) }} className={!email_id && "error"}/>
                               </CFormGroup>
+                              {!email_id && 
+                              <div className="input-feedback">Email is required</div>} 
                      </CCol>
                   </CRow>
 
@@ -172,15 +196,21 @@ export default function EditEmployee(props) {
                   <CIcon name="cil-pen-alt" className='m-2'/> <b>Designation: </b>
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="designation"
-                                    name="designation" placeholder="designation" value={designation} onChange={(e) => { setDesignation(e.target.value) }} />
+                                    name="designation" placeholder="designation" value={designation} 
+                                    onChange={(e) => { setDesignation(e.target.value) }} className={!designation && "error"}/>
                               </CFormGroup>
+                              {!designation && 
+                              <div className="input-feedback">Designation is required</div>} 
                      </CCol>
                      <CCol xs="12" sm="12" lg="6">
                      <CIcon name="cil-voice-over-record" className='m-2'/> <b>Employee Type:</b>
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="employee_type"
-                                    name="employee_type" placeholder="employee_type" value={employee_type} onChange={(e) => { setEmployeeType(e.target.value) }} />
+                                    name="employee_type" placeholder="employee_type" value={employee_type} 
+                                    onChange={(e) => { setEmployeeType(e.target.value) }} className={!employee_type && "error"}/>
                               </CFormGroup>
+                              {!employee_type && 
+                              <div className="input-feedback">Employee Type is required</div>} 
                      </CCol>
                   </CRow>
 
@@ -189,15 +219,21 @@ export default function EditEmployee(props) {
                      <CIcon name="cil-calendar" className='m-2'/> <b>Date Of Joining:</b>
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="date" id="date_of_joining"
-                                    name="date_of_joining" placeholder="date_of_joining" value={date_of_joining} onChange={(e) => { setDateOfJoining(e.target.value) }} />
+                                    name="date_of_joining" placeholder="date_of_joining" value={date_of_joining} 
+                                    onChange={(e) => { setDateOfJoining(e.target.value) }} className={!date_of_joining && "error"}/>
                               </CFormGroup>
+                              {!date_of_joining && 
+                              <div className="input-feedback">Date Of Joining is required</div>}
                      </CCol>
                   <CCol xs="12" sm="12" lg="6">
                   <CIcon name="cil-calendar" className='m-2'/> <b>Date Of Leaving: </b>
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="date" id="date_of_leaving"
-                                    name="date_of_leaving" placeholder="date_of_leaving" value={date_of_leaving} onChange={(e) => { setDateOfLeaving(e.target.value) }} />
+                                    name="date_of_leaving" placeholder="date_of_leaving" value={date_of_leaving} 
+                                    onChange={(e) => {setDateOfLeaving(e.target.value)}} className={!date_of_leaving && "error"}/>
                               </CFormGroup>
+                              {!date_of_leaving && 
+                              <div className="input-feedback">Date Of Leaving is required</div>}
                      </CCol>
                   </CRow>
                   <CRow className="pt-3 pb-2">
@@ -240,6 +276,8 @@ export default function EditEmployee(props) {
                   </CRow>
             </CCardBody>
          </CCard>
+        )}
+      </Formik>
       </>
 
    )

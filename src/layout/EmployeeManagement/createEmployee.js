@@ -19,6 +19,7 @@ import { useHistory } from "react-router-dom";
 import CIcon from '@coreui/icons-react'
 import * as Yup from "yup"
 import '../styles.css'
+import moment from 'moment'
 
 const employeeservice = new EmployeeService()
 
@@ -105,6 +106,9 @@ var date = curr.toISOString().substr(0,10);
               
                 initialValues={data}
                 onSubmit={async (values) => {
+                  console.log('values from employee',values);
+                  values.date_of_joining =  moment(new Date(values.date_of_joining)).format('YYYY-MM-DD HH:mm:ss') 
+                  values.date_of_leaving =  moment(new Date(values.date_of_leaving)).format('YYYY-MM-DD HH:mm:ss') 
                     submitHandler(values)
                 }}>
                 {({ handleSubmit, handleChange, values, errors, touched, resetForm }) => (

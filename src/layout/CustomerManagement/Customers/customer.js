@@ -169,7 +169,7 @@ export default function Customer(props) {
               itemsPerPage={20}
               pagination
               scopedSlots={{
-                'customerName':
+                'company':
                   (item) => (
                     <td>
                     <CLink>  <a onClick={() => {
