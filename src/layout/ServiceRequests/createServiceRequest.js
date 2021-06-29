@@ -115,11 +115,11 @@ export default function CreateServiceRequest() {
     currentData.createdDate = moment().format('MMMM Do YYYY, h:mm:ss a')
     console.log(currentData)
     try {
-  // let res = await serviceRequestService.createServiceReq(currentData)
-    // history.push({
-    //   pathname: './servicerequest',
-    //   state: 'Service Request added'
-    // })
+  let res = await serviceRequestService.createServiceReq(currentData)
+    history.push({
+      pathname: './servicerequest',
+      state: 'Service Request added'
+    })
   } catch (err) {
     console.log('err', err.message)
     setAlert(true)
@@ -270,19 +270,20 @@ export default function CreateServiceRequest() {
                       }
                       ) : null}
                     </CSelect>
-                 
+                    {!company &&
+                    <div className="input-feedback mt-1">Customer Name required</div>}
                   </CFormGroup>
                 </CRow>
               </CCol>
               <CCol xs="12" sm="12" lg="4" >
                 <CRow>
                   <div style={{ fontWeight: 'bold' }}><CIcon name="cil-asterisk-circle" className="m-2"/> Customer Code :</div>
-                  <span className="ml-2" >{customerCode}</span> </CRow>
+                  <span className="ml-2 mt-1" >{customerCode}</span> </CRow>
               </CCol>
               <CCol xs="12" sm="12" lg="4" >
                 <CRow>
                   <div style={{ fontWeight: 'bold' }}><CIcon name="cil-contact" className="m-2"/> Contact Person Name : </div>
-                  <span className="ml-2">
+                  <span className="ml-2 mt-1">
                     {contactName}</span> </CRow>
               </CCol>
             </CRow>
@@ -291,19 +292,19 @@ export default function CreateServiceRequest() {
               <CCol xs="12" sm="12" lg="4" >
                 <CRow>
                   <div style={{ fontWeight: 'bold' }}><CIcon name="cil-mobile" className="m-2"/> Contact Number :  </div>
-                  <span className="ml-2">
+                  <span className="ml-2 mt-1">
                     {contactNumber}</span> </CRow>
               </CCol>
               <CCol xs="12" sm="12" lg="4" >
                 <CRow>
                   <div style={{ fontWeight: 'bold' }}><CIcon name="cil-mobile" className="m-2"/> Alternate Number :  </div>
-                  <span className="ml-2">
+                  <span className="ml-2 mt-1">
                     {alternateNumber} </span></CRow>
               </CCol>
               <CCol xs="10" sm="12" lg="4">
                 <CRow>
                   <div style={{ fontWeight: 'bold' }}><CIcon name="cil-envelope-closed" className="m-2"/> Email :  </div>
-                  <span className="ml-2">
+                  <span className="ml-2 mt-1">
                     {email}</span>
                 </CRow>
               </CCol>
@@ -313,7 +314,7 @@ export default function CreateServiceRequest() {
               <CCol xs="12" sm="4" lg="4" >
                 <CRow>
                   <div style={{ fontWeight: 'bold' }}><CIcon name="cil-location-pin" className="m-2"/>  Customer Address : </div>
-                  <span className="ml-2">
+                  <span className="ml-2 mt-1">
                     {customerAddress}
                   </span> </CRow>
               </CCol>
@@ -332,7 +333,8 @@ export default function CreateServiceRequest() {
                 <CRow>
                   <div style={{ fontWeight: 'bold' }}> Select Machine: </div>
                   <CFormGroup className="ml-3" >
-                  <CSelect custom size="sm" name="name" id="name" value={machine} onChange={machineChangeController}>
+                  <CSelect custom size="sm" name="name" id="name" value={machine} onChange={machineChangeController}
+                   className={!machine && "error"}>
                       <option value="">Open this select menu</option>
                       {machineArr && machineArr.length ? machineArr.map((elem) => {
                         return <option key={elem.machine_id} value={elem.machine_id}>{elem.machine_model}</option>
@@ -340,7 +342,8 @@ export default function CreateServiceRequest() {
                       ) : null}
 
                     </CSelect>
-                    
+                    {!machine &&
+                    <div className="input-feedback mt-1">Machine required</div>}
                   </CFormGroup>
                 </CRow>
               </CCol>
@@ -489,9 +492,9 @@ export default function CreateServiceRequest() {
               <CRow >
               <CIcon name="cil-clock" className='m-1  mr-2'/> <b>Schedule Time:</b>
                 <CFormGroup className="ml-3 w-50" >
-                  <CInput type="time" id="sheduleTime" name="sheduleTime" placeholder="sheduleTime" 
+                  <input type="time" id="sheduleTime" name="sheduleTime" placeholder="sheduleTime"
                   style={{borderColor:'lightgray'}} onChange={handleChange} 
-                  defaultValue={presentTime} />
+                  defaultValue={moment("20010704T120854").format("LT")} />
                 </CFormGroup>
               
               </CRow>
