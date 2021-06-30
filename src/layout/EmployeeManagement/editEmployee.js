@@ -99,6 +99,7 @@ export default function EditEmployee(props) {
       console.log(currentData);
       try {
          let res = await employeeSerice.updateEmployee(currentData)
+         await employeeSerice.updateEmployeeActive(employee_id, active)
          history.push({
             pathname: '/employeemanagement',
             state: 'Employee updated successfully!'
@@ -109,10 +110,9 @@ export default function EditEmployee(props) {
       }
    }
 
-   const activeHandler = () => {
-      console.log('in active');
-      setActive(!active)
-      console.log('active', active);
+   const activeHandler = (status) => {
+      setActive(status)
+      // console.log('active', active);
    }
    React.useEffect(() => {
       console.log('props', props.location.state);
@@ -303,11 +303,11 @@ export default function EditEmployee(props) {
                                  <CFormGroup>
                                     <CCol sm="9">
                                        <CSwitch
-                                          value={active}
+                                         checked={active ? true : false}
                                           className="mr-1"
                                           color="primary"
-                                          onChange={activeHandler}
-                                       />
+                                          onChange={(e) => activeHandler(e.target.checked)}
+                                       /> 
                                     </CCol>
                                  </CFormGroup>
                               </CRow>
