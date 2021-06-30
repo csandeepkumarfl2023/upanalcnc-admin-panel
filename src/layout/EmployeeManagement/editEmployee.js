@@ -63,31 +63,7 @@ export default function EditEmployee(props) {
    const validation = yup.object().shape({
       department: yup
          .string()
-         .required('Department required'),
-         employee_name: yup
-         .string()
-         .required('Employee Name required'),
-         phone_number: yup
-         .string()
-         .required('Phone Number required'),
-         address: yup
-         .string()
-         .required('Address required'),
-         email_id: yup
-         .string()
-         .required('Email required'),
-         designation: yup
-         .string()
-         .required('Designation required'),
-         employee_type: yup
-         .string()
-         .required('Employee Type required'),
-         date_of_joining: yup
-         .string()
-         .required('Date Of Joining required'),
-         date_of_leaving: yup
-         .string()
-         .required('Date Of Leaving required'),
+         .required('Required')
    })
 
    const getEmployeeDetails = async () => {
@@ -165,8 +141,17 @@ export default function EditEmployee(props) {
             {alertText}
          </CAlert>
          <Formik
-            enableReinitialize={true}
             validationSchema={validation}
+            //  validate={values => {
+            //    let errors = {};
+            //    if (!values.employee_id) {
+            //      errors.employee_id = "Employee id is required";
+            //    }
+            //    if (!values.employee_name) {
+            //        errors.employee_name = "Employee name is required";
+            //      }
+            //      return errors;
+            //    }}
             initialValues={data}
             onSubmit={async (values) => {
                console.log('values', values);
@@ -188,151 +173,145 @@ export default function EditEmployee(props) {
                   <CCardBody>
 
                      <div className="pt-1 pl-3 ">
-                        <CRow className="mb-2 pb-2">
-                        <CCol xs="12" sm="12" lg="6">
-                                 <CIcon name="cib-adobe-indesign" className='m-1' /> <b>Employee Id:    </b>
-                                 { edit ?
-                                 <CFormGroup > 
-                                    <CInput style={{ width: '85%' }} type="text" id="employee_id"
-                                    name="employee_id" placeholder="employee_id" value={employee_id} onChange={(e) => { setEmployeeId(e.target.value) }} readOnly/>
-                                 </CFormGroup>
-                                 : employee_id } 
-                           </CCol>
+                        <CRow className="mb-2 ">
                            <CCol xs="12" sm="12" lg="6">
                               <CIcon name="cil-user" className='m-1' />  <b>Employee Name:   </b>
                               {edit ?
-                              <>
                                  <CFormGroup >
                                     <CInput style={{ width: '85%' }} type="text" id="employee_name"
                                        name="employee_name" placeholder="employee_name" value={values.employee_name}
                                        onChange={handleChange} className={errors.employee_name && touched.employee_name && "error"} />
                                  </CFormGroup>
-                                 { errors.employee_name && touched.employee_name &&
-                                    <div className="input-feedback">{errors.employee_name}</div>}
-                                    </>
                                  : employee_name}
-                             
-                           </CCol>
-                                 </CRow>
-
-                                 <CRow className="mb-2 pb-2">
-                           <CCol xs="12" sm="12" lg="6">
-                              <CIcon name="cil-pen-alt" className='m-1' /> <b>Designation:    </b>
-                              {edit ?
-                              <>
-                                 <CFormGroup >
-                                    <CInput style={{ width: '85%' }} type="text" id="designation"
-                                       name="designation" placeholder="designation" value={values.designation}
-                                       onChange={handleChange}  className={errors.designation && touched.designation && "error"} />
-                                 </CFormGroup>
-                                  {errors.designation && touched.designation &&
-                                    <div className="input-feedback">{errors.designation}</div>}
-                                    </>
-                                 : designation}
-                             
+                              {errors.employee_name && touched.employee_name &&
+                                 <div className="input-feedback">{errors.employee_name}</div>}
                            </CCol>
                            <CCol xs="12" sm="12" lg="6">
                               <CIcon name="cil-briefcase" className='m-1' /> <b>Department:   </b>
                               {edit ?
-                              <>
                                  <CFormGroup >
                                     <CInput style={{ width: '85%' }} type="department" id="department"
                                        name="department" placeholder="department" value={values.department}
                                        onChange={handleChange} className={errors.department && touched.department && "error"} />
                                  </CFormGroup>
-                                 {errors.department && touched.department &&
-                                    <div className="input-feedback">{errors.department}</div>}
-                                    </>
                                  : department}
-                              
+                              {errors.department && touched.department &&
+                                 <div className="input-feedback">{errors.department}</div>}
                            </CCol>
-                           </CRow>
-                        
 
-                        <CRow className=" pb-2">
-                        <CCol xs="12" sm="12" lg="6">
-                              <CIcon name="cil-voice-over-record" className='m-1' /> <b>Employee Type:     </b>
-                              {edit ?
-                              <>
-                                 <CFormGroup >
-                                    <CInput style={{ width: '85%' }} type="text" id="employee_type"
-                                       name="employee_type" placeholder="employee_type" value={values.employee_type}
-                                       onChange={handleChange} className={errors.employee_type && touched.employee_type && "error"}/>
-                                 </CFormGroup>
-                                     {errors.employee_type && touched.employee_type &&
-                                       <div className="input-feedback">{errors.employee_type}</div>}
-                                       </>
-                                 : employee_type}
-                          
-                           </CCol>
-                           <CCol xs="12" sm="12" lg="6" >
-                              <CIcon name="cil-mobile" className='ml-1 mt-0' />  <b>Phone Number:   </b>
-                              {edit ?
-                              <>
-                                 <CFormGroup >
-                                    <CInput style={{ width: '85%' }} type="text" id="phone_number"
-                                       name="phone_number" placeholder="phone_number" value={values.phone_number}
-                                       onChange={handleChange} className={errors.phone_number && touched.phone_number && "error"}/>
-                                 </CFormGroup>
-                                  {errors.phone_number && touched.phone_number &&
-                                    <div className="input-feedback">{errors.phone_number}</div>}
-                                    </>
-                                 : phone_number}
-                             
-                           </CCol>
-                        </CRow>
-
-                        <CRow className="pt-2 pb-2">
-                           <CCol xs="12" sm="12" lg="6">
-                              <CIcon name="cil-location-pin" className='m-1' /><b>Employee Address:   </b>
-                              {edit ?
-                              <>
-                                 <CFormGroup >
-                                    <CTextarea style={{ width: '85%' }} type="text" id="address"
-                                       name="address" placeholder="address" value={values.address}
-                                       onChange={handleChange} className={errors.address && touched.address && "error"} />
-                                 </CFormGroup>
-                                    {errors.address && touched.address &&
-                                       <div className="input-feedback">{errors.address}</div>}
-                                       </>
-                                 : address}
-                             
-                           </CCol>
-                           <CCol xs="12" sm="12" lg="6">
-                              <CIcon name="cil-envelope-closed" className='m-1' /> <b>Email Id:    </b>
-                              {edit ?
-                              <>
-                                 <CFormGroup >
-                                    <CInput style={{ width: '85%' }} type="text" id="email_id"
-                                       name="email_id" placeholder="email_id" value={values.email_id}
-                                       onChange={handleChange} className={errors.email_id && touched.email_id && "error"} />
-                                 </CFormGroup>
-                                  {errors.email_id && touched.email_id &&
-                                    <div className="input-feedback">{errors.email_id}</div>}
-                                    </>
-                                 : email_id}
-                            
-                           </CCol>
                         </CRow>
 
                         <CRow className="pt-3 pb-1">
                            <CCol xs="12" sm="12" lg="6">
-                              <CIcon name="cil-calendar" className='m-1' /> <b>Date Of Joining:    </b>
-                              {edit ?
-                              <>
+                              <CRow className="ml-1">
+                                 <CIcon name="cib-adobe-indesign" className='m-1' /> <b>Employee Id:   </b>
                                  <CFormGroup >
-                                    <CInput style={{ width: '85%' }} type="date" id="date_of_joining"
-                                       name="date_of_joining" placeholder="date_of_joining" value={moment(values.date_of_joining).format('YYYY-MM-DD') }
-                                       onChange={handleChange} className={errors.date_of_joining && touched.date_of_joining && "error"} />
+                                    {employee_id}
+                                    {/* <CInput style={{ width: '85%' }} type="text" id="employee_id"
+                                    name="employee_id" placeholder="employee_id" value={employee_id} onChange={(e) => { setEmployeeId(e.target.value) }} readOnly/> */}
                                  </CFormGroup>
-                                   {errors.date_of_joining && touched.date_of_joining &&
-                                    <div className="input-feedback">{errors.date_of_joining}</div>}
-                                    </>
-                                 : moment(new Date(date_of_joining)).format('MM/DD/yyyy')}
-                             
+                              </CRow>
+                           </CCol>
+                           <CCol xs="12" sm="12" lg="6" >
+                              <CIcon name="cil-mobile" className='ml-1 mt-0' />  <b>Phone Number:   </b>
+                              {edit ?
+                                 <CFormGroup >
+                                    <CInput style={{ width: '85%' }} type="text" id="phone_number"
+                                       name="phone_number" placeholder="phone_number" value={phone_number}
+                                       onChange={(e) => { setPhoneNumber(e.target.value) }} className={!phone_number && "error"} />
+                                 </CFormGroup>
+                                 : phone_number}
+                              {/* {!phone_number && 
+                              <div className="input-feedback">Phone Number is required</div>}  */}
+                           </CCol>
+                        </CRow>
+
+                        <CRow className="pt-2 pb-3">
+                           <CCol xs="12" sm="12" lg="6">
+                              <CIcon name="cil-location-pin" className='m-1' /><b>Employee Address:   </b>
+                              {edit ?
+                                 <CFormGroup >
+                                    <CTextarea style={{ width: '85%' }} type="text" id="address"
+                                       name="address" placeholder="address" value={address}
+                                       onChange={(e) => { setAddress(e.target.value) }} className={!address && "error"} />
+                                 </CFormGroup>
+                                 : address}
+                              {/* {!address && 
+                              <div className="input-feedback">Address is required</div>}  */}
                            </CCol>
                            <CCol xs="12" sm="12" lg="6">
-                           <CIcon name="cil-calendar-check" className='m-1' /><b>Active:</b>
+                              <CIcon name="cil-envelope-closed" className='m-1' /> <b>EmailId:    </b>
+                              {edit ?
+                                 <CFormGroup >
+                                    <CInput style={{ width: '85%' }} type="text" id="email_id"
+                                       name="email_id" placeholder="email_id" value={email_id}
+                                       onChange={(e) => { setEmailId(e.target.value) }} className={!email_id && "error"} />
+                                 </CFormGroup>
+                                 : email_id}
+                              {/* {!email_id && 
+                              <div className="input-feedback">Email is required</div>}  */}
+                           </CCol>
+                        </CRow>
+
+                        <CRow className="pt-2 pb-3">
+
+                           <CCol xs="12" sm="12" lg="6">
+                              <CIcon name="cil-pen-alt" className='m-1' /> <b>Designation:    </b>
+                              {edit ?
+                                 <CFormGroup >
+                                    <CInput style={{ width: '85%' }} type="text" id="designation"
+                                       name="designation" placeholder="designation" value={designation}
+                                       onChange={(e) => { setDesignation(e.target.value) }} className={!designation && "error"} />
+                                 </CFormGroup>
+                                 : designation}
+                              {/* {!designation && 
+                              <div className="input-feedback">Designation is required</div>}  */}
+                           </CCol>
+                           <CCol xs="12" sm="12" lg="6">
+                              <CIcon name="cil-voice-over-record" className='m-1' /> <b>Employee Type:     </b>
+                              {edit ?
+                                 <CFormGroup >
+                                    <CInput style={{ width: '85%' }} type="text" id="employee_type"
+                                       name="employee_type" placeholder="employee_type" value={employee_type}
+                                       onChange={(e) => { setEmployeeType(e.target.value) }} className={!employee_type && "error"} />
+                                 </CFormGroup>
+                                 : employee_type}
+                              {/* {!employee_type && 
+                              <div className="input-feedback">Employee Type is required</div>}  */}
+                           </CCol>
+                        </CRow>
+
+                        <CRow className="pt-2 pb-3">
+                           <CCol xs="12" sm="12" lg="6">
+                              <CIcon name="cil-calendar" className='m-1' /> <b>Date Of Joining:    </b>
+                              {edit ?
+                                 <CFormGroup >
+                                    <CInput style={{ width: '85%' }} type="date" id="date_of_joining"
+                                       name="date_of_joining" placeholder="date_of_joining" value={date_of_joining}
+                                       onChange={(e) => { setDateOfJoining(e.target.value) }} className={!date_of_joining && "error"} />
+                                 </CFormGroup>
+                                 : moment(new Date(date_of_joining)).format('MM/DD/yyyy')}
+                              {/* {!date_of_joining && 
+                              <div className="input-feedback">Date Of Joining is required</div>} */}
+                           </CCol>
+                           <CCol xs="12" sm="12" lg="6">
+                              <CIcon name="cil-calendar" className='m-1' /> <b>Date Of Leaving:    </b>
+                              {edit ?
+                                 <CFormGroup >
+                                    <CInput style={{ width: '85%' }} type="date" id="date_of_leaving"
+                                       name="date_of_leaving" placeholder="date_of_leaving" value={date_of_leaving}
+                                       onChange={(e) => { setDateOfLeaving(e.target.value) }} className={!date_of_leaving && "error"} />
+                                 </CFormGroup>
+                                 : moment(new Date(date_of_leaving)).format('MM/DD/yyyy')}
+                              {/* {!date_of_leaving && 
+                              <div className="input-feedback">Date Of Leaving is required</div>} */}
+                           </CCol>
+                        </CRow>
+
+                        <CRow className="pt-2 pb-3 ml-0">
+                           <CCol xs="12" sm="12" lg="6">
+                              <CRow>
+                                 <CIcon name="cil-calendar-check" className='m-1' /><b>Active:</b>
                                  <CFormGroup>
                                     <CCol sm="9">
                                        <CSwitch
@@ -343,25 +322,8 @@ export default function EditEmployee(props) {
                                        /> 
                                     </CCol>
                                  </CFormGroup>
-                                 </CCol>
-                        </CRow>
-
-                        <CRow className=" pb-1">
-                           <CCol xs="12" sm="12" lg="6">
-                              <CIcon name="cil-calendar" className='m-1' /> <b>Date Of Leaving:    </b>
-                              {edit ?
-                              <>
-                                 <CFormGroup >
-                                    <CInput style={{ width: '85%' }} type="date" id="date_of_leaving"
-                                       name="date_of_leaving" placeholder="date_of_leaving" value={moment(values.date_of_leaving).format('YYYY-MM-DD') }
-                                       onChange={handleChange} className={errors.date_of_leaving && touched.date_of_leaving && "error"} />
-                                 </CFormGroup>
-                                   {errors.date_of_leaving && touched.date_of_leaving &&
-                                    <div className="input-feedback">{errors.date_of_leaving}</div>}
-                                    </>
-                                 : moment(new Date(date_of_leaving)).format('MM/DD/yyyy')}
-                             
-                           </CCol>                    
+                              </CRow>
+                           </CCol>
                         </CRow>
 
                      </div>

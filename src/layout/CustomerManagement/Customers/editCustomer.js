@@ -183,7 +183,6 @@ export default function EditCustomer(props) {
                      <CCol xs="12" sm="12" lg="6">
                      <CIcon name="cil-user" className='m-1'/><b>Customer Name:   </b>
                      {edit ?
-                     <>
                            <CFormGroup >
                            <CInput type="text"
                                             style={{ width: '85%' }}
@@ -191,11 +190,9 @@ export default function EditCustomer(props) {
                                             onChange={handleChange} value = {values.customerName} 
                                             className={errors.customerName && touched.customerName && "error"} />
                                     </CFormGroup>
-                                     {errors.customerName && touched.customerName &&
-                                       <div className="input-feedback">{errors.customerName}</div>}
-                                       </>
                                     : customerName}
-                                     
+                                    {/* {!customerName && 
+                                       <div className="input-feedback">Customer Name required</div>} */}
                                     </CCol>
 
                      <CCol xs="12" sm="12" lg="6">
@@ -215,34 +212,28 @@ export default function EditCustomer(props) {
                   <CCol xs="12" sm="12" lg="6">
                   <CIcon name="cil-contact" className='m-1'/>  <b>Contact Person:   </b> 
                   { edit ?
-                              <>
-                                <CFormGroup >
+                              <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="contactPerson"
                                     name="contactPerson" placeholder="contactPerson" value={values.contactPerson} 
                                     onChange={handleChange} 
                                     className={errors.contactPerson && touched.contactPerson && "error"}/>
                               </CFormGroup>
-                               {errors.contactPerson && touched.contactPerson &&
-                                 <div className="input-feedback">{errors.contactPerson}</div>}
-                                 </>
-                          : contactPerson }
-                           
+                          : null }
+                              {/* {!contactPerson && 
+                                       <div className="input-feedback" >Contact Person is required</div>}   */}
                      </CCol>
                      <CCol xs="12" sm="12" lg="6">
                      <CIcon name="cil-screen-smartphone" /> <b>Contact Number:  </b>
                      {edit ?
-                     <>
                               <CFormGroup >
                              <CInput style={{ width: '85%' }} type="text" id="mobileNo"
                                     name="mobileNo" placeholder="mobileNo" value={values.mobileNo} 
                                     onChange={handleChange} 
                                      className={errors.mobileNo && touched.mobileNo && "error"}/>
                               </CFormGroup>
-                                 {errors.mobileNo && touched.mobileNo &&
-                                    <div className="input-feedback">{errors.mobileNo}</div>}
-                                    </>
                               : mobileNo}
-                          
+                              {/* {!mobileNo && 
+                             <div className="input-feedback">Mobile No is required</div>}   */}
                      </CCol>
                   </CRow>
 
@@ -251,35 +242,29 @@ export default function EditCustomer(props) {
                      <CCol xs="12" sm="12" lg="6">
                      <CIcon name="cil-screen-smartphone" />  <b>Alternate Number:  </b>
                      { edit ?
-                     <>
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="alternateNo"
                                     name="alternateNo" placeholder="alternateNo" value={values.alternateNo} 
                                     onChange={handleChange} 
                                     className={errors.alternateNo && touched.alternateNo && "error"}/>
                            </CFormGroup>
-                            {errors.alternateNo && touched.alternateNo &&
-                              <div className="input-feedback">{errors.alternateNo}</div>}
-                              </>
                            : alternateNo }
-                          
+                           {/* {!alternateNo && 
+                                       <div className="input-feedback" >Alternate No is required</div>}   */}
                      </CCol>
           
                      <CCol xs="12" sm="12" lg="6">
                      <CIcon name="cil-location-pin" className='m-1'/> <b>Customer Address:  </b>
                      { edit ?
-                     <>
                            <CFormGroup >
                                  <CTextarea style={{ width: '85%' }} type="text" id="address"
                                     name="address" placeholder="address" value={values.address} 
                                     onChange={handleChange}
                                     className={errors.address && touched.address && "error"}/>
                               </CFormGroup>
-                                 {errors.address && touched.address &&
-                                    <div className="input-feedback">{errors.address}</div>}
-                                    </>
                               : address }
-                         
+                              {/* {!address && 
+                                       <div className="input-feedback" style={{color:'red'}}>Address is required</div>}  */}
                      </CCol>
                   </CRow>
 
@@ -288,35 +273,29 @@ export default function EditCustomer(props) {
                      <CCol xs="12" sm="12" lg="6">
                      <CIcon name="cil-audio" className='m-1'/><b>City:  </b>
                      { edit ?
-                     <>
                            <CFormGroup >
                               <CInput style={{ width: '85%' }} type="text" id="city"
                                  name="city" placeholder="city" value={values.city} 
                                  onChange={handleChange}
                                  className={errors.city && touched.city && "error"}/>
                            </CFormGroup>
-                               {errors.city && touched.city &&
-                                 <div className="input-feedback">{errors.city}</div>}
-                                 </>
                            : city }
-                        
+                           {/* {!city && 
+                                       <div className="input-feedback" style={{color:'red'}}>City is required</div>}  */}
                      </CCol>
                 
                   <CCol xs="12" sm="12" lg="6">
                   <CIcon name="cil-pin" className='m-1'/> <b>Zip:   </b>
                   {edit ?
-                  <>
                         <CFormGroup >
                            <CInput style={{ width: '85%' }} type="text" id="zip"
                               name="zip" placeholder="zip" value={values.zip} 
                               onChange={handleChange}
                               className={errors.zip && touched.zip && "error"}/>
                         </CFormGroup>
-                           {errors.zip && touched.zip &&
-                              <div className="input-feedback">{errors.zip}</div>}
-                              </>
                         : zip }
-                     
+                        {/* {!zip && 
+                         <div className="input-feedback" style={{color:'red'}}>Zip is required</div>}  */}
                      </CCol>
                   </CRow>
 
@@ -327,32 +306,26 @@ export default function EditCustomer(props) {
                      <CCol xs="12" sm="12" lg="6">
                      <CIcon name="cil-bank" className='m-1'/><b>State:   </b>
                      { edit ?
-                     <>
                         <CFormGroup >
                            <CInput style={{ width: '85%' }} type="text" id="state"
                               name="state" placeholder="state" value={values.state} 
                               onChange={handleChange} className={errors.state && touched.state && "error"}/>
                         </CFormGroup>
-                          {errors.state && touched.state &&
-                           <div className="input-feedback">{errors.state}</div>}
-                           </>
                         : state }
-                   
+                        {/* {!state && 
+                         <div className="input-feedback" >State is required</div>}  */}
                      </CCol>
                      <CCol xs="12" sm="12" lg="6">
                      <CIcon name="cil-flag-alt" className='m-1'/> <b>Country:  </b>
                      { edit ?
-                     <>
                         <CFormGroup >
                            <CInput style={{ width: '85%' }} type="text" id="country"
                               name="country" placeholder="country" value={values.country}
                               onChange={handleChange} className={errors.country && touched.country && "error"}/>
                         </CFormGroup>
-                          {errors.country && touched.country &&
-                           <div className="input-feedback">{errors.country}</div>}
-                           </>
                         : country }
-                     
+                        {/* {!country && 
+                        <div className="input-feedback">Country is required</div>}  */}
                      </CCol>
                   </CRow>
 
@@ -360,32 +333,24 @@ export default function EditCustomer(props) {
                      <CCol xs="12" sm="12" lg="6">
                      <CIcon name="cil-envelope-closed" className='m-1'/><b>Email:   </b>
                      { edit ?
-                     <>
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="email"
                                     name="email" placeholder="email" value={values.email} 
                                     onChange={handleChange} className={errors.email && touched.email && "error"}/>
                               </CFormGroup>
-                               {errors.email && touched.email &&
-                                 <div className="input-feedback">{errors.email}</div>}
-                                 </>
                               : email }
-                            
+                              {/* {!email && 
+                               <div className="input-feedback" >Email is required</div>}  */}
                      </CCol>
                   <CCol xs="12" sm="12" lg="6">
                   <CIcon name="cil-notes" className='m-1'/><b>GstNumber:  </b>
                   { edit ?
-                  <>
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="gstNumber"
-                                    name="gstNumber" placeholder="gstNumber" value={values.gstNumber} 
-                                    onChange={handleChange} className={errors.gstNumber && touched.gstNumber && "error"}/>
+                                    name="gstNumber" placeholder="gstNumber" value={gstNumber} 
+                                    onChange={(e) => { setGstNumber(e.target.value) }} className={!gstNumber && "error"}/>
                            </CFormGroup>  
-                              {errors.gstNumber && touched.gstNumber &&
-                                 <div className="input-feedback">{errors.gstNumber}</div>}
-                                 </>
                               : gstNumber } 
-                            
                             
                      </CCol>
                   </CRow>

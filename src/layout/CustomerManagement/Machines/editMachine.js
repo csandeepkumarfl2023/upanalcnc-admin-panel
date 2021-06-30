@@ -210,7 +210,6 @@ export default function EditMachine(props) {
                         
                     <CIcon name="cil-check-circle" className='m-1'/> <b>Customer Code:    </b>
                     { edit ?
-                    <>
                         <CFormGroup style={{ marginTop: '10px' }}>
                                 <CSelect custom size="md" name="customerCode" id="customerCode"
                                             onChange={handleChange}
@@ -222,11 +221,7 @@ export default function EditMachine(props) {
                                             ) : null}
                                         </CSelect>
                         </CFormGroup>
-                          {errors.customerCode && touched.customerCode &&
-                            <div className="input-feedback">{errors.customerCode}</div>}
-                            </>
                        : customerCode }
-                      
                     </CCol>
                     <CCol xs="12" lg="6">
                     <CIcon name="cil-cog" className='m-1'/>  <b>Machine Type:    </b>
@@ -263,36 +258,30 @@ export default function EditMachine(props) {
                 <CCol xs="12" md="6">
                     <CIcon name="cil-arrow-thick-right" className='m-1'/>  <b>Make:    </b>
                     { edit ?
-                    <>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="make" className="w-52"
                                 name="make" placeholder="make" value={values.make} 
                                 onChange={handleChange} 
                                 className={errors.make && touched.make && "error"} />
                         </CFormGroup>
-                          {errors.make && touched.make &&
-                            <div className="input-feedback">{errors.make}</div>}
-                            </>
                         : make }
-                       
+                        {/* {! make &&
+                              <div className="input-feedback" >Make is required</div>}   */}
 
                     </CCol>
 
                     <CCol xs="12" md="6">
                     <CIcon name="cil-pen-nib" className='m-1'/> <b>Model:    </b>
                     { edit ?
-                    <>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="model" className="w-52"
                                 name="model" placeholder="model" value={values.model}
                                  onChange={handleChange} 
                                  className={errors.model && touched.model && "error"} />
                         </CFormGroup>
-                        {errors.model && touched.model &&
-                            <div className="input-feedback">{errors.model}</div>}
-                            </>
                         : model }
-                         
+                        {/* {! model &&
+                              <div className="input-feedback" >Model is required</div>}   */}
                     </CCol>
 
                 </CRow>
@@ -301,7 +290,6 @@ export default function EditMachine(props) {
                     <CCol xs="12" md="6">
                     <CIcon name="cil-tv" className='m-1'/> <b>MachineAge:    </b>
                     { edit ?
-                    <>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="machineAge" className="w-52"
                                 name="machineAge" placeholder="machineAge" value={values.machineAge}
@@ -324,11 +312,21 @@ export default function EditMachine(props) {
                                 onChange={handleChange} 
                                 className={errors.machineSerialNo && touched.machineSerialNo && "error"}/>
                         </CFormGroup>
-                         {errors.machineSerialNo && touched.machineSerialNo &&
-                            <div className="input-feedback">{errors.machineSerialNo}</div>}
-                            </>
+                        : machineAge }
+                        {/* {! machineAge &&
+                              <div className="input-feedback" >Machine Age is required</div>}  */}
+                    </CCol>
+                    <CCol xs="12" md="6">
+                    <CIcon name="cil-aperture" className='m-1'/>   <b>Machine SerialNo:     </b>
+                    { edit ?
+                        <CFormGroup style={{ marginTop: '10px' }}>
+                            <CInput type="text" id="machineSerialNo" className="w-52"
+                                name="machineSerialNo" placeholder="machineSerialNo" value={machineSerialNo} 
+                                onChange={(e) => { setMachineSerialNo(e.target.value) }} className={!machineSerialNo && "error"}/>
+                        </CFormGroup>
                         : machineSerialNo }
-                        
+                        {/* {! machineSerialNo &&
+                              <div className="input-feedback" >Machine Serial No is required</div>}   */}
                     </CCol>
                     </CRow>
        
@@ -356,18 +354,15 @@ export default function EditMachine(props) {
                     <CCol xs="12" md="6">
                     <CIcon name="cil-badge" className='m-1'/>   <b>ControllerModel:     </b>
                     { edit ?
-                    <>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="controllerModel" className="w-52"
                                 name="controllerModel" placeholder="controllerModel" value={values.controllerModel}
                                 onChange={handleChange} 
                                 className={errors.controllerModel && touched.controllerModel && "error"}/>
                         </CFormGroup>
-                          {errors.controllerModel && touched.controllerModel &&
-                            <div className="input-feedback">{errors.controllerModel}</div>}
-                            </>
                         : controllerModel }
-                       
+                        {/* {! controllerModel &&
+                              <div className="input-feedback" >Controller Model is required</div>}  */}
                     </CCol>
                 </CRow>
                       
@@ -390,7 +385,7 @@ export default function EditMachine(props) {
                               >Cancel</CButton>
                            </CCol>
                            <CCol xs="6">
-                           <CButton block color="info" className="mr-1" onClick={handleSubmit}
+                              <CButton block color="info" className="mr-1" onClick={submitHandler}
                               >Submit</CButton>
                            </CCol>
                         </CRow>
