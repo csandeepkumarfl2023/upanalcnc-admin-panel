@@ -47,6 +47,7 @@ export default function EditMachine(props) {
     const [typeOthers, setTypeOthers] = useState(false)
     const [controllersArr, setControllersArr] = useState()
     const [others, setOthers] = useState(false)
+    const [edit, setEdit] = React.useState(false)
 
     const [alert, setAlert] = useState(false)
 
@@ -174,18 +175,22 @@ export default function EditMachine(props) {
 
         <CCard className="mt-2">
             <CCardHeader>
-                <CRow>
+            <CRow className="pl-3 mt-3" >
                     <CCol xs="6" md="11">
                         <CCardSubtitle style={{ marginTop: '1%' }}>Machine {item ? item.machine_id : null}</CCardSubtitle>
                     </CCol>
                     <CCol xs="6" md="1">
+                    <CIcon name="cil-pen" size="lg" style={{ cursor: 'pointer' }} onClick={() => {setEdit(true)}}>
+                  </CIcon>
                     </CCol>
                 </CRow>
             </CCardHeader>
             <CCardBody>
                 <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
                     <CCol xs="12" md="6">
+                        
                     <CIcon name="cil-check-circle" className='m-1'/> <b>Customer Code:</b>
+                    { edit ?
                         <CFormGroup style={{ marginTop: '10px' }}>
                                 <CSelect custom size="md" name="customerCode" id="customerCode"
                                             onChange={(e) => setCustomerCode(e.target.value)}
@@ -197,10 +202,11 @@ export default function EditMachine(props) {
                                             ) : null}
                                         </CSelect>
                         </CFormGroup>
-                       
+                       : customerCode }
                     </CCol>
                     <CCol xs="12" lg="6">
                     <CIcon name="cil-cog" className='m-1'/>  <b>Machine Type:</b>
+                    { edit ?
                         <CFormGroup style={{ marginTop: '10px' }} >
                                  <CSelect custom size="md" name="machine_type" id="machine_type"
                                             value={machineType}
@@ -215,6 +221,7 @@ export default function EditMachine(props) {
                                             ) : null}
                                         </CSelect>
                         </CFormGroup>
+                        : machineType }
                     </CCol>
                    </CRow>
 
@@ -232,53 +239,62 @@ export default function EditMachine(props) {
 
                     <CCol xs="12" lg="4">
                     <CIcon name="cil-arrow-thick-right" className='m-1'/>  <b>Make:</b>
+                    { edit ?
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="make" className="w-52"
                                 name="make" placeholder="make" value={make} 
                                 onChange={(e) => {setMake(e.target.value) }} className={!make && "error"}/>
                         </CFormGroup>
-                        {! make &&
-                              <div className="input-feedback" >Make is required</div>}  
+                        : make }
+                        {/* {! make &&
+                              <div className="input-feedback" >Make is required</div>}   */}
 
                     </CCol>
 
                     <CCol xs="12" lg="4">
                     <CIcon name="cil-pen-nib" className='m-1'/> <b>Model:</b>
+                    { edit ?
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="model" className="w-52"
                                 name="model" placeholder="model" value={model}
                                  onChange={(e) => { setModel(e.target.value) }} className={!model && "error"}/>
                         </CFormGroup>
-                        {! model &&
-                              <div className="input-feedback" >Model is required</div>}  
+                        : model }
+                        {/* {! model &&
+                              <div className="input-feedback" >Model is required</div>}   */}
                     </CCol>
 
                     <CCol xs="12" lg="4">
                     <CIcon name="cil-aperture" className='m-1'/>   <b>Machine SerialNo:</b>
+                    { edit ?
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="machineSerialNo" className="w-52"
                                 name="machineSerialNo" placeholder="machineSerialNo" value={machineSerialNo} 
                                 onChange={(e) => { setMachineSerialNo(e.target.value) }} className={!machineSerialNo && "error"}/>
                         </CFormGroup>
-                        {! machineSerialNo &&
-                              <div className="input-feedback" >Machine Serial No is required</div>}  
+                        : machineSerialNo }
+                        {/* {! machineSerialNo &&
+                              <div className="input-feedback" >Machine Serial No is required</div>}   */}
                     </CCol>
                 </CRow>
 
                 <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
                     <CCol xs="12" lg="4">
                     <CIcon name="cil-tv" className='m-1'/> <b>MachineAge:</b>
+                    { edit ?
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="machineAge" className="w-52"
                                 name="machineAge" placeholder="machineAge" value={machineAge}
                                  onChange={(e) => { setMachineAge(e.target.value) }} className={!machineAge && "error"}/>
                         </CFormGroup>
-                        {! machineAge &&
-                              <div className="input-feedback" >Machine Age is required</div>} 
+                        : machineAge }
+                        {/* {! machineAge &&
+                              <div className="input-feedback" >Machine Age is required</div>}  */}
                     </CCol>
                     
                     <CCol xs="12" lg="4">
                     <CIcon name="cil-camera-control" className='m-1'/> <b>Controller:</b>
+                    { edit ?
                         <CFormGroup style={{ marginTop: '10px' }}>
                                  <CSelect custom size="md" name="machine_controller" id="machine_controller" value={controller}
                                             onChange={(e) => {
@@ -292,19 +308,22 @@ export default function EditMachine(props) {
                                             ) : null}
                                         </CSelect>
                         </CFormGroup>
-                        {! controller &&
-                              <div className="input-feedback" >Controller is required</div>} 
+                        : controller }
+                        {/* {! controller &&
+                              <div className="input-feedback" >Controller is required</div>}  */}
                     </CCol>
 
                     <CCol xs="12" lg="4">
                     <CIcon name="cil-badge" className='m-1'/>   <b>ControllerModel:</b>
+                    { edit ?
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="controllerModel" className="w-52"
                                 name="controllerModel" placeholder="controllerModel" value={controllerModel}
                                  onChange={(e) => { setControllerModel(e.target.value) }} className={!controllerModel && "error"}/>
                         </CFormGroup>
-                        {! controllerModel &&
-                              <div className="input-feedback" >Controller Model is required</div>} 
+                        : controllerModel }
+                        {/* {! controllerModel &&
+                              <div className="input-feedback" >Controller Model is required</div>}  */}
                     </CCol>
                 </CRow>
                       
@@ -318,20 +337,27 @@ export default function EditMachine(props) {
                                 : null}
 
             <CRow style={{ justifyContent: 'center' }}>
-                <CCardFooter style={{ width: '25%' }}>
+            {edit ?
+                     <CCardFooter style={{ width: '25%' }}>
 
-                    <CRow>
-                        <CCol xs="6">
-                            <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/customermanagement')}
-                            >Cancel</CButton>
-                        </CCol>
-                        <CCol xs="6">
-                            <CButton block color="info" className="mr-1" onClick={submitHandler}
-                            >Submit</CButton>
-                        </CCol>
-                    </CRow>
+                        <CRow>
+                           <CCol xs="6">
+                              <CButton variant="outline" block color="info" className="mr-1" onClick={() => setEdit(false)}
+                              >Cancel</CButton>
+                           </CCol>
+                           <CCol xs="6">
+                              <CButton block color="info" className="mr-1" onClick={submitHandler}
+                              >Submit</CButton>
+                           </CCol>
+                        </CRow>
 
-                </CCardFooter>
+                     </CCardFooter>
+                     :
+                     <CCardFooter style={{ width: '13%' }}>
+                        <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/customermanagement')}
+                        >Close</CButton>
+                     </CCardFooter>
+                  }
             </CRow>
         </CCardBody>
         </CCard>
