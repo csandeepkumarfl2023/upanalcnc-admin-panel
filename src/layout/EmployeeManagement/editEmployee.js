@@ -70,9 +70,10 @@ export default function EditEmployee(props) {
       setActive(res.data.active)
    }
 
-   const submitHandler = async () => {
+   const submitHandler = async (values) => {
+      console.log('values',values);
       let currentData = { ...item }
-      currentData.employee_name = employee_name
+      currentData.employee_name = values.employee_name
       currentData.department = department
       currentData.employee_id = employee_id
       currentData.phone_number = phone_number
@@ -126,8 +127,12 @@ export default function EditEmployee(props) {
            }
            return errors;
          }}
-                initialValues={item}
-                onSubmit={async (values) => {
+                initialValues={{
+                  active: "", phone_number: "", email_id: "",department:"",employee_type:"",
+                  address: "",  employee_name: "", designation: "", employee_id: "",security_pin: "", date_of_joining: "",date_of_leaving : ""
+                }}
+                 onSubmit={async (values) => {
+                   console.log('values',values);
                     submitHandler(values)
                 }}>
                 {({ handleSubmit, handleChange, values, errors, touched }) => (
@@ -148,7 +153,7 @@ export default function EditEmployee(props) {
                <div className="pt-1 pl-3 ">
                   <CRow className="mb-2 ">
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-user" className='m-1'/>  <b>Employee Name:</b>
+                     <CIcon name="cil-user" className='m-1'/>  <b>Employee Name:   </b>
                            {edit ? 
                            <CFormGroup >
                              <CInput style={{ width: '85%' }} type="text" id="employee_name"
@@ -157,10 +162,10 @@ export default function EditEmployee(props) {
                            </CFormGroup>
                            : employee_name }
                             {errors.employee_name && touched.employee_name && 
-                                       <div className="input-feedback">{errors.employee_name}</div>}
+                            <div className="input-feedback">{errors.employee_name}</div>}
                      </CCol>
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-briefcase" className='m-1'/> <b>Department:</b>
+                     <CIcon name="cil-briefcase" className='m-1'/> <b>Department:   </b>
                           {edit ? 
                            <CFormGroup >
                            <CInput style={{ width: '85%' }} type="department" id="department"
@@ -177,7 +182,7 @@ export default function EditEmployee(props) {
                   <CRow className="pt-3 pb-1">  
                   <CCol xs="12" sm="12" lg="6">
                      <CRow className="ml-1">
-                  <CIcon name="cib-adobe-indesign" className='m-1'/> <b>Employee Id: </b> 
+                  <CIcon name="cib-adobe-indesign" className='m-1'/> <b>Employee Id:   </b> 
                               <CFormGroup >
                               {employee_id} 
                                  {/* <CInput style={{ width: '85%' }} type="text" id="employee_id"
@@ -186,7 +191,7 @@ export default function EditEmployee(props) {
                               </CRow>
                      </CCol>
                      <CCol xs="12" sm="12" lg="6" >
-                     <CIcon name="cil-mobile" className='ml-1 mt-0'/>  <b>Phone Number: </b>
+                     <CIcon name="cil-mobile" className='ml-1 mt-0'/>  <b>Phone Number:   </b>
                               {edit ? 
                               <CFormGroup >
                               <CInput style={{ width: '85%' }} type="text" id="phone_number"
@@ -201,7 +206,7 @@ export default function EditEmployee(props) {
 
                   <CRow className="pt-2 pb-3">
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-location-pin" className='m-1'/><b>Employee Address: </b>
+                     <CIcon name="cil-location-pin" className='m-1'/><b>Employee Address:   </b>
                            {edit ? 
                            <CFormGroup >
                            <CTextarea style={{ width: '85%' }} type="text" id="address"
@@ -213,7 +218,7 @@ export default function EditEmployee(props) {
                               <div className="input-feedback">Address is required</div>}  */}
                      </CCol>
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-envelope-closed" className='m-1'/> <b>EmailId:</b>
+                     <CIcon name="cil-envelope-closed" className='m-1'/> <b>EmailId:    </b>
                            {edit ?
                            <CFormGroup >
                            <CInput style={{ width: '85%' }} type="text" id="email_id"
@@ -229,7 +234,7 @@ export default function EditEmployee(props) {
                   <CRow className="pt-2 pb-3">
                     
                   <CCol xs="12" sm="12" lg="6">
-                  <CIcon name="cil-pen-alt" className='m-1'/> <b>Designation: </b>
+                  <CIcon name="cil-pen-alt" className='m-1'/> <b>Designation:    </b>
                            {edit ?
                            <CFormGroup >
                            <CInput style={{ width: '85%' }} type="text" id="designation"
@@ -241,7 +246,7 @@ export default function EditEmployee(props) {
                               <div className="input-feedback">Designation is required</div>}  */}
                      </CCol>
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-voice-over-record" className='m-1'/> <b>Employee Type:</b>
+                     <CIcon name="cil-voice-over-record" className='m-1'/> <b>Employee Type:     </b>
                               {edit ?
                            <CFormGroup >   
                            <CInput style={{ width: '85%' }} type="text" id="employee_type"
@@ -256,7 +261,7 @@ export default function EditEmployee(props) {
 
                   <CRow className="pt-2 pb-3">
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-calendar" className='m-1'/> <b>Date Of Joining:</b>
+                     <CIcon name="cil-calendar" className='m-1'/> <b>Date Of Joining:    </b>
                               {edit ?
                            <CFormGroup >
                            <CInput style={{ width: '85%' }} type="date" id="date_of_joining"
@@ -268,7 +273,7 @@ export default function EditEmployee(props) {
                               <div className="input-feedback">Date Of Joining is required</div>} */}
                      </CCol>
                   <CCol xs="12" sm="12" lg="6">
-                  <CIcon name="cil-calendar" className='m-1'/> <b>Date Of Leaving: </b>
+                  <CIcon name="cil-calendar" className='m-1'/> <b>Date Of Leaving:    </b>
                            {edit ?
                            <CFormGroup >
                            <CInput style={{ width: '85%' }} type="date" id="date_of_leaving"

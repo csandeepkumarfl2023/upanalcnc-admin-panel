@@ -189,7 +189,7 @@ export default function EditMachine(props) {
                 <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
                     <CCol xs="12" md="6">
                         
-                    <CIcon name="cil-check-circle" className='m-1'/> <b>Customer Code:</b>
+                    <CIcon name="cil-check-circle" className='m-1'/> <b>Customer Code:    </b>
                     { edit ?
                         <CFormGroup style={{ marginTop: '10px' }}>
                                 <CSelect custom size="md" name="customerCode" id="customerCode"
@@ -205,7 +205,7 @@ export default function EditMachine(props) {
                        : customerCode }
                     </CCol>
                     <CCol xs="12" lg="6">
-                    <CIcon name="cil-cog" className='m-1'/>  <b>Machine Type:</b>
+                    <CIcon name="cil-cog" className='m-1'/>  <b>Machine Type:    </b>
                     { edit ?
                         <CFormGroup style={{ marginTop: '10px' }} >
                                  <CSelect custom size="md" name="machine_type" id="machine_type"
@@ -236,9 +236,8 @@ export default function EditMachine(props) {
 
                 <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
 
-
-                    <CCol xs="12" lg="4">
-                    <CIcon name="cil-arrow-thick-right" className='m-1'/>  <b>Make:</b>
+                <CCol xs="12" md="6">
+                    <CIcon name="cil-arrow-thick-right" className='m-1'/>  <b>Make:    </b>
                     { edit ?
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="make" className="w-52"
@@ -251,8 +250,8 @@ export default function EditMachine(props) {
 
                     </CCol>
 
-                    <CCol xs="12" lg="4">
-                    <CIcon name="cil-pen-nib" className='m-1'/> <b>Model:</b>
+                    <CCol xs="12" md="6">
+                    <CIcon name="cil-pen-nib" className='m-1'/> <b>Model:    </b>
                     { edit ?
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="model" className="w-52"
@@ -264,23 +263,11 @@ export default function EditMachine(props) {
                               <div className="input-feedback" >Model is required</div>}   */}
                     </CCol>
 
-                    <CCol xs="12" lg="4">
-                    <CIcon name="cil-aperture" className='m-1'/>   <b>Machine SerialNo:</b>
-                    { edit ?
-                        <CFormGroup style={{ marginTop: '10px' }}>
-                            <CInput type="text" id="machineSerialNo" className="w-52"
-                                name="machineSerialNo" placeholder="machineSerialNo" value={machineSerialNo} 
-                                onChange={(e) => { setMachineSerialNo(e.target.value) }} className={!machineSerialNo && "error"}/>
-                        </CFormGroup>
-                        : machineSerialNo }
-                        {/* {! machineSerialNo &&
-                              <div className="input-feedback" >Machine Serial No is required</div>}   */}
-                    </CCol>
                 </CRow>
 
                 <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
-                    <CCol xs="12" lg="4">
-                    <CIcon name="cil-tv" className='m-1'/> <b>MachineAge:</b>
+                    <CCol xs="12" md="6">
+                    <CIcon name="cil-tv" className='m-1'/> <b>MachineAge:    </b>
                     { edit ?
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="machineAge" className="w-52"
@@ -291,9 +278,23 @@ export default function EditMachine(props) {
                         {/* {! machineAge &&
                               <div className="input-feedback" >Machine Age is required</div>}  */}
                     </CCol>
-                    
-                    <CCol xs="12" lg="4">
-                    <CIcon name="cil-camera-control" className='m-1'/> <b>Controller:</b>
+                    <CCol xs="12" md="6">
+                    <CIcon name="cil-aperture" className='m-1'/>   <b>Machine SerialNo:     </b>
+                    { edit ?
+                        <CFormGroup style={{ marginTop: '10px' }}>
+                            <CInput type="text" id="machineSerialNo" className="w-52"
+                                name="machineSerialNo" placeholder="machineSerialNo" value={machineSerialNo} 
+                                onChange={(e) => { setMachineSerialNo(e.target.value) }} className={!machineSerialNo && "error"}/>
+                        </CFormGroup>
+                        : machineSerialNo }
+                        {/* {! machineSerialNo &&
+                              <div className="input-feedback" >Machine Serial No is required</div>}   */}
+                    </CCol>
+                    </CRow>
+       
+                    <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>          
+                    <CCol xs="12" md="6">
+                    <CIcon name="cil-camera-control" className='m-1'/> <b>Controller:     </b>
                     { edit ?
                         <CFormGroup style={{ marginTop: '10px' }}>
                                  <CSelect custom size="md" name="machine_controller" id="machine_controller" value={controller}
@@ -312,9 +313,8 @@ export default function EditMachine(props) {
                         {/* {! controller &&
                               <div className="input-feedback" >Controller is required</div>}  */}
                     </CCol>
-
-                    <CCol xs="12" lg="4">
-                    <CIcon name="cil-badge" className='m-1'/>   <b>ControllerModel:</b>
+                    <CCol xs="12" md="6">
+                    <CIcon name="cil-badge" className='m-1'/>   <b>ControllerModel:     </b>
                     { edit ?
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="controllerModel" className="w-52"

@@ -226,10 +226,10 @@ var date = curr.toISOString().substr(0,10);
                                         <CInput style={{ width: '85%' }} type="date" id="date_of_leaving"
                                        size="sm"
                                        name="date_of_leaving" placeholder="date_of_leaving" 
-                                       onChange={handleChange} className={errors.date_of_leaving && touched.date_of_leaving && "error"}/>
+                                       onChange={handleChange} />
                                         </CFormGroup>
-                                        {errors.date_of_leaving && touched.date_of_leaving && 
-                                      <div className="input-feedback">{errors.date_of_leaving}</div>}
+                                        {/* {errors.date_of_leaving && touched.date_of_leaving && 
+                                      <div className="input-feedback">{errors.date_of_leaving}</div>} */}
                             </CCol>
                         </CRow>
                         <CRow className="pt-3 pb-2">

@@ -122,7 +122,7 @@ export default function EditCustomer(props) {
                <div className="pt-1 pl-3">
                   <CRow className="mb-2">
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-user" className='m-1'/><b>Customer Name:</b>
+                     <CIcon name="cil-user" className='m-1'/><b>Customer Name:   </b>
                      {edit ?
                            <CFormGroup >
                            <CInput type="text"
@@ -136,7 +136,7 @@ export default function EditCustomer(props) {
                                     </CCol>
 
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-asterisk-circle" /> <b>Customer Code: </b>
+                     <CIcon name="cil-asterisk-circle" /> <b>Customer Code:  </b>
                      {edit ?
                            <CFormGroup >
                               <CInput style={{ width: '85%' }} type="text" id="customerCode"
@@ -150,7 +150,7 @@ export default function EditCustomer(props) {
                   <CRow className="pt-3 pb-2">
                      
                   <CCol xs="12" sm="12" lg="6">
-                  <CIcon name="cil-contact" className='m-1'/>  <b>Contact Person: </b> 
+                  <CIcon name="cil-contact" className='m-1'/>  <b>Contact Person:   </b> 
                   { edit ?
                               <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="contactPerson"
@@ -162,7 +162,7 @@ export default function EditCustomer(props) {
                                        <div className="input-feedback" >Contact Person is required</div>}   */}
                      </CCol>
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-screen-smartphone" /> <b>Contact Number: </b>
+                     <CIcon name="cil-screen-smartphone" /> <b>Contact Number:  </b>
                      {edit ?
                               <CFormGroup >
                              <CInput style={{ width: '85%' }} type="text" id="mobileNo"
@@ -178,7 +178,7 @@ export default function EditCustomer(props) {
                   <CRow className="pt-3 pb-2">
 
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-screen-smartphone" />  <b>Alternate Number: </b>
+                     <CIcon name="cil-screen-smartphone" />  <b>Alternate Number:  </b>
                      { edit ?
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="alternateNo"
@@ -191,7 +191,7 @@ export default function EditCustomer(props) {
                      </CCol>
           
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-location-pin" className='m-1'/> <b>Customer Address: </b>
+                     <CIcon name="cil-location-pin" className='m-1'/> <b>Customer Address:  </b>
                      { edit ?
                            <CFormGroup >
                                  <CTextarea style={{ width: '85%' }} type="text" id="address"
@@ -207,7 +207,7 @@ export default function EditCustomer(props) {
                   <CRow className="pt-3 pb-2">
                  
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-audio" className='m-1'/><b>City:</b>
+                     <CIcon name="cil-audio" className='m-1'/><b>City:  </b>
                      { edit ?
                            <CFormGroup >
                               <CInput style={{ width: '85%' }} type="text" id="city"
@@ -220,7 +220,7 @@ export default function EditCustomer(props) {
                      </CCol>
                 
                   <CCol xs="12" sm="12" lg="6">
-                  <CIcon name="cil-pin" className='m-1'/> <b>Zip:</b>
+                  <CIcon name="cil-pin" className='m-1'/> <b>Zip:   </b>
                   {edit ?
                         <CFormGroup >
                            <CInput style={{ width: '85%' }} type="text" id="zip"
@@ -238,7 +238,7 @@ export default function EditCustomer(props) {
                <CRow className="pt-3 pb-2">
            
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-bank" className='m-1'/><b>State:</b>
+                     <CIcon name="cil-bank" className='m-1'/><b>State:   </b>
                      { edit ?
                         <CFormGroup >
                            <CInput style={{ width: '85%' }} type="text" id="state"
@@ -250,7 +250,7 @@ export default function EditCustomer(props) {
                          <div className="input-feedback" >State is required</div>}  */}
                      </CCol>
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-flag-alt" className='m-1'/> <b>Country: </b>
+                     <CIcon name="cil-flag-alt" className='m-1'/> <b>Country:  </b>
                      { edit ?
                         <CFormGroup >
                            <CInput style={{ width: '85%' }} type="text" id="country"
@@ -265,7 +265,7 @@ export default function EditCustomer(props) {
 
                   <CRow className="pt-3 pb-2">
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-envelope-closed" className='m-1'/><b>Email:</b>
+                     <CIcon name="cil-envelope-closed" className='m-1'/><b>Email:   </b>
                      { edit ?
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="email"
@@ -277,7 +277,7 @@ export default function EditCustomer(props) {
                                <div className="input-feedback" >Email is required</div>}  */}
                      </CCol>
                   <CCol xs="12" sm="12" lg="6">
-                  <CIcon name="cil-notes" className='m-1'/><b>GstNumber: </b>
+                  <CIcon name="cil-notes" className='m-1'/><b>GstNumber:  </b>
                   { edit ?
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="gstNumber"
