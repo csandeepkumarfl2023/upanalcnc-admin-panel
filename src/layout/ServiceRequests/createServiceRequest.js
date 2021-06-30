@@ -205,10 +205,9 @@ export default function CreateServiceRequest() {
   curr.setDate(curr.getDate());
   var todayDate = curr.toISOString().substr(0,10);
 
-  var Time = new Date();
-  Time.setTime(Time.getTime())
-  var presentTime = Time.toTimeString().substr(0,10)
- console.log('time',presentTime);
+  const formattedTime =  moment().format('HH:mm'); 
+  console.log('time',formattedTime);
+
   return (
     <>
    <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
@@ -247,7 +246,7 @@ export default function CreateServiceRequest() {
                   console.log(customerName, machine)
                   (!customerName) ? setCustomerNameRequired(true) : setCustomerNameRequired(false)
                   (!machine) ? setMachineNameRequired(true) : setMachineNameRequired(false)
-                   // submitHandler(values)
+                    submitHandler(values)
                 }}>
                 {({ handleSubmit, handleChange, values, errors, touched }) => (
 
@@ -494,7 +493,7 @@ export default function CreateServiceRequest() {
                 <CFormGroup className="ml-3 w-50" >
                   <input type="time" id="sheduleTime" name="sheduleTime" placeholder="sheduleTime"
                   style={{borderColor:'lightgray'}} onChange={handleChange} 
-                  defaultValue={moment("20010704T120854").format("LT")} />
+                  defaultValue={formattedTime} />
                 </CFormGroup>
               
               </CRow>
