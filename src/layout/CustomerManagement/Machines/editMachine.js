@@ -23,12 +23,42 @@ import CommonService from '../../../services/commonService'
 import CIcon from '@coreui/icons-react'
 import '../../styles.css'
 import { Formik } from "formik"
+import * as yup from 'yup'
 
 const machineService = new MachineService()
 const customerservice = new CustomerService()
 const commonService = new CommonService()
 
 export default function EditMachine(props) {
+    const validation = yup.object().shape({
+        machineType: yup
+           .string()
+           .required('Machine Type required'),
+           customerCode: yup
+           .string()
+           .required('customer Code required'),
+           make: yup
+           .string()
+           .required('make required'),
+           model: yup
+           .string()
+           .required('model required'),
+           machineSerialNo: yup
+           .string()
+           .required('machineSerialNo required'),
+           machineAge: yup
+           .string()
+           .required('machineAge required'),
+           controller: yup
+           .string()
+           .required('controller required'),
+           controllerModel: yup
+           .string()
+           .required('controller Model required'),
+
+     })
+
+
 
     console.log('item', props.location.state);
     const history = useHistory();
@@ -47,8 +77,14 @@ export default function EditMachine(props) {
     const [typeOthers, setTypeOthers] = useState(false)
     const [controllersArr, setControllersArr] = useState()
     const [others, setOthers] = useState(false)
+    const [edit, setEdit] = React.useState(false)
 
     const [alert, setAlert] = useState(false)
+
+    const [data, setData] = useState({
+        machineType: "", customerCode: "", make: "", model: "", machineSerialNo: "",
+        machineAge: "", controller: "", controllerModel: ""
+     })
 
     const cancelHandler = () => {
         history.push('/customermanagement');
@@ -66,6 +102,17 @@ export default function EditMachine(props) {
         setController(res.data.machine_controller)
         setControllerModel(res.data.machine_controller_model)
         setGenerateQRCode(res.data.generateQRCode)
+        let currentData = {}
+        currentData = {...data}
+        currentData.customerCode = res.data.client_id
+        currentData.machineType = res.data.machine_type
+        currentData.make = res.data.machine_make
+        currentData.model = res.data.machine_model
+        currentData.machineSerialNo = res.data.machine_serial_number
+        currentData.machineAge = res.data.machine_age_as_on_installation
+        currentData.controller = res.data.machine_controller
+        currentData.controllerModel = res.data.machine_controller_model
+        setData(currentData)
 
     }
 
@@ -136,60 +183,38 @@ export default function EditMachine(props) {
        {alert}
       </CAlert>
       <Formik
-             validate={values => {
-                let errors = {};
-                if (!values.customerCode) {
-                  errors.customerCode = "Customer Code is required";
-                }
-                if (!values.machine_make) {
-                    errors.machine_make = "Make is required";
-                  }
-                  if (!values.machine_model) {
-                    errors.machine_model = "Machine Model is required";
-                  }
-                  if (!values.machine_serial_number) {
-                    errors.machine_serial_number = "Machine Serial Number is required";
-                  }
-                  if (!values.machineAge) {
-                    errors.machineAge = "Machine Age is required";
-                  }
-                  if (!values.machine_controller_model) {
-                    errors.machine_controller_model = "Controller Model is required";
-                  }
-                  if (!values.machine_type) {
-                    errors.machine_type = "Machine Type is required";
-                  }
-                  if (!values.machine_controller) {
-                    errors.machine_controller = "Machine Controller is required";
-                  }
-                
-                return errors;
-              }}
-                initialValues={item}
+                enableReinitialize={true}
+                validationSchema={validation}
+                initialValues={data}
                 onSubmit={(values) => {
-                    submitHandler(values)
                     console.log(values)
+                    submitHandler(values)
                 }}>
                 {({ handleSubmit, handleChange, values,errors, touched, setFieldValue }) => (
 
         <CCard className="mt-2">
             <CCardHeader>
-                <CRow>
+            <CRow className="pl-3 mt-3" >
                     <CCol xs="6" md="11">
                         <CCardSubtitle style={{ marginTop: '1%' }}>Machine {item ? item.machine_id : null}</CCardSubtitle>
                     </CCol>
                     <CCol xs="6" md="1">
+                    <CIcon name="cil-pen" size="lg" style={{ cursor: 'pointer' }} onClick={() => {setEdit(true)}}>
+                  </CIcon>
                     </CCol>
                 </CRow>
             </CCardHeader>
             <CCardBody>
                 <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
                     <CCol xs="12" md="6">
-                    <CIcon name="cil-check-circle" className='m-1'/> <b>Customer Code:</b>
+                        
+                    <CIcon name="cil-check-circle" className='m-1'/> <b>Customer Code:    </b>
+                    { edit ?
+                    <>
                         <CFormGroup style={{ marginTop: '10px' }}>
                                 <CSelect custom size="md" name="customerCode" id="customerCode"
-                                            onChange={(e) => setCustomerCode(e.target.value)}
-                                            value={customerCode} className={!customerCode && "error"}>
+                                            onChange={handleChange}
+                                            value={values.CustomerCode}  className={errors.CustomerCode && touched.CustomerCode && "error"}>
                                             <option value="0">Open this select menu</option>
                                             {customerseArr && customerseArr.length ? customerseArr.map((elem) => {
                                                 return <option key={elem.client_id} value={elem.client_id} style={{ textTransform: 'capitalize' }}>{elem.client_id}</option>
@@ -197,13 +222,18 @@ export default function EditMachine(props) {
                                             ) : null}
                                         </CSelect>
                         </CFormGroup>
-                       
+                          {errors.customerCode && touched.customerCode &&
+                            <div className="input-feedback">{errors.customerCode}</div>}
+                            </>
+                       : customerCode }
+                      
                     </CCol>
                     <CCol xs="12" lg="6">
-                    <CIcon name="cil-cog" className='m-1'/>  <b>Machine Type:</b>
+                    <CIcon name="cil-cog" className='m-1'/>  <b>Machine Type:    </b>
+                    { edit ?
                         <CFormGroup style={{ marginTop: '10px' }} >
                                  <CSelect custom size="md" name="machine_type" id="machine_type"
-                                            value={machineType}
+                                            value={values.machineType}
                                             onChange={(e) => {
                                                 setMachineType(e.target.value)
                                                 e.target.value == 'OTHERS' ? setTypeOthers(true) : setTypeOthers(false)
@@ -215,6 +245,7 @@ export default function EditMachine(props) {
                                             ) : null}
                                         </CSelect>
                         </CFormGroup>
+                        : machineType }
                     </CCol>
                    </CRow>
 
@@ -229,58 +260,84 @@ export default function EditMachine(props) {
 
                 <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
 
-
-                    <CCol xs="12" lg="4">
-                    <CIcon name="cil-arrow-thick-right" className='m-1'/>  <b>Make:</b>
+                <CCol xs="12" md="6">
+                    <CIcon name="cil-arrow-thick-right" className='m-1'/>  <b>Make:    </b>
+                    { edit ?
+                    <>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="make" className="w-52"
-                                name="make" placeholder="make" value={make} 
-                                onChange={(e) => {setMake(e.target.value) }} className={!make && "error"}/>
+                                name="make" placeholder="make" value={values.make} 
+                                onChange={handleChange} 
+                                className={errors.make && touched.make && "error"} />
                         </CFormGroup>
-                        {! make &&
-                              <div className="input-feedback" >Make is required</div>}  
+                          {errors.make && touched.make &&
+                            <div className="input-feedback">{errors.make}</div>}
+                            </>
+                        : make }
+                       
 
                     </CCol>
 
-                    <CCol xs="12" lg="4">
-                    <CIcon name="cil-pen-nib" className='m-1'/> <b>Model:</b>
+                    <CCol xs="12" md="6">
+                    <CIcon name="cil-pen-nib" className='m-1'/> <b>Model:    </b>
+                    { edit ?
+                    <>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="model" className="w-52"
-                                name="model" placeholder="model" value={model}
-                                 onChange={(e) => { setModel(e.target.value) }} className={!model && "error"}/>
+                                name="model" placeholder="model" value={values.model}
+                                 onChange={handleChange} 
+                                 className={errors.model && touched.model && "error"} />
                         </CFormGroup>
-                        {! model &&
-                              <div className="input-feedback" >Model is required</div>}  
+                        {errors.model && touched.model &&
+                            <div className="input-feedback">{errors.model}</div>}
+                            </>
+                        : model }
+                         
                     </CCol>
 
-                    <CCol xs="12" lg="4">
-                    <CIcon name="cil-aperture" className='m-1'/>   <b>Machine SerialNo:</b>
-                        <CFormGroup style={{ marginTop: '10px' }}>
-                            <CInput type="text" id="machineSerialNo" className="w-52"
-                                name="machineSerialNo" placeholder="machineSerialNo" value={machineSerialNo} 
-                                onChange={(e) => { setMachineSerialNo(e.target.value) }} className={!machineSerialNo && "error"}/>
-                        </CFormGroup>
-                        {! machineSerialNo &&
-                              <div className="input-feedback" >Machine Serial No is required</div>}  
-                    </CCol>
                 </CRow>
 
                 <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>
-                    <CCol xs="12" lg="4">
-                    <CIcon name="cil-tv" className='m-1'/> <b>MachineAge:</b>
+                    <CCol xs="12" md="6">
+                    <CIcon name="cil-tv" className='m-1'/> <b>MachineAge:    </b>
+                    { edit ?
+                    <>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="machineAge" className="w-52"
-                                name="machineAge" placeholder="machineAge" value={machineAge}
-                                 onChange={(e) => { setMachineAge(e.target.value) }} className={!machineAge && "error"}/>
+                                name="machineAge" placeholder="machineAge" value={values.machineAge}
+                                onChange={handleChange} 
+                                 className={errors.machineAge && touched.machineAge && "error"}/>
                         </CFormGroup>
-                        {! machineAge &&
-                              <div className="input-feedback" >Machine Age is required</div>} 
+                          {errors.machineAge && touched.machineAge &&
+                            <div className="input-feedback">{errors.machineAge}</div>}
+                            </>
+                        : machineAge }
+                       
                     </CCol>
-                    
-                    <CCol xs="12" lg="4">
-                    <CIcon name="cil-camera-control" className='m-1'/> <b>Controller:</b>
+                    <CCol xs="12" md="6">
+                    <CIcon name="cil-aperture" className='m-1'/>   <b>Machine SerialNo:     </b>
+                    { edit ?
+                    <>
                         <CFormGroup style={{ marginTop: '10px' }}>
-                                 <CSelect custom size="md" name="machine_controller" id="machine_controller" value={controller}
+                            <CInput type="text" id="machineSerialNo" className="w-52"
+                                name="machineSerialNo" placeholder="machineSerialNo" value={values.machineSerialNo} 
+                                onChange={handleChange} 
+                                className={errors.machineSerialNo && touched.machineSerialNo && "error"}/>
+                        </CFormGroup>
+                         {errors.machineSerialNo && touched.machineSerialNo &&
+                            <div className="input-feedback">{errors.machineSerialNo}</div>}
+                            </>
+                        : machineSerialNo }
+                        
+                    </CCol>
+                    </CRow>
+       
+                    <CRow style={{ marginLeft: '2%', marginTop: '2%' }}>          
+                    <CCol xs="12" md="6">
+                    <CIcon name="cil-camera-control" className='m-1'/> <b>Controller:     </b>
+                    { edit ?
+                        <CFormGroup style={{ marginTop: '10px' }}>
+                                 <CSelect custom size="md" name="machine_controller" id="machine_controller" value={values.controller}
                                             onChange={(e) => {
                                                 setController(e.target.value)
                                                 e.target.value == 'others' ? setOthers(true) : setOthers(false)
@@ -292,19 +349,25 @@ export default function EditMachine(props) {
                                             ) : null}
                                         </CSelect>
                         </CFormGroup>
-                        {! controller &&
-                              <div className="input-feedback" >Controller is required</div>} 
+                        : controller }
+                        {/* {! controller &&
+                              <div className="input-feedback" >Controller is required</div>}  */}
                     </CCol>
-
-                    <CCol xs="12" lg="4">
-                    <CIcon name="cil-badge" className='m-1'/>   <b>ControllerModel:</b>
+                    <CCol xs="12" md="6">
+                    <CIcon name="cil-badge" className='m-1'/>   <b>ControllerModel:     </b>
+                    { edit ?
+                    <>
                         <CFormGroup style={{ marginTop: '10px' }}>
                             <CInput type="text" id="controllerModel" className="w-52"
-                                name="controllerModel" placeholder="controllerModel" value={controllerModel}
-                                 onChange={(e) => { setControllerModel(e.target.value) }} className={!controllerModel && "error"}/>
+                                name="controllerModel" placeholder="controllerModel" value={values.controllerModel}
+                                onChange={handleChange} 
+                                className={errors.controllerModel && touched.controllerModel && "error"}/>
                         </CFormGroup>
-                        {! controllerModel &&
-                              <div className="input-feedback" >Controller Model is required</div>} 
+                          {errors.controllerModel && touched.controllerModel &&
+                            <div className="input-feedback">{errors.controllerModel}</div>}
+                            </>
+                        : controllerModel }
+                       
                     </CCol>
                 </CRow>
                       
@@ -318,20 +381,27 @@ export default function EditMachine(props) {
                                 : null}
 
             <CRow style={{ justifyContent: 'center' }}>
-                <CCardFooter style={{ width: '25%' }}>
+            {edit ?
+                     <CCardFooter style={{ width: '25%' }}>
 
-                    <CRow>
-                        <CCol xs="6">
-                            <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/customermanagement')}
-                            >Cancel</CButton>
-                        </CCol>
-                        <CCol xs="6">
-                            <CButton block color="info" className="mr-1" onClick={submitHandler}
-                            >Submit</CButton>
-                        </CCol>
-                    </CRow>
+                        <CRow>
+                           <CCol xs="6">
+                              <CButton variant="outline" block color="info" className="mr-1" onClick={() => setEdit(false)}
+                              >Cancel</CButton>
+                           </CCol>
+                           <CCol xs="6">
+                           <CButton block color="info" className="mr-1" onClick={handleSubmit}
+                              >Submit</CButton>
+                           </CCol>
+                        </CRow>
 
-                </CCardFooter>
+                     </CCardFooter>
+                     :
+                     <CCardFooter style={{ width: '13%' }}>
+                        <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/customermanagement')}
+                        >Close</CButton>
+                     </CCardFooter>
+                  }
             </CRow>
         </CCardBody>
         </CCard>

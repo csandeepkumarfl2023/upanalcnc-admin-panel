@@ -17,6 +17,7 @@ import {
    CModalFooter,
    CModalHeader,
    CModalTitle,
+   CTextarea
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
@@ -293,10 +294,10 @@ export default function EditServiceRequest(props) {
                            <span className="ml-2">
                            {edit ?
                                  <CFormGroup >
-                                    <CInput type="text"  name="issueDetails" placeholder="issueDetails" value={issueDetails} 
+                                    <CTextarea type="text"  name="issueDetails" placeholder="issueDetails" value={issueDetails} 
                                     onChange={(e) => { setIssueDetails(e.target.value) }} className={!issueDetails && "error"}/>
                                     {!issueDetails && 
-                              <div className="input-feedback">Issue Details is required</div>} 
+                              <div className="input-feedback mt-2">Issue Details is required</div>} 
                                  </CFormGroup>
                                  
                                  :

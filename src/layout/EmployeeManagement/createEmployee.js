@@ -32,6 +32,8 @@ export default function CreateEmployee(props) {
         address: "",  employee_name: "", designation: "", employee_id: "",security_pin: "", date_of_joining: "",date_of_leaving : ""
     })
 
+    const [active, setActive] = useState(true)
+
     const [alert, setAlert] = useState(false)
     const [alertText, setAlertText] = useState(false)
 
@@ -39,6 +41,7 @@ export default function CreateEmployee(props) {
         try {
             console.log(value);
            let res = await employeeservice.createEmployee(value)
+           await employeeservice.updateEmployeeActive(value.employee_id, active)
            if(res)
            {
             history.push({
@@ -51,6 +54,11 @@ export default function CreateEmployee(props) {
             setAlert(true)
         }
     }
+
+    const activeHandler = (status) => {
+      setActive(status)
+      // console.log('active', active);
+   }
 
     React.useEffect(() => {
         console.log('alert>>>>>>', props.location.state);
@@ -226,10 +234,10 @@ var date = curr.toISOString().substr(0,10);
                                         <CInput style={{ width: '85%' }} type="date" id="date_of_leaving"
                                        size="sm"
                                        name="date_of_leaving" placeholder="date_of_leaving" 
-                                       onChange={handleChange} className={errors.date_of_leaving && touched.date_of_leaving && "error"}/>
+                                       onChange={handleChange} />
                                         </CFormGroup>
-                                        {errors.date_of_leaving && touched.date_of_leaving && 
-                                      <div className="input-feedback">{errors.date_of_leaving}</div>}
+                                        {/* {errors.date_of_leaving && touched.date_of_leaving && 
+                                      <div className="input-feedback">{errors.date_of_leaving}</div>} */}
                             </CCol>
                         </CRow>
                         <CRow className="pt-3 pb-2">
@@ -251,8 +259,8 @@ var date = curr.toISOString().substr(0,10);
                                                 <CSwitch
                                                 className="mr-1"
                                                 color="primary"
-                                                defaultChecked
-                                                onChange={(data.active)}
+                                                checked={active ? true : false}
+                                                onChange={(e) => activeHandler(e.target.checked)}
                                                 />                            
                                       </CCol>
                                       </CFormGroup>

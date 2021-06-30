@@ -24,6 +24,7 @@ import moment from 'moment'
 import CIcon from '@coreui/icons-react'
 import { Formik } from "formik"
 import '../styles.css'
+import * as yup from 'yup'
 
 const serviceRequestService = new ServiceRequestService()
 const customerSerice = new CustomerService()
@@ -32,9 +33,37 @@ const commonService = new CommonService()
 const employeeService = new EmployeeService()
 export default function CreateServiceRequest() {
 
+  const validation = yup.object().shape({
+       customerName: yup
+       .string()
+       .required('Customer Code required'),
+       machine:  yup
+       .string()
+       .required('Machine required'),
+       issueType:  yup
+       .string()
+       .required('Issue Type required'),
+       priority: yup
+       .string()
+       .required('Priority required'),
+       serviceRequestType:  yup
+       .string()
+       .required('ServiceRequest Type required'),
+       executive:  yup
+       .string()
+       .required('Executive required'),
+       sheduleDate:  yup
+       .string()
+       .required('sheduleDate required'),
+       sheduleTime:  yup
+       .string()
+       .required('Shedule Time required'),
+
+ })
+
   const history = useHistory();
   const [data, setData] = useState({
-    customerName: "", machine_model: "", issueType: "", priority: "",
+    customerName: "", machine: "", issueType: "", priority: "",
     serviceRequestType: "", executive: "", sheduleDate: "", sheduleTime: ""
 })
   const [customerArr, setCustomerArr] = useState()
@@ -147,6 +176,11 @@ export default function CreateServiceRequest() {
     let filteredMachinesArr = res.data.filter(item => item.client.client_id == customerId)
     console.log(filteredMachinesArr)
     setMachineArr(filteredMachinesArr)
+
+    let currentData = {}
+    currentData = {...data}
+    currentData.customerName = selectedCustomer.client_id
+    setData(currentData)
   }
 
   const machineChangeController = (e) => {
@@ -162,6 +196,10 @@ export default function CreateServiceRequest() {
     setMachineAge(selectedMachine.machine_age_as_on_installation)
     setMachineController(selectedMachine.machine_controller)
     setControllerModel(selectedMachine.machine_controller_model)
+    let currentData = {}
+    currentData = {...data}
+    currentData.machine = selectedMachine.machine_model
+    setData(currentData)
   }
 
   const getEmployees = async () => {
@@ -205,49 +243,24 @@ export default function CreateServiceRequest() {
   curr.setDate(curr.getDate());
   var todayDate = curr.toISOString().substr(0,10);
 
-  var Time = new Date();
-  Time.setTime(Time.getTime())
-  var presentTime = Time.toTimeString().substr(0,10)
- console.log('time',presentTime);
+  const formattedTime =  moment().format('HH:mm'); 
+  console.log('time',formattedTime);
+
   return (
     <>
    <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible>
         Error occured Please try again!
       </CAlert>
       <Formik
-      validate={values => {
-                let errors = {};
-                if (!values.machine_model) {
-                  errors.machine_model = "Machine is required";
-                } 
-                if (!values.issueType) {
-                  errors.issueType = "Issue Type is required";
-                } 
-                if (!values.priority) {
-                  errors.priority = "Priority is required";
-                }
-                if (!values.serviceRequestType) {
-                  errors.serviceRequestType = "RequestType is required";
-                }
-                if (!values.executive) {
-                  errors.executive = "Executive is required";
-                }
-                if (!values.sheduleDate) {
-                  errors.sheduleDate = "Date is required";
-                }
-                if (!values.sheduleTime) {
-                  errors.sheduleTime = "Time is required";
-                }
-                return errors;
-              }}
-              
+
+              enableReinitialize={true}
+              validationSchema={validation}
                 initialValues={data}
                 onSubmit={async (values) => {
                   console.log(values)
-                  console.log(customerName, machine)
                   (!customerName) ? setCustomerNameRequired(true) : setCustomerNameRequired(false)
                   (!machine) ? setMachineNameRequired(true) : setMachineNameRequired(false)
-                   // submitHandler(values)
+                    submitHandler(values)
                 }}>
                 {({ handleSubmit, handleChange, values, errors, touched }) => (
 
@@ -260,50 +273,50 @@ export default function CreateServiceRequest() {
             <CRow>
               <CCol xs="12" sm="12" lg="4">
                 <CRow>
-                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-user" className="m-2"/>  Customer Name: </div>
+                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-user" className="m-1"/>  Customer Name: </div>
                   <CFormGroup className="ml-3">
-                    <CSelect custom size="sm" name="name" id="name" value={customerName} 
-                    onChange={customerChangeHandler} >
+                    <CSelect custom size="sm" name="name" id="name" 
+                    onChange={customerChangeHandler} className={errors.customerName && touched.customerName && "error"}>
                       <option value="">Open this select menu</option>
                       {customerArr && customerArr.length ? customerArr.map((elem) => {
                         return <option key={elem.client_id} value={elem.client_id}>{elem.company}</option>
                       }
                       ) : null}
                     </CSelect>
-                    {!company &&
-                    <div className="input-feedback mt-1">Customer Name required</div>}
+                    {errors.customerName && touched.customerName && 
+                     <div className="input-feedback m-1">{errors.customerName}</div>}
                   </CFormGroup>
                 </CRow>
               </CCol>
               <CCol xs="12" sm="12" lg="4" >
                 <CRow>
-                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-asterisk-circle" className="m-2"/> Customer Code :</div>
+                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-asterisk-circle" className="m-1"/> Customer Code :</div>
                   <span className="ml-2 mt-1" >{customerCode}</span> </CRow>
               </CCol>
               <CCol xs="12" sm="12" lg="4" >
                 <CRow>
-                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-contact" className="m-2"/> Contact Person Name : </div>
+                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-contact" className="m-1"/> Contact Person Name : </div>
                   <span className="ml-2 mt-1">
                     {contactName}</span> </CRow>
               </CCol>
-            </CRow>
+            </CRow> 
 
             <CRow className="pt-2 pb-2">
               <CCol xs="12" sm="12" lg="4" >
                 <CRow>
-                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-mobile" className="m-2"/> Contact Number :  </div>
+                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-mobile" className="m-1"/> Contact Number :  </div>
                   <span className="ml-2 mt-1">
                     {contactNumber}</span> </CRow>
               </CCol>
               <CCol xs="12" sm="12" lg="4" >
                 <CRow>
-                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-mobile" className="m-2"/> Alternate Number :  </div>
+                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-mobile" className="m-1"/> Alternate Number :  </div>
                   <span className="ml-2 mt-1">
                     {alternateNumber} </span></CRow>
               </CCol>
               <CCol xs="10" sm="12" lg="4">
                 <CRow>
-                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-envelope-closed" className="m-2"/> Email :  </div>
+                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-envelope-closed" className="m-1"/> Email :  </div>
                   <span className="ml-2 mt-1">
                     {email}</span>
                 </CRow>
@@ -313,7 +326,7 @@ export default function CreateServiceRequest() {
             <CRow className="pt-4">
               <CCol xs="12" sm="4" lg="4" >
                 <CRow>
-                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-location-pin" className="m-2"/>  Customer Address : </div>
+                  <div style={{ fontWeight: 'bold' }}><CIcon name="cil-location-pin" className="m-1"/>  Customer Address : </div>
                   <span className="ml-2 mt-1">
                     {customerAddress}
                   </span> </CRow>
@@ -333,8 +346,8 @@ export default function CreateServiceRequest() {
                 <CRow>
                   <div style={{ fontWeight: 'bold' }}> Select Machine: </div>
                   <CFormGroup className="ml-3" >
-                  <CSelect custom size="sm" name="name" id="name" value={machine} onChange={machineChangeController}
-                   className={!machine && "error"}>
+                  <CSelect custom size="sm" name="name" id="name" onChange={machineChangeController}
+                  className={errors.machine && touched.machine && "error"}>
                       <option value="">Open this select menu</option>
                       {machineArr && machineArr.length ? machineArr.map((elem) => {
                         return <option key={elem.machine_id} value={elem.machine_id}>{elem.machine_model}</option>
@@ -342,8 +355,8 @@ export default function CreateServiceRequest() {
                       ) : null}
 
                     </CSelect>
-                    {!machine &&
-                    <div className="input-feedback mt-1">Machine required</div>}
+                    {errors.machine && touched.machine && 
+                     <div className="input-feedback m-1">{errors.machine}</div>}
                   </CFormGroup>
                 </CRow>
               </CCol>
@@ -406,7 +419,7 @@ export default function CreateServiceRequest() {
           <CRow>
             <CCol xs="12" sm="12" lg="4" >
               <CRow>
-              <CIcon name="cil-chevron-circle-right-alt" className='m-1 mr-2'/> <b>Issue Type:</b>
+              <CIcon name="cil-chevron-circle-right-alt" className='m-1 ml-1'/> <b>Issue Type:</b>
                 <CFormGroup className="ml-3">
                   <CSelect custom size="sm" name="issueType" id="issueType" 
                    onChange={handleChange} 
@@ -426,7 +439,7 @@ export default function CreateServiceRequest() {
             </CCol>
             <CCol xs="12" sm="12" lg="4" >
               <CRow>
-              <CIcon name="cil-asterisk-circle" className=' mr-2 m-1'/><b> Priority:</b>
+              <CIcon name="cil-asterisk-circle" className=' ml-1 m-1'/><b> Priority:</b>
                 <CFormGroup className="ml-3" >
                   <CSelect custom size="sm" name="priority" id="priority" 
                  onChange={handleChange} className={errors.priority && touched.priority && "error"}>
@@ -461,7 +474,7 @@ export default function CreateServiceRequest() {
           <CRow className="pt-2 pb-2">
           <CCol xs="12" sm="12" lg="4" >
               <CRow >
-              <CIcon name="cil-user" className='m-1  mr-2'/> <b>Executive:</b>
+              <CIcon name="cil-user" className='m-1  mrl-1'/> <b>Executive:</b>
                 <CFormGroup className="ml-3" >
                   <CSelect custom size="sm" name="executive" id="executive"
                   onChange={handleChange}  className={errors.executive && touched.executive && "error"}>
@@ -494,7 +507,7 @@ export default function CreateServiceRequest() {
                 <CFormGroup className="ml-3 w-50" >
                   <input type="time" id="sheduleTime" name="sheduleTime" placeholder="sheduleTime"
                   style={{borderColor:'lightgray'}} onChange={handleChange} 
-                  defaultValue={moment("20010704T120854").format("LT")} />
+                  defaultValue={formattedTime} />
                 </CFormGroup>
               
               </CRow>

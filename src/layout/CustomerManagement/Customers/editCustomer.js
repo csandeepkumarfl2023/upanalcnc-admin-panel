@@ -18,10 +18,48 @@ import CustomerService from '../../../services/customerService'
 import CIcon from '@coreui/icons-react'
 import { Formik } from "formik"
 import '../../styles.css'
+import * as yup from 'yup'
 
 const customerSerice = new CustomerService()
 
 export default function EditCustomer(props) {
+
+   const validation = yup.object().shape({
+      customerName: yup
+         .string()
+         .required('Customer Name required'),
+         contactPerson: yup
+         .string()
+         .required('Contact Person required'),
+         mobileNo: yup
+         .string()
+         .required('Phone Number required'),
+         address: yup
+         .string()
+         .required('Address required'),
+         email: yup
+         .string()
+         .required('Email required'),
+         alternateNo: yup
+         .string()
+         .required('Alternate phone number required'),
+         gstNumber: yup
+         .string()
+         .required('Gst Number required'),
+         city: yup
+         .string()
+         .required('City required'),
+         zip: yup
+         .string()
+         .required('Zip required'),
+         state: yup
+         .string()
+         .required('State required'),
+         country: yup
+         .string()
+         .required('Country required'),
+   })
+
    const history = useHistory();
    const [item, setItem] = useState(props.location.state)
    const [edit, setEdit] = React.useState(false)
@@ -39,6 +77,11 @@ export default function EditCustomer(props) {
    const [country, setCountry] = useState("")
 
    const [alert, setAlert] = useState(false)
+
+   const [data, setData] = useState({
+      active: "", mobileNo: "", email: "", contactPerson: "", employee_type: "",
+      address: "", customerName: "", gstNumber: "", alternateNo: "", city: "", zip: "", state: "",country:""
+   })
 
    const cancelHandler = () => {
       setEdit(false)
@@ -58,6 +101,20 @@ export default function EditCustomer(props) {
       setZip(res.data.pincode)
       setState(res.data.state)
       setCountry(res.data.country)
+      let currentData = {}
+      currentData = {...data}
+      currentData.customerName = res.data.company
+       currentData.contactPerson = res.data.contact_person
+       currentData.alternateNo = res.data.alternate_phone_number
+      currentData.zip = res.data.pincode
+      currentData.gstNumber = res.data.gst_number
+      currentData.country = res.data.country
+      currentData.state = res.data.state
+       currentData.mobileNo = res.data.phone_number
+      currentData.email = res.data.email_id
+       currentData.address = res.data.address
+       currentData.city = res.data.city
+      setData(currentData)
    }
 
    const submitHandler = async () => {
@@ -101,36 +158,54 @@ export default function EditCustomer(props) {
       {alert}
     </CAlert>
     <Formik
-                initialValues={item}
+                enableReinitialize={true}
+               validationSchema={validation}
+                initialValues={data}
                 onSubmit={async (values) => {
                     submitHandler(values)
                 }}>
                 {({ handleSubmit, handleChange, values, errors, touched, resetForm }) => (
 
          <CCard>
-            <CCardSubtitle className="pl-3 mt-3" style={{ fontSize: '1rem' }}><b>Customer:</b> {item ? item.company : null}</CCardSubtitle>
+             <CRow className="pl-3 mt-3" >
+               <CCol xs="6" md="11">
+               <CCardSubtitle style={{ fontSize: '1rem' }}><b>Customer:</b> {item ? item.company : null}</CCardSubtitle>
+               </CCol>
+            <CCol xs="6" md="1">
+                  <CIcon name="cil-pen" size="lg" style={{ cursor: 'pointer' }} onClick={() => {setEdit(true)}}>
+                  </CIcon>
+                  </CCol>
+                  </CRow>
             <hr />
             <CCardBody>
                <div className="pt-1 pl-3">
                   <CRow className="mb-2">
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-user" className='m-1'/><b>Customer Name:</b>
+                     <CIcon name="cil-user" className='m-1'/><b>Customer Name:   </b>
+                     {edit ?
+                     <>
                            <CFormGroup >
                            <CInput type="text"
                                             style={{ width: '85%' }}
-                                            id="customerName" name="customerName" placeholder="Customer Name" value = {customerName} onChange={(e) => setCustomerName(e.target.value)} 
-                                             className={!customerName && "error"}/>
+                                            id="customerName" name="customerName" placeholder="Customer Name" 
+                                            onChange={handleChange} value = {values.customerName} 
+                                            className={errors.customerName && touched.customerName && "error"} />
                                     </CFormGroup>
-                                    {!customerName && 
-                                       <div className="input-feedback">Customer Name required</div>}
+                                     {errors.customerName && touched.customerName &&
+                                       <div className="input-feedback">{errors.customerName}</div>}
+                                       </>
+                                    : customerName}
+                                     
                                     </CCol>
 
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-asterisk-circle" /> <b>Customer Code: </b>
+                     <CIcon name="cil-asterisk-circle" /> <b>Customer Code:  </b>
+                     {edit ?
                            <CFormGroup >
                               <CInput style={{ width: '85%' }} type="text" id="customerCode"
                                  name="customerCode" placeholder="customerCode" value={customerCode} readOnly />
-                           </CFormGroup>                   
+                           </CFormGroup> 
+                           : customerCode }                  
                      </CCol>
 
                   </CRow>
@@ -138,74 +213,110 @@ export default function EditCustomer(props) {
                   <CRow className="pt-3 pb-2">
                      
                   <CCol xs="12" sm="12" lg="6">
-                  <CIcon name="cil-contact" className='m-1'/>  <b>Contact Person: </b> 
-                              <CFormGroup >
+                  <CIcon name="cil-contact" className='m-1'/>  <b>Contact Person:   </b> 
+                  { edit ?
+                              <>
+                                <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="contactPerson"
-                                    name="contactPerson" placeholder="contactPerson" value={contactPerson} 
-                                    onChange={(e) => { setContactPerson(e.target.value) }} className={!contactPerson && "error"}/>
+                                    name="contactPerson" placeholder="contactPerson" value={values.contactPerson} 
+                                    onChange={handleChange} 
+                                    className={errors.contactPerson && touched.contactPerson && "error"}/>
                               </CFormGroup>
-                              {!contactPerson && 
-                                       <div className="input-feedback" >Contact Person is required</div>}  
+                               {errors.contactPerson && touched.contactPerson &&
+                                 <div className="input-feedback">{errors.contactPerson}</div>}
+                                 </>
+                          : contactPerson }
+                           
                      </CCol>
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-screen-smartphone" /> <b>Contact Number: </b>
+                     <CIcon name="cil-screen-smartphone" /> <b>Contact Number:  </b>
+                     {edit ?
+                     <>
                               <CFormGroup >
                              <CInput style={{ width: '85%' }} type="text" id="mobileNo"
-                                    name="mobileNo" placeholder="mobileNo" value={mobileNo} 
-                                    onChange={(e) => { setMobileNo(e.target.value) }} className={!mobileNo && "error"}/>
+                                    name="mobileNo" placeholder="mobileNo" value={values.mobileNo} 
+                                    onChange={handleChange} 
+                                     className={errors.mobileNo && touched.mobileNo && "error"}/>
                               </CFormGroup>
-                              {!mobileNo && 
-                             <div className="input-feedback">Mobile No is required</div>}  
+                                 {errors.mobileNo && touched.mobileNo &&
+                                    <div className="input-feedback">{errors.mobileNo}</div>}
+                                    </>
+                              : mobileNo}
+                          
                      </CCol>
                   </CRow>
 
                   <CRow className="pt-3 pb-2">
 
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-screen-smartphone" />  <b>Alternate Number: </b>
+                     <CIcon name="cil-screen-smartphone" />  <b>Alternate Number:  </b>
+                     { edit ?
+                     <>
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="alternateNo"
-                                    name="alternateNo" placeholder="alternateNo" value={alternateNo} 
-                                    onChange={(e) => { setAlternateNo(e.target.value) }} className={!alternateNo && "error"}/>
+                                    name="alternateNo" placeholder="alternateNo" value={values.alternateNo} 
+                                    onChange={handleChange} 
+                                    className={errors.alternateNo && touched.alternateNo && "error"}/>
                            </CFormGroup>
-                           {!alternateNo && 
-                                       <div className="input-feedback" >Alternate No is required</div>}  
+                            {errors.alternateNo && touched.alternateNo &&
+                              <div className="input-feedback">{errors.alternateNo}</div>}
+                              </>
+                           : alternateNo }
+                          
                      </CCol>
           
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-location-pin" className='m-1'/> <b>Customer Address: </b>
+                     <CIcon name="cil-location-pin" className='m-1'/> <b>Customer Address:  </b>
+                     { edit ?
+                     <>
                            <CFormGroup >
                                  <CTextarea style={{ width: '85%' }} type="text" id="address"
-                                    name="address" placeholder="address" value={address} 
-                                    onChange={(e) => { setAddress(e.target.value) }} className={!address && "error"}/>
+                                    name="address" placeholder="address" value={values.address} 
+                                    onChange={handleChange}
+                                    className={errors.address && touched.address && "error"}/>
                               </CFormGroup>
-                              {!address && 
-                                       <div className="input-feedback" style={{color:'red'}}>Address is required</div>} 
+                                 {errors.address && touched.address &&
+                                    <div className="input-feedback">{errors.address}</div>}
+                                    </>
+                              : address }
+                         
                      </CCol>
                   </CRow>
 
                   <CRow className="pt-3 pb-2">
                  
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-audio" className='m-1'/><b>City:</b>
+                     <CIcon name="cil-audio" className='m-1'/><b>City:  </b>
+                     { edit ?
+                     <>
                            <CFormGroup >
                               <CInput style={{ width: '85%' }} type="text" id="city"
-                                 name="city" placeholder="city" value={city} 
-                                 onChange={(e) => {setCity(e.target.value) }} className={!city && "error"}/>
+                                 name="city" placeholder="city" value={values.city} 
+                                 onChange={handleChange}
+                                 className={errors.city && touched.city && "error"}/>
                            </CFormGroup>
-                           {!city && 
-                                       <div className="input-feedback" style={{color:'red'}}>City is required</div>} 
+                               {errors.city && touched.city &&
+                                 <div className="input-feedback">{errors.city}</div>}
+                                 </>
+                           : city }
+                        
                      </CCol>
                 
                   <CCol xs="12" sm="12" lg="6">
-                  <CIcon name="cil-pin" className='m-1'/> <b>Zip:</b>
+                  <CIcon name="cil-pin" className='m-1'/> <b>Zip:   </b>
+                  {edit ?
+                  <>
                         <CFormGroup >
                            <CInput style={{ width: '85%' }} type="text" id="zip"
-                              name="zip" placeholder="zip" value={zip} 
-                              onChange={(e) => {setZip(e.target.value) }} className={!zip && "error"}/>
+                              name="zip" placeholder="zip" value={values.zip} 
+                              onChange={handleChange}
+                              className={errors.zip && touched.zip && "error"}/>
                         </CFormGroup>
-                        {!zip && 
-                         <div className="input-feedback" style={{color:'red'}}>Zip is required</div>} 
+                           {errors.zip && touched.zip &&
+                              <div className="input-feedback">{errors.zip}</div>}
+                              </>
+                        : zip }
+                     
                      </CCol>
                   </CRow>
 
@@ -214,66 +325,94 @@ export default function EditCustomer(props) {
                <CRow className="pt-3 pb-2">
            
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-bank" className='m-1'/><b>State:</b>
+                     <CIcon name="cil-bank" className='m-1'/><b>State:   </b>
+                     { edit ?
+                     <>
                         <CFormGroup >
                            <CInput style={{ width: '85%' }} type="text" id="state"
-                              name="state" placeholder="state" value={state} 
-                              onChange={(e) => { setState(e.target.value) }} className={!state && "error"}/>
+                              name="state" placeholder="state" value={values.state} 
+                              onChange={handleChange} className={errors.state && touched.state && "error"}/>
                         </CFormGroup>
-                        {!state && 
-                         <div className="input-feedback" >State is required</div>} 
+                          {errors.state && touched.state &&
+                           <div className="input-feedback">{errors.state}</div>}
+                           </>
+                        : state }
+                   
                      </CCol>
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-flag-alt" className='m-1'/> <b>Country: </b>
+                     <CIcon name="cil-flag-alt" className='m-1'/> <b>Country:  </b>
+                     { edit ?
+                     <>
                         <CFormGroup >
                            <CInput style={{ width: '85%' }} type="text" id="country"
-                              name="country" placeholder="country" value={country}
-                               onChange={(e) => {setCountry(e.target.value) }} className={!country && "error"}/>
+                              name="country" placeholder="country" value={values.country}
+                              onChange={handleChange} className={errors.country && touched.country && "error"}/>
                         </CFormGroup>
-                        {!country && 
-                        <div className="input-feedback">Country is required</div>} 
+                          {errors.country && touched.country &&
+                           <div className="input-feedback">{errors.country}</div>}
+                           </>
+                        : country }
+                     
                      </CCol>
                   </CRow>
 
                   <CRow className="pt-3 pb-2">
                      <CCol xs="12" sm="12" lg="6">
-                     <CIcon name="cil-envelope-closed" className='m-1'/><b>Email:</b>
+                     <CIcon name="cil-envelope-closed" className='m-1'/><b>Email:   </b>
+                     { edit ?
+                     <>
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="email"
-                                    name="email" placeholder="email" value={email} 
-                                    onChange={(e) => { setEmail(e.target.value) }} className={!email && "error"}/>
+                                    name="email" placeholder="email" value={values.email} 
+                                    onChange={handleChange} className={errors.email && touched.email && "error"}/>
                               </CFormGroup>
-                              {!email && 
-                               <div className="input-feedback" >Email is required</div>} 
+                               {errors.email && touched.email &&
+                                 <div className="input-feedback">{errors.email}</div>}
+                                 </>
+                              : email }
+                            
                      </CCol>
                   <CCol xs="12" sm="12" lg="6">
-                  <CIcon name="cil-notes" className='m-1'/><b>GstNumber: </b>
+                  <CIcon name="cil-notes" className='m-1'/><b>GstNumber:  </b>
+                  { edit ?
+                  <>
                            <CFormGroup >
                                  <CInput style={{ width: '85%' }} type="text" id="gstNumber"
-                                    name="gstNumber" placeholder="gstNumber" value={gstNumber} 
-                                    onChange={(e) => { setGstNumber(e.target.value) }} className={!gstNumber && "error"}/>
-                              </CFormGroup>
-                              {!gstNumber && 
-                              <div className="input-feedback">Gst Number is required</div>} 
+                                    name="gstNumber" placeholder="gstNumber" value={values.gstNumber} 
+                                    onChange={handleChange} className={errors.gstNumber && touched.gstNumber && "error"}/>
+                           </CFormGroup>  
+                              {errors.gstNumber && touched.gstNumber &&
+                                 <div className="input-feedback">{errors.gstNumber}</div>}
+                                 </>
+                              : gstNumber } 
+                            
+                            
                      </CCol>
                   </CRow>
                </div>
                <CRow className="mt-2" style={{ justifyContent: 'center' }}>
+               {edit ?
                      <CCardFooter style={{ width: '25%' }}>
 
                         <CRow>
                            <CCol xs="6">
-                              <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/customermanagement')}
+                              <CButton variant="outline" block color="info" className="mr-1" onClick={() => setEdit(false)}
                               >Cancel</CButton>
                            </CCol>
                            <CCol xs="6">
-                              <CButton block color="info" className="mr-1" onClick={submitHandler}
+                              <CButton block color="info" className="mr-1" onClick={handleSubmit}
                               >Submit</CButton>
                            </CCol>
                         </CRow>
 
                      </CCardFooter>
-                  </CRow>
+                     :
+                     <CCardFooter style={{ width: '13%' }}>
+                        <CButton variant="outline" block color="info" className="mr-1" onClick={() => history.push('/customermanagement')}
+                        >Close</CButton>
+                     </CCardFooter>
+                  }
+                        </CRow>
             </CCardBody>
          </CCard>
          

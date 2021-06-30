@@ -63,6 +63,7 @@ const getBadge = status => {
 }
 const fields = [
   { key: 'service_request_id', _style: { width: '40%'} },
+  { key: 'service_request_type', _style: { width: '40%'} },
   { key: 'company', _style: { width: '20%'} },
   { key: 'request_priority', _style: { width: '20%'} },
   { key: 'issue_type', _style: { width: '20%'} },

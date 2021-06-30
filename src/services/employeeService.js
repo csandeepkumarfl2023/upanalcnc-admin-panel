@@ -32,4 +32,9 @@ async getEmployee(id) {
     let response = await Axios.put(`${constants.apiEndPoint}employee`, data)
     return response
 }
+
+async updateEmployeeActive(id, status) {
+    let response = await Axios.delete(`${constants.apiEndPoint}employee/${id}/${status}`)
+    return response
+}
 }
