@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
   CCard,
   CCardBody,
@@ -11,7 +11,8 @@ import {
   CInputGroupPrepend,
   CInputGroupText,
   CRow,
-  CImg
+  CImg,
+  CAlert
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import AdminService from '../../../src/services/adminService'
@@ -20,14 +21,18 @@ const loginService = new AdminService()
 
 const Login = (props) => {
 
+  const [userName, setUserName] = useState()
+  const [password, setPassword] = useState()
+  const [alert, setAlert] = useState(false)
+  const [alertText, setAlertText] = useState(false)
 
   const loginHandler = async (e) => {
     e.preventDefault()
     console.log('loginn');
 
     let data = {
-      username: "1",
-      password: "welcome",
+      username: userName,
+      password: password,
       client_app_type: "EMPLOYEE"
     }
     try {
@@ -41,7 +46,8 @@ const Login = (props) => {
       props.history.push('/overview')
     }
     catch (err) {
-      console.log(err.message);
+      setAlertText(err.message || 'Error occured Please try again!')
+      setAlert(true)
     }
   }
 
@@ -57,11 +63,18 @@ const Login = (props) => {
   },[])
 
   return (
-
+    
     <div className="c-app c-default-layout flex-row align-items-center">
-
       <CContainer>
-
+        <CRow>
+          <CCol sm="2"></CCol>
+          <CCol sm="8">
+      <CAlert color="danger" show={alert} closeButton onClick={() => setAlert(false)} dismissible="true">
+       {alertText}
+      </CAlert>
+      </CCol>
+      <CCol sm="2"></CCol>
+      </CRow>
         <CRow className="justify-content-center">
           <CCol md="8">
             <CCardGroup>
@@ -76,7 +89,7 @@ const Login = (props) => {
                           <CIcon name="cil-user" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="text" placeholder="Username" autoComplete="username" className="input" />
+                      <CInput type="text" placeholder="Username" autoComplete="username" className="input" value={userName} onChange={(e) => setUserName(e.target.value)} />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
@@ -84,7 +97,7 @@ const Login = (props) => {
                           <CIcon name="cil-lock-locked" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="password" placeholder="Password" autoComplete="current-password" className="input"/>
+                      <CInput type="password" placeholder="Password" autoComplete="current-password" className="input" value={password} onChange={(e) => setPassword(e.target.value)} />
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6" className="text-center">
